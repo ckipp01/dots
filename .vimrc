@@ -1,0 +1,96 @@
+" Call the .vimrc.plug file
+   if filereadable(expand("~/.vimrc.plug"))
+       source ~/.vimrc.plug
+    endif
+
+" Set compatibility to Vim only.
+set nocompatible
+
+" Color scheme settings
+set background=dark
+colorscheme hybrid_reverse
+
+" Specific for the hybrid theme
+let g:enable_bold_font = 1
+
+" Airline theme
+let g:airline_theme='hybrid'
+let g:airline#extensions#ale#enabled = 1
+
+" Turn on syntax highlighting.
+" There is logic in here to make sure you don't call sytax highlighting twich which will screw it up
+if !exists("g:syntax_on")
+  syntax enable
+endif
+
+" Turn off modelines
+set modelines=0
+
+" Don't wrap at screen end
+set nowrap
+
+" Tabs vs spations options
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set noshiftround
+
+" Make sure line endings are always unix
+set ff=unix
+
+" Display options
+set showmode
+set showcmd
+set cursorline
+set number
+
+"Allows your update time to be a bit faster
+set updatetime=250
+
+" basically allows your backspace to work as expected
+set backspace=indent,eol,start
+
+" Highlight matching pairs of brackets. Use the '%' character to jump between them.
+set matchpairs+=<:>
+set showmatch
+
+" Set status line display
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]
+set laststatus=2
+
+" search down into subfolders
+" proives tab completion for file related tasks
+set path+=**
+
+" visual autocomplet for command menu
+set wildmenu
+
+" Encoding
+set encoding=utf-8
+
+" search settings
+" Highlight matching search patterns
+set hlsearch
+" Enable incremental search
+set incsearch
+" Include matching uppercase words with lowercase search term
+set ignorecase
+" Include only uppercase words with uppercase search term
+set smartcase
+
+" Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
+set viminfo='100,<9999,s100
+
+
+" Below are plug specific settings
+" This sets where where notes will be stored
+:let g:notes_directories = ['~/notes']
+
+"Below are custom shortcuts/settings
+let mapleader = ","
+
+"Toggle NERDTree open
+nmap <leader>nt :NERDTree<cr>
+"Toggle tagbar open
+nmap <leader>tb :TagbarToggle<CR>

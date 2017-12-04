@@ -1,0 +1,43 @@
+  call plug#begin('~/.vim/plugged')
+
+  "Wakatime Plugin to track coding activity
+  Plug 'wakatime/vim-wakatime'
+
+  "The NerdTree plugin to use a type of file explorer
+  Plug 'scrooloose/nerdtree'
+
+  "Note taking stuff
+  Plug 'xolox/vim-notes'
+
+  "This is needed for the above note taking feature
+  Plug 'xolox/vim-misc'
+
+  "Autocomplete brackets
+  Plug 'townk/vim-autoclose'
+
+  "Material Theme for Vim
+  Plug 'kristijanhusak/vim-hybrid-material'
+
+  "Airline
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
+  "Tagbar
+  Plug 'majutsushi/tagbar'
+
+  "Support for a bunch of filetypes
+  Plug 'sheerun/vim-polyglot'
+
+  "Help visualize spacing
+  Plug 'Yggdroot/indentLine'
+
+  "This shows you the colors in your css
+  Plug 'chrisbra/colorizer'
+
+  "Allows you to see your changes in the git gutter
+  Plug 'airblade/vim-gitgutter'
+
+  "Allows for asynchronous linting
+  Plug 'w0rp/ale'
+
+  call plug#end()
