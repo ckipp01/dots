@@ -22,6 +22,9 @@
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
 
+  "Airline like display for tmux
+  Plug 'edkolev/tmuxline.vim'
+
   "Tagbar
   Plug 'majutsushi/tagbar'
 
