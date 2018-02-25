@@ -4,7 +4,9 @@ if filereadable(expand("~/.vimrc.plug"))
 endif
 
 "Color scheme settings
+let g:gruvbox_italic=1
 colorscheme gruvbox
+set background=dark
 
 "So that my colorschemes actually work in stupid putty
 if &term =~ "xterm"
