@@ -1,20 +1,16 @@
-" Call the .vimrc.plug file
-   if filereadable(expand("~/.vimrc.plug"))
-       source ~/.vimrc.plug
-    endif
+"Call the .vimrc.plug file
+if filereadable(expand("~/.vimrc.plug"))
+   source ~/.vimrc.plug
+endif
 
-" Set compatibility to Vim only.
-set nocompatible
+"Color scheme settings
+colorscheme gruvbox
 
-" Color scheme settings
-set background=dark
-colorscheme hybrid_reverse
-
-" So that my colorschemes actually work in stupid putty
+"So that my colorschemes actually work in stupid putty
 if &term =~ "xterm"
-  " 256 colors
+  "256 colors
   let &t_Co = 256
-  " restore screen after quitting
+  "restore screen after quitting
   let &t_ti = "\<Esc>7\<Esc>[r\<Esc>[?47h"
   let &t_te = "\<Esc>[?47l\<Esc>8"
   if has("terminfo")
@@ -26,36 +22,35 @@ if &term =~ "xterm"
   endif
 endif
 
-" Specific for the hybrid theme
-let g:enable_bold_font = 1
+"Airline theme
+let g:airline_theme='gruvbox'
 
-" Airline theme
-let g:airline_theme='hybrid'
+"Specific for ale
 let g:airline#extensions#ale#enabled = 1
 
-" Turn on syntax highlighting.
-" There is logic in here to make sure you don't call sytax highlighting twich which will screw it up
+"Turn on syntax highlighting.
+"There is logic in here to make sure you don't call sytax highlighting twich which will screw it up
 if !exists("g:syntax_on")
   syntax enable
 endif
 
-" Turn off modelines
+"Turn off modelines
 set modelines=0
 
-" Don't wrap at screen end
+"Don't wrap at screen end
 set nowrap
 
-" Tabs vs spations options
+"Tabs vs spations options
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 set noshiftround
 
-" Make sure line endings are always unix
+"Make sure line endings are always unix
 set ff=unix
 
-" Display options
+"Display options
 set showmode
 set showcmd
 set cursorline
@@ -64,44 +59,46 @@ set number
 "Allows your update time to be a bit faster
 set updatetime=250
 
-" basically allows your backspace to work as expected
+"Basically allows your backspace to work as expected
 set backspace=indent,eol,start
 
-" Highlight matching pairs of brackets. Use the '%' character to jump between them.
+"Highlight matching pairs of brackets. Use the '%' character to jump between them.
 set matchpairs+=<:>
 set showmatch
 
-" Set status line display
+"Set status line display
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]
 set laststatus=2
 
-" search down into subfolders
-" proives tab completion for file related tasks
+"Search down into subfolders
+"Proives tab completion for file related tasks
 set path+=**
 
-" visual autocomplet for command menu
+"Visual autocomplete for command menu
 set wildmenu
 
-" Encoding
+"Encoding
 set encoding=utf-8
 
-" search settings
-" Highlight matching search patterns
+"Search settings
+"Highlight matching search patterns
 set hlsearch
-" Enable incremental search
+"Enable incremental search
 set incsearch
-" Include matching uppercase words with lowercase search term
+"Include matching uppercase words with lowercase search term
 set ignorecase
-" Include only uppercase words with uppercase search term
+"Include only uppercase words with uppercase search term
 set smartcase
 
-" Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
+"Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
 set viminfo='100,<9999,s100
 
+"Below are plug specific settings
+"This sets where where notes will be stored
+let g:notes_directories = ['~/notes']
 
-" Below are plug specific settings
-" This sets where where notes will be stored
-:let g:notes_directories = ['~/notes']
+"Specific indenting for scala
+let g:scala_scaladoc_indent = 1
 
 "Below are custom shortcuts/settings
 let mapleader = ","

@@ -1,46 +1,49 @@
-  call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugged')
 
-  "Wakatime Plugin to track coding activity
-  Plug 'wakatime/vim-wakatime'
+"Wakatime Plugin to track coding activity
+Plug 'wakatime/vim-wakatime'
 
-  "The NerdTree plugin to use a type of file explorer
-  Plug 'scrooloose/nerdtree'
+"The NerdTree plugin to use a type of file explorer
+Plug 'scrooloose/nerdtree'
 
-  "Note taking stuff
-  Plug 'xolox/vim-notes'
+"Note taking stuff
+Plug 'xolox/vim-notes'
 
-  "This is needed for the above note taking feature
-  Plug 'xolox/vim-misc'
+"This is needed for the above note taking feature
+Plug 'xolox/vim-misc'
 
-  "Autocomplete brackets
-  Plug 'townk/vim-autoclose'
+"Autocomplete brackets
+Plug 'townk/vim-autoclose'
 
-  "Material Theme for Vim
-  Plug 'kristijanhusak/vim-hybrid-material'
+"Gruvbox theme
+Plug 'morhetz/gruvbox'
 
-  "Airline
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+"Vim airline and themes
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-  "Airline like display for tmux
-  Plug 'edkolev/tmuxline.vim'
+"Tmux line
+Plug 'edkolev/tmuxline.vim'
 
-  "Tagbar
-  Plug 'majutsushi/tagbar'
+"Tagbar
+Plug 'majutsushi/tagbar'
 
-  "Support for a bunch of filetypes
-  Plug 'sheerun/vim-polyglot'
+"Support for a bunch of filetypes
+Plug 'sheerun/vim-polyglot'
 
-  "Help visualize spacing
-  Plug 'Yggdroot/indentLine'
+"Some specific help for scala
+Plug 'derekwyatt/vim-scala'
 
-  "This shows you the colors in your css
-  Plug 'chrisbra/colorizer'
+"Help visualize spacing
+Plug 'Yggdroot/indentLine'
 
-  "Allows you to see your changes in the git gutter
-  Plug 'airblade/vim-gitgutter'
+"This shows you the colors in your css
+Plug 'chrisbra/colorizer'
 
-  "Allows for asynchronous linting
-  Plug 'w0rp/ale'
+"Allows you to see your changes in the git gutter
+Plug 'airblade/vim-gitgutter'
 
-  call plug#end()
+"Allows for asynchronous linting
+Plug 'w0rp/ale'
+
+call plug#end()
