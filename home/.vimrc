@@ -46,6 +46,7 @@ set nowrap
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
+set expandtab
 set noshiftround
 
 "Make sure line endings are always unix
@@ -97,6 +98,8 @@ set viminfo='100,<9999,s100
 "Below are plug specific settings
 "This sets where where notes will be stored
 let g:notes_directories = ['~/notes']
+let g:notes_suffix = '.txt'
+
 
 "Specific indenting for scala
 let g:scala_scaladoc_indent = 1
