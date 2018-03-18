@@ -7,10 +7,7 @@ ZSH_THEME=""
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+#plugins
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
@@ -32,6 +29,7 @@ prompt_context() {}
 # aliases
 alias andagago="cd ~/Documents/Node/andaga"
 alias rec="asciinema rec"
+alias ssh='TERM=xterm-color ssh'
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# path
 export PATH="$PATH:$HOME/bin:$HOME/.rvm/bin"
