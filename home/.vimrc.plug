@@ -12,6 +12,9 @@ Plug 'xolox/vim-notes'
 "This is needed for the above note taking feature
 Plug 'xolox/vim-misc'
 
+"For specific spacing with txt files
+Plug 'junegunn/goyo.vim', {'for': 'text'}
+
 "Autocomplete brackets
 Plug 'townk/vim-autoclose'
 
