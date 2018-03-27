@@ -24,10 +24,6 @@ tmux send-keys "ssh local5" C-m
 tmux new-window -t $session:3 -n "test5"
 tmux send-keys "ssh test5" C-m
 
-# create a new window called notes and jumps to my notes directory
-tmux new-window -t $session:4 -n "notes"
-tmux send-keys "cd ~/notes" C-m
-
 # jump back to test7 window to put in your pw
 tmux select-window -t $session:1
 
