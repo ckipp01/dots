@@ -99,7 +99,9 @@ set viminfo='100,<9999,s100
 "This sets where where notes will be stored
 let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.txt'
-autocmd BufRead,BufNewFile   *.txt :Goyo
+"Turn on Goyo specifcally for txt files
+autocmd BufRead,BufNewFile *.txt :Goyo
+autocmd BufRead,BufNewFile *.txt set wrap linebreak nolist
 
 "Specific indenting for scala
 let g:scala_scaladoc_indent = 1
