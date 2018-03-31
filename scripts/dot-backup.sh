@@ -2,7 +2,7 @@
 
 for i in .vimrc .vimrc.plug .tmux.conf .tmux.snapshot .zshrc tmux-256color-italic.terminfo xterm-256color-italic.terminfo
 do
-    if [ ! -e $i ]
+    if [ -e ${HOME}/$i ]
     then
         [[ `diff ${HOME}/$i ${HOME}/dots/home/$i` ]] &&
             (cp ${HOME}/$i ${HOME}/dots/home/$i && echo "$i copied") ||
@@ -12,14 +12,14 @@ do
     fi
 done
 
-for i in dot-backup.sh
+for w in dot-backup.sh
 do
-    if [ ! -e $i ]
+    if [ -e ${HOME}/bin/$w ]
     then
-        [[ `diff ${HOME}/bin/$i ${HOME}/dots/home/scripts/$i` ]] &&
-            (cp ${HOME}/bin/$i ${HOME}/dots/home/scripts/$i && echo "$i copied") ||
-                (echo "$i was the same")
+        [[ `diff ${HOME}/bin/$w ${HOME}/dots/scripts/$w` ]] &&
+            (cp ${HOME}/bin/$w ${HOME}/dots/scripts/$w && echo "$w copied") ||
+                (echo "$w was the same")
     else
-        echo "no $i on this machine"
+        echo "no $w on this machine"
     fi
 done
