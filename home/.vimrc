@@ -100,7 +100,7 @@ set viminfo='100,<9999,s100
 let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.md'
 "Turn on Goyo specifcally for txt files
-au BufReadPost,BufNewFile *.md :Goyo
+au BufReadPost,BufNewFile *.md :Goyo 85%
 au BufReadPost,BufNewFile *.md set wrap linebreak nolist
 
 "Specific indenting for scala
