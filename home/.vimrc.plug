@@ -13,7 +13,7 @@ Plug 'xolox/vim-notes'
 Plug 'xolox/vim-misc'
 
 "For specific spacing with txt files
-Plug 'junegunn/goyo.vim', {'for': 'text'}
+Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 
 "Autocomplete brackets
 Plug 'townk/vim-autoclose'
