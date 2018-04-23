@@ -3,7 +3,8 @@
 for i in .vimrc .vimrc.plug .tmux.conf \
         .tmux.snapshot .zshrc tmux-256color-italic.terminfo \
         xterm-256color-italic.terminfo \
-        .config/termite/config
+        .config/termite/config \
+        .config/gtk-3.0/gtk.css
 do
     if [ -e ${HOME}/$i ]
     then
