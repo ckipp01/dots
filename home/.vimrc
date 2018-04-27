@@ -101,7 +101,7 @@ let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.md'
 "Turn on Goyo specifcally for txt files
 au BufReadPost,BufNewFile *.md :Goyo 85%
-au BufReadPost,BufNewFile *.md set wrap linebreak nolist
+au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
 
 "Specific indenting for scala
 let g:scala_scaladoc_indent = 1
