@@ -5,7 +5,7 @@ endif
 
 "Color scheme settings
 let g:gruvbox_italic=1
-colorscheme gruvbox
+colorscheme gruvbox 
 set background=dark
 
 "So that my colorschemes actually work in stupid putty
@@ -29,6 +29,7 @@ let g:airline_theme='gruvbox'
 
 "Specific for ale
 let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_enabled = 1
 
 "Turn on syntax highlighting.
 "There is logic in here to make sure you don't call sytax highlighting twich which will screw it up

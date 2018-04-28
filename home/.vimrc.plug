@@ -31,9 +31,6 @@ Plug 'edkolev/tmuxline.vim'
 "Tagbar
 Plug 'majutsushi/tagbar'
 
-"Support for a bunch of filetypes
-Plug 'sheerun/vim-polyglot'
-
 "Some specific help for scala
 Plug 'derekwyatt/vim-scala'
 
