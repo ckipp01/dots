@@ -26,6 +26,7 @@ prompt_context() {}
 alias andagago="cd ~/Documents/Node/andaga"
 alias rec="asciinema rec"
 alias ssh='TERM=xterm-color ssh'
+alias weather="curl wttr.in"
 
 # path
 export PATH="$PATH:$HOME/bin:$HOME/.rvm/bin"
