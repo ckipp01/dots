@@ -31,8 +31,8 @@ Plug 'edkolev/tmuxline.vim'
 "Tagbar
 Plug 'majutsushi/tagbar'
 
-"Some specific help for scala
-Plug 'derekwyatt/vim-scala'
+"Some specific help for perl
+Plug 'vim-perl/vim-perl', {'for': 'perl'}
 
 "Help visualize spacing
 Plug 'Yggdroot/indentLine'

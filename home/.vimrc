@@ -4,8 +4,8 @@ if filereadable(expand("~/.vimrc.plug"))
 endif
 
 "Color scheme settings
-let g:gruvbox_italic=1
-colorscheme gruvbox 
+"let g:gruvbox_italic=1
+colorscheme gruvbox
 set background=dark
 
 "So that my colorschemes actually work in stupid putty
@@ -26,10 +26,6 @@ endif
 
 "Airline theme
 let g:airline_theme='gruvbox'
-
-"Specific for ale
-let g:airline#extensions#ale#enabled = 1
-let g:ale_completion_enabled = 1
 
 "Turn on syntax highlighting.
 "There is logic in here to make sure you don't call sytax highlighting twich which will screw it up
@@ -104,8 +100,9 @@ let g:notes_suffix = '.md'
 au BufReadPost,BufNewFile *.md :Goyo 85%
 au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
 
-"Specific indenting for scala
-let g:scala_scaladoc_indent = 1
+"Specific for ale
+let g:airline#extensions#ale#enabled = 1
+let g:ale_completion_enabled = 1
 
 "Below are custom shortcuts/settings
 let mapleader = ","
