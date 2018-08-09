@@ -3,9 +3,8 @@
 #audible_bell = false
 #clickable_url = true
 #dynamic_title = true
-font = Monospace 9
+font = Source Code Pro 12
 #fullscreen = true
-#geometry = 640x480
 #icon_name = terminal
 #mouse_autohide = false
 #scroll_on_output = false
@@ -44,15 +43,14 @@ scrollback_lines = 10000
 #cursor = #dcdccc
 #cursor_foreground = #dcdccc
 
-#foreground = #dcdccc
 #foreground_bold = #ffffff
-background = #262626
+background = #1C1C1C
 
 # 20% background transparency (requires a compositor)
 #background = rgba(63, 63, 63, 0.8)
 
 # If unset, will reverse foreground and background
-highlight = #2f2f2f
+highlight = #3A3A3A
 
 # Colors from color0 to color254 can be set
 color0 = #3f3f3f

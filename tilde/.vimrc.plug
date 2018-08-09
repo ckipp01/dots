@@ -18,8 +18,8 @@ Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 "Autocomplete brackets
 Plug 'townk/vim-autoclose'
 
-"Gruvbox theme
-Plug 'morhetz/gruvbox'
+"Material theme
+Plug 'kristijanhusak/vim-hybrid-material'
 
 "Vim airline and themes
 Plug 'vim-airline/vim-airline'
@@ -31,9 +31,6 @@ Plug 'edkolev/tmuxline.vim'
 "Tagbar
 Plug 'majutsushi/tagbar'
 
-"Some specific help for perl
-Plug 'vim-perl/vim-perl', {'for': 'perl'}
-
 "Help visualize spacing
 Plug 'Yggdroot/indentLine'
 
@@ -42,8 +39,5 @@ Plug 'chrisbra/colorizer'
 
 "Allows you to see your changes in the git gutter
 Plug 'airblade/vim-gitgutter'
-
-"Allows for asynchronous linting
-Plug 'w0rp/ale'
 
 call plug#end()

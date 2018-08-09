@@ -4,9 +4,10 @@ if filereadable(expand("~/.vimrc.plug"))
 endif
 
 "Color scheme settings
-"let g:gruvbox_italic=1
-colorscheme gruvbox
+colorscheme hybrid_reverse
 set background=dark
+let g:enable_bold_font=1
+let g:enable_italic_font=1
 
 "So that my colorschemes actually work in stupid putty
 if &term =~ "xterm"
@@ -25,7 +26,7 @@ if &term =~ "xterm"
 endif
 
 "Airline theme
-let g:airline_theme='gruvbox'
+let g:airline_theme='hybrid'
 
 "Turn on syntax highlighting.
 "There is logic in here to make sure you don't call sytax highlighting twich which will screw it up
@@ -40,9 +41,9 @@ set modelines=0
 set nowrap
 
 "Tabs vs spations options
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set noshiftround
 
@@ -94,15 +95,11 @@ set viminfo='100,<9999,s100
 
 "Below are plug specific settings
 "This sets where where notes will be stored
-let g:notes_directories = ['~/notes']
+let g:notes_directories = ['~/work-notes']
 let g:notes_suffix = '.md'
 "Turn on Goyo specifcally for txt files
-au BufReadPost,BufNewFile *.md :Goyo 85%
+au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
-
-"Specific for ale
-let g:airline#extensions#ale#enabled = 1
-let g:ale_completion_enabled = 1
 
 "Below are custom shortcuts/settings
 let mapleader = ","
