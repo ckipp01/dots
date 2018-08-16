@@ -95,7 +95,7 @@ set viminfo='100,<9999,s100
 
 "Below are plug specific settings
 "This sets where where notes will be stored
-let g:notes_directories = ['~/work-notes']
+let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.md'
 "Turn on Goyo specifcally for txt files
 au BufReadPost,BufNewFile *.md :Goyo 90%

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 for i in .vimrc .vimrc.plug .tmux.conf \
         .tmux.snapshot .zshrc tmux-256color-italic.terminfo \
