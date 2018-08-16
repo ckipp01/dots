@@ -15,6 +15,9 @@ Plug 'xolox/vim-misc'
 "For specific spacing with txt files
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 
+"For working specifically with scala
+Plug 'derekwyatt/vim-scala', {'for': 'scala'}
+
 "Autocomplete brackets
 Plug 'townk/vim-autoclose'
 
