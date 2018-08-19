@@ -18,6 +18,9 @@ Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 "For working specifically with scala
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 
+"For working specifically with rust
+Plug 'rust-lang/rust.vim', {'for': 'rust'}
+
 "Autocomplete brackets
 Plug 'townk/vim-autoclose'
 
