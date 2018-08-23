@@ -4,8 +4,8 @@ if filereadable(expand("~/.vimrc.plug"))
 endif
 
 "Color scheme settings
-colorscheme hybrid_reverse
 set background=dark
+colorscheme hybrid_reverse
 let g:enable_bold_font=1
 let g:enable_italic_font=1
 
@@ -106,5 +106,5 @@ let mapleader = ","
 
 "Toggle NERDTree open
 nmap <leader>nt :NERDTree<cr>
-"Toggle tagbar open
-nmap <leader>tb :TagbarToggle<CR>
+"Toggle highlight search off
+nmap <leader>hs :nohlsearch<cr>
