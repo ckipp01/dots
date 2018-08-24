@@ -29,7 +29,6 @@ endif
 let g:airline_theme='hybrid'
 
 "Turn on syntax highlighting.
-"There is logic in here to make sure you don't call sytax highlighting twich which will screw it up
 if !exists("g:syntax_on")
   syntax enable
 endif
