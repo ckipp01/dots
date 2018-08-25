@@ -1,6 +1,6 @@
 "Call the .vimrc.plug file
-if filereadable(expand("~/.vimrc.plug"))
-   source ~/.vimrc.plug
+if filereadable(expand("~/.flavor/vimrc.plug"))
+  source ~/.flavor/vimrc.plug
 endif
 
 "Color scheme settings
