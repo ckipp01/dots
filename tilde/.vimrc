@@ -96,6 +96,8 @@ set viminfo='100,<9999,s100
 "This sets where where notes will be stored
 let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.md'
+let g:notes_unicode_enabled = 0
+let g:notes_conceal_url = 0
 "Turn on Goyo specifcally for txt files
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
