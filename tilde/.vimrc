@@ -76,8 +76,11 @@ set ignorecase
 "Include only uppercase words with uppercase search term
 set smartcase
 
-"Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data. Useful for copying large amounts of data between files.
+"Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data.
 set viminfo='100,<9999,s100
+
+"While in vim just use the xclipbard
+set clipboard=unnamedplus
 
 "Below are plug specific settings
 "This sets where where notes will be stored
