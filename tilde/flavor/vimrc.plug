@@ -25,11 +25,12 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'townk/vim-autoclose'
 
 "Material theme
-Plug 'kristijanhusak/vim-hybrid-material'
+"Plug 'kristijanhusak/vim-hybrid-material'
+"Palenight theme
+Plug 'drewtempelmeyer/palenight.vim'
 
-"Vim airline and themes
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Lightline
+Plug 'itchyny/lightline.vim'
 
 "Tmux line
 Plug 'edkolev/tmuxline.vim'

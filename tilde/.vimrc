@@ -9,8 +9,10 @@ colorscheme hybrid_reverse
 let g:enable_bold_font=1
 let g:enable_italic_font=1
 
-"Airline theme
-let g:airline_theme='hybrid'
+"lightline settings
+let g:lightline = {
+      \ 'colorscheme': 'seoul256',
+      \ }
 
 "Turn on syntax highlighting.
 if !exists("g:syntax_on")
