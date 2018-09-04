@@ -43,6 +43,7 @@ set showmode
 set showcmd
 set cursorline
 set number
+set relativenumber
 
 "Allows your update time to be a bit faster
 set updatetime=250
