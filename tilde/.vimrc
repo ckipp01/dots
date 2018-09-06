@@ -60,7 +60,7 @@ set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]
 set laststatus=2
 
 "Search down into subfolders
-"Proives tab completion for file related tasks
+"Provides tab completion for file related tasks
 set path+=**
 
 "Visual autocomplete for command menu
