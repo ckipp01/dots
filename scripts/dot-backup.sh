@@ -59,7 +59,7 @@ done
 
 
 #scripts
-for s in dot-backup.sh tmux-work.sh
+for s in dot-backup.sh tmux-work.sh dot-populate.sh
 do
   if [ -e ${HOME}/bin/$s ]
   then
@@ -73,6 +73,6 @@ do
       echo "$s was the same"
     fi
   else
-      echo "no $s on this machine"
+    echo "no $s on this machine"
   fi
 done

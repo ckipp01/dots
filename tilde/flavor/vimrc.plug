@@ -25,9 +25,7 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'townk/vim-autoclose'
 
 "Material theme
-"Plug 'kristijanhusak/vim-hybrid-material'
-"Palenight theme
-Plug 'drewtempelmeyer/palenight.vim'
+Plug 'kristijanhusak/vim-hybrid-material'
 
 "Lightline
 Plug 'itchyny/lightline.vim'
@@ -46,5 +44,8 @@ Plug 'chrisbra/colorizer'
 
 "Allows you to see your changes in the git gutter
 Plug 'airblade/vim-gitgutter'
+
+"Syntax checking
+Plug 'scrooloose/syntastic'
 
 call plug#end()
