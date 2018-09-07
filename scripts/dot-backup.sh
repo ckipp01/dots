@@ -63,7 +63,6 @@ do
   fi
 done
 
-
 #scripts
 echo -e "${UNDERLINE}bin scripts${END}"
 for s in dot-backup.sh tmux-work.sh dot-populate.sh colors.sh
