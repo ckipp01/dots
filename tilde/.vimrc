@@ -1,11 +1,11 @@
-"Call the .vimrc.plug file
+ "Call the .vimrc.plug file
 if filereadable(expand("~/.flavor/vimrc.plug"))
   source ~/.flavor/vimrc.plug
 endif
 
 "Color scheme settings
-set background=dark
-colorscheme hybrid_reverse
+let g:seoul256_background=234
+colorscheme seoul256 
 let g:enable_bold_font=1
 let g:enable_italic_font=1
 
@@ -49,7 +49,6 @@ set showmode
 set showcmd
 set cursorline
 set number
-set relativenumber
 
 "Allows your update time to be a bit faster
 set updatetime=250

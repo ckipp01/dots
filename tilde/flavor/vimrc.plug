@@ -25,7 +25,9 @@ Plug 'rust-lang/rust.vim', {'for': 'rust'}
 Plug 'townk/vim-autoclose'
 
 "Material theme
-Plug 'kristijanhusak/vim-hybrid-material'
+"Plug 'kristijanhusak/vim-hybrid-material'
+"Seoul256
+Plug 'junegunn/seoul256.vim'
 
 "Lightline
 Plug 'itchyny/lightline.vim'

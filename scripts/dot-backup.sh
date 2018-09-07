@@ -1,78 +1,85 @@
 #!/bin/bash
 
+#include colors
+. ${HOME}/bin/colors.sh
+
 #files directly in ~
+echo -e "${UNDERLINE}~ files${END}"
 for i in .vimrc .tmux.conf
 do
-    if [ -e ${HOME}/$i ]
+    if [ -e ${HOME}/${i} ]
     then
-      if [ ! -e ${HOME}/dots/tilde/$i ]
+      if [ ! -e ${HOME}/dots/tilde/${i} ]
       then
-        cp ${HOME}/$i ${HOME}/dots/tilde/$i && echo "$i is now being tracked"
-      elif [ ${HOME}/$i -nt ${HOME}/dots/tilde/$i ]
+        cp ${HOME}/${i} ${HOME}/dots/tilde/${i} && echo -e "${GREEN}${i} is now being tracked${END}"
+      elif [ ${HOME}/${i} -nt ${HOME}/dots/tilde/${i} ]
       then
-          cp ${HOME}/$i ${HOME}/dots/tilde/$i && echo "$i copied"
+          cp ${HOME}/${i} ${HOME}/dots/tilde/${i} && echo -e "${GREEN}${i} copied${END}"
       else
-        echo "$i was the same"
+        echo -e "${BLUE}${i} was the same${END}"
       fi
     else
-        echo "no $i on this machine"
+        echo -e "${RED}no ${i} on this machine${END}"
     fi
 done
 
 #flavor files
+echo -e "${UNDERLINE}flavor files${END}"
 for f in alias.bash function.bash tmux.snapshot vimrc.plug
 do
-  if [ -e ${HOME}/.flavor/$f ]
+  if [ -e ${HOME}/.flavor/${f} ]
   then
-    if [ ! -e ${HOME}/dots/tilde/flavor/$f ]
+    if [ ! -e ${HOME}/dots/tilde/flavor/${f} ]
     then
-      cp ${HOME}/.flavor/$f ${HOME}/dots/tilde/flavor/$f && echo "$f is now being tracked"
-    elif [ ${HOME}/.flavor/$f -nt ${HOME}/dots/tilde/flavor/$f ]
+      cp ${HOME}/.flavor/${f} ${HOME}/dots/tilde/flavor/${f} && echo -e "${GREEN}${f} is now being tracked${END}"
+    elif [ ${HOME}/.flavor/${f} -nt ${HOME}/dots/tilde/flavor/${f} ]
     then
-        cp ${HOME}/.flavor/$f ${HOME}/dots/tilde/flavor/$f && echo "$f copied"
+        cp ${HOME}/.flavor/${f} ${HOME}/dots/tilde/flavor/${f} && echo -e "${GREEN}${f} copied${END}"
     else
-      echo "$f was the same"
+      echo -e "${BLUE}${f} was the same${END}"
     fi
   else
-      echo "no $f on this machine"
+      echo -e "${RED}no ${f} on this machine${END}"
   fi
 done
 
 #config directory files
+echo -e "${UNDERLINE}config files${END}"
 for c in termite/config gtk-3.0/gtk.css
 do
-  if [ -e ${HOME}/.config/$c ]
+  if [ -e ${HOME}/.config/${c} ]
   then
-    if [ ! -e ${HOME}/dots/tilde/config/$c ]
+    if [ ! -e ${HOME}/dots/tilde/config/${c} ]
     then
-      cp ${HOME}/.config/$c ${HOME}/dots/tilde/config/$c && echo "$c is now being tracked"
-    elif [ ${HOME}/.config/$c -nt ${HOME}/dots/tilde/config/$c ]
+      cp ${HOME}/.config/${c} ${HOME}/dots/tilde/config/${c} && echo -e "${GREEN}${c} is now being tracked${END}"
+    elif [ ${HOME}/.config/${c} -nt ${HOME}/dots/tilde/config/${c} ]
     then
-        cp ${HOME}/.config/$c ${HOME}/dots/tilde/config/$c && echo "$c copied"
+        cp ${HOME}/.config/${c} ${HOME}/dots/tilde/config/${c} && echo -e "${GREEN}${c} copied${END}"
     else
-      echo "$c was the same"
+      echo -e "${BLUE}${c} was the same${END}"
     fi
   else
-      echo "no $c on this machine"
+      echo -e "${RED}no ${c} on this machine${END}"
   fi
 done
 
 
 #scripts
-for s in dot-backup.sh tmux-work.sh dot-populate.sh
+echo -e "${UNDERLINE}bin scripts${END}"
+for s in dot-backup.sh tmux-work.sh dot-populate.sh colors.sh
 do
-  if [ -e ${HOME}/bin/$s ]
+  if [ -e ${HOME}/bin/${s} ]
   then
-    if [ ! -e ${HOME}/dots/scripts/$s ]
+    if [ ! -e ${HOME}/dots/scripts/${s} ]
     then
-      cp ${HOME}/bin/$s ${HOME}/dots/scripts/$s && echo "$s is now being tracked"
-    elif [ ${HOME}/bin/$s -nt ${HOME}/dots/scripts/$s ]
+      cp ${HOME}/bin/${s} ${HOME}/dots/scripts/${s} && echo -e "${GREEN}${s} is now being tracked${END}"
+    elif [ ${HOME}/bin/${s} -nt ${HOME}/dots/scripts/${s} ]
     then
-        cp ${HOME}/bin/$s ${HOME}/dots/scripts/$s && echo "$s copied"
+        cp ${HOME}/bin/${s} ${HOME}/dots/scripts/${s} && echo -e "${GREEN}${s} copied${END}"
     else
-      echo "$s was the same"
+      echo -e "${BLUE}${s} was the same${END}"
     fi
   else
-    echo "no $s on this machine"
+    echo -e "${RED}no ${s} on this machine${END}"
   fi
 done
