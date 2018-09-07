@@ -20,16 +20,16 @@ do
 done
 
 #flavor files
-if [ ! -d ${home}/.flavor ]
+if [ ! -d ${HOME}/.flavor ]
 then
-  mkdir ${home}/.flavor
+  mkdir ${HOME}/.flavor
 fi
 
 for f in alias.bash function.bash tmux.snapshot vimrc.plug
 do
   if [ -e ${HOME}/dots/tilde/flavor/$f ]
   then
-    if [ ! -e ${HOME}/$f ]
+    if [ ! -e ${HOME}/.flavor/$f ]
     then
       cp ${HOME}/dots/tilde/flavor/$f ${HOME}/.flavor/$f && echo "$f has been created in .flavor"
     elif [ ${HOME}/dots/tilde/flavor/$f -nt ${HOME}/.flavor/$f ]
