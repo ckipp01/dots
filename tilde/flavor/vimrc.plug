@@ -15,17 +15,21 @@ Plug 'xolox/vim-misc'
 "For specific spacing with txt files
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 
+"This shows you the colors in your css
+Plug 'chrisbra/colorizer', {'for': 'css'}
+
 "For working specifically with scala
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 
 "For working specifically with rust
 Plug 'rust-lang/rust.vim', {'for': 'rust'}
 
+"For working specifically with javascript
+Plug 'pangloss/vim-javascript'
+
 "Autocomplete brackets
 Plug 'townk/vim-autoclose'
 
-"Material theme
-"Plug 'kristijanhusak/vim-hybrid-material'
 "Seoul256
 Plug 'junegunn/seoul256.vim'
 
@@ -41,13 +45,9 @@ Plug 'majutsushi/tagbar'
 "Help visualize spacing
 Plug 'Yggdroot/indentLine'
 
-"This shows you the colors in your css
-Plug 'chrisbra/colorizer'
-
 "Allows you to see your changes in the git gutter
 Plug 'airblade/vim-gitgutter'
 
-"Syntax checking
-Plug 'scrooloose/syntastic'
-
+"Linting and other magic
+Plug 'w0rp/ale'
 call plug#end()

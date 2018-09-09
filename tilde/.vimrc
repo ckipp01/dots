@@ -35,13 +35,6 @@ set softtabstop=2
 set expandtab
 set noshiftround
 
-"Syntastic settings
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_loc_list_height=5
-let g:syntastic_javascript_checkers=['eslint']
-
 "Make sure line endings are always unix
 set ff=unix
 
@@ -68,6 +61,7 @@ set laststatus=2
 "Search down into subfolders
 "Provides tab completion for file related tasks
 set path+=**
+filetype plugin on
 
 "Visual autocomplete for command menu
 set wildmenu
@@ -91,7 +85,10 @@ set viminfo='100,<9999,s100
 "While in vim just use the xclipbard
 set clipboard=unnamedplus
 
-"Below are plug specific settings
+"Ale settings
+let g:ale_completion_enabled=1
+
+"Settings for notes
 "This sets where where notes will be stored
 let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.md'
