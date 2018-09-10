@@ -25,7 +25,7 @@ done
 
 #flavor files
 echo -e "${UNDERLINE}flavor files${END}"
-for f in alias.bash function.bash tmux.snapshot vimrc.plug
+for f in alias.bash function.bash tmux.snapshot vimrc.plug plug.settings
 do
   if [ -e ${HOME}/.flavor/${f} ]
   then

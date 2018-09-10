@@ -1,6 +1,9 @@
- "Call the .vimrc.plug file
 if filereadable(expand("~/.flavor/vimrc.plug"))
   source ~/.flavor/vimrc.plug
+endif
+
+if filereadable(expand("~/.flavor/plug.settings"))
+  source ~/.flavor/plug.settings
 endif
 
 "Color scheme settings
@@ -8,11 +11,6 @@ let g:seoul256_background=234
 colorscheme seoul256 
 let g:enable_bold_font=1
 let g:enable_italic_font=1
-
-"lightline settings
-let g:lightline = {
-      \ 'colorscheme': 'seoul256',
-      \ }
 
 "Turn on syntax highlighting.
 if !exists("g:syntax_on")
@@ -85,24 +83,8 @@ set viminfo='100,<9999,s100
 "While in vim just use the xclipbard
 set clipboard=unnamedplus
 
-"Ale settings
-let g:ale_completion_enabled=1
-
-"NERDTree settings
-let NERDTreeMinimalUI=1
-let NERDTreeDirArrows=1
-
-"Settings for notes
-"This sets where where notes will be stored
-let g:notes_directories = ['~/notes']
-let g:notes_suffix = '.md'
-let g:notes_unicode_enabled = 0
-let g:notes_conceal_url = 0
-"Turn on Goyo specifcally for txt files
-au BufReadPost,BufNewFile *.md :Goyo 90%
-au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
-
 "Below are custom shortcuts/settings
+inoremap jj <ESC>
 let mapleader = ","
 
 "Toggle NERDTree open
