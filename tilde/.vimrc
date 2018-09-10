@@ -88,6 +88,10 @@ set clipboard=unnamedplus
 "Ale settings
 let g:ale_completion_enabled=1
 
+"NERDTree settings
+let NERDTreeMinimalUI=1
+let NERDTreeDirArrows=1
+
 "Settings for notes
 "This sets where where notes will be stored
 let g:notes_directories = ['~/notes']
