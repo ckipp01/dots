@@ -63,8 +63,7 @@ filetype plugin on
 
 "Visual autocomplete for command menu
 set wildmenu
-set wildmode=list:longest
-set wildignore=.git,*/node_modules/*
+set wildignore=.git,*/node_modules/*,*/target/*
 
 "Encoding
 set encoding=utf-8

@@ -9,6 +9,7 @@ let g:ale_completion_enabled=1
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 
+
 "Settings for notes
 "This sets where where notes will be stored
 let g:notes_directories = ['~/notes']
