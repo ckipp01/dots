@@ -20,12 +20,13 @@ Plug 'chrisbra/colorizer', {'for': 'css'}
 
 "For working specifically with scala
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
-
-"For working specifically with rust
-Plug 'rust-lang/rust.vim', {'for': 'rust'}
+Plug 'ensime/ensime-vim', {'for': 'scala'}
 
 "For working specifically with javascript
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}
+
+"For working with jsx
+Plug 'mxw/vim-jsx'
 
 "Autocomplete brackets
 Plug 'townk/vim-autoclose'
@@ -50,4 +51,5 @@ Plug 'airblade/vim-gitgutter'
 
 "Linting and other magic
 Plug 'w0rp/ale'
+
 call plug#end()
