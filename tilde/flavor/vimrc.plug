@@ -52,4 +52,7 @@ Plug 'airblade/vim-gitgutter'
 "Linting and other magic
 Plug 'w0rp/ale'
 
+"Language Client
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
 call plug#end()

@@ -2,8 +2,6 @@
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
       \ }
-"Ale settings
-let g:ale_completion_enabled=1
 
 "NERDTree settings
 let NERDTreeMinimalUI=1
@@ -19,3 +17,20 @@ let g:notes_conceal_url = 0
 "Turn on Goyo specifcally for txt files
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
+
+"Language client specific stuff
+let g:LanguageClient_autoStart = 1
+if executable('javascript-typescript-stdio')
+  let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ }
+  autocmd FileType javascript setlocal omnifunc=LanguageClient#complete
+else
+  echo "javascript-typescript-stdio not installed!\n"
+  :cq
+endif
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
