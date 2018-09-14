@@ -1,3 +1,5 @@
+"Collection of plugins for vim
+
 call plug#begin('~/.vim/plugged')
 
 "Wakatime Plugin to track coding activity

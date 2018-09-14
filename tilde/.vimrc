@@ -52,6 +52,9 @@ set backspace=indent,eol,start
 set matchpairs+=<:>
 set showmatch
 
+"Disables the automatic comment lines after another comment line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 "Set status line display
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]
 set laststatus=2

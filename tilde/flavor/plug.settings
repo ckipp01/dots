@@ -1,3 +1,6 @@
+" These are a collection of vim settings that specifically
+" relate to plugins
+
 "lightline settings
 let g:lightline = {
       \ 'colorscheme': 'seoul256',
@@ -7,13 +10,12 @@ let g:lightline = {
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 
-
 "Settings for notes
-"This sets where where notes will be stored
 let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.md'
 let g:notes_unicode_enabled = 0
 let g:notes_conceal_url = 0
+
 "Turn on Goyo specifcally for txt files
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
