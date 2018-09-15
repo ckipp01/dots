@@ -3,7 +3,7 @@
 
 "lightline settings
 let g:lightline = {
-      \ 'colorscheme': 'seoul256',
+      \ 'colorscheme': 'one',
       \ }
 
 "NERDTree settings
