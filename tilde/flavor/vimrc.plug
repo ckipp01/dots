@@ -1,59 +1,62 @@
-" Collection of plugins for vim
+" collection of plugins for vim
 call plug#begin('~/.vim/plugged')
 
-" Wakatime Plugin to track coding activity
+" wakatime Plugin to track coding activity
 Plug 'wakatime/vim-wakatime'
 
-" The NerdTree plugin to use a type of file explorer
+" the NerdTree plugin to use a type of file explorer
 Plug 'scrooloose/nerdtree'
 
-" Note taking stuff
+" note taking stuff
 Plug 'xolox/vim-notes'
 
-" This is needed for the above note taking feature
+" this is needed for the above note taking feature
 Plug 'xolox/vim-misc'
 
-" For specific spacing with txt files
+" for specific spacing with txt files
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 
-" This shows you the colors in your css
+" this shows you the colors in your css
 Plug 'chrisbra/colorizer', {'for': 'css'}
 
-" For working specifically with scala
+" for working specifically with scala
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'ensime/ensime-vim', {'for': 'scala'}
 
-" For working specifically with javascript
+" for working specifically with javascript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 
-" For working with jsx
+" for working with jsx
 Plug 'mxw/vim-jsx'
 
-" Autocomplete brackets
+" for working with elm
+Plug 'elmcast/elm-vim', {'for': 'elm'}
+
+" autocomplete brackets
 Plug 'townk/vim-autoclose'
 
-" Current theme
+" current theme
 Plug 'joshdick/onedark.vim'
 
-" Lightline
+" lightline
 Plug 'itchyny/lightline.vim'
 
-" Tmux line
+" tmux line
 Plug 'edkolev/tmuxline.vim'
 
-" Tagbar
+" tagbar
 Plug 'majutsushi/tagbar'
 
-" Help visualize spacing
+" help visualize spacing
 Plug 'Yggdroot/indentLine'
 
-" Allows you to see your changes in the git gutter
+" allows you to see your changes in the git gutter
 Plug 'airblade/vim-gitgutter'
 
-" Linting and other magic
+" linting and other magic
 Plug 'w0rp/ale'
 
-" Language Client
+" language Client
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 call plug#end()
