@@ -1,26 +1,32 @@
-" These are a collection of vim settings that specifically
-" relate to plugins
+set ft=vim
 
-"lightline settings
+" lightline settings
 let g:lightline = {
       \ 'colorscheme': 'one',
       \ }
 
-"NERDTree settings
+" tmuxline settings
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'y'    : ['%R']}
+
+" NERDTree settings
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
 
-"Settings for notes
+" notes settings
 let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.md'
 let g:notes_unicode_enabled = 0
 let g:notes_conceal_url = 0
 
-"Turn on Goyo specifcally for txt files
+" turn on Goyo specifcally for txt files
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
 
-"Language client specific stuff
+" LanguageClient-neovim settings 
 let g:LanguageClient_autoStart = 1
 if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands = {
@@ -34,5 +40,5 @@ else
 endif
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_typeDefinition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>

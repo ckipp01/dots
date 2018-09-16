@@ -1,0 +1,6 @@
+Plug 'junegunn/seoul256.vim'
+  https://github.com/junegunn/seoul256.vim
+Plug 'kristijanhusak/vim-hybrid-material'
+  https://github.com/kristijanhusak/vim-hybrid-material
+Plug 'joshdick/onedark.vim'
+  https://vimawesome.com/plugin/onedark-vim
