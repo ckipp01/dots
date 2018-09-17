@@ -5,7 +5,7 @@
 
 #files directly in ~
 echo -e "${UNDERLINE}~ files${END}"
-for i in .vimrc .tmux.conf
+for i in .vimrc .tmux.conf .bashrc
 do
     if [ -e ${HOME}/${i} ]
     then

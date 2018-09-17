@@ -13,6 +13,9 @@ source ~/.flavor/alias.bash
 # autojump
 source /usr/share/autojump/autojump.bash
 
+# run any necessary functions on startup
+run_on_startup;
+
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
 
