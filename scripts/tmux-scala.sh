@@ -2,7 +2,7 @@
 #
 # Setup for my work environment
 
-session="work"
+session="scala"
 
 #Grap the snapshot on load
 tmux start-server
