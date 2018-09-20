@@ -2,7 +2,7 @@ set ft=vim
 
 " lightline settings
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'tender',
       \ }
 
 " tmuxline settings

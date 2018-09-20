@@ -7,7 +7,8 @@ if filereadable(expand("~/.flavor/plug.settings"))
 endif
 
 " Color scheme settings
-colorscheme onedark 
+set background=dark
+colorscheme tender 
 
 " Turn on syntax highlighting.
 if !exists("g:syntax_on")
@@ -38,6 +39,7 @@ set showmode
 set showcmd
 set cursorline
 set number
+set noshowmode
 
 " Allows your update time to be a bit faster
 set updatetime=250
