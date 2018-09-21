@@ -4,3 +4,6 @@ Plug 'kristijanhusak/vim-hybrid-material'
   https://github.com/kristijanhusak/vim-hybrid-material
 Plug 'joshdick/onedark.vim'
   https://vimawesome.com/plugin/onedark-vim
+Plug 'jacoborus/tender.vim'
+  https://github.com/jacoborus/tender.vim
+
