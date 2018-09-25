@@ -70,6 +70,9 @@ set wildignore=.git,*/node_modules/*,*/target/*
 " Encoding
 set encoding=utf-8
 
+" format json on save
+autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
+
 " Search settings
 " Highlight matching search patterns
 set hlsearch
