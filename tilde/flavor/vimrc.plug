@@ -16,6 +16,9 @@ Plug 'xolox/vim-notes'
 " this is needed for the above note taking feature
 Plug 'xolox/vim-misc'
 
+" current theme 
+Plug 'morhetz/gruvbox'
+
 " for specific spacing with txt files
 Plug 'junegunn/goyo.vim', {'for': 'markdown'}
 
@@ -38,11 +41,9 @@ Plug 'elmcast/elm-vim', {'for': 'elm'}
 " autocomplete brackets
 Plug 'townk/vim-autoclose'
 
-" current theme
-Plug 'jacoborus/tender.vim'
-
-" lightline
-Plug 'itchyny/lightline.vim'
+" airline 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " tmux line
 Plug 'edkolev/tmuxline.vim'

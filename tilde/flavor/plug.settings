@@ -1,9 +1,7 @@
 set ft=vim
 
-" lightline settings
-let g:lightline = {
-      \ 'colorscheme': 'tender',
-      \ }
+" airline settings
+let g:airline_theme='gruvbox'
 
 " tmuxline settings
 let g:tmuxline_preset = {
@@ -26,7 +24,7 @@ let g:notes_conceal_url = 0
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
 
-" LanguageClient-neovim settings 
+" LanguageClient-neovim settings
 let g:LanguageClient_autoStart = 1
 if executable('javascript-typescript-stdio')
   let g:LanguageClient_serverCommands = {

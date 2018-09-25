@@ -8,7 +8,7 @@ endif
 
 " Color scheme settings
 set background=dark
-colorscheme tender 
+colorscheme gruvbox 
 
 " Turn on syntax highlighting.
 if !exists("g:syntax_on")
