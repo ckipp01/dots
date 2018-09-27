@@ -6,94 +6,100 @@ if filereadable(expand("~/.flavor/plug.settings"))
   source ~/.flavor/plug.settings
 endif
 
-" Color scheme settings
+" color scheme settings
 set background=dark
-colorscheme gruvbox 
+colorscheme gruvbox
 
-" Turn on syntax highlighting.
+" turn on syntax highlighting.
 if !exists("g:syntax_on")
   syntax enable
 endif
 
-" Allow for urls with query strings to be opened with the query string
+" allow for urls with query strings to be opened with the query string
 let g:netrw_gx="<cWORD>"
 
-" Turn off modelines
+" turn off modelines
 set modelines=0
 
-" Don't wrap at screen end
+" don't wrap at screen end
 set nowrap
 
-" Tabs vs spations options
+" tabs vs spations options
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
 set noshiftround
 
-" Make sure line endings are always unix
+" make sure line endings are always unix
 set ff=unix
 
-" Display options
+" display options
 set showmode
 set showcmd
 set cursorline
 set number
 set noshowmode
 
-" Allows your update time to be a bit faster
+" allows your update time to be a bit faster
 set updatetime=250
 
-" Basically allows your backspace to work as expected
+" basically allows your backspace to work as expected
 set backspace=indent,eol,start
 
-" Highlight matching pairs of brackets. Use the '%' character to jump between them.
+" annoying red to make sure I don't go over 80 wide
+highlight OverLength ctermbg=red ctermfg=white
+match OverLength /\%81v.\+/
+
+" highlight matching pairs of brackets
+" use the '%' character to jump between them
 set matchpairs+=<:>
 set showmatch
 
-" Disables the automatic comment lines after another comment line
+" disables the automatic comment lines after another comment line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Set status line display
+" set status line display
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]
 set laststatus=2
 
-" Search down into subfolders
-" Provides tab completion for file related tasks
+" search down into subfolders
+" provides tab completion for file related tasks
 set path+=**
 filetype plugin on
 
-" Visual autocomplete for command menu
+" visual autocomplete for command menu
 set wildmenu
 set wildignore=.git,*/node_modules/*,*/target/*
 
-" Encoding
+" dncoding
 set encoding=utf-8
 
 " format json on save
 autocmd FileType json autocmd BufWritePre <buffer> %!python -m json.tool
 
-" Search settings
-" Highlight matching search patterns
+" search settings
+" highlight matching search patterns
 set hlsearch
-" Enable incremental search
+" enable incremental search
 set incsearch
-" Include matching uppercase words with lowercase search term
+" include matching uppercase words with lowercase search term
 set ignorecase
-" Include only uppercase words with uppercase search term
+" include only uppercase words with uppercase search term
 set smartcase
 
-" Store info from no more than 100 files at a time, 9999 lines of text, 100kb of data.
+" store info from no more than 100 files at a time
+" 9999 lines of text, 100kb of data.
 set viminfo='100,<9999,s100
 
-" While in vim just use the xclipbard
+" while in vim just use the xclipbard
 set clipboard=unnamedplus
 
-" Below are custom shortcuts/settings
+" below are custom shortcuts/settings
 inoremap jj <ESC>
 let mapleader = ","
 
-" Toggle NERDTree open
+" toggle NERDTree open
 nmap <leader>nt :NERDTree<cr>
-" Toggle highlight search off
+" toggle highlight search off
 nmap <leader>hs :nohlsearch<cr>
