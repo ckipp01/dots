@@ -5,10 +5,11 @@ let g:airline_theme='gruvbox'
 
 " tmuxline settings
 let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'win'  : ['#I', '#W'],
-      \'cwin' : ['#I', '#W', '#F'],
-      \'y'    : ['%R']}
+  \'a'    : '#S',
+  \'win'  : ['#I', '#W'],
+  \'cwin' : ['#I', '#W', '#F'],
+  \'y'    : ['%R']
+  \ }
 
 " NERDTree settings
 let NERDTreeMinimalUI=1
@@ -23,6 +24,12 @@ let g:notes_conceal_url = 0
 " turn on Goyo specifcally for txt files
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md set wrap linebreak nolist spell spelllang=en_us complete+=kspell
+
+" ale
+let g:ale_fixers = {
+  \ '*': ['trim_whitespace'],
+  \ 'javascript': ['eslint'],
+  \ }
 
 " LanguageClient-neovim settings
 let g:LanguageClient_autoStart = 1
