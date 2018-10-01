@@ -11,10 +11,12 @@ do
     then
       if [ ! -e ${HOME}/dots/tilde/${i} ]
       then
-        cp ${HOME}/${i} ${HOME}/dots/tilde/${i} && echo -e "${GREEN}${i} is now being tracked${END}"
+        cp ${HOME}/${i} ${HOME}/dots/tilde/${i} &&
+          echo -e "${GREEN}${i} is now being tracked${END}"
       elif [ ${HOME}/${i} -nt ${HOME}/dots/tilde/${i} ]
       then
-          cp ${HOME}/${i} ${HOME}/dots/tilde/${i} && echo -e "${GREEN}${i} copied${END}"
+          cp ${HOME}/${i} ${HOME}/dots/tilde/${i} && echo
+            -e "${GREEN}${i} copied${END}"
       else
         echo -e "${BLUE}${i} was the same${END}"
       fi
@@ -25,16 +27,19 @@ done
 
 #flavor files
 echo -e "${UNDERLINE}flavor files${END}"
-for f in alias.bash function.bash tmux.snapshot vimrc.plug plug.settings vim-themes
+for f in alias.bash function.bash tmux.snapshot \
+  vimrc.plug plug.settings vim-themes
 do
   if [ -e ${HOME}/.flavor/${f} ]
   then
     if [ ! -e ${HOME}/dots/tilde/flavor/${f} ]
     then
-      cp ${HOME}/.flavor/${f} ${HOME}/dots/tilde/flavor/${f} && echo -e "${GREEN}${f} is now being tracked${END}"
+      cp ${HOME}/.flavor/${f} ${HOME}/dots/tilde/flavor/${f} &&
+        echo -e "${GREEN}${f} is now being tracked${END}"
     elif [ ${HOME}/.flavor/${f} -nt ${HOME}/dots/tilde/flavor/${f} ]
     then
-        cp ${HOME}/.flavor/${f} ${HOME}/dots/tilde/flavor/${f} && echo -e "${GREEN}${f} copied${END}"
+        cp ${HOME}/.flavor/${f} ${HOME}/dots/tilde/flavor/${f} &&
+          echo -e "${GREEN}${f} copied${END}"
     else
       echo -e "${BLUE}${f} was the same${END}"
     fi
@@ -51,10 +56,12 @@ do
   then
     if [ ! -e ${HOME}/dots/tilde/config/${c} ]
     then
-      cp ${HOME}/.config/${c} ${HOME}/dots/tilde/config/${c} && echo -e "${GREEN}${c} is now being tracked${END}"
+      cp ${HOME}/.config/${c} ${HOME}/dots/tilde/config/${c} &&
+        echo -e "${GREEN}${c} is now being tracked${END}"
     elif [ ${HOME}/.config/${c} -nt ${HOME}/dots/tilde/config/${c} ]
     then
-        cp ${HOME}/.config/${c} ${HOME}/dots/tilde/config/${c} && echo -e "${GREEN}${c} copied${END}"
+        cp ${HOME}/.config/${c} ${HOME}/dots/tilde/config/${c} &&
+          echo -e "${GREEN}${c} copied${END}"
     else
       echo -e "${BLUE}${c} was the same${END}"
     fi
@@ -71,10 +78,12 @@ do
   then
     if [ ! -e ${HOME}/dots/scripts/${s} ]
     then
-      cp ${HOME}/bin/${s} ${HOME}/dots/scripts/${s} && echo -e "${GREEN}${s} is now being tracked${END}"
+      cp ${HOME}/bin/${s} ${HOME}/dots/scripts/${s} &&
+        echo -e "${GREEN}${s} is now being tracked${END}"
     elif [ ${HOME}/bin/${s} -nt ${HOME}/dots/scripts/${s} ]
     then
-        cp ${HOME}/bin/${s} ${HOME}/dots/scripts/${s} && echo -e "${GREEN}${s} copied${END}"
+        cp ${HOME}/bin/${s} ${HOME}/dots/scripts/${s} &&
+          echo -e "${GREEN}${s} copied${END}"
     else
       echo -e "${BLUE}${s} was the same${END}"
     fi

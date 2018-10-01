@@ -48,7 +48,7 @@ set updatetime=250
 set backspace=indent,eol,start
 
 " annoying red to make sure I don't go over 80 wide
-highlight OverLength ctermbg=red ctermfg=white
+highlight OverLength ctermbg=1 ctermfg=white
 match OverLength /\%81v.\+/
 
 " highlight matching pairs of brackets
