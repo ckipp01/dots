@@ -16,7 +16,7 @@ Plug 'xolox/vim-notes'
 " this is needed for the above note taking feature
 Plug 'xolox/vim-misc'
 
-" current theme 
+" current theme
 Plug 'morhetz/gruvbox'
 
 " for specific spacing with txt files
@@ -41,7 +41,7 @@ Plug 'elmcast/elm-vim', {'for': 'elm'}
 " autocomplete brackets
 Plug 'townk/vim-autoclose'
 
-" airline 
+" airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -62,5 +62,13 @@ Plug 'w0rp/ale'
 
 " language Client
 Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 call plug#end()

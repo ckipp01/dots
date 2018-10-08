@@ -27,9 +27,10 @@ au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
 
 " ale
+let g:ale_completion_enabled = 1
 let g:ale_fixers = {
   \ '*': ['trim_whitespace'],
-  \ 'javascript': ['eslint'],
+  \ 'javascript': ['eslint', 'prettier'],
   \ }
 
 " LanguageClient-neovim settings
@@ -48,3 +49,6 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_typeDefinition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" deoplete
+let g:deoplete#enable_at_startup = 1

@@ -96,6 +96,10 @@ set viminfo='100,<9999,s100
 set clipboard=unnamedplus
 
 " below are custom shortcuts/settings
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" escape
 inoremap jj <ESC>
 let mapleader = ","
 
