@@ -72,7 +72,7 @@ filetype plugin on
 set wildmenu
 set wildignore=.git,*/node_modules/*,*/target/*
 
-" dncoding
+" encoding
 set encoding=utf-8
 
 " search settings
@@ -104,3 +104,5 @@ let mapleader = ","
 nmap <leader>nt :NERDTree<cr>
 " toggle highlight search off
 nmap <leader>hs :nohlsearch<cr>
+" format json
+nmap <leader>js :%!jq '.'<cr>
