@@ -40,6 +40,7 @@ set showcmd
 set cursorline
 set number
 set noshowmode
+set conceallevel=0
 
 " allows your update time to be a bit faster
 set updatetime=250

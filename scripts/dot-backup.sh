@@ -16,7 +16,7 @@ do
       elif [ ${HOME}/${i} -nt ${HOME}/dots/tilde/${i} ]
       then
           cp ${HOME}/${i} ${HOME}/dots/tilde/${i} && echo
-            -e "${GREEN}${i} copied${END}"
+        echo -e "${GREEN}${i} copied${END}"
       else
         echo -e "${BLUE}${i} was the same${END}"
       fi
