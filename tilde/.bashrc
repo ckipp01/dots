@@ -26,7 +26,7 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# checking and resizing of windowsize 
+# checking and resizing of windowsize
 shopt -s checkwinsize
 
 # make less more friendly for non-text input files
@@ -35,7 +35,9 @@ shopt -s checkwinsize
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    test -r ~/.dircolors &&\
+    eval "$(dircolors -b ~/.dircolors)" ||\
+    eval "$(dircolors -b)"
 fi
 
 bind 'set show-all-if-ambiguous on'
@@ -50,4 +52,10 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export JAVA_HOME=/home/ckipp/java/jdk1.8.0_191/
+export PATH="$HOME/.yarn/bin:\
+  $HOME/.config/yarn/global/node_modules/.bin:\
+  $JAVA_HOME/bin:\
+  $PATH"
 
