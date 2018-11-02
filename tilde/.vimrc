@@ -48,9 +48,8 @@ set updatetime=250
 " basically allows your backspace to work as expected
 set backspace=indent,eol,start
 
-" annoying red to make sure I don't go over 80 wide
-highlight OverLength ctermbg=1 ctermfg=white
-match OverLength /\%81v.\+/
+autocmd Filetype javascript set colorcolumn=80
+set colorcolumn=100
 
 " highlight matching pairs of brackets
 " use the '%' character to jump between them
