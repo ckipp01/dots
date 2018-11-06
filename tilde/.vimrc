@@ -24,7 +24,7 @@ set modelines=0
 " don't wrap at screen end
 set nowrap
 
-" tabs vs spations options
+" tabs vs spaces options
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
