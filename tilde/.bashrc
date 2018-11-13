@@ -12,6 +12,8 @@ source ~/.flavor/function.bash
 source ~/.flavor/alias.bash
 # autojump
 source /usr/share/autojump/autojump.bash
+# wakatime tracking
+source ~/.flavor/bash-wakatime.sh
 
 # run any necessary functions on startup
 run_on_startup;
