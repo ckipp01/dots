@@ -56,8 +56,5 @@ if ! shopt -oq posix; then
 fi
 
 export JAVA_HOME=/home/ckipp/java/jdk1.8.0_191/
-export PATH="$HOME/.yarn/bin:\
-  $HOME/.config/yarn/global/node_modules/.bin:\
-  $JAVA_HOME/bin:\
-  $PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$JAVA_HOME/bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:$PATH"
 
