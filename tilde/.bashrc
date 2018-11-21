@@ -18,11 +18,13 @@ source ~/.flavor/bash-wakatime.sh
 # run any necessary functions on startup
 run_on_startup;
 
+# history stuff
 # don't put duplicate lines or lines starting with space in the history.
 HISTCONTROL=ignoreboth
-
 # append to the history file, don't overwrite it
 shopt -s histappend
+# allow for my prompt history to all be accumulated from various open places
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
 # for setting history length
 HISTSIZE=1000
@@ -55,6 +57,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export JAVA_HOME=/home/ckipp/java/jdk1.8.0_191/
+export JAVA_HOME=/home/ckipp/java/jdk1.8.0_191
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$JAVA_HOME/bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:$PATH"
 

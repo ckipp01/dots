@@ -36,11 +36,10 @@ let g:ale_fixers = {
 " LanguageClient-neovim settings
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
-      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
-      \ 'elm': ['/usr/local/bin/elm-oracle']
+      \ 'javascript': ['/home/ckipp/.npm-global/bin/javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['/home/ckipp/.npm-global/bin/javascript-typescript-stdio']
       \ }
-autocmd FileType javascript, elm setlocal omnifunc=LanguageClient#complete
+autocmd FileType [javascript, elm] setlocal omnifunc=LanguageClient#complete
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_typeDefinition()<CR>
