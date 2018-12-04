@@ -48,9 +48,6 @@ set updatetime=250
 " basically allows your backspace to work as expected
 set backspace=indent,eol,start
 
-autocmd Filetype javascript set colorcolumn=80
-set colorcolumn=100
-
 " highlight matching pairs of brackets
 " use the '%' character to jump between them
 set matchpairs+=<:>
