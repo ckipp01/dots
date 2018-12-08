@@ -57,6 +57,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export JAVA_HOME=/home/ckipp/java/jdk1.8.0_191
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$JAVA_HOME/bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:$PATH"
 
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/home/ckipp/.sdkman"
+[[ -s "/home/ckipp/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ckipp/.sdkman/bin/sdkman-init.sh"

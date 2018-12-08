@@ -36,10 +36,6 @@ Plug 'posva/vim-vue'
 " for working with elm
 Plug 'elmcast/elm-vim', {'for': 'elm'}
 
-" for working with php
-Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs', 'for': 'php'}
-
-
 " autocomplete brackets
 Plug 'townk/vim-autoclose'
 
@@ -63,7 +59,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'w0rp/ale'
 
 " language Client
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+Plug 'natebosch/vim-lsc'
 
 " autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
