@@ -72,7 +72,7 @@ done
 
 #scripts
 echo -e "${UNDERLINE}bin scripts${END}"
-for s in dot-backup.sh tmux-scala.sh tmux-js.sh dot-populate.sh colors.sh
+for s in dot-backup.sh tmux-scala.sh tmux-js.sh dot-populate.sh colors.sh get-waka-summary.sh
 do
   if [ -e ${HOME}/bin/${s} ]
   then

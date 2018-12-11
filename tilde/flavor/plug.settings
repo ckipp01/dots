@@ -35,7 +35,8 @@ let g:ale_fixers = {
 
 let g:lsc_server_commands = {
       \ 'javascript': '/home/ckipp/.npm-global/bin/javascripty-typescript-stdio',
-      \ 'javascript.jsx': '/home/ckipp/.npm-global/bin/javascript-typescript-stdio'}
+      \ 'javascript.jsx': '/home/ckipp/.npm-global/bin/javascript-typescript-stdio',
+      \ 'scala': 'metals-vim'}
 
 let g:lsc_auto_map = {
       \ 'GoToDefinition': '<leader>gd',
