@@ -59,6 +59,9 @@ fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:$PATH"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# for usage with n and node jazz
+export N_PREFIX=$HOME
+
+# sdkman stuff
 export SDKMAN_DIR="/home/ckipp/.sdkman"
 [[ -s "/home/ckipp/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ckipp/.sdkman/bin/sdkman-init.sh"

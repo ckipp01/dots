@@ -5,13 +5,13 @@ baseurl="https://wakatime.com/api/v1/"
 user="ckipp01"
 outputDir=${HOME}/Documents/waka-records/
 
-echo -e "${BLUE}Provide start date (YYYY-MM-DD): ${END}"
+echo -e "${LBLUE}Provide start date (YYYY-MM-DD): ${END}"
 read startDate
 
-echo -e "${BLUE}Provide end date (YYYY-MM-DD): ${END}"
+echo -e "${LBLUE}Provide end date (YYYY-MM-DD): ${END}"
 read endDate
 
-echo -e "${BLUE}Would you like to print results to file or terminal? (f/t)${END}"
+echo -e "${LBLUE}Would you like to print results to file or terminal? (f/t)${END}"
 read FT
 case ${FT} in
   [Ff]* )
@@ -21,11 +21,11 @@ case ${FT} in
     mode=terminal
 esac
 
-echo -e "${BLUE}Captured start date: $startDate${END}"
-echo -e "${BLUE}Captured end date: $endDate${END}"
-echo -e "${BLUE}Captured output mode: $mode${END}"
+echo -e "${LBLUE}Captured start date: ${BLUE}$startDate${END}"
+echo -e "${LBLUE}Captured end date: ${BLUE}$endDate${END}"
+echo -e "${LBLUE}Captured output mode: ${BLUE}$mode${END}"
 
-echo -e "${BLUE}Is this correct? (y/n)${END}"
+echo -e "${LBLUE}Is this correct? (y/n)${END}"
 read correct
 
 if [ $correct = "y" ]
