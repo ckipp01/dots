@@ -26,6 +26,9 @@ let g:notes_conceal_url = 0
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
 
+" specifcally for vim-scala
+au BufRead,BufNewFile *.sbt set filetype=scala
+
 " ale
 let g:ale_completion_enabled = 1
 let g:ale_fixers = {

@@ -33,7 +33,7 @@ then
   encoded="$(echo $wakatimeAPIKey | base64)"
   case $mode in
     file)
-      response=$(curl -v --header "Authorization: Basic ${encoded}" "${baseurl}users/${user}/summaries?start=${startDate}&end=${endDate}" > ${outputDir}summary-${startDate}.json)
+      response=$(curl -v --header "Authorization: Basic ${encoded}" "${baseurl}users/${user}/summaries?start=${startDate}&end=${endDate}" -o ${outputDir}summary-${startDate}.json)
       echo $response
       ;;
     terminal)
