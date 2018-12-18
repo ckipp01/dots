@@ -5,11 +5,26 @@ baseurl="https://wakatime.com/api/v1/"
 user="ckipp01"
 outputDir=${HOME}/Documents/waka-records/
 
-echo -e "${LBLUE}Provide start date (YYYY-MM-DD): ${END}"
-read startDate
+echo -e "${BLUE}Would you like to provide a date or range? (d/r)${END}"
+read dateFormat
 
-echo -e "${LBLUE}Provide end date (YYYY-MM-DD): ${END}"
-read endDate
+if [ $dateFormat = "d" ]
+then
+  echo -e "${BLUE}Please provide the date (YYYY-MM-DD): ${END}"
+  read date
+  startDate=$date
+  endDate=$date
+elif [ $dateFormat = "r" ]
+then
+  echo -e "${LBLUE}Provide start date (YYYY-MM-DD): ${END}"
+  read startDate
+
+  echo -e "${LBLUE}Provide end date (YYYY-MM-DD): ${END}"
+  read endDate
+else
+  echo -e ${GREEN}Ok, bye.${END}
+  exit 0
+fi
 
 echo -e "${LBLUE}Would you like to print results to file or terminal? (f/t)${END}"
 read FT
