@@ -1,9 +1,5 @@
 set ft=vim
 
-" airline settings
-let g:airline_theme='gruvbox'
-let g:airline#extensions#tabline#formatter = 'unique_tail'
-
 " tmuxline settings
 let g:tmuxline_preset = {
   \'a'    : '#S',

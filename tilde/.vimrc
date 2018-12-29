@@ -39,7 +39,6 @@ set showmode
 set showcmd
 set cursorline
 set number
-set noshowmode
 set conceallevel=0
 
 " allows your update time to be a bit faster
@@ -57,7 +56,7 @@ set showmatch
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " set status line display
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]
+set statusline=%t%m%r%h%w\ [%{&ff}]\ [%Y]\ [%l,%v][%p%%]
 set laststatus=2
 
 " search down into subfolders

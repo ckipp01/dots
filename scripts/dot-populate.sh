@@ -1,7 +1,9 @@
 #!/bin/bash
 
-#include colors
-. ${HOME}/bin/colors.sh
+echo "Is this a desktop or server?"
+read setupType
+
+[ -f ${HOME}/.vim/autoload/plug.vim ]
 
 #files directly in ~
 echo -e "${UNDERLINE}~ files${END}"
@@ -11,7 +13,7 @@ do
     then
       if [ ! -e ${HOME}/${i} ]
       then
-        cp ${HOME}/dots/tilde/${i} ${HOME}/${i} && echo -e "${GREEN}${i} has been created in ${HOME}${END}"
+        cp ${HOME}/dots/tilde/${i} ${HOME}/${i} && echo "${i} has been created in ${HOME}"
       elif [ ${HOME}/dot/tilde/${i} -nt ${HOME}/${i} ]
       then
           cp ${HOME}/dots/tilde/${i} ${HOME}/${i} && echo -e "${GREEN}updated ${i}${END}"

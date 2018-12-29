@@ -39,10 +39,6 @@ Plug 'elmcast/elm-vim', {'for': 'elm'}
 " autocomplete brackets
 Plug 'townk/vim-autoclose'
 
-" airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
 " tmux line
 Plug 'edkolev/tmuxline.vim'
 
