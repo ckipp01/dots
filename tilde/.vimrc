@@ -56,7 +56,13 @@ set showmatch
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " set status line display
-set statusline=%t%m%r%h%w\ [%{&ff}]\ [%Y]\ [%l,%v][%p%%]
+set statusline=%n\   " buffer number
+set statusline+=%t%m%r%h%w\  " file, modified, readonly
+set statusline+=%{fugitive#statusline()}\ " git branch 
+set statusline+=%=%{&ff}\  " right align line endings 
+set statusline+=%Y\  " filetype
+set statusline+=%l,%v\ " curser position 
+set statusline+=%p%%\  " percentage on page
 set laststatus=2
 
 " search down into subfolders
