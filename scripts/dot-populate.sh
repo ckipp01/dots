@@ -3,7 +3,9 @@
 echo "Is this a desktop or server?"
 read setupType
 
-[ -f ${HOME}/.vim/autoload/plug.vim ]
+[ ! -f ${HOME}/.vim/autoload/plug.vim ] && \
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 #files directly in ~
 echo -e "${UNDERLINE}~ files${END}"
