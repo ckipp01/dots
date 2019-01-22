@@ -108,3 +108,4 @@ nmap <leader>nt :NERDTree<cr>
 nmap <leader>hs :nohlsearch<cr>
 " format json
 nmap <leader>js :%!jq '.'<cr>
+nmap <leader>xml :%!xmllint --format -<cr>
