@@ -28,9 +28,13 @@ au BufRead,BufNewFile *.sbt set filetype=scala
 
 " ale
 let g:ale_completion_enabled = 1
+let g:ale_lint_on_save = 1
+let g:ale_linters = {
+  \ 'javascript': ['standard']
+  \ }
 let g:ale_fixers = {
   \ '*': ['trim_whitespace'],
-  \ 'javascript': ['eslint', 'prettier'],
+  \ 'javascript': ['standard']
   \ }
 
 let g:lsc_server_commands = {
