@@ -55,6 +55,10 @@ set showmatch
 " disables the automatic comment lines after another comment line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" enforce characters to be 80 or less
+highlight ColorColumn ctermbg=red
+call matchadd('ColorColumn', '\%81v', 100)
+
 " set status line display
 set statusline=%n\   " buffer number
 set statusline+=%t%m%r%h%w\  " file, modified, readonly
