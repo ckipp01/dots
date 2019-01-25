@@ -11,7 +11,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 
 " note taking stuff
-Plug 'xolox/vim-notes'
+ Plug 'xolox/vim-notes'
 
 " this is needed for the above note taking feature
 Plug 'xolox/vim-misc'
@@ -19,8 +19,8 @@ Plug 'xolox/vim-misc'
 " current theme
 Plug 'morhetz/gruvbox'
 
-" for specific spacing with txt files
-Plug 'junegunn/goyo.vim', {'for': 'markdown'}
+" for specific spacing
+Plug 'junegunn/goyo.vim'
 
 " this shows you the colors in your css
 Plug 'chrisbra/colorizer', {'for': 'css'}
