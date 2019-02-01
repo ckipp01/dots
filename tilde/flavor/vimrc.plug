@@ -60,4 +60,7 @@ Plug 'natebosch/vim-lsc'
 " autocomplete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+" devicons for nerdtree
+Plug 'ryanoasis/vim-devicons'
+
 call plug#end()

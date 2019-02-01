@@ -4,7 +4,7 @@ audible_bell = false
 clickable_url = true
 scrollback_lines = 10000
 
-font = Source Code Pro 12
+font = SauceCodePro Nerd Font Mono
 
 [colors]
 # hard contrast: background = #1d2021
