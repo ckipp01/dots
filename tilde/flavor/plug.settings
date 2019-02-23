@@ -41,7 +41,11 @@ let g:ale_fixers = {
 let g:lsc_server_commands = {
       \ 'javascript': 'javascripty-typescript-stdio',
       \ 'javascript.jsx': 'javascript-typescript-stdio',
-      \ 'scala': 'metals-vim'}
+      \ 'scala': {
+      \   'command': 'metals-vim',
+      \   'log_level': 'Log'
+      \   }
+      \ }
 
 let g:lsc_auto_map = {
       \ 'GoToDefinition': '<leader>gd',
