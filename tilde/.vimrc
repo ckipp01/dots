@@ -21,6 +21,9 @@ let g:netrw_gx="<cWORD>"
 " turn off modelines
 set modelines=0
 
+" turn hybrid line numbers on
+set number relativenumber
+
 " don't wrap at screen end
 set nowrap
 
@@ -62,10 +65,10 @@ autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
 " set status line display
 set statusline=%n\   " buffer number
 set statusline+=%t%m%r%h%w\  " file, modified, readonly
-set statusline+=%{fugitive#statusline()}\ " git branch 
-set statusline+=%=%{&ff}\  " right align line endings 
+set statusline+=%{fugitive#statusline()}\ " git branch
+set statusline+=%=%{&ff}\  " right align line endings
 set statusline+=%Y\  " filetype
-set statusline+=%l,%v\ " curser position 
+set statusline+=%l,%v\ " curser position
 set statusline+=%p%%\  " percentage on page
 set laststatus=2
 
