@@ -21,9 +21,6 @@ let g:netrw_gx="<cWORD>"
 " turn off modelines
 set modelines=0
 
-" turn hybrid line numbers on
-set number relativenumber
-
 " don't wrap at screen end
 set nowrap
 
@@ -59,7 +56,7 @@ set showmatch
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " enforce characters to be 80 or less
-highlight ColorColumn ctermbg=red
+highlight ColorColumn ctermbg=lightgrey
 autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
 
 " set status line display
@@ -76,6 +73,9 @@ set laststatus=2
 " provides tab completion for file related tasks
 set path+=**
 filetype plugin on
+
+" turn show peview window for completions
+set completeopt-=preview
 
 " visual autocomplete for command menu
 set wildmenu
@@ -115,4 +115,5 @@ nmap <leader>nt :NERDTree<cr>
 nmap <leader>hs :nohlsearch<cr>
 " format json
 nmap <leader>js :%!jq '.'<cr>
+" format xml
 nmap <leader>xml :%!xmllint --format -<cr>

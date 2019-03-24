@@ -39,7 +39,7 @@ let g:ale_fixers = {
   \ }
 
 let g:lsc_server_commands = {
-      \ 'javascript': 'javascripty-typescript-stdio',
+      \ 'javascript': 'javascript-typescript-stdio',
       \ 'javascript.jsx': 'javascript-typescript-stdio',
       \ 'scala': {
       \   'command': 'metals-vim',
