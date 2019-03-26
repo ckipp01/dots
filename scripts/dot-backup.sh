@@ -50,7 +50,7 @@ done
 
 #config directory files
 echo -e "${UNDERLINE}config files${END}"
-for c in termite/config gtk-3.0/gtk.css
+for c in termite/config gtk-3.0/gtk.css ranger/rc.conf
 do
   if [ -e ${HOME}/.config/${c} ]
   then
