@@ -8,7 +8,7 @@ endif
 
 " color scheme settings
 set background=dark
-colorscheme gruvbox
+colorscheme gruvbox 
 
 " turn on syntax highlighting.
 if !exists("g:syntax_on")
