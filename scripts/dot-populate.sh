@@ -34,7 +34,7 @@ then
   mkdir ${HOME}/.flavor && echo -e "${GREEN}created .flavor directory${END}"
 fi
 
-for f in alias.bash function.bash tmux.snapshot vimrc.plug
+for f in alias.bash function.bash vimrc.plug
 do
   if [ -e ${HOME}/dots/tilde/flavor/${f} ]
   then

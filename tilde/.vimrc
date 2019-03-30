@@ -8,7 +8,8 @@ endif
 
 " color scheme settings
 set background=dark
-colorscheme gruvbox 
+colorscheme base16-default-dark
+set termguicolors
 
 " turn on syntax highlighting.
 if !exists("g:syntax_on")
