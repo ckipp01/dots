@@ -48,6 +48,12 @@ let g:ale_fixers = {
   \ 'javascript': [linter]
   \ }
 
+" LSC settings
+
+if has ('nvim')
+  set shortmess-=F
+endif
+
 let g:lsc_server_commands = {
       \ 'javascript': 'javascript-typescript-stdio',
       \ 'javascript.jsx': 'javascript-typescript-stdio',
