@@ -1,13 +1,5 @@
 set ft=vim
 
-" tmuxline settings
-let g:tmuxline_preset = {
-  \'a'    : '#S',
-  \'win'  : ['#I', '#W'],
-  \'cwin' : ['#I', '#W', '#F'],
-  \'y'    : ['%R']
-  \ }
-
 " NERDTree settings
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1

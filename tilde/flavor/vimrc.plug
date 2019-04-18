@@ -32,16 +32,12 @@ Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
-Plug 'posva/vim-vue'
 
 " for working with elm
 Plug 'elmcast/elm-vim', {'for': 'elm'}
 
 " autocomplete brackets
 Plug 'townk/vim-autoclose'
-
-" tmux line
-Plug 'edkolev/tmuxline.vim'
 
 " tagbar
 Plug 'majutsushi/tagbar'
