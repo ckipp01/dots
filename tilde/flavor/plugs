@@ -1,9 +1,6 @@
 " collection of plugins for vim
 call plug#begin('~/.vim/plugged')
 
-" wakatime plugin to track coding activity
-Plug 'wakatime/vim-wakatime'
-
 " current theme
 Plug 'chriskempson/base16-vim'
 
@@ -11,18 +8,18 @@ Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 
-" note taking stuff
- Plug 'xolox/vim-notes'
+" wakatime plugin to track coding activity
+Plug 'wakatime/vim-wakatime'
 
-" for specific spacing
-Plug 'junegunn/goyo.vim'
-
-" this is needed for the above note taking feature
+" note taking and spacing
+Plug 'xolox/vim-notes'
 Plug 'xolox/vim-misc'
+Plug 'junegunn/goyo.vim'
 
 " autocomplete brackets
 Plug 'townk/vim-autoclose'
 
+" language server client
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 " allows you to see your changes in the git gutter
@@ -38,5 +35,8 @@ Plug 'mxw/vim-jsx'
 
 " help visualize spacing
 Plug 'Yggdroot/indentLine'
+
+" linting and other magic
+Plug 'w0rp/ale'
 
 call plug#end()

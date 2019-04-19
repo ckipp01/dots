@@ -28,7 +28,7 @@ done
 #flavor files
 echo -e "${UNDERLINE}flavor files${END}"
 for f in alias.bash function.bash \
-  vimrc.plug plug.settings vim-themes \
+  plugs plug.settings vim-themes \
   coc.settings lsc.settings
 do
   if [ -e ${HOME}/.flavor/${f} ]

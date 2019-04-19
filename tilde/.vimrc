@@ -1,6 +1,6 @@
 " plugins
-if filereadable(expand("~/.flavor/vimrc.plug"))
-  source ~/.flavor/vimrc.plug
+if filereadable(expand("~/.flavor/plugs"))
+  source ~/.flavor/plugs
 endif
 
 " plugin settings

@@ -1,5 +1,32 @@
 set ft=vim
 
+" ale
+let g:ale_sign_error = '❌' 
+let g:ale_sign_warning = '⚠️'
+let g:ale_completion_enabled = 1
+let g:ale_fix_on_save = 1
+
+if executable("./node_modules/.bin/standard")
+  let linter = "standard"
+elseif filereadable(expand("./.eslintrc"))
+  let linter = "eslint"
+else
+  let linter = "standard"
+endif
+
+let g:ale_linters = {
+  \ 'javascript': [linter]
+  \ }
+let g:ale_fixers = {
+  \ '*': ['trim_whitespace'],
+  \ 'javascript': [linter]
+  \ }
+
+" goyo 
+au BufReadPost,BufNewFile *.md :Goyo 90%
+au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
+au BufReadPost,BufNewFile *.html set spell spelllang=en_us
+
 " NERDTree settings
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
@@ -10,10 +37,6 @@ let g:notes_suffix = '.md'
 let g:notes_unicode_enabled = 0
 let g:notes_conceal_url = 0
 
-" turn on Goyo specifcally for txt files
-au BufReadPost,BufNewFile *.md :Goyo 90%
-au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
-au BufReadPost,BufNewFile *.html set spell spelllang=en_us
-
-" specifcally for vim-scala
+" vim-scala
 au BufRead,BufNewFile *.sbt set filetype=scala
+
