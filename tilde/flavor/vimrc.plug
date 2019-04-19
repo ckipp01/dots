@@ -4,26 +4,29 @@ call plug#begin('~/.vim/plugged')
 " wakatime plugin to track coding activity
 Plug 'wakatime/vim-wakatime'
 
-" git things
-Plug 'tpope/vim-fugitive'
+" current theme
+Plug 'chriskempson/base16-vim'
 
 " the NerdTree plugin to use a type of file explorer
 Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 
 " note taking stuff
  Plug 'xolox/vim-notes'
 
-" this is needed for the above note taking feature
-Plug 'xolox/vim-misc'
-
-" current theme
-Plug 'chriskempson/base16-vim'
-
 " for specific spacing
 Plug 'junegunn/goyo.vim'
 
-" this shows you the colors in your css
-Plug 'chrisbra/colorizer', {'for': 'css'}
+" this is needed for the above note taking feature
+Plug 'xolox/vim-misc'
+
+" autocomplete brackets
+Plug 'townk/vim-autoclose'
+
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+" allows you to see your changes in the git gutter
+Plug 'airblade/vim-gitgutter'
 
 " for working specifically with scala
 Plug 'derekwyatt/vim-scala', {'for': 'scala'}
@@ -33,31 +36,7 @@ Plug 'pangloss/vim-javascript', {'for': 'javascript'}
 Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 
-" for working with elm
-Plug 'elmcast/elm-vim', {'for': 'elm'}
-
-" autocomplete brackets
-Plug 'townk/vim-autoclose'
-
-" tagbar
-Plug 'majutsushi/tagbar'
-
 " help visualize spacing
 Plug 'Yggdroot/indentLine'
-
-" allows you to see your changes in the git gutter
-Plug 'airblade/vim-gitgutter'
-
-" linting and other magic
-Plug 'w0rp/ale'
-
-" language Client
-Plug 'natebosch/vim-lsc'
-
-" autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" devicons for nerdtree
-Plug 'ryanoasis/vim-devicons'
 
 call plug#end()

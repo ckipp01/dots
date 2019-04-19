@@ -1,12 +1,19 @@
+" plugins
 if filereadable(expand("~/.flavor/vimrc.plug"))
   source ~/.flavor/vimrc.plug
 endif
 
+" plugin settings
 if filereadable(expand("~/.flavor/plug.settings"))
   source ~/.flavor/plug.settings
 endif
 
-" color scheme settings
+" langauge server client settings
+if filereadable(expand("~/.flavor/coc.settings"))
+  source ~/.flavor/coc.settings
+endif
+
+" color theming 
 set background=dark
 colorscheme base16-default-dark
 set termguicolors
@@ -25,15 +32,16 @@ set modelines=0
 " don't wrap at screen end
 set nowrap
 
-" tabs vs spaces options
+" tabs vs spaces!
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set expandtab
-set noshiftround
 
 " make sure line endings are always unix
 set ff=unix
+
+set showtabline=1 " not fully sure I want this yet
 
 " display options
 set showmode
@@ -43,27 +51,21 @@ set number
 set conceallevel=0
 
 " allows your update time to be a bit faster
-set updatetime=250
+set updatetime=300
 
-" basically allows your backspace to work as expected
-set backspace=indent,eol,start
-
-" highlight matching pairs of brackets
-" use the '%' character to jump between them
 set matchpairs+=<:>
 set showmatch
 
 " disables the automatic comment lines after another comment line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" enforce characters to be 80 or less
+" enforce characters to be 80 or less in js
 highlight ColorColumn ctermbg=lightgrey
 autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
 
 " set status line display
 set statusline=%n\   " buffer number
 set statusline+=%t%m%r%h%w\  " file, modified, readonly
-set statusline+=%{fugitive#statusline()}\ " git branch
 set statusline+=%=%{&ff}\  " right align line endings
 set statusline+=%Y\  " filetype
 set statusline+=%l,%v\ " curser position
@@ -75,36 +77,24 @@ set laststatus=2
 set path+=**
 filetype plugin on
 
-" turn show peview window for completions
+" turn off show peview window for completions
 set completeopt-=preview
 
-" visual autocomplete for command menu
-set wildmenu
+" don't search git, node_modules, or targert with wildmenu
 set wildignore=.git,*/node_modules/*,*/target/*
 
 " encoding
 set encoding=utf-8
 
 " search settings
-" highlight matching search patterns
-set hlsearch
-" enable incremental search
 set incsearch
 " include matching uppercase words with lowercase search term
 set ignorecase
 " include only uppercase words with uppercase search term
 set smartcase
 
-" store info from no more than 100 files at a time
-" 9999 lines of text, 100kb of data.
-set viminfo='100,<9999,s100
-
-" while in vim just use the xclipbard
+" while in vim just use xclipboard
 set clipboard=unnamedplus
-
-" below are custom shortcuts/settings
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " escape
 inoremap jj <ESC>
@@ -118,3 +108,4 @@ nmap <leader>hs :nohlsearch<cr>
 nmap <leader>js :%!jq '.'<cr>
 " format xml
 nmap <leader>xml :%!xmllint --format -<cr>
+

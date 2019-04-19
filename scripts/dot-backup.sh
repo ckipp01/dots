@@ -28,7 +28,8 @@ done
 #flavor files
 echo -e "${UNDERLINE}flavor files${END}"
 for f in alias.bash function.bash \
-  vimrc.plug plug.settings vim-themes
+  vimrc.plug plug.settings vim-themes \
+  coc.settings lsc.settings
 do
   if [ -e ${HOME}/.flavor/${f} ]
   then
@@ -50,7 +51,8 @@ done
 
 #config directory files
 echo -e "${UNDERLINE}config files${END}"
-for c in termite/config gtk-3.0/gtk.css ranger/rc.conf
+for c in termite/config gtk-3.0/gtk.css ranger/rc.conf \
+  nvim/coc-settings.json
 do
   if [ -e ${HOME}/.config/${c} ]
   then
