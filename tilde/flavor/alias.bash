@@ -8,6 +8,7 @@ alias vsc='visual-studio-code'
 alias weather='curl wttr.in/hague,netherlands'
 alias reddit='rtv'
 alias v='nvim'
+alias vsun="nvim --cmd 'let sunny=1'"
 alias 'cd..'='cd_up'
 alias andaga='node index.js'
 alias iglu='GTK_THEME=Matcha-aliz /home/ckipp/Documents/scala-workspace/ebpi/iglu/iglu'

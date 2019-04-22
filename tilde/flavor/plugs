@@ -2,7 +2,7 @@
 call plug#begin('~/.vim/plugged')
 
 " current theme
-Plug 'chriskempson/base16-vim'
+Plug 'aonemd/kuroi.vim'
 
 " the NerdTree plugin to use a type of file explorer
 Plug 'scrooloose/nerdtree'

@@ -13,9 +13,13 @@ if filereadable(expand("~/.flavor/coc.settings"))
   source ~/.flavor/coc.settings
 endif
 
-" color theming 
-set background=dark
-colorscheme base16-default-dark
+" color theming
+if exists('sunny')
+  set background=light
+else
+  set background=dark
+endif
+colorscheme kuroi
 set termguicolors
 
 " turn on syntax highlighting.
@@ -76,9 +80,6 @@ set laststatus=2
 " provides tab completion for file related tasks
 set path+=**
 filetype plugin on
-
-" turn off show peview window for completions
-set completeopt-=preview
 
 " don't search git, node_modules, or targert with wildmenu
 set wildignore=.git,*/node_modules/*,*/target/*
