@@ -13,6 +13,11 @@ if filereadable(expand("~/.flavor/coc.settings"))
   source ~/.flavor/coc.settings
 endif
 
+" custom functions
+if filereadable(expand("~/.flavor/vim.functions"))
+  source ~/.flavor/vim.functions
+endif
+
 " color theming
 if exists('sunny')
   set background=light
@@ -70,6 +75,7 @@ autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
 " set status line display
 set statusline=%n\   " buffer number
 set statusline+=%t%m%r%h%w\  " file, modified, readonly
+set statusline+=%{StatusDiagnostic()}
 set statusline+=%=%{&ff}\  " right align line endings
 set statusline+=%Y\  " filetype
 set statusline+=%l,%v\ " curser position
