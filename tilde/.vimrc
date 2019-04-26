@@ -24,7 +24,8 @@ if exists('sunny')
 else
   set background=dark
 endif
-colorscheme kuroi
+
+colorscheme gruvbox8
 set termguicolors
 
 " turn on syntax highlighting.
