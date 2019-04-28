@@ -58,6 +58,7 @@ set showmode
 set showcmd
 set cursorline
 set number
+set relativenumber
 set conceallevel=0
 
 " allows your update time to be a bit faster

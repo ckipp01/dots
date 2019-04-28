@@ -5,17 +5,44 @@ case $- in
 esac
 
 # prompt file
-source ~/.patatetoy/patatetoy.sh
+if [ -f ~/.patatetoy/patatetoy.sh ]; then
+  source ~/.patatetoy/patatetoy.sh
+fi
+
 # function file
-source ~/.flavor/function.bash
+if [ -f ~/.flavor/function.bash ]; then
+  source ~/.flavor/function.bash
+fi
+
 # alias file
-source ~/.flavor/alias.bash
+if [ -f ~/.flavor/alias.bash ]; then
+  source ~/.flavor/alias.bash
+fi
+
 # autojump
-source /usr/share/autojump/autojump.bash
+if [ -f /usr/share/autojump/autojump.bash ]; then
+  source /usr/share/autojump/autojump.bash
+fi
+
 # wakatime tracking
-source ~/.flavor/bash-wakatime.sh
+if [ -f ~/.flavor/bash-wakatime.sh ]; then
+  source ~/.flavor/bash-wakatime.sh
+fi
+
 # some env stuff
-source ~/.env
+if [ -f ~/.env ]; then
+  source ~/.env
+fi
+
+# bash completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+fi
+
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
+bind 'set completion-ignore-case on'
+
 
 # run any necessary functions on startup
 run_on_startup;
@@ -46,18 +73,6 @@ if [ -x /usr/bin/dircolors ]; then
     eval "$(dircolors -b)"
 fi
 
-bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
-bind 'set completion-ignore-case on'
-
-# bash completion
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
-fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:$PATH"
 
