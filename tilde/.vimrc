@@ -1,3 +1,6 @@
+" custom leader
+let mapleader = ","
+
 " plugins
 if filereadable(expand("~/.flavor/plugs"))
   source ~/.flavor/plugs
@@ -107,7 +110,6 @@ set clipboard=unnamedplus
 
 " escape
 inoremap jj <ESC>
-let mapleader = ","
 
 " toggle NERDTree open
 nmap <leader>nt :NERDTree<cr>
