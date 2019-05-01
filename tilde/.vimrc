@@ -6,6 +6,11 @@ if filereadable(expand("~/.flavor/plugs"))
   source ~/.flavor/plugs
 endif
 
+" custom functions
+if filereadable(expand("~/.flavor/vim.functions"))
+  source ~/.flavor/vim.functions
+endif
+
 " plugin settings
 if filereadable(expand("~/.flavor/plug.settings"))
   source ~/.flavor/plug.settings
@@ -14,11 +19,6 @@ endif
 " langauge server client settings
 if filereadable(expand("~/.flavor/coc.settings"))
   source ~/.flavor/coc.settings
-endif
-
-" custom functions
-if filereadable(expand("~/.flavor/vim.functions"))
-  source ~/.flavor/vim.functions
 endif
 
 " color theming
