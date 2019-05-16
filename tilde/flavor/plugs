@@ -22,7 +22,8 @@ Plug 'townk/vim-autoclose'
 " language server client
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
-" allows you to see your changes in the git gutter
+" git related plugins
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " for working specifically with scala

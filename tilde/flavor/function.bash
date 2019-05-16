@@ -7,3 +7,6 @@ cd-up() {
 copy-last-command() {
   tail -n 1 ~/.bash_history | xclip -selection c
 }
+cheat() {
+  curl cheat.sh/"$@"
+}
