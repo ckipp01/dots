@@ -11,16 +11,18 @@ if executable("./node_modules/.bin/standard")
 elseif filereadable(expand("./.eslintrc"))
   let linter = "eslint"
 else
-  let linter = "standard"
+  let linter = ""
 endif
 
-let g:ale_linters = {
-  \ 'javascript': [linter]
-  \ }
-let g:ale_fixers = {
-  \ '*': ['trim_whitespace'],
-  \ 'javascript': [linter]
-  \ }
+if (linter != "")
+  let g:ale_linters = {
+    \ 'javascript': [linter]
+    \ }
+  let g:ale_fixers = {
+    \ '*': ['trim_whitespace'],
+    \ 'javascript': [linter]
+    \ }
+endif
 
 " goyo
 au BufReadPost,BufNewFile *.md :Goyo 90%
