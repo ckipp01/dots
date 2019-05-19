@@ -53,7 +53,7 @@ done
 #config directory files
 echo -e "${UNDERLINE}config files${END}"
 for c in termite/config gtk-3.0/gtk.css ranger/rc.conf \
-  nvim/coc-settings.json
+  nvim/coc-settings.json nvim/init.vim
 do
   if [ -e ${HOME}/.config/${c} ]
   then
