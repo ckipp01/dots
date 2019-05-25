@@ -12,3 +12,4 @@ alias vsun="nvim --cmd 'let sunny=1'"
 alias 'cd..'='cd_up'
 alias andaga='node index.js'
 alias iglu='GTK_THEME=Matcha-aliz /home/ckipp/Documents/scala-workspace/ebpi/iglu/iglu'
+alias new-sbt='sbt new scala/scala-seed.g8'

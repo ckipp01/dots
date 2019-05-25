@@ -10,6 +10,8 @@ if executable("./node_modules/.bin/standard")
   let linter = "standard"
 elseif filereadable(expand("./.eslintrc"))
   let linter = "eslint"
+elseif filereadable(expand("./.eslintrc.js"))
+  let linter = "eslint"
 else
   let linter = ""
 endif

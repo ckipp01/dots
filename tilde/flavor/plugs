@@ -31,7 +31,6 @@ Plug 'derekwyatt/vim-scala', {'for': 'scala'}
 
 " for working specifically with javascript
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}
-Plug 'leafgarland/typescript-vim'
 Plug 'mxw/vim-jsx'
 
 " help visualize spacing
