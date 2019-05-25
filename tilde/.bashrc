@@ -7,6 +7,9 @@ esac
 # prompt file
 if [ -f ~/.patatetoy/patatetoy.sh ]; then
   source ~/.patatetoy/patatetoy.sh
+else
+  git clone https://github.com/loliee/patatetoy.git "$HOME/.patatetoy"
+  source ~/.patatetoy/patatetoy.sh
 fi
 
 # function file
@@ -21,6 +24,9 @@ fi
 
 # autojump
 if [ -f /usr/share/autojump/autojump.bash ]; then
+  source /usr/share/autojump/autojump.bash
+else
+  sudo apt install autojump
   source /usr/share/autojump/autojump.bash
 fi
 
@@ -74,7 +80,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$HOME/.cargo/bin:$HOME/.npm-global/bin:$PATH"
+export PATH="$HOME/bin/:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # for usage with n and node jazz
 export N_PREFIX=$HOME

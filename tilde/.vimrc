@@ -28,7 +28,7 @@ else
   set background=dark
 endif
 
-colorscheme gruvbox8
+colorscheme gruvbox8_soft
 set termguicolors
 
 " turn on syntax highlighting.

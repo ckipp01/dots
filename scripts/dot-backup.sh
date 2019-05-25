@@ -5,7 +5,7 @@
 
 #files directly in ~
 echo -e "${UNDERLINE}~ files${END}"
-for i in .vimrc .tmux.conf .bashrc
+for i in .vimrc .tmux.conf .bashrc .Xresources
 do
     if [ -e ${HOME}/${i} ]
     then
@@ -52,8 +52,7 @@ done
 
 #config directory files
 echo -e "${UNDERLINE}config files${END}"
-for c in termite/config gtk-3.0/gtk.css ranger/rc.conf \
-  nvim/coc-settings.json nvim/init.vim
+for c in ranger/rc.conf nvim/coc-settings.json nvim/init.vim
 do
   if [ -e ${HOME}/.config/${c} ]
   then

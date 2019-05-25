@@ -43,4 +43,3 @@ let g:notes_conceal_url = 0
 
 " vim-scala
 au BufRead,BufNewFile *.sbt set filetype=scala
-

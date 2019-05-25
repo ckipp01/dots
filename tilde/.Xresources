@@ -1,0 +1,5 @@
+! rofi settings
+rofi.combi-modi: window,drun,ssh
+rofi.modi:       combi
+rofi.font:       SauceCodePro Nerd Font Mono 12 
+rofi.theme:      gruvbox-dark-soft
