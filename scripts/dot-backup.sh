@@ -52,7 +52,8 @@ done
 
 #config directory files
 echo -e "${UNDERLINE}config files${END}"
-for c in ranger/rc.conf nvim/coc-settings.json nvim/init.vim
+for c in ranger/rc.conf nvim/coc-settings.json nvim/init.vim \
+  i3/config
 do
   if [ -e ${HOME}/.config/${c} ]
   then
@@ -74,7 +75,8 @@ done
 
 #scripts
 echo -e "${UNDERLINE}bin scripts${END}"
-for s in dot-backup.sh tmux-scala.sh tmux-js.sh dot-populate.sh colors.sh get-waka-summary.sh notifications.sh
+for s in dot-backup.sh tmux-scala.sh tmux-js.sh dot-populate.sh \
+  colors.sh get-waka-summary.sh notifications.sh
 do
   if [ -e ${HOME}/bin/${s} ]
   then

@@ -1,5 +1,10 @@
 ! rofi settings
-rofi.combi-modi: window,drun,ssh
-rofi.modi:       combi
-rofi.font:       SauceCodePro Nerd Font Mono 12 
-rofi.theme:      gruvbox-dark-soft
+rofi.combi-modi:  window,drun,ssh
+rofi.modi:        combi
+rofi.font:        SauceCodePro Nerd Font Mono 12 
+rofi.theme:       gruvbox-dark-soft
+rofi.terminal:    Xfce4-terminal
+rofi.ssh-client:  ssh
+rofi.ssh-command: {terminal} -e {ssh-client} {host}
+
+Xcursor.size: 16

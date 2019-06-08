@@ -18,11 +18,11 @@ endif
 
 if (linter != "")
   let g:ale_linters = {
-    \ 'javascript': [linter]
+    \ 'javascript': [linter],
     \ }
   let g:ale_fixers = {
     \ '*': ['trim_whitespace'],
-    \ 'javascript': [linter]
+    \ 'javascript': [linter],
     \ }
 endif
 

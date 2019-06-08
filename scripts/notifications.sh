@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DESKTOP=$XDG_CURRENT_DESKTOP
+echo $DESKTOP
 CURRENT_VAL=$(gsettings get org.gnome.desktop.notifications show-banners)
 if [ "$CURRENT_VAL" = true ]
   then
