@@ -28,8 +28,7 @@ else
   set background=dark
 endif
 
-colorscheme gruvbox8_soft
-set termguicolors
+colorscheme nord
 
 " turn on syntax highlighting.
 if !exists("g:syntax_on")
@@ -92,13 +91,7 @@ set laststatus=2
 set path+=**
 filetype plugin on
 
-" don't search git, node_modules, or targert with wildmenu
-set wildignore=.git,*/node_modules/*,*/target/*
-
-" encoding
-set encoding=utf-8
-
-" search settings
+" don't search git, node_modules, or targert with wildmenu set wildignore=.git,*/node_modules/*,*/target/* encoding set encoding=utf-8 search settings
 set incsearch
 " include matching uppercase words with lowercase search term
 set ignorecase

@@ -2,7 +2,9 @@
 call plug#begin('~/.vim/plugged')
 
 " current theme
-Plug 'lifepillar/vim-gruvbox8'
+Plug 'arcticicestudio/nord-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'edkolev/tmuxline.vim'
 
 " the NerdTree plugin to use a type of file explorer
 Plug 'scrooloose/nerdtree'

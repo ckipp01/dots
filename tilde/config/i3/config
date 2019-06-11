@@ -90,8 +90,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $sink toggle
 # Mod2 here needed in order for the numpad to work correctly
 # https://github.com/i3/i3/issues/2558
 bindsym $mod+Mod2+KP_5 exec /home/ckipp/bin/sp play
-bindsym $mod+Mod2+KP_6 exec /home/ckipp/bin/sp next 
-bindsym $mod+Mod2+KP_4 exec /home/ckipp/bin/sp prev 
+bindsym $mod+Mod2+KP_6 exec /home/ckipp/bin/sp next
+bindsym $mod+Mod2+KP_4 exec /home/ckipp/bin/sp prev
 
 # focus the child container
 #bindsym $mod+d focus child
