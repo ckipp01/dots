@@ -53,7 +53,7 @@ done
 #config directory files
 echo -e "${UNDERLINE}config files${END}"
 for c in ranger/rc.conf nvim/coc-settings.json nvim/init.vim \
-  i3/config
+  i3/config polybar/config polybar/launch.sh
 do
   if [ -e ${HOME}/.config/${c} ]
   then
