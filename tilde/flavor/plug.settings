@@ -1,10 +1,9 @@
 set ft=vim
 
 " ale
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
 let g:ale_completion_enabled = 1
-let g:ale_fix_on_save = 1
 
 if executable("./node_modules/.bin/standard")
   let linter = "standard"
@@ -34,12 +33,6 @@ au BufReadPost,BufNewFile *.html,*.txt set spell spelllang=en_us
 " NERDTree settings
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
-
-" notes settings
-let g:notes_directories = ['~/notes']
-let g:notes_suffix = '.md'
-let g:notes_unicode_enabled = 0
-let g:notes_conceal_url = 0
 
 " vim-scala
 au BufRead,BufNewFile *.sbt set filetype=scala

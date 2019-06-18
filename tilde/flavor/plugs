@@ -14,9 +14,7 @@ Plug 'liuchengxu/vista.vim'
 " wakatime plugin to track coding activity
 Plug 'wakatime/vim-wakatime'
 
-" note taking and spacing
-Plug 'xolox/vim-notes'
-Plug 'xolox/vim-misc'
+" allow for nice spacing during reading
 Plug 'junegunn/goyo.vim'
 
 " autocomplete brackets
