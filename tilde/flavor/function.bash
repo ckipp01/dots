@@ -1,3 +1,5 @@
+#/usr/bin/env bash
+
 run_on_startup() {
   stty -ixon
 }

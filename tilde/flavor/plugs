@@ -10,7 +10,6 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'liuchengxu/vista.vim'
 " wakatime plugin to track coding activity
 Plug 'wakatime/vim-wakatime'
 

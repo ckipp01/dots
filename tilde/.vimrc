@@ -69,6 +69,7 @@ set updatetime=300
 set matchpairs+=<:>
 set showmatch
 
+set completeopt-=preview
 " disables the automatic comment lines after another comment line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 

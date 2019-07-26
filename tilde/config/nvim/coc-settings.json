@@ -6,5 +6,6 @@
       "filetypes": ["scala", "sbt"]
     }
   },
-  "suggest.enablePreview": true
+  "suggest.enablePreview": true,
+  "coc.preferences.hoverTarget": "float"
 }

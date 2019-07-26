@@ -14,6 +14,7 @@ case $DESKTOP in
   "i3")
     if [ "$MODE" = "on"]
     then
+
 #notify-send DUNST_COMMAND_PAUSE     
 
 

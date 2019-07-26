@@ -3,7 +3,7 @@ set ft=vim
 " ale
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0
 
 if executable("./node_modules/.bin/standard")
   let linter = "standard"
@@ -28,7 +28,7 @@ endif
 " goyo
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
-au BufReadPost,BufNewFile *.html,*.txt set spell spelllang=en_us
+au BufReadPost,BufNewFile *.html,*.txt,*.md set spell spelllang=en_us
 
 " NERDTree settings
 let NERDTreeMinimalUI=1
