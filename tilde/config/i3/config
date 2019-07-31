@@ -177,5 +177,5 @@ mode "$mode_display" {
 bindsym $mod+x mode "$mode_display"
 bindsym $mod+r mode "resize"
 
-exec_always --no-startup-id feh --bg-scale /home/ckipp/Pictures/athens-1903.jpg
+exec_always --no-startup-id feh --bg-scale /home/ckipp/Pictures/arctic.jpg
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
