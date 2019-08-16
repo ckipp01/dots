@@ -27,7 +27,7 @@ endif
 " goyo
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
-au BufReadPost,BufNewFile *.html,*.txt,*.md set spell spelllang=en_us
+au BufReadPost,BufNewFile *.html,*.txt,*.md,*.ndtl set spell spelllang=en_us
 
 " NERDTree settings
 let NERDTreeMinimalUI=1

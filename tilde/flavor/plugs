@@ -22,6 +22,9 @@ Plug 'townk/vim-autoclose'
 " language server client'
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 
+" markdown preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+
 " git related plugins
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
