@@ -6,8 +6,8 @@ let g:ale_sign_warning = '⚠'
 
 if executable("./node_modules/.bin/standard")
   let linter = "standard"
-elseif filereadable(expand("./.eslintrc"))
-  let linter = "eslint"
+elseif executable("./node_modules/.bin/xo")
+  let linter = "xo"
 elseif filereadable(expand("./.eslintrc.js"))
   let linter = "eslint"
 else
