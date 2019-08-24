@@ -47,11 +47,8 @@ set nowrap
 " tabs vs spaces!
 set tabstop=2
 set shiftwidth=2
-set softtabstop=0 noexpandtab
-
-" handle ndtl correctly
-au BufRead,BufNewFile *.ndtl set filetype=ndtl
-autocmd FileType ndtl setlocal softtabstop=2 expandtab
+set softtabstop=2
+set expandtab
 
 " make sure line endings are always unix
 set ff=unix
