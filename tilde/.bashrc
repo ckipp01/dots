@@ -22,12 +22,12 @@ if [ -f ~/.flavor/alias.bash ]; then
   source ~/.flavor/alias.bash
 fi
 
-# autojump
-if [ -f /usr/share/autojump/autojump.bash ]; then
-  source /usr/share/autojump/autojump.bash
+# z - jump around
+if [ -f ~/Software/z/z.sh ]; then
+  source ~/Software/z/z.sh
 else
-  sudo apt install autojump
-  source /usr/share/autojump/autojump.bash
+  git clone git@github.com:rupa/z.git ~/Software/
+  source ~/Software/z/z.sh
 fi
 
 # wakatime tracking
