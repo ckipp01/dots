@@ -23,6 +23,7 @@ if [ -f ~/.flavor/alias.bash ]; then
 fi
 
 # z - jump around
+_Z_CMD=j
 if [ -f ~/Software/z/z.sh ]; then
   source ~/Software/z/z.sh
 else
