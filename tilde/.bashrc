@@ -33,7 +33,8 @@ fi
 
 # wakatime tracking
 if [ -f ~/.flavor/bash-wakatime.sh ]; then
-  source ~/.flavor/bash-wakatime.sh
+  git clone git@github.com:irondoge/bash-wakatime.git ~/Software/
+  source ~/Software/bash-wakatime/bash-wakatime.sh
 fi
 
 # some env stuff
