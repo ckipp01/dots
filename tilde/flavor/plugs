@@ -2,13 +2,14 @@
 call plug#begin('~/.vim/plugged')
 
 " current theme
-Plug 'arcticicestudio/nord-vim'
-Plug 'vim-airline/vim-airline'
-Plug 'edkolev/tmuxline.vim'
+Plug 'ayu-theme/ayu-vim' " or other package manager
 
 " the NerdTree plugin to use a type of file explorer
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
+
+" MD preview
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " wakatime plugin to track coding activity
 Plug 'wakatime/vim-wakatime'
@@ -31,6 +32,9 @@ Plug 'airblade/vim-gitgutter'
 
 " language specific syntax plugin
 Plug 'sheerun/vim-polyglot'
+
+" ndtl
+Plug 'ckipp01/vim-indental'
 
 " help visualize spacing
 Plug 'Yggdroot/indentLine'

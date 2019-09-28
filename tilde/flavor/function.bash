@@ -3,7 +3,7 @@
 run_on_startup() {
   stty -ixon
 }
-cd-up() {
+Cd-up() {
   cd $(printf "%.s../" $(seq 1 $1));
 }
 copy-last-command() {

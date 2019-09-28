@@ -1,6 +1,12 @@
 " custom leader
 let mapleader = ","
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " plugins
 if filereadable(expand("~/.flavor/plugs"))
   source ~/.flavor/plugs
@@ -21,14 +27,16 @@ if filereadable(expand("~/.flavor/coc.settings"))
   source ~/.flavor/coc.settings
 endif
 
+set termguicolors     " enable true colors support
+
 " color theming
 if exists('sunny')
-  set background=light
+  let ayucolor="light"  " for light version of theme
 else
-  set background=dark
+  let ayucolor="mirage"   " for dark version of theme
 endif
 
-colorscheme nord
+colorscheme ayu
 
 " turn on syntax highlighting.
 if !exists("g:syntax_on")
@@ -60,7 +68,6 @@ set showmode
 set showcmd
 set cursorline
 set number
-set relativenumber
 set conceallevel=0
 
 " allows your update time to be a bit faster
@@ -80,7 +87,7 @@ autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
 " set status line display
 set statusline=%n\   " buffer number
 set statusline+=%t%m%r%h%w\  " file, modified, readonly
-set statusline+=%{StatusDiagnostic()}
+" set statusline+=%{StatusDiagnostic()}
 set statusline+=%=%{&ff}\  " right align line endings
 set statusline+=%Y\  " filetype
 set statusline+=%l,%v\ " curser position

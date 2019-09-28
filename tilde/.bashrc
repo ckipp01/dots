@@ -40,6 +40,8 @@ fi
 # some env stuff
 if [ -f ~/.env ]; then
   source ~/.env
+else
+  echo "No .env file found."
 fi
 
 # bash completion
