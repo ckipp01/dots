@@ -37,3 +37,7 @@ let NERDTreeDirArrows=1
 
 " vim-scala
 au BufRead,BufNewFile *.sbt set filetype=scala
+
+" airline
+" enables seeing buffers up on top
+let g:airline#extensions#tabline#enabled = 1

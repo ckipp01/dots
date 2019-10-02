@@ -7,8 +7,6 @@ set hidden
 set nobackup
 set nowritebackup
 
-set cmdheight=2
-
 " Smaller updatetime for CursorHold & CursorHoldI
 set updatetime=300
 

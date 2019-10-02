@@ -32,9 +32,11 @@ else
 fi
 
 # wakatime tracking
-if [ -f ~/.flavor/bash-wakatime.sh ]; then
-  git clone git@github.com:irondoge/bash-wakatime.git ~/Software/
+if [ -f ~/Software/bash-wakatime/bash-wakatime.sh ]; then
   source ~/Software/bash-wakatime/bash-wakatime.sh
+else
+  echo "No wakatime tracking found."
+  git clone git@github.com:irondoge/bash-wakatime.git ~/Software/bash-wakatime
 fi
 
 # some env stuff
@@ -45,8 +47,10 @@ else
 fi
 
 # bash completion
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-  . /usr/share/bash-completion/bash_completion
+if [ -f "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
+  source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+else
+  echo "No bash_completion ccript found."
 fi
 
 bind 'set show-all-if-ambiguous on'
