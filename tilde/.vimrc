@@ -1,6 +1,7 @@
 " custom leader
 let mapleader = ","
 
+" TODO look into native plugin managment instead of vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -10,11 +11,6 @@ endif
 " plugins
 if filereadable(expand("~/.flavor/plugs"))
   source ~/.flavor/plugs
-endif
-
-" custom functions
-if filereadable(expand("~/.flavor/vim.functions"))
-  source ~/.flavor/vim.functions
 endif
 
 " plugin settings
@@ -27,16 +23,8 @@ if filereadable(expand("~/.flavor/coc.settings"))
   source ~/.flavor/coc.settings
 endif
 
-set termguicolors     " enable true colors support
-
-" color theming
-if exists('sunny')
-  let ayucolor="light"  " for light version of theme
-else
-  let ayucolor="mirage"   " for dark version of theme
-endif
-
-colorscheme ayu
+"set termguicolors     " enable true colors support
+colorscheme nord
 
 " turn on syntax highlighting.
 if !exists("g:syntax_on")
@@ -84,14 +72,6 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 highlight ColorColumn ctermbg=lightgrey
 autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
 
-" set status line display
-set statusline=%n\   " buffer number
-set statusline+=%t%m%r%h%w\  " file, modified, readonly
-" set statusline+=%{StatusDiagnostic()}
-set statusline+=%=%{&ff}\  " right align line endings
-set statusline+=%Y\  " filetype
-set statusline+=%l,%v\ " curser position
-set statusline+=%p%%\  " percentage on page
 set laststatus=2
 
 " search down into subfolders
@@ -99,7 +79,13 @@ set laststatus=2
 set path+=**
 filetype plugin on
 
-" don't search git, node_modules, or targert with wildmenu set wildignore=.git,*/node_modules/*,*/target/* encoding set encoding=utf-8 search settings
+" don't search git, node_modules, or targert with wildmenu
+set wildignore=.git,*/node_modules/*,*/target/*
+
+"encoding
+set encoding=utf-8
+
+"search settings
 set incsearch
 " include matching uppercase words with lowercase search term
 set ignorecase
@@ -113,11 +99,11 @@ set clipboard=unnamedplus
 inoremap jj <ESC>
 
 " toggle NERDTree open
-nmap <leader>nt :NERDTree<cr>
+nnoremap <leader>nt :NERDTree<cr>
 " toggle highlight search off
-nmap <leader>hs :nohlsearch<cr>
+nnoremap<leader>hs :nohlsearch<cr>
 " format json
-nmap <leader>js :%!jq '.'<cr>
+nnoremap<leader>js :%!jq '.'<cr>
 " format xml
-nmap <leader>xml :%!xmllint --format -<cr>
+nnoremap<leader>xml :%!xmllint --format -<cr>
 

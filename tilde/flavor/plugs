@@ -2,9 +2,10 @@
 call plug#begin('~/.vim/plugged')
 
 " current theme
-Plug 'ayu-theme/ayu-vim' " or other package manager
+Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline'
+
 " the NerdTree plugin to use a type of file explorer
 Plug 'scrooloose/nerdtree'
 Plug 'ryanoasis/vim-devicons'
@@ -23,9 +24,6 @@ Plug 'townk/vim-autoclose'
 
 " language server client'
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
-
-" markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " git related plugins
 Plug 'tpope/vim-fugitive'
