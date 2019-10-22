@@ -100,6 +100,8 @@ inoremap jj <ESC>
 
 " toggle NERDTree open
 nnoremap <leader>nt :NERDTree<cr>
+" find open file in NerdTree
+nnoremap <leader>nf :NERDTreeFind<cr>
 " toggle highlight search off
 nnoremap<leader>hs :nohlsearch<cr>
 " format json

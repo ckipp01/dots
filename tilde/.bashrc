@@ -22,13 +22,13 @@ if [ -f ~/.flavor/alias.bash ]; then
   source ~/.flavor/alias.bash
 fi
 
-# z - jump around
-_Z_CMD=j
-if [ -f ~/Software/z/z.sh ]; then
-  source ~/Software/z/z.sh
+# autojump
+if [ -f ~/.autojump/etc/profile.d/autojump.sh ]; then
+  source ~/.autojump/etc/profile.d/autojump.sh
 else
-  git clone git@github.com:rupa/z.git ~/Software/
-  source ~/Software/z/z.sh
+  git clone git://github.com/wting/autojump.git ~/Software/autojump
+  cd ~/Software/autojump && ./install.py
+  source ~/.autojump/etc/profile.d/autojump.sh
 fi
 
 # wakatime tracking
@@ -92,6 +92,8 @@ export PATH="$HOME/bin/:$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.
 
 # for usage with n and node jazz
 export N_PREFIX=$HOME
+
+export JAVA_HOME="/Users/ckipp/.sdkman/candidates/java/current"
 
 # sdkman stuff
 export SDKMAN_DIR="/home/ckipp/.sdkman"
