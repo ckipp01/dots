@@ -19,9 +19,6 @@ Plug 'wakatime/vim-wakatime'
 " allow for nice spacing during reading
 Plug 'junegunn/goyo.vim'
 
-" autocomplete brackets
-Plug 'townk/vim-autoclose'
-
 " language server client'
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 

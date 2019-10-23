@@ -64,6 +64,14 @@ set updatetime=300
 set matchpairs+=<:>
 set showmatch
 
+" autoclose certain pairs -- no need for a plugin to do this
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+
 set completeopt-=preview
 " disables the automatic comment lines after another comment line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
