@@ -7,7 +7,7 @@ set hidden
 set nobackup
 set nowritebackup
 
-" Smaller updatetime for CursorHold & CursorHoldI
+" Smaller updatetime for CursorHold & CursorHold
 set updatetime=300
 
 " don't give |ins-completion-menu| messages.
@@ -89,10 +89,11 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` for fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
 let g:airline#extensions#coc#enabled = 1
-
+let airline#extensions#coc#error_symbol = '✘'
+let airline#extensions#coc#warning_symbol = '⚠'
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>

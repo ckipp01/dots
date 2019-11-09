@@ -22,6 +22,9 @@ Plug 'junegunn/goyo.vim'
 " language server client'
 Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 
+" other lsp clients used for testing metals
+"Plug 'natebosch/vim-lsc'
+
 " git related plugins
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -35,7 +38,7 @@ Plug 'ckipp01/vim-indental'
 " help visualize spacing
 Plug 'Yggdroot/indentLine'
 
-" linting and other magic
-Plug 'w0rp/ale'
+" autoclose help
+Plug 'townk/vim-autoclose'
 
 call plug#end()

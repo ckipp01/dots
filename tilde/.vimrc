@@ -20,10 +20,12 @@ endif
 
 " langauge server client settings
 if filereadable(expand("~/.flavor/coc.settings"))
-  source ~/.flavor/coc.settings
+ source ~/.flavor/coc.settings
 endif
 
-"set termguicolors     " enable true colors support
+" used for alternative lsp clients settings used for testing
+"source ~/.flavor/lsc.settings
+
 colorscheme nord
 
 " turn on syntax highlighting.
@@ -63,14 +65,6 @@ set updatetime=300
 
 set matchpairs+=<:>
 set showmatch
-
-" autoclose certain pairs -- no need for a plugin to do this
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
 
 set completeopt-=preview
 " disables the automatic comment lines after another comment line

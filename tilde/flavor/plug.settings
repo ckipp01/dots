@@ -1,31 +1,5 @@
 set ft=vim
 
-" ale
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
-
-if executable("./node_modules/.bin/standard")
-	let linter = "standard"
-elseif executable("./node_modules/.bin/xo")
-	let linter = "xo"
-elseif executable("./node_modules/.bin/prettier")
-	let linter = "prettier"
-elseif executable("./node_modules/.bin/eslint")
-	let linter = "eslint"
-else
-	let linter = ""
-endif
-
-if (linter != "")
-	let g:ale_linters = {
-		\ 'javascript': [linter],
-		\ }
-	let g:ale_fixers = {
-			\ '*': ['trim_whitespace'],
-			\ 'javascript': [linter],
-			\ }
-endif
-
 " goyo
 au BufReadPost,BufNewFile *.md :Goyo 90%
 au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
