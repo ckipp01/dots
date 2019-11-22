@@ -20,11 +20,12 @@ endif
 
 " langauge server client settings
 if filereadable(expand("~/.flavor/coc.settings"))
- source ~/.flavor/coc.settings
+  source ~/.flavor/coc.settings
 endif
 
 " used for alternative lsp clients settings used for testing
 "source ~/.flavor/lsc.settings
+"source ~/.flavor/nvim-lsp.settings
 
 colorscheme nord
 

@@ -24,6 +24,7 @@ Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
 
 " other lsp clients used for testing metals
 "Plug 'natebosch/vim-lsc'
+"Plug 'neovim/nvim-lsp'
 
 " git related plugins
 Plug 'tpope/vim-fugitive'
@@ -39,6 +40,7 @@ Plug 'ckipp01/vim-indental'
 Plug 'Yggdroot/indentLine'
 
 " autoclose help
-Plug 'townk/vim-autoclose'
+" commenting this out to try coc.pairs
+"Plug 'townk/vim-autoclose'
 
 call plug#end()
