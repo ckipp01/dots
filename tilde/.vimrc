@@ -1,7 +1,6 @@
 " custom leader
 let mapleader = ","
 
-" TODO look into native plugin managment instead of vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -67,7 +66,8 @@ set updatetime=300
 set matchpairs+=<:>
 set showmatch
 
-set completeopt-=preview
+" looks like this is default off in coc, testing for now
+"set completeopt-=preview
 " disables the automatic comment lines after another comment line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -105,6 +105,8 @@ inoremap jj <ESC>
 nnoremap <leader>nt :NERDTree<cr>
 " find open file in NerdTree
 nnoremap <leader>nf :NERDTreeFind<cr>
+" close currently open NertTree
+nnoremap <leader>nc :NERDTreeClose<cr>
 " toggle highlight search off
 nnoremap<leader>hs :nohlsearch<cr>
 " format json
