@@ -5,10 +5,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline'
-"Plug 'morhetz/gruvbox'
-"Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim', { 'as': 'dracula' }
-"Plug 'cocopon/iceberg.vim'
 Plug 'rakr/vim-one'
 
 " the NerdTree plugin to use a type of file explorer

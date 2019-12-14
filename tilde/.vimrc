@@ -26,7 +26,11 @@ endif
 "source ~/.flavor/lsc.settings
 "source ~/.flavor/nvim-lsp.settings
 
-colorscheme nord
+" Theming
+set termguicolors
+let g:one_allow_italics = 1
+colorscheme one
+set background=dark
 
 " turn on syntax highlighting.
 if !exists("g:syntax_on")

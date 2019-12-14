@@ -1,23 +1,5 @@
 {
-  "languageserver": {
-    "elmLS": {
-      "command": "elm-language-server",
-      "filetypes": ["elm"],
-      "rootPatterns": ["elm.json"],
-      "initializationOptions": {
-        "elmAnalyseTrigger": "change"
-      }
-    },
-    // "metals": {
-    //   "command": "metals-vim",
-    //   "rootPatterns": ["build.sbt"],
-    //   "filetypes": ["scala", "sbt"]
-    // }
-  },
   "codeLens.enable": true,
   "coc.preferences.formatOnType": true,
-  // "diagnostic.virtualText": true,
-  "metals.serverProperties": [],
-  "metals.customRepositories": [],
-  "metals.serverVersion": "0.7.6"
+  "metals.serverVersion": "0.7.6+530-f4aefd3d-SNAPSHOT"
 }
