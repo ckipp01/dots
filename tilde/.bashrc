@@ -18,8 +18,8 @@ if [ -f ~/.flavor/function.bash ]; then
 fi
 
 # alias file
-if [ -f ~/.flavor/alias.bash ]; then
-  source ~/.flavor/alias.bash
+if [ -f ~/.flavor/aliases ]; then
+  source ~/.flavor/aliases
 fi
 
 # autojump

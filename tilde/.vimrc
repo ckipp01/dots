@@ -28,9 +28,9 @@ endif
 
 " Theming
 set termguicolors
+set background=dark
 let g:one_allow_italics = 1
 colorscheme one
-set background=dark
 
 " turn on syntax highlighting.
 if !exists("g:syntax_on")
@@ -99,8 +99,8 @@ set ignorecase
 " include only uppercase words with uppercase search term
 set smartcase
 
-" while in vim just use xclipboard
-set clipboard=unnamedplus
+" yank to clipboard
+set clipboard=unnamed
 
 " escape
 inoremap jj <ESC>

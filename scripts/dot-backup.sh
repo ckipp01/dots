@@ -27,7 +27,7 @@ done
 
 #flavor files
 echo -e "${UNDERLINE}flavor files${END}"
-for f in alias.bash function.bash \
+for f in aliases function.bash \
   plugs plug.settings vim-themes \
   coc.settings lsc.settings \
   vim.functions xterm-256color-italic
@@ -53,7 +53,7 @@ done
 #config directory files
 echo -e "${UNDERLINE}config files${END}"
 for c in ranger/rc.conf nvim/coc-settings.json nvim/init.vim \
-  i3/config polybar/config polybar/launch.sh
+  i3/config polybar/config polybar/launch.sh fish/config.fish
 do
   if [ -e ${HOME}/.config/${c} ]
   then
