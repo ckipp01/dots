@@ -91,8 +91,8 @@ command! -nargs=0 Format :call CocAction('format')
 " Use `:Fold` for fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
- let airline#extensions#coc#error_symbol = '✘'
- let airline#extensions#coc#warning_symbol = '⚠'
+let airline#extensions#coc#error_symbol = '✘'
+let airline#extensions#coc#warning_symbol = '⚠'
 
 " Using CocList
 " Show all diagnostics

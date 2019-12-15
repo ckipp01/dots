@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 #include colors
 . ${HOME}/bin/colors.sh
 
 #files directly in ~
-echo -e "${UNDERLINE}~ files${END}"
+echo "${UNDERLINE}~ files${END}"
 for i in .vimrc .tmux.conf .bashrc .Xresources
 do
     if [ -e ${HOME}/${i} ]
@@ -12,21 +12,21 @@ do
       if [ ! -e ${HOME}/dots/tilde/${i} ]
       then
         cp ${HOME}/${i} ${HOME}/dots/tilde/${i} &&
-          echo -e "${GREEN}${i} is now being tracked${END}"
+          echo "${GREEN}${i} is now being tracked${END}"
       elif [ ${HOME}/${i} -nt ${HOME}/dots/tilde/${i} ]
       then
           cp ${HOME}/${i} ${HOME}/dots/tilde/${i} &&
-        echo -e "${GREEN}${i} copied${END}"
+        echo "${GREEN}${i} copied${END}"
       else
-        echo -e "${BLUE}${i} was the same${END}"
+        echo "${BLUE}${i} was the same${END}"
       fi
     else
-        echo -e "${RED}no ${i} on this machine${END}"
+        echo "${RED}no ${i} on this machine${END}"
     fi
 done
 
 #flavor files
-echo -e "${UNDERLINE}flavor files${END}"
+echo "${UNDERLINE}flavor files${END}"
 for f in aliases function.bash \
   plugs plug.settings vim-themes \
   coc.settings lsc.settings \
@@ -37,44 +37,45 @@ do
     if [ ! -e ${HOME}/dots/tilde/flavor/${f} ]
     then
       cp ${HOME}/.flavor/${f} ${HOME}/dots/tilde/flavor/${f} &&
-        echo -e "${GREEN}${f} is now being tracked${END}"
+        echo "${GREEN}${f} is now being tracked${END}"
     elif [ ${HOME}/.flavor/${f} -nt ${HOME}/dots/tilde/flavor/${f} ]
     then
         cp ${HOME}/.flavor/${f} ${HOME}/dots/tilde/flavor/${f} &&
-          echo -e "${GREEN}${f} copied${END}"
+          echo "${GREEN}${f} copied${END}"
     else
-      echo -e "${BLUE}${f} was the same${END}"
+      echo "${BLUE}${f} was the same${END}"
     fi
   else
-      echo -e "${RED}no ${f} on this machine${END}"
+      echo "${RED}no ${f} on this machine${END}"
   fi
 done
 
 #config directory files
-echo -e "${UNDERLINE}config files${END}"
+echo "${UNDERLINE}config files${END}"
 for c in ranger/rc.conf nvim/coc-settings.json nvim/init.vim \
-  i3/config polybar/config polybar/launch.sh fish/config.fish
+  i3/config polybar/config polybar/launch.sh fish/config.fish \
+  fish/functions.fish
 do
   if [ -e ${HOME}/.config/${c} ]
   then
     if [ ! -e ${HOME}/dots/tilde/config/${c} ]
     then
       cp ${HOME}/.config/${c} ${HOME}/dots/tilde/config/${c} &&
-        echo -e "${GREEN}${c} is now being tracked${END}"
+        echo "${GREEN}${c} is now being tracked${END}"
     elif [ ${HOME}/.config/${c} -nt ${HOME}/dots/tilde/config/${c} ]
     then
         cp ${HOME}/.config/${c} ${HOME}/dots/tilde/config/${c} &&
-          echo -e "${GREEN}${c} copied${END}"
+          echo "${GREEN}${c} copied${END}"
     else
-      echo -e "${BLUE}${c} was the same${END}"
+      echo "${BLUE}${c} was the same${END}"
     fi
   else
-      echo -e "${RED}no ${c} on this machine${END}"
+      echo "${RED}no ${c} on this machine${END}"
   fi
 done
 
 #scripts
-echo -e "${UNDERLINE}bin scripts${END}"
+echo "${UNDERLINE}bin scripts${END}"
 for s in dot-backup.sh tmux-scala.sh tmux-js.sh dot-populate.sh \
   colors.sh get-waka-summary.sh notifications.sh
 do
@@ -83,15 +84,15 @@ do
     if [ ! -e ${HOME}/dots/scripts/${s} ]
     then
       cp ${HOME}/bin/${s} ${HOME}/dots/scripts/${s} &&
-        echo -e "${GREEN}${s} is now being tracked${END}"
+        echo "${GREEN}${s} is now being tracked${END}"
     elif [ ${HOME}/bin/${s} -nt ${HOME}/dots/scripts/${s} ]
     then
         cp ${HOME}/bin/${s} ${HOME}/dots/scripts/${s} &&
-          echo -e "${GREEN}${s} copied${END}"
+          echo "${GREEN}${s} copied${END}"
     else
-      echo -e "${BLUE}${s} was the same${END}"
+      echo "${BLUE}${s} was the same${END}"
     fi
   else
-    echo -e "${RED}no ${s} on this machine${END}"
+    echo "${RED}no ${s} on this machine${END}"
   fi
 done

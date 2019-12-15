@@ -99,6 +99,7 @@ set ignorecase
 " include only uppercase words with uppercase search term
 set smartcase
 
+set backspace=indent,eol,start
 " yank to clipboard
 set clipboard=unnamed
 
