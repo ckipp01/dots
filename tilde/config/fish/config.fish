@@ -12,5 +12,7 @@ source /Users/ckipp/.config/fish/env.fish
 # FUNCTIONS #
 source /Users/ckipp/.config/fish/functions.fish
 
+set PATH /Users/ckipp/bin $PATH
+
 echo "Hello Chris"
 fish_logo
