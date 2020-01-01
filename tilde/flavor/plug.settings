@@ -12,8 +12,22 @@ let NERDTreeDirArrows=1
 " vim-scala
 au BufRead,BufNewFile *.sbt set filetype=scala
 
+"set statusline^=%{coc#status()}
+
+" I used this instead of coc_status()
+" because coc#status includes both statusline
+" information and diagnostic information
+" since I display diagnostic on the far right,
+" I don't want to also display it in the center again
+function! CocExtensionProgress() abort
+  return get(g:, 'coc_status', '')
+endfunction
+let g:airline_section_c = '%f%{CocExtensionProgress()}'
+
 " airline
-" enables seeing buffers up on top
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#coc#error_symbol = '✘ '
+let g:airline#extensions#coc#warning_symbol = '⚠ '
+let g:airline#extensions#coc#enabled = 1

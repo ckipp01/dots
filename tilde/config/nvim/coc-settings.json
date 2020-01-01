@@ -1,6 +1,7 @@
 {
-  "codeLens.enable": true,
+  "metals.serverVersion": "0.7.7-SNAPSHOT",
   "coc.preferences.formatOnType": true,
-  "metals.serverVersion": "0.7.6+530-f4aefd3d-SNAPSHOT",
-  "metals.javaHome": "/Users/ckipp/.sdkman/candidates/java/current"
+  "codeLens.enable": true,
+  "coc.preferences.enableFloatHighlight": false
+
 }

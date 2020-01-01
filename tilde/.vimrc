@@ -22,10 +22,6 @@ if filereadable(expand("~/.flavor/coc.settings"))
   source ~/.flavor/coc.settings
 endif
 
-" used for alternative lsp clients settings used for testing
-"source ~/.flavor/lsc.settings
-"source ~/.flavor/nvim-lsp.settings
-
 " Theming
 set termguicolors
 set background=dark
@@ -69,15 +65,18 @@ set updatetime=300
 set matchpairs+=<:>
 set showmatch
 
-" looks like this is default off in coc, testing for now
-"set completeopt-=preview
 " disables the automatic comment lines after another comment line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" automatically wrap in markdown
+autocmd FileType markdown setlocal textwidth=100
 
 " enforce characters to be 80 or less in js
 highlight ColorColumn ctermbg=lightgrey
 autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
 
+
+" set status line display
 set laststatus=2
 
 " search down into subfolders
@@ -118,3 +117,21 @@ nnoremap<leader>js :%!jq '.'<cr>
 " format xml
 nnoremap<leader>xml :%!xmllint --format -<cr>
 
+function! TestPreview(info, filetype, ...) abort
+  pclose
+  keepalt new +setlocal\ previewwindow|setlocal\ buftype=nofile|setlocal\ noswapfile|setlocal\ wrap [Document]
+  setl bufhidden=wipe
+  setl nobuflisted
+  setl nospell
+  exe 'setl filetype='.a:filetype
+  setl conceallevel=2
+  setl nofoldenable
+  for command in a:000
+    execute command
+  endfor
+  let lines = a:info
+  call append(0, lines)
+  exe "normal! z" . len(lines) . "\<cr>"
+  exe "normal! gg"
+  wincmd p
+endfunction

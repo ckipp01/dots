@@ -6,6 +6,7 @@ Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'joshdick/onedark.vim'
+Plug 'flrnprz/candid.vim'
 
 " the NerdTree plugin to use a type of file explorer
 Plug 'scrooloose/nerdtree'
@@ -21,11 +22,8 @@ Plug 'wakatime/vim-wakatime'
 Plug 'junegunn/goyo.vim'
 
 " language server client'
-Plug 'neoclide/coc.nvim', {'do': './install.sh nightly'}
-
-" other lsp clients used for testing metals
-"Plug 'natebosch/vim-lsc'
-"Plug 'neovim/nvim-lsp'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " git related plugins
 Plug 'tpope/vim-fugitive'
@@ -39,5 +37,8 @@ Plug 'ckipp01/vim-indental'
 
 " help visualize spacing
 Plug 'Yggdroot/indentLine'
+
+Plug 'tpope/vim-scriptease'
+Plug 'derekwyatt/vim-scala'
 
 call plug#end()
