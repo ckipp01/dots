@@ -1,10 +1,5 @@
 set ft=vim
 
-" goyo
-au BufReadPost,BufNewFile *.md :Goyo 90%
-au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
-au BufReadPost,BufNewFile *.html,*.txt,*.md set spell spelllang=en_us
-
 " NERDTree settings
 let NERDTreeMinimalUI=1
 let NERDTreeDirArrows=1
@@ -31,3 +26,12 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#coc#error_symbol = '✘ '
 let g:airline#extensions#coc#warning_symbol = '⚠ '
 let g:airline#extensions#coc#enabled = 1
+
+
+" nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+" nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+" nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+" nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+" nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+" nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>

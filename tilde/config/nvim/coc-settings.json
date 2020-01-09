@@ -1,7 +1,7 @@
 {
-  "metals.serverVersion": "0.7.7-SNAPSHOT",
+  "metals.serverVersion": "0.7.6+703-4d344438-SNAPSHOT",
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
-  "coc.preferences.enableFloatHighlight": false
-
+  "coc.preferences.enableFloatHighlight": false,
+  "metals.serverProperties": ["-Dhttps.prox='yajdyad'"]
 }

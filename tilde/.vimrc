@@ -57,6 +57,7 @@ set showmode
 set showcmd
 set cursorline
 set number
+set relativenumber
 set conceallevel=0
 
 " allows your update time to be a bit faster
@@ -117,21 +118,12 @@ nnoremap<leader>js :%!jq '.'<cr>
 " format xml
 nnoremap<leader>xml :%!xmllint --format -<cr>
 
-function! TestPreview(info, filetype, ...) abort
-  pclose
-  keepalt new +setlocal\ previewwindow|setlocal\ buftype=nofile|setlocal\ noswapfile|setlocal\ wrap [Document]
-  setl bufhidden=wipe
-  setl nobuflisted
-  setl nospell
-  exe 'setl filetype='.a:filetype
-  setl conceallevel=2
-  setl nofoldenable
-  for command in a:000
-    execute command
-  endfor
-  let lines = a:info
-  call append(0, lines)
-  exe "normal! z" . len(lines) . "\<cr>"
-  exe "normal! gg"
-  wincmd p
-endfunction
+au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
+au BufReadPost,BufNewFile *.html,*.txt,*.md set spell spelllang=en_us
+
+"-----------------------------------------------------------------------------
+" nvim-lsp
+"-----------------------------------------------------------------------------
+" lua << EOF
+" require'nvim_lsp'.metals.setup{}
+" EOF

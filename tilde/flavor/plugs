@@ -2,11 +2,8 @@
 call plug#begin('~/.vim/plugged')
 
 " current theme
-Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
-Plug 'edkolev/tmuxline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'joshdick/onedark.vim'
-Plug 'flrnprz/candid.vim'
 
 " the NerdTree plugin to use a type of file explorer
 Plug 'scrooloose/nerdtree'
@@ -39,6 +36,8 @@ Plug 'ckipp01/vim-indental'
 Plug 'Yggdroot/indentLine'
 
 Plug 'tpope/vim-scriptease'
-Plug 'derekwyatt/vim-scala'
+
+" common settings for nvim-lsp
+Plug 'neovim/nvim-lsp'
 
 call plug#end()
