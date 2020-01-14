@@ -22,10 +22,16 @@ if filereadable(expand("~/.flavor/coc.settings"))
   source ~/.flavor/coc.settings
 endif
 
-" Theming
+" Theme
 set termguicolors
-set background=dark
-colorscheme onedark
+
+if exists("sunny")
+  set background=light
+else
+  set background=dark
+endif
+
+colorscheme one
 
 " turn on syntax highlighting.
 if !exists("g:syntax_on")
@@ -118,12 +124,14 @@ nnoremap<leader>js :%!jq '.'<cr>
 " format xml
 nnoremap<leader>xml :%!xmllint --format -<cr>
 
-au BufReadPost,BufNewFile *.md,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
+au BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
 au BufReadPost,BufNewFile *.html,*.txt,*.md set spell spelllang=en_us
 
-"-----------------------------------------------------------------------------
-" nvim-lsp
-"-----------------------------------------------------------------------------
-" lua << EOF
-" require'nvim_lsp'.metals.setup{}
-" EOF
+if has('nvim')
+  "-----------------------------------------------------------------------------
+  " nvim-lsp
+  "-----------------------------------------------------------------------------
+  " lua << EOF
+  " require'nvim_lsp'.metals.setup{}
+  " EOF
+endif

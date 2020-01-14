@@ -1,7 +1,19 @@
 {
-  "metals.serverVersion": "0.7.6+703-4d344438-SNAPSHOT",
+  "metals.serverVersion": "0.8.0",
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
-  "coc.preferences.enableFloatHighlight": false,
-  "metals.serverProperties": ["-Dhttps.prox='yajdyad'"]
+  // "coc.preferences.enableFloatHighlight": false,
+  // Keep this in here for testing
+  // "languageserver": {
+  //   "metals": {
+  //     "command": "metals-vim",
+  //     "rootPatterns": [
+  //       "build.sbt"
+  //     ],
+  //     "filetypes": [
+  //       "scala",
+  //       "sbt"
+  //     ]
+  //   }
+  // }
 }

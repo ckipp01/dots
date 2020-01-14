@@ -3,11 +3,8 @@ call plug#begin('~/.vim/plugged')
 
 " current theme
 Plug 'vim-airline/vim-airline'
-Plug 'joshdick/onedark.vim'
-
-" the NerdTree plugin to use a type of file explorer
-Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
+Plug 'rakr/vim-one'
+Plug  'joshdick/onedark.vim'
 
 " MD preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -21,6 +18,7 @@ Plug 'junegunn/goyo.vim'
 " language server client'
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'natebosch/vim-lsc'
 
 " git related plugins
 Plug 'tpope/vim-fugitive'
@@ -29,15 +27,15 @@ Plug 'airblade/vim-gitgutter'
 " language specific syntax plugin
 Plug 'sheerun/vim-polyglot'
 
-" ndtl
-Plug 'ckipp01/vim-indental'
-
 " help visualize spacing
 Plug 'Yggdroot/indentLine'
 
+" help with debugging plugins
 Plug 'tpope/vim-scriptease'
 
-" common settings for nvim-lsp
-Plug 'neovim/nvim-lsp'
+if has('nvim')
+  " built-in nvim lsp settings
+  Plug 'neovim/nvim-lsp'
+endif
 
 call plug#end()
