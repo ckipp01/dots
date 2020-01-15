@@ -20,13 +20,12 @@ endfunction
 let g:airline_section_c = '%f%{CocExtensionProgress()}'
 
 " airline
-let g:airline_theme='one'
+"let g:airline_theme='one'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#coc#error_symbol = '✘ '
 let g:airline#extensions#coc#warning_symbol = '⚠ '
 let g:airline#extensions#coc#enabled = 1
-
 
 if has('nvim')
   " nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>

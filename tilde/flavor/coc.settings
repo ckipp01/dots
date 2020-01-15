@@ -1,8 +1,5 @@
 set ft=vim
 
-" if hidden is not set, TextEdit might fail.
-set hidden
-
 " Some servers have issues with backup files
 set nobackup
 set nowritebackup

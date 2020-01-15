@@ -27,11 +27,21 @@ set termguicolors
 
 if exists("sunny")
   set background=light
+  colorscheme one
 else
   set background=dark
-endif
+  " onedark.vim override: Don't set a background color when running in a terminal;
+  " just use the terminal's background color
+  if (has("autocmd") && !has("gui_running"))
+    augroup colors
+      autocmd!
+      let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16": "7"}
+      autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) "No `bg` setting
+    augroup END
+  endif
 
-colorscheme one
+  colorscheme onedark
+endif
 
 " turn on syntax highlighting.
 if !exists("g:syntax_on")
@@ -56,7 +66,11 @@ set expandtab
 " make sure line endings are always unix
 set ff=unix
 
-set showtabline=1 " not fully sure I want this yet
+" allow for more than one unsaved buffer
+set hidden
+
+" show if at least 2 tab pages
+set showtabline=1
 
 " display options
 set showmode
