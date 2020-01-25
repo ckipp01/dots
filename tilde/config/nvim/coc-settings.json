@@ -1,9 +1,9 @@
 {
-  "metals.serverVersion": "0.8.0",
+  "metals.serverVersion": "0.8.0+59-097e5a8f-SNAPSHOT",
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
   "diagnostic.errorSign": "✘",
-  "diagnostic.warningSign": "⚠ ",
+  "diagnostic.warningSign": "⚠ "
   // "coc.preferences.enableFloatHighlight": false,
   // Keep this in here for testing
   // "languageserver": {

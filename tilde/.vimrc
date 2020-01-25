@@ -90,7 +90,7 @@ set showmatch
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " automatically wrap in markdown
-autocmd FileType markdown setlocal textwidth=100
+autocmd FileType markdown setlocal textwidth=80
 
 " enforce characters to be 80 or less in js
 highlight ColorColumn ctermbg=lightgrey

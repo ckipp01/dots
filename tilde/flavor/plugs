@@ -25,8 +25,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " language specific syntax plugin
-" Plug 'sheerun/vim-polyglot'
-Plug 'ckipp01/vim-scala'
+Plug 'sheerun/vim-polyglot'
+" Plug 'ckipp01/vim-scala'
 
 " help visualize spacing
 Plug 'Yggdroot/indentLine'
