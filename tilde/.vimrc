@@ -17,11 +17,6 @@ if filereadable(expand("~/.flavor/plug.settings"))
   source ~/.flavor/plug.settings
 endif
 
-" langauge server client settings
-if filereadable(expand("~/.flavor/coc.settings"))
-  source ~/.flavor/coc.settings
-endif
-
 " Theme
 set termguicolors
 

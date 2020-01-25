@@ -7,17 +7,37 @@ let g:netrw_banner=0
 " vim-scala
 au BufRead,BufNewFile *.sbt set filetype=scala
 
-"set statusline^=%{coc#status()}
 
-" I used this instead of coc_status()
-" because coc#status includes both statusline
-" information and diagnostic information
-" since I display diagnostic on the far right,
-" I don't want to also display it in the center again
-function! CocExtensionProgress() abort
-  return get(g:, 'coc_status', '')
-endfunction
-let g:airline_section_c = '%f%{CocExtensionProgress()}'
+if exists("lsp")
+  inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+  inoremap <expr> <cr>    pumvisible() ? "\<C-y>" : "\<cr>"
+elseif exists("lsc")
+  let g:lsc_auto_map = v:true
+  let g:lsc_server_commands = { 'scala': 'metals-vim' }
+elseif exists("vnative") && has("nvim")
+  nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+  nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+else
+  " I used this instead of coc_status()
+  " because coc#status includes both statusline
+  " information and diagnostic information
+  " since I display diagnostic on the far right,
+  " I don't want to also display it in the center again
+  function! CocExtensionProgress() abort
+    return get(g:, 'coc_status', '')
+  endfunction
+  let g:airline_section_c = '%f%{CocExtensionProgress()}'
+  " langauge server client settings
+  if filereadable(expand("~/.flavor/coc.settings"))
+    source ~/.flavor/coc.settings
+  endif
+endif
+
 
 " airline
 "let g:airline_theme='one'
@@ -27,20 +47,5 @@ let g:airline#extensions#coc#error_symbol = '✘ '
 let g:airline#extensions#coc#warning_symbol = '⚠ '
 let g:airline#extensions#coc#enabled = 1
 
-if has('nvim')
-  " nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-  " nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-  " nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-  " nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-  " nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-  " nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-  " nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-endif
-
 " Coming from polyglot's markdown settings
 let g:vim_markdown_conceal = 0
-
-" Configuration for vim-lsc
-" let g:lsc_auto_map = v:true
-" let g:lsc_server_commands = { 'scala': 'metals-vim' }
-
