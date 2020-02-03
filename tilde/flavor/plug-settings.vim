@@ -1,5 +1,3 @@
-set ft=vim
-
 " netwr settings
 let g:netrw_liststyle=3
 let g:netrw_banner=0
@@ -16,12 +14,9 @@ elseif exists("lsc")
   let g:lsc_auto_map = v:true
   let g:lsc_server_commands = { 'scala': 'metals-vim' }
 elseif exists("vnative") && has("nvim")
-  nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
-  nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-  nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-  nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-  nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-  nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+  if filereadable(expand("~/.flavor/nvim-lsp.vim"))
+    source ~/.flavor/nvim-lsp.vim
+  endif
 else
   " I used this instead of coc_status()
   " because coc#status includes both statusline
@@ -33,8 +28,8 @@ else
   endfunction
   let g:airline_section_c = '%f%{CocExtensionProgress()}'
   " langauge server client settings
-  if filereadable(expand("~/.flavor/coc.settings"))
-    source ~/.flavor/coc.settings
+  if filereadable(expand("~/.flavor/coc.vim"))
+    source ~/.flavor/coc.vim
   endif
 endif
 

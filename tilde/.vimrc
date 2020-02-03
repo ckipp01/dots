@@ -8,13 +8,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " plugins
-if filereadable(expand("~/.flavor/plugs"))
-  source ~/.flavor/plugs
+if filereadable(expand("~/.flavor/plugs.vim"))
+  source ~/.flavor/plugs.vim
 endif
 
 " plugin settings
-if filereadable(expand("~/.flavor/plug.settings"))
-  source ~/.flavor/plug.settings
+if filereadable(expand("~/.flavor/plug-settings.vim"))
+  source ~/.flavor/plug-settings.vim
 endif
 
 " Theme
@@ -135,12 +135,3 @@ nnoremap<leader>xml :%!xmllint --format -<cr>
 
 au BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
 au BufReadPost,BufNewFile *.html,*.txt,*.md set spell spelllang=en_us
-
-if has('nvim')
-  "-----------------------------------------------------------------------------
-  " nvim-lsp
-  "-----------------------------------------------------------------------------
-  " lua << EOF
-  " require'nvim_lsp'.metals.setup{}
-  " EOF
-endif

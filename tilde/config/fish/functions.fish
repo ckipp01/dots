@@ -3,6 +3,10 @@ function cheat
   curl cheat.sh/"$argv"
 end
 
+function amm --description 'Scala REPL'
+    sh -c 'amm "$@"' amm $argv
+end
+
 function fish_logo \
     --description="Fish-shell colorful ASCII-art logo" \
     --argument-names outer_color medium_color inner_color mouth eye
@@ -35,3 +39,4 @@ function fish_logo \
                       (J'$m'JJ'$o'| \UUU)
                        (UU)'(set_color normal)
 end
+

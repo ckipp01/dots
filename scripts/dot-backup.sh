@@ -28,8 +28,8 @@ done
 #flavor files
 echo "${UNDERLINE}flavor files${END}"
 for f in aliases function.bash \
-  plugs plug.settings vim-themes \
-  coc.settings lsc.settings \
+  plugs.vim plug-settings.vim vim-themes \
+  coc.vim lsc.settings nvim-lsp.vim \
   vim.functions xterm-256color-italic
 do
   if [ -e ${HOME}/.flavor/${f} ]

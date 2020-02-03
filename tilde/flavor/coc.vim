@@ -1,5 +1,3 @@
-set ft=vim
-
 " Some servers have issues with backup files
 set nobackup
 set nowritebackup
