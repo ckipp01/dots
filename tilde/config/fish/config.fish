@@ -13,3 +13,6 @@ source /Users/ckipp/.config/fish/env.fish
 source /Users/ckipp/.config/fish/functions.fish
 
 set PATH /Users/ckipp/bin $PATH
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/ckipp/google-cloud-sdk/path.fish.inc' ]; . '/Users/ckipp/google-cloud-sdk/path.fish.inc'; end

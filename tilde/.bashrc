@@ -96,5 +96,5 @@ export N_PREFIX=$HOME
 # export JAVA_HOME="/Users/ckipp/.sdkman/candidates/java/current"
 
 # sdkman stuff
-#export SDKMAN_DIR="/home/ckipp/.sdkman"
-#[[ -s "/home/ckipp/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ckipp/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="/home/ckipp/.sdkman"
+[[ -s "/home/ckipp/.sdkman/bin/sdkman-init.sh" ]] && source "/home/ckipp/.sdkman/bin/sdkman-init.sh"
