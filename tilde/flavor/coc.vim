@@ -83,6 +83,7 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+nnoremap <leader>cl :<C-u>call CocActionAsync('codeLensAction')<CR>
 " Use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
 

@@ -23,10 +23,11 @@ else
   " information and diagnostic information
   " since I display diagnostic on the far right,
   " I don't want to also display it in the center again
-  function! CocExtensionProgress() abort
+  function! CocMinimalStatus() abort
     return get(g:, 'coc_status', '')
   endfunction
-  let g:airline_section_c = '%f%{CocExtensionProgress()}'
+  " let g:airline_section_c = '%f%{coc#status()}'
+  let g:airline_section_c = '%t %#LineNr#%{CocMinimalStatus()}'
   " langauge server client settings
   if filereadable(expand("~/.flavor/coc.vim"))
     source ~/.flavor/coc.vim
@@ -44,3 +45,6 @@ let g:airline#extensions#coc#enabled = 1
 
 " Coming from polyglot's markdown settings
 let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+
+let g:vimspector_enable_mappings = 'HUMAN'

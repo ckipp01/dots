@@ -40,3 +40,20 @@ function fish_logo \
                        (UU)'(set_color normal)
 end
 
+function foo --description "Example argparse usage"
+  set --local options 'h/help' 'n/count=!_validate_int --min 1'
+
+  argparse $options -- $argv
+
+  if set --query _flag_help
+    printf "Usage: foo [OPTIONS]\n\n"
+    printf "Options:\n"
+    printf "  -h/--help       Prints help and exits\n"
+    printf "  -n/--count=NUM  Count (minimum 1, default 10)"
+    return 0
+  end
+
+  set --query _flag_count; or set --local _flag_count 10
+
+  for i in (seq $_flag_count); echo foo; end
+end

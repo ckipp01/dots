@@ -29,6 +29,8 @@ Plug 'Yggdroot/indentLine'
 " help with debugging plugins
 Plug 'tpope/vim-scriptease'
 
+Plug 'puremourning/vimspector'
+
 if exists("lsp")
   Plug 'prabirshrestha/async.vim'
   Plug 'prabirshrestha/asyncomplete.vim'
