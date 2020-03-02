@@ -1,10 +1,3 @@
-# THEME PURE #
-set fish_function_path /Users/ckipp/.config/fish/functions/theme-pure/functions/ $fish_function_path
-source /Users/ckipp/.config/fish/functions/theme-pure/conf.d/pure.fish
-
-# AUTOJUMP #
-[ -f /usr/local/share/autojump/autojump.fish ]; and source /usr/local/share/autojump/autojump.fish
-
 # ALIASES #
 source /Users/ckipp/.flavor/aliases
 # ENV #
@@ -13,6 +6,9 @@ source /Users/ckipp/.config/fish/env.fish
 source /Users/ckipp/.config/fish/functions.fish
 
 set PATH /Users/ckipp/bin $PATH
+
+# Setting to change z to j #
+set -U Z_CMD "j"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/ckipp/google-cloud-sdk/path.fish.inc' ]; . '/Users/ckipp/google-cloud-sdk/path.fish.inc'; end

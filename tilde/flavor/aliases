@@ -14,4 +14,5 @@ alias new-sbt='sbt new scala/scala-seed.g8'
 alias mlog='tail -f .metals/metals.log'
 alias metac="coursier launch org.scalameta:metac_2.12.10:4.3.1 -- -cp (coursier fetch -p org.scala-lang:scala-library:2.12.8)"
 alias metap="coursier launch  -M scala.meta.cli.Metap org.scalameta:scalameta_2.12:4.3.1 --"
-alias andaga="java -jar ~/Documents/scala-workspace/andaga/out/cli/assembly/dest/out.jar"
+
+# vim: ft=sh

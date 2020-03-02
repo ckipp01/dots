@@ -26,7 +26,6 @@ else
   function! CocMinimalStatus() abort
     return get(g:, 'coc_status', '')
   endfunction
-  " let g:airline_section_c = '%f%{coc#status()}'
   let g:airline_section_c = '%t %#LineNr#%{CocMinimalStatus()}'
   " langauge server client settings
   if filereadable(expand("~/.flavor/coc.vim"))
@@ -36,7 +35,6 @@ endif
 
 
 " airline
-"let g:airline_theme='one'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#coc#error_symbol = '✘ '

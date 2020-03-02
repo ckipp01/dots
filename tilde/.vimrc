@@ -46,9 +46,6 @@ endif
 " allow for urls with query strings to be opened with the query string
 let g:netrw_gx="<cWORD>"
 
-" turn off modelines
-set modelines=0
-
 " don't wrap at screen end
 set nowrap
 
