@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 END='\033[0m'
 
 UNDERLINE='\033[4m'

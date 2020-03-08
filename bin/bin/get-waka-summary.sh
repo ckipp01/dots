@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 . ${HOME}/.env
 . ${HOME}/bin/colors.sh
 baseurl="https://wakatime.com/api/v1/"
