@@ -5,7 +5,7 @@ source /Users/ckipp/.config/fish/env.fish
 # FUNCTIONS #
 source /Users/ckipp/.config/fish/functions.fish
 
-set PATH /Users/ckipp/bin $PATH
+set PATH /Users/ckipp/bin /Users/ckipp/Library/Application\ Support/Coursier/bin $PATH
 
 # Setting to change z to j #
 set -U Z_CMD "j"
