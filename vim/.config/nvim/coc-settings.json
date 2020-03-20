@@ -1,10 +1,12 @@
 {
-  "metals.serverVersion": "0.8.2-SNAPSHOT",
+  "metals.serverVersion": "0.8.3",
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "⚠ ",
-  "metals.statusBarEnabled": true
+  "metals.statusBarEnabled": true,
+  "metals.superMethodLenses": true
+
   // "coc.preferences.enableFloatHighlight": false,
   // Keep this in here for testing
   // "languageserver": {
