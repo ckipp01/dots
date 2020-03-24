@@ -125,4 +125,4 @@ nnoremap<leader>js :%!jq '.'<cr>
 nnoremap<leader>xml :%!xmllint --format -<cr>
 
 au BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
-au BufReadPost,BufNewFile *.html,*.txt,*.md set spell spelllang=en_us
+au BufReadPost,BufNewFile *.html,*.txt,*.md,*.adoc set spell spelllang=en_us
