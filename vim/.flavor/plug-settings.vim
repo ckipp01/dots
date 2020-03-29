@@ -23,6 +23,10 @@ else
   " information and diagnostic information
   " since I display diagnostic on the far right,
   " I don't want to also display it in the center again
+  " By default airline shows the status, but I dislike
+  " the bold display that is the same color as your file.
+  " This whill do a minimal status the same color as your
+  " line number.
   function! CocMinimalStatus() abort
     return get(g:, 'coc_status', '')
   endfunction

@@ -5,7 +5,7 @@
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "⚠ ",
   "metals.statusBarEnabled": true,
-  "metals.superMethodLenses": true
+  "metals.superMethodLensesEnabled": true
 
   // "coc.preferences.enableFloatHighlight": false,
   // Keep this in here for testing
