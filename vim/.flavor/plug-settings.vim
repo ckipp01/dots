@@ -18,6 +18,25 @@ elseif exists("vnative") && has("nvim")
     source ~/.flavor/nvim-lsp.vim
   endif
 else
+  " This just just an experiment to see if I can 
+  " get the total diagnostics in a workspace rather
+  " than those just in the current buffer
+  function! StatusDiagnostic() abort
+    let diagnostics = CocAction('diagnosticList')
+    if type(diagnostics) == v:t_list
+      let errors = []
+      let warnings = []
+      for diagnostic in diagnostics
+        if diagnostic['severity'] == 'Error'
+          call add(errors, diagnostic)
+        endif
+        if diagnostic['severity'] == 'Warning'
+          call add(warnings, diagnostic)
+        endif
+      endfor
+      return " E " . string(len(errors)) . " W " . string(len(warnings))
+    endif
+  endfunction
   " I used this instead of coc_status()
   " because coc#status includes both statusline
   " information and diagnostic information
@@ -37,7 +56,6 @@ else
   endif
 endif
 
-
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
@@ -49,4 +67,10 @@ let g:airline#extensions#coc#enabled = 1
 let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 
+" vimspector
 let g:vimspector_enable_mappings = 'HUMAN'
+
+" nnn.vim
+let g:nnn#set_default_mappings = 0
+let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Debug' } }
+nnoremap <leader>n :NnnPicker %:p:h<CR>

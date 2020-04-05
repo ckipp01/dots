@@ -6,7 +6,10 @@
   "diagnostic.warningSign": "⚠ ",
   "metals.statusBarEnabled": true,
   "metals.superMethodLensesEnabled": true
-
+  // "metals.customRepositories": [
+  //   "central",
+  //   "bintray:alexarchambault/metals-amm"
+  // ]
   // "coc.preferences.enableFloatHighlight": false,
   // Keep this in here for testing
   // "languageserver": {

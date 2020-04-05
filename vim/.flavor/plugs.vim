@@ -6,7 +6,10 @@ Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
 
-" MD preview
+" giving nnn.vim a chance
+Plug 'mcchrish/nnn.vim'
+
+" md preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " wakatime plugin to track coding activity
@@ -29,6 +32,7 @@ Plug 'Yggdroot/indentLine'
 " help with debugging plugins
 Plug 'tpope/vim-scriptease'
 
+" necessary for debugging with coc-metals
 Plug 'puremourning/vimspector'
 
 if exists("lsp")
