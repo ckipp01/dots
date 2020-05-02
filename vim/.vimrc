@@ -3,8 +3,8 @@ let mapleader = ","
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " plugins
@@ -25,15 +25,15 @@ if exists("sunny")
   colorscheme one
 else
   set background=dark
-   " onedark.vim override: Don't set a background color when running in a terminal;
-   " just use the terminal's background color
-   if (has("autocmd") && !has("gui_running"))
-     augroup colors
-       autocmd!
-       let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16": "7"}
-       autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) "No `bg` setting
-     augroup END
-   endif
+  " onedark.vim override: Don't set a background color when running in a terminal;
+  " just use the terminal's background color
+  if (has("autocmd") && !has("gui_running"))
+    augroup colors
+      autocmd!
+      let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16": "7"}
+      autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) "No `bg` setting
+    augroup END
+  endif
 
   colorscheme onedark
 endif
@@ -87,7 +87,6 @@ autocmd FileType markdown setlocal textwidth=80
 " enforce characters to be 80 or less in js
 highlight ColorColumn ctermbg=lightgrey
 autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
-
 
 " set status line display
 set laststatus=2

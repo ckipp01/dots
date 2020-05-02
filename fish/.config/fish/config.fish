@@ -13,6 +13,7 @@ set -U Z_CMD "j"
 # Ensure that nvim is set as the default editor
 set -gx EDITOR nvim
 set -gx VISUAL $EDITOR
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/ckipp/google-cloud-sdk/path.fish.inc' ]; . '/Users/ckipp/google-cloud-sdk/path.fish.inc'; end
 set -g fish_user_paths "/usr/local/opt/thrift@0.9/bin" $fish_user_paths

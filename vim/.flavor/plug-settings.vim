@@ -5,7 +5,6 @@ let g:netrw_banner=0
 " vim-scala
 au BufRead,BufNewFile *.sbt set filetype=scala
 
-
 if exists("lsp")
   inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -18,7 +17,7 @@ elseif exists("vnative") && has("nvim")
     source ~/.flavor/nvim-lsp.vim
   endif
 else
-  " This just just an experiment to see if I can 
+  " This just just an experiment to see if I can
   " get the total diagnostics in a workspace rather
   " than those just in the current buffer
   function! StatusDiagnostic() abort
@@ -74,3 +73,5 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let g:nnn#set_default_mappings = 0
 let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Debug' } }
 nnoremap <leader>n :NnnPicker %:p:h<CR>
+
+let g:vista_default_executive = 'coc'

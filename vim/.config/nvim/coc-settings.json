@@ -1,27 +1,36 @@
 {
-  "metals.serverVersion": "0.8.4-SNAPSHOT",
+  "metals.serverVersion": "0.8.5-SNAPSHOT",
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "⚠ ",
   "metals.statusBarEnabled": true,
-  "metals.superMethodLensesEnabled": true
-  // "metals.customRepositories": [
-  //   "central",
-  //   "bintray:alexarchambault/metals-amm"
-  // ]
-  // "coc.preferences.enableFloatHighlight": false,
-  // Keep this in here for testing
-  // "languageserver": {
-  //   "metals": {
-  //     "command": "metals-vim",
-  //     "rootPatterns": [
-  //       "build.sbt"
-  //     ],
-  //     "filetypes": [
-  //       "scala",
-  //       "sbt"
-  //     ]
-  //   }
-  // }
+  "diagnostic.checkCurrentLine": true,
+  "languageserver": {
+    "lua": {
+      "args": [
+        "-E",
+        "-e",
+        "LANG=en",
+        "/Users/ckipp/Documents/lua-workspace/lua-language-server/main.lua"
+      ],
+      "command": "/Users/ckipp/Documents/lua-workspace/lua-language-server/bin/macOS/lua-language-server",
+      "filetypes": [
+        "lua"
+      ],
+      "rootPatterns": [
+        ".git/"
+      ]
+    }
+  },
+  "Lua.diagnostics": {
+    "disable": [
+      "lowercase-global"
+    ],
+    "globals": [
+      "vim",
+      "it",
+      "describe"
+    ]
+  }
 }

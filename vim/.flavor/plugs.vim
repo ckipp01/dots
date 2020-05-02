@@ -6,8 +6,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
 
-" giving nnn.vim a chance
+" nnn.vim
 Plug 'mcchrish/nnn.vim'
+"Plug 'preservim/nerdtree'
 
 " md preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -24,7 +25,7 @@ Plug 'airblade/vim-gitgutter'
 
 " language specific syntax plugin
 Plug 'sheerun/vim-polyglot'
-" Plug 'ckipp01/vim-scala'
+"Plug 'ckipp01/vim-scala'
 
 " help visualize spacing
 Plug 'Yggdroot/indentLine'
@@ -45,8 +46,12 @@ elseif exists("lsc")
   Plug 'natebosch/vim-lsc'
 elseif exists("vnative") && has("nvim")
   Plug 'neovim/nvim-lsp'
+  Plug 'haorenW1025/completion-nvim'
+  Plug 'haorenW1025/diagnostic-nvim'
+  Plug 'mfussenegger/nvim-jdtls'
 else
   Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'liuchengxu/vista.vim'
 endif
 
 call plug#end()

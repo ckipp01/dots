@@ -7,10 +7,9 @@ alias v='nvim'
 alias vsun="nvim --cmd 'let sunny=1'"
 alias vlsp="nvim --cmd 'let lsp=1'"
 alias vlsc="nvim --cmd 'let lsc=1'"
-alias vnative="nvim --cmd 'let vnative=1'"
+alias vnative="nvim --cmd 'let vnative=1' --cmd 'set rtp+=/Users/ckipp/Documents/lua-workspace/nvim-metals'"
 alias t='touch'
-alias 'cd..'='cd_up'
-alias new-sbt='sbt new scala/scala-seed.g8'
+alias new-sbt='g8 scala/scala-seed.g8'
 alias mlog='tail -f .metals/metals.log'
 
 # vit: ft=sh
