@@ -38,6 +38,26 @@ else
   colorscheme onedark
 endif
 
+" highlight groups used for statusline
+highlight StatusLineStatus ctermfg=238 ctermbg=236 guifg=#4B5263 guibg=#2C323C
+highlight StatusLineError ctermfg=9 ctermbg=236 guifg=#ff0000 guibg=#2C323C
+highlight StatusLineWarning ctermfg=130 ctermbg=236 guifg=#ff922b guibg=#2C323C
+
+set statusline=%n\   " buffer number
+set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview
+if exists("vnative")
+  set statusline+=%#StatusLineError#%{LspErrors()}\ "LSP Errors
+  set statusline+=%#StatusLineWarning#%{LspWarnings()}%#StatusLine#\ "LSP Warnings
+else
+  set statusline+=%#StatusLineError#%{CocMinimalErrors()}\ " coc-errors
+  set statusline+=%#StatusLineWarning#%{CocMinimalWarnings()}\ " coc-warnings
+  set statusline+=%#StatusLineStatus#%{CocMinimalStatus()}%#StatusLine#\ " coc status 
+endif
+set statusline+=%=%Y\  " filetype
+set statusline+=%{&ff}\  " right align line endings
+set statusline+=%l,%v\ " curser position
+set statusline+=%p%%\  " percentage on page
+
 " turn on syntax highlighting.
 if !exists("g:syntax_on")
   syntax enable
@@ -78,6 +98,9 @@ set updatetime=300
 set matchpairs+=<:>
 set showmatch
 
+" always show signcolumns
+set signcolumn=yes
+
 " disables the automatic comment lines after another comment line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
@@ -88,7 +111,7 @@ autocmd FileType markdown setlocal textwidth=80
 highlight ColorColumn ctermbg=lightgrey
 autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
 
-" set status line display
+" always show statusline
 set laststatus=2
 
 " search down into subfolders

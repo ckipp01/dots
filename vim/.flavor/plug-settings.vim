@@ -17,50 +17,11 @@ elseif exists("vnative") && has("nvim")
     source ~/.flavor/nvim-lsp.vim
   endif
 else
-  " This just just an experiment to see if I can
-  " get the total diagnostics in a workspace rather
-  " than those just in the current buffer
-  function! StatusDiagnostic() abort
-    let diagnostics = CocAction('diagnosticList')
-    if type(diagnostics) == v:t_list
-      let errors = []
-      let warnings = []
-      for diagnostic in diagnostics
-        if diagnostic['severity'] == 'Error'
-          call add(errors, diagnostic)
-        endif
-        if diagnostic['severity'] == 'Warning'
-          call add(warnings, diagnostic)
-        endif
-      endfor
-      return " E " . string(len(errors)) . " W " . string(len(warnings))
-    endif
-  endfunction
-  " I used this instead of coc_status()
-  " because coc#status includes both statusline
-  " information and diagnostic information
-  " since I display diagnostic on the far right,
-  " I don't want to also display it in the center again
-  " By default airline shows the status, but I dislike
-  " the bold display that is the same color as your file.
-  " This whill do a minimal status the same color as your
-  " line number.
-  function! CocMinimalStatus() abort
-    return get(g:, 'coc_status', '')
-  endfunction
-  let g:airline_section_c = '%t %#LineNr#%{CocMinimalStatus()}'
   " langauge server client settings
   if filereadable(expand("~/.flavor/coc.vim"))
     source ~/.flavor/coc.vim
   endif
 endif
-
-" airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-let g:airline#extensions#coc#error_symbol = '✘ '
-let g:airline#extensions#coc#warning_symbol = '⚠ '
-let g:airline#extensions#coc#enabled = 1
 
 " Coming from polyglot's markdown settings
 let g:vim_markdown_conceal = 0
@@ -73,5 +34,3 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let g:nnn#set_default_mappings = 0
 let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Debug' } }
 nnoremap <leader>n :NnnPicker %:p:h<CR>
-
-let g:vista_default_executive = 'coc'

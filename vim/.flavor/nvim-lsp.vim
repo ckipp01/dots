@@ -1,9 +1,11 @@
 "=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 " These settings are a work in progress for using https://scalameta.org/metals
-" with the built-in LSP support of Nvim. They assume that you have the
-" following plugins installed for the listed reasons. Also ensure that you have
-" Nvim nightly installed. The latest stable release does not yet have built-in
-" LSP support.
+" with the built-in LSP support of Nvim. They are also meant to serve as an
+" example of what a setup can look like. They aren't necessarily meant to be
+" copied verbatim, but rather referenced, improved, tweaked, etc.
+" They assume that you have the following plugins installed for the listed
+" reasons. Also ensure that you have Nvim nightly installed. The latest stable
+" release does not yet have built-in LSP support.
 "
 " - https://github.com/neovim/nvim-lsp
 "     (automated installation and basic setup info)
@@ -20,10 +22,9 @@ nnoremap <silent> gd          <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K           <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gi          <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gr          <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gs          <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-" rename currently has issues https://github.com/neovim/neovim/pull/12185
+nnoremap <silent> gsd         <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gsw         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <leader>rn  <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent> <leader>bi  <cmd>lua require'metals'.build_import()<CR>
 nnoremap <silent> <leader>f   <cmd>lua vim.lsp.buf.formatting()<CR>
 
 " Mapping specific to plugins
@@ -37,15 +38,21 @@ nnoremap <silent> go          :OpenDiagnostic<CR>
 autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
 let g:LspDiagnosticsErrorSign = '✘'
-let g:LspDiagnosticsWarningSign = '⚠'
+let g:LspDiagnosticsWarningSign = ''
 
-let g:metals_server_version = '0.8.4+127-65087a2b-SNAPSHOT'
+" If you just use the latest stable version, then setting this isn't necessary
+let g:metals_server_version = '0.9.0'
+
 "-----------------------------------------------------------------------------
 " lua callbacks
 "-----------------------------------------------------------------------------
 :lua << EOF
   local nvim_lsp = require'nvim_lsp'
+  local lsp = vim.lsp
+  local metals = require'metals'
   local M = {}
+
+  -- lsp.callbacks['metals/status'] = metals.metals_publish_decorations
 
   M.on_attach = function()
       require'diagnostic'.on_attach();
@@ -67,8 +74,34 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "-----------------------------------------------------------------------------
 " diagnostic-nvim settings
 "-----------------------------------------------------------------------------
-let g:diagnostic_enable_virtual_text = 1
+"let g:diagnostic_enable_virtual_text = 1
 let g:diagnostic_virtual_text_prefix = ' '
+
+
+"-----------------------------------------------------------------------------
+" statusline functions
+"-----------------------------------------------------------------------------
+let s:LspStatusLineErrorSign = get(g:, 'LspDiagnosticsErrorSign', 'E')
+let s:LspStatusLineWarningSign = get(g:, 'LspDiagnosticsWarningSign', 'W')
+
+function! LspErrors() abort
+  let errorCount = luaeval('vim.lsp.util.buf_diagnostics_count("Error")')
+  if (errorCount > 0)
+    return s:LspStatusLineErrorSign . errorCount
+  else
+    return ''
+  endif
+endfunction
+
+
+function! LspWarnings() abort
+  let warningCount = luaeval('vim.lsp.util.buf_diagnostics_count("Warning")')
+  if (warningCount > 0)
+    return s:LspStatusLineWarningSign . warningCount
+  else
+    return ''
+  endif
+endfunction
 
 "-----------------------------------------------------------------------------
 " Helpful general settings
@@ -78,12 +111,3 @@ set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
-
-" TODO
-" [ ] Status messages
-" [ ] Status line
-" [ ] Initialization options
-" [ ] Server commands

@@ -2,7 +2,6 @@
 call plug#begin('~/.vim/plugged')
 
 " current theme
-Plug 'vim-airline/vim-airline'
 Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
 
@@ -36,6 +35,9 @@ Plug 'tpope/vim-scriptease'
 " necessary for debugging with coc-metals
 Plug 'puremourning/vimspector'
 
+" Document symbol explorer
+Plug 'liuchengxu/vista.vim'
+
 if exists("lsp")
   Plug 'prabirshrestha/async.vim'
   Plug 'prabirshrestha/asyncomplete.vim'
@@ -51,7 +53,6 @@ elseif exists("vnative") && has("nvim")
   Plug 'mfussenegger/nvim-jdtls'
 else
   Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'liuchengxu/vista.vim'
 endif
 
 call plug#end()

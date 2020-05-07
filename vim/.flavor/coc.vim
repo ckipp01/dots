@@ -1,3 +1,62 @@
+" Gets Errors and Warnings for buffer plus the Status message from coc.nvim
+function! StatusDiagnosticForBuffer() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, '✘' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, '' . info['warning'])
+  endif
+  return join(msgs, ' ')
+endfunction
+
+" Gets Errors and Warnings for the entire workspace from coc.nvim
+function! StatusDiagnosticForWorkspace() abort
+  let diagnostics = CocAction('diagnosticList')
+  if type(diagnostics) == v:t_list
+    let errors = []
+    let warnings = []
+    for diagnostic in diagnostics
+      if diagnostic['severity'] == 'Error'
+        call add(errors, diagnostic)
+      endif
+      if diagnostic['severity'] == 'Warning'
+        call add(warnings, diagnostic)
+      endif
+    endfor
+    return " ✘ " . string(len(errors)) . "  " . string(len(warnings)) . " "
+  endif
+endfunction
+
+" Just gets the status message from coc.nvim
+function! CocMinimalStatus() abort
+  return get(g:, 'coc_status', '')
+endfunction
+
+" Just gets the errors from the current buffer
+function! CocMinimalErrors() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, '✘' . info['error'])
+  endif
+  return join(msgs)
+endfunction
+
+" Just gets the warnings from the current buffer
+function! CocMinimalWarnings() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'warning', 0)
+    call add(msgs, '' . info['warning'])
+  endif
+  return join(msgs)
+endfunction
+
 " Some servers have issues with backup files
 set nobackup
 set nowritebackup
@@ -7,9 +66,6 @@ set updatetime=300
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -113,9 +169,11 @@ inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
 
 " Toggle panel with Tree Views
 nnoremap <silent> <space>t :<C-u>CocCommand metals.tvp<CR>
-" Toggle Tree View 'metalsBuild'
-nnoremap <silent> <space>tb :<C-u>CocCommand metals.tvp metalsBuild<CR>
+" Toggle Tree View 'metalsPackages'
+nnoremap <silent> <space>tp :<C-u>CocCommand metals.tvp metalsPackages<CR>
 " Toggle Tree View 'metalsCompile'
 nnoremap <silent> <space>tc :<C-u>CocCommand metals.tvp metalsCompile<CR>
-" Reveal current current class (trait or object) in Tree View 'metalsBuild'
-nnoremap <silent> <space>tf :<C-u>CocCommand metals.revealInTreeView metalsBuild<CR>
+" Toggle Tree View 'metalsBuild'
+nnoremap <silent> <space>tb :<C-u>CocCommand metals.tvp metalsBuild<CR>
+" Reveal current current class (trait or object) in Tree View 'metalsPackages'
+nnoremap <silent> <space>tf :<C-u>CocCommand metals.revealInTreeView metalsPackages<CR>
