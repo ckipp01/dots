@@ -50,7 +50,6 @@ elseif exists("vnative") && has("nvim")
   Plug 'neovim/nvim-lsp'
   Plug 'haorenW1025/completion-nvim'
   Plug 'haorenW1025/diagnostic-nvim'
-  Plug 'mfussenegger/nvim-jdtls'
 else
   Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 endif

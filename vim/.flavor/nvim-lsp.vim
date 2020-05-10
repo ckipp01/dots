@@ -48,11 +48,8 @@ let g:metals_server_version = '0.9.0'
 "-----------------------------------------------------------------------------
 :lua << EOF
   local nvim_lsp = require'nvim_lsp'
-  local lsp = vim.lsp
   local metals = require'metals'
   local M = {}
-
-  -- lsp.callbacks['metals/status'] = metals.metals_publish_decorations
 
   M.on_attach = function()
       require'diagnostic'.on_attach();
@@ -61,6 +58,14 @@ let g:metals_server_version = '0.9.0'
 
   nvim_lsp.metals.setup{
     on_attach = M.on_attach;
+    root_dir = metals.root_pattern("build.sbt", "build.sc");
+    init_options = {
+      statusBarProvider = "on";
+    };
+    callbacks = {
+      ["textDocument/hover"] = metals.hover_wrap;
+      ["metals/status"] = metals.metals_status;
+    };
   }
 EOF
 

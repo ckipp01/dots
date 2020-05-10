@@ -48,6 +48,7 @@ set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview
 if exists("vnative")
   set statusline+=%#StatusLineError#%{LspErrors()}\ "LSP Errors
   set statusline+=%#StatusLineWarning#%{LspWarnings()}%#StatusLine#\ "LSP Warnings
+  set statusline+=%#StatusLineStatus#%{metals#status()}%#StatusLine#\ "nvim-metals status 
 else
   set statusline+=%#StatusLineError#%{CocMinimalErrors()}\ " coc-errors
   set statusline+=%#StatusLineWarning#%{CocMinimalWarnings()}\ " coc-warnings
@@ -108,7 +109,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd FileType markdown setlocal textwidth=80
 
 " enforce characters to be 80 or less in js
-highlight ColorColumn ctermbg=lightgrey
+highlight ColorColumn ctermbg=red
 autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)
 
 " always show statusline
@@ -147,4 +148,4 @@ nnoremap<leader>js :%!jq '.'<cr>
 nnoremap<leader>xml :%!xmllint --format -<cr>
 
 au BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
-au BufReadPost,BufNewFile *.html,*.txt,*.md,*.adoc set spell spelllang=en_us
+au BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang=en_us
