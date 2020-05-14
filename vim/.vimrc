@@ -43,6 +43,10 @@ highlight StatusLineStatus ctermfg=238 ctermbg=236 guifg=#4B5263 guibg=#2C323C
 highlight StatusLineError ctermfg=9 ctermbg=236 guifg=#ff0000 guibg=#2C323C
 highlight StatusLineWarning ctermfg=130 ctermbg=236 guifg=#ff922b guibg=#2C323C
 
+" highlight groups to match statusline
+highlight LspGutterError ctermfg=9 guifg=#ff0000
+highlight LspGutterWarning ctermfg=130 guifg=#ff922b
+
 set statusline=%n\   " buffer number
 set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview
 if exists("vnative")

@@ -35,11 +35,6 @@ nnoremap <silent> go          :OpenDiagnostic<CR>
 "-----------------------------------------------------------------------------
 " nvim-lsp Settings
 "-----------------------------------------------------------------------------
-autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-let g:LspDiagnosticsErrorSign = '✘'
-let g:LspDiagnosticsWarningSign = ''
-
 " If you just use the latest stable version, then setting this isn't necessary
 let g:metals_server_version = '0.9.0'
 
@@ -86,13 +81,12 @@ let g:diagnostic_virtual_text_prefix = ' '
 "-----------------------------------------------------------------------------
 " statusline functions
 "-----------------------------------------------------------------------------
-let s:LspStatusLineErrorSign = get(g:, 'LspDiagnosticsErrorSign', 'E')
-let s:LspStatusLineWarningSign = get(g:, 'LspDiagnosticsWarningSign', 'W')
-
 function! LspErrors() abort
   let errorCount = luaeval('vim.lsp.util.buf_diagnostics_count("Error")')
+  let possibleLspSign = sign_getdefined("LspDiagnosticsErrorSign")
+  let sign = get(possibleLspSign, 0, {"text": "E"})
   if (errorCount > 0)
-    return s:LspStatusLineErrorSign . errorCount
+    return sign.text . errorCount
   else
     return ''
   endif
@@ -101,8 +95,10 @@ endfunction
 
 function! LspWarnings() abort
   let warningCount = luaeval('vim.lsp.util.buf_diagnostics_count("Warning")')
+  let possibleLspSign = sign_getdefined("LspDiagnosticsWarningSign")
+  let sign = get(possibleLspSign, 0, {"text": "W"})
   if (warningCount > 0)
-    return s:LspStatusLineWarningSign . warningCount
+    return sign.text . warningCount
   else
     return ''
   endif
@@ -111,6 +107,15 @@ endfunction
 "-----------------------------------------------------------------------------
 " Helpful general settings
 "-----------------------------------------------------------------------------
+" Needed for compltions
+autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+" Needed if you want to set your own gutter signs
+" NOTE: the `texthl` groups I created. You can use the defaults or create your
+" own to match your statusline for example
+call sign_define("LspDiagnosticsErrorSign", {"text" : "✘ ", "texthl" : "LspGutterError"})
+call sign_define("LspDiagnosticsWarningSign", {"text" : "", "texthl" : "LspGutterWarning"})
+
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 

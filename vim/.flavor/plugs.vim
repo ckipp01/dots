@@ -38,6 +38,10 @@ Plug 'puremourning/vimspector'
 " Document symbol explorer
 Plug 'liuchengxu/vista.vim'
 
+" Used for testing Nvim lua plugins
+Plug 'tjdevries/luvjob.nvim'
+Plug 'tjdevries/plenary.nvim'
+
 if exists("lsp")
   Plug 'prabirshrestha/async.vim'
   Plug 'prabirshrestha/asyncomplete.vim'
