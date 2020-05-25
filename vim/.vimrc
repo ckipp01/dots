@@ -50,8 +50,8 @@ highlight LspGutterWarning ctermfg=130 guifg=#ff922b
 set statusline=%n\   " buffer number
 set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview
 if exists("vnative")
-  set statusline+=%#StatusLineError#%{LspErrors()}\ "LSP Errors
-  set statusline+=%#StatusLineWarning#%{LspWarnings()}%#StatusLine#\ "LSP Warnings
+  set statusline+=%#StatusLineError#%{metals#errors()}\ "LSP Errors
+  set statusline+=%#StatusLineWarning#%{metals#warnings()}%#StatusLine#\ "LSP Warnings
   set statusline+=%#StatusLineStatus#%{metals#status()}%#StatusLine#\ "nvim-metals status 
 else
   set statusline+=%#StatusLineError#%{CocMinimalErrors()}\ " coc-errors

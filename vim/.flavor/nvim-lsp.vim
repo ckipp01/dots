@@ -26,11 +26,12 @@ nnoremap <silent> gsd         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gsw         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <leader>rn  <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>f   <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <silent> <leader>ca  <cmd>lua vim.lsp.buf.code_action()<CR>
 
 " Mapping specific to plugins
 nnoremap <silent> [c          :NextDiagnostic<CR>
 nnoremap <silent> ]c          :PrevDiagnostic<CR>
-nnoremap <silent> go          :OpenDiagnostic<CR>
+nnoremap <silent> <space>d    :OpenDiagnostic<CR>
 
 "-----------------------------------------------------------------------------
 " nvim-lsp Settings
@@ -56,10 +57,18 @@ let g:metals_server_version = '0.9.0'
     root_dir = metals.root_pattern("build.sbt", "build.sc");
     init_options = {
       statusBarProvider = "on";
+      inputBoxProvider  = true;
+      quickPickProvider = true;
+      executeClientCommandProvider = true;
+      decorationProvider = true;
     };
     callbacks = {
-      ["textDocument/hover"] = metals.hover_wrap;
-      ["metals/status"] = metals.metals_status;
+      ["textDocument/hover"]          = metals['textDocument/hover'];
+      ["metals/status"]               = metals['metals/status'];
+      ["metals/inputBox"]             = metals['metals/inputBox'];
+      ["metals/quickPick"]            = metals['metals/quickPick'];
+      ["metals/executeClientCommand"] = metals["metals/executeClientCommand"];
+      ["metals/publishDecorations"]   = metals["metals/publishDecorations"];
     };
   }
 EOF
@@ -113,7 +122,7 @@ autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc
 " Needed if you want to set your own gutter signs
 " NOTE: the `texthl` groups I created. You can use the defaults or create your
 " own to match your statusline for example
-call sign_define("LspDiagnosticsErrorSign", {"text" : "✘ ", "texthl" : "LspGutterError"})
+call sign_define("LspDiagnosticsErrorSign", {"text" : "✘", "texthl" : "LspGutterError"})
 call sign_define("LspDiagnosticsWarningSign", {"text" : "", "texthl" : "LspGutterWarning"})
 
 " Set completeopt to have a better completion experience
