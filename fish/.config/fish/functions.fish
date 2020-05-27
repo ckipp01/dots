@@ -4,7 +4,7 @@ function cheat
 end
 
 function amm --description 'Scala REPL'
-    sh -c 'amm "$@"' amm $argv
+    sh -c 'amm "$@"' amm --no-remote-logging $argv
 end
 
 function fish_logo \

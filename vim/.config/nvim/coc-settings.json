@@ -1,5 +1,5 @@
 {
-  "metals.serverVersion": "0.9.0+139-c169b4ce-SNAPSHOT",
+  "metals.serverVersion": "0.9.1-SNAPSHOT",
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
   "diagnostic.errorSign": "✘",
