@@ -9,8 +9,9 @@ Plug 'joshdick/onedark.vim'
 Plug 'mcchrish/nnn.vim'
 "Plug 'preservim/nerdtree'
 
-" md preview
+" md and adoc
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'habamax/vim-asciidoctor'
 
 " wakatime plugin to track coding activity
 Plug 'wakatime/vim-wakatime'

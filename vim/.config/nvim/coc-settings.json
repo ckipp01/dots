@@ -1,12 +1,11 @@
 {
-  "metals.serverVersion": "0.9.1-SNAPSHOT",
+  "metals.serverVersion": "0.9.0+177-e87c2312-SNAPSHOT",
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "",
   "metals.statusBarEnabled": true,
   "diagnostic.checkCurrentLine": true,
-  "tsserver.trace.server": "verbose",
   "languageserver": {
     "lua": {
       "args": [
