@@ -151,5 +151,11 @@ nnoremap<leader>js :%!jq '.'<cr>
 " format xml
 nnoremap<leader>xml :%!xmllint --format -<cr>
 
+" Mappings to deal with the quickfix window
+nnoremap<leader>fo :copen<cr>
+nnoremap<leader>fc :cclose<cr>
+nnoremap<leader>fn :cnext<cr>
+nnoremap<leader>fp :cprevious<cr>
+
 au BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell
 au BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang=en_us

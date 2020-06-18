@@ -1,4 +1,6 @@
-alias l='ls -la'
+alias l='exa -la --icons'
+alias ls='exa'
+alias tree='exa -T'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -13,4 +15,4 @@ alias t='touch'
 alias new-sbt='g8 scala/scala-seed.g8'
 alias mlog='tail -f .metals/metals.log'
 
-# vit: ft=sh
+# vim: ft=sh

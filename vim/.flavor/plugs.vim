@@ -57,6 +57,7 @@ elseif exists("vnative") && has("nvim")
   Plug 'haorenW1025/diagnostic-nvim'
 else
   Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+  "Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 endif
 
 call plug#end()

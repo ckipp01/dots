@@ -37,31 +37,38 @@ nnoremap <silent> <space>d    :OpenDiagnostic<CR>
 " nvim-lsp Settings
 "-----------------------------------------------------------------------------
 " If you just use the latest stable version, then setting this isn't necessary
-let g:metals_server_version = '0.9.0'
+let g:metals_server_version = '0.9.2-SNAPSHOT'
+let g:metals_decoration_color = 'Conceal' 
 
 "-----------------------------------------------------------------------------
 " lua callbacks
 "-----------------------------------------------------------------------------
 :lua << EOF
   local nvim_lsp = require'nvim_lsp'
-  local metals = require'metals'
+  local metals   = require'metals'
+  local setup    = require'metals.setup' 
   local M = {}
 
   M.on_attach = function()
       require'diagnostic'.on_attach();
       require'completion'.on_attach();
+      setup.auto_commands()
     end
 
   nvim_lsp.metals.setup{
-    on_attach = M.on_attach;
-    root_dir = metals.root_pattern("build.sbt", "build.sc");
+    on_attach    = M.on_attach;
+    root_dir     = metals.root_pattern("build.sbt", "build.sc", ".git");
     init_options = {
-      statusBarProvider = "on";
-      inputBoxProvider  = true;
-      quickPickProvider = true;
+      statusBarProvider            = "on";
+      inputBoxProvider             = true;
+      quickPickProvider            = true;
       executeClientCommandProvider = true;
-      decorationProvider = true;
+      decorationProvider           = true;
+      didFocusProvider             = true;
     };
+
+    on_init = setup.on_init;
+
     callbacks = {
       ["textDocument/hover"]          = metals['textDocument/hover'];
       ["metals/status"]               = metals['metals/status'];
@@ -69,6 +76,7 @@ let g:metals_server_version = '0.9.0'
       ["metals/quickPick"]            = metals['metals/quickPick'];
       ["metals/executeClientCommand"] = metals["metals/executeClientCommand"];
       ["metals/publishDecorations"]   = metals["metals/publishDecorations"];
+      ["metals/didFocusTextDocument"] = metals["metals/didFocusTextDocument"];
     };
   }
 EOF
@@ -83,7 +91,7 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "-----------------------------------------------------------------------------
 " diagnostic-nvim settings
 "-----------------------------------------------------------------------------
-"let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_enable_virtual_text = 1
 let g:diagnostic_virtual_text_prefix = ' '
 
 
