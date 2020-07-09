@@ -63,8 +63,8 @@ let g:metals_decoration_color = 'Conceal'
       inputBoxProvider             = true;
       quickPickProvider            = true;
       executeClientCommandProvider = true;
-      decorationProvider           = true;
       didFocusProvider             = true;
+      decorationProvider           = true;
     };
 
     on_init = setup.on_init;
