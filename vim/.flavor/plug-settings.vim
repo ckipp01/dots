@@ -34,3 +34,12 @@ let g:vimspector_enable_mappings = 'HUMAN'
 let g:nnn#set_default_mappings = 0
 let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Debug' } }
 nnoremap <leader>n :NnnPicker %:p:h<CR>
+
+:lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "scala", "html", "javascript", "yaml", "css", "toml", "lua", "json" },
+  highlight = {
+    enable = true
+  },
+}
+EOF

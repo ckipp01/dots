@@ -21,12 +21,13 @@
 nnoremap <silent> gd          <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K           <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gi          <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> gr          <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gsd         <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gsw         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+nnoremap <silent> gr          <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
+nnoremap <silent> gds         <cmd>lua vim.lsp.buf.document_symbol()<CR>
+nnoremap <silent> gws         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <leader>rn  <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>f   <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> <leader>ca  <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <leader>ws  <cmd>lua require 'metals.decoration'.show_hover_message()<CR>
 
 " Mapping specific to plugins
 nnoremap <silent> [c          :NextDiagnostic<CR>
@@ -37,17 +38,20 @@ nnoremap <silent> <space>d    :OpenDiagnostic<CR>
 " nvim-lsp Settings
 "-----------------------------------------------------------------------------
 " If you just use the latest stable version, then setting this isn't necessary
-let g:metals_server_version = '0.9.2-SNAPSHOT'
+let g:metals_server_version = '0.9.3+77-61bd09f6-SNAPSHOT'
 let g:metals_decoration_color = 'Conceal' 
 
 "-----------------------------------------------------------------------------
 " lua callbacks
 "-----------------------------------------------------------------------------
 :lua << EOF
-  local nvim_lsp = require'nvim_lsp'
-  local metals   = require'metals'
-  local setup    = require'metals.setup' 
+  local nvim_lsp  = require'nvim_lsp'
+  local metals    = require'metals'
+  local setup     = require'metals.setup' 
   local M = {}
+
+
+  require('telescope.builtin').quickfix()
 
   M.on_attach = function()
       require'diagnostic'.on_attach();

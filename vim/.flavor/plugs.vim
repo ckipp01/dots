@@ -39,9 +39,14 @@ Plug 'puremourning/vimspector'
 " Document symbol explorer
 Plug 'liuchengxu/vista.vim'
 
+" Used for surrounding stuff
+Plug 'machakann/vim-sandwich'
+
+Plug 'nvim-treesitter/nvim-treesitter'
+
 " Used for testing Nvim lua plugins
-Plug 'tjdevries/luvjob.nvim'
-Plug 'tjdevries/plenary.nvim'
+" Just uncomment then when you need them
+" Plug 'tjdevries/luvjob.nvim'
 
 if exists("lsp")
   Plug 'prabirshrestha/async.vim'
@@ -55,9 +60,16 @@ elseif exists("vnative") && has("nvim")
   Plug 'neovim/nvim-lsp'
   Plug 'haorenW1025/completion-nvim'
   Plug 'haorenW1025/diagnostic-nvim'
+  " While I don't want these, snippets aren't workign without it at all for LSP
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'hrsh7th/vim-vsnip-integ'
+  "
+  Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-lua/telescope.nvim'
 else
-  Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-  "Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+"Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 endif
 
 call plug#end()

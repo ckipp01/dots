@@ -1,12 +1,17 @@
 {
-  "metals.serverVersion": "0.9.2-SNAPSHOT",
+  "metals.serverVersion": "0.9.3+79-8bcafa59-SNAPSHOT",
+  //"metals.serverVersion": "0.9.4-SNAPSHOT",
+  "metals.excludedPackages": [
+    "akka.actor.typed.javadsl",
+    "com.github.swagger.akka.javadsl"
+  ],
   "coc.preferences.formatOnType": true,
   "codeLens.enable": true,
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "",
   "metals.statusBarEnabled": true,
-  "metals.enableStripMarginOnTypeFormatting": true,
   "diagnostic.checkCurrentLine": true,
+  "metals.superMethodLensesEnabled": true,
   "languageserver": {
     "lua": {
       "args": [
@@ -34,5 +39,11 @@
       "describe"
     ]
   },
-  "coc.preferences.extensionUpdateCheck": "daily"
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "tsserver.log": "verbose",
+  "tsserver.trace.server": "verbose",
+
+
+
+
 }
