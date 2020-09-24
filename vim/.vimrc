@@ -40,7 +40,7 @@ endif
 
 " highlight groups used for statusline
 highlight StatusLineStatus ctermfg=238 ctermbg=236 guifg=#4B5263 guibg=#2C323C
-highlight StatusLineError ctermfg=9 ctermbg=236 guifg=#ff0000 guibg=#2C323C
+highlight StatusLineError ctermfg=204 ctermbg=236 guifg=#E06C75 guibg=#2C323C
 highlight StatusLineWarning ctermfg=130 ctermbg=236 guifg=#ff922b guibg=#2C323C
 
 " highlight groups to match statusline

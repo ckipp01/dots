@@ -14,5 +14,6 @@ alias vnativesun="nvim --cmd 'let sunny=1' --cmd 'let vnative=1' --cmd 'set rtp+
 alias t='touch'
 alias new-sbt='g8 scala/scala-seed.g8'
 alias mlog='tail -f .metals/metals.log'
+alias tmux='tmux -2'
 
 # vim: ft=sh

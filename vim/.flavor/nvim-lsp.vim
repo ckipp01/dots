@@ -1,8 +1,7 @@
 "=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 " These settings are a work in progress for using https://scalameta.org/metals
 " with the built-in LSP support of Nvim. They are also meant to serve as an
-" example of what a setup can look like. They aren't necessarily meant to be
-" copied verbatim, but rather referenced, improved, tweaked, etc.
+" example of what a setup can look like. They aren't necessarily meant to be copied verbatim, but rather referenced, improved, tweaked, etc.
 " They assume that you have the following plugins installed for the listed
 " reasons. Also ensure that you have Nvim nightly installed. The latest stable
 " release does not yet have built-in LSP support.
@@ -11,7 +10,7 @@
 "     (automated installation and basic setup info)
 " - https://github.com/haorenW1025/completion-nvim
 "     (completions much like your familiar to with other LSP clients)
-" - https://github.com/haorenW1025/diagnostic-nvim
+" - https://github.com/haorenW025/diagnostic-nvim
 "     (a bit more sensible diagnostic than what ships by default)
 "=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
@@ -142,3 +141,12 @@ set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
+
+:lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = { "scala", "html", "javascript", "yaml", "css", "toml", "lua", "json" },
+  highlight = {
+    enable = true
+  },
+}
+EOF

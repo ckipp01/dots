@@ -42,8 +42,6 @@ Plug 'liuchengxu/vista.vim'
 " Used for surrounding stuff
 Plug 'machakann/vim-sandwich'
 
-Plug 'nvim-treesitter/nvim-treesitter'
-
 " Used for testing Nvim lua plugins
 " Just uncomment then when you need them
 " Plug 'tjdevries/luvjob.nvim'
@@ -64,6 +62,8 @@ elseif exists("vnative") && has("nvim")
   Plug 'hrsh7th/vim-vsnip'
   Plug 'hrsh7th/vim-vsnip-integ'
   "
+  Plug 'nvim-treesitter/nvim-treesitter'
+
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-lua/telescope.nvim'
