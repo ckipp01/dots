@@ -6,12 +6,6 @@
 " reasons. Also ensure that you have Nvim nightly installed. The latest stable
 " release does not yet have built-in LSP support.
 "
-" - https://github.com/neovim/nvim-lsp
-"     (automated installation and basic setup info)
-" - https://github.com/haorenW1025/completion-nvim
-"     (completions much like your familiar to with other LSP clients)
-" - https://github.com/haorenW025/diagnostic-nvim
-"     (a bit more sensible diagnostic than what ships by default)
 "=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 
 "-----------------------------------------------------------------------------
@@ -21,12 +15,14 @@ nnoremap <silent> gd          <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K           <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gi          <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> gr          <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
+nnoremap <silent> <leader>s   <cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<CR> 
 nnoremap <silent> gds         <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gws         <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> <leader>rn  <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <silent> <leader>f   <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> <leader>ca  <cmd>lua vim.lsp.buf.code_action()<CR>
-nnoremap <silent> <leader>ws  <cmd>lua require 'metals.decoration'.show_hover_message()<CR>
+nnoremap <silent> <leader>ws  <cmd>lua require'metals.decoration'.show_hover_message()<CR>
+nnoremap <silent> <leader>a   <cmd>lua require'metals.diagnostic'.open_all_diagnostics()<CR>
 
 " Mapping specific to plugins
 nnoremap <silent> [c          :NextDiagnostic<CR>
@@ -37,7 +33,7 @@ nnoremap <silent> <space>d    :OpenDiagnostic<CR>
 " nvim-lsp Settings
 "-----------------------------------------------------------------------------
 " If you just use the latest stable version, then setting this isn't necessary
-let g:metals_server_version = '0.9.3+77-61bd09f6-SNAPSHOT'
+let g:metals_server_version = '0.9.4+18-744ffa6f-SNAPSHOT'
 let g:metals_decoration_color = 'Conceal' 
 
 "-----------------------------------------------------------------------------
@@ -48,9 +44,6 @@ let g:metals_decoration_color = 'Conceal'
   local metals    = require'metals'
   local setup     = require'metals.setup' 
   local M = {}
-
-
-  require('telescope.builtin').quickfix()
 
   M.on_attach = function()
       require'diagnostic'.on_attach();

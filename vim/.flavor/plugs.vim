@@ -5,6 +5,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
 
+Plug 'edkolev/tmuxline.vim'
 " nnn.vim
 Plug 'mcchrish/nnn.vim'
 "Plug 'preservim/nerdtree'
@@ -42,19 +43,20 @@ Plug 'liuchengxu/vista.vim'
 " Used for surrounding stuff
 Plug 'machakann/vim-sandwich'
 
+Plug 'jiangmiao/auto-pairs'
 " Used for testing Nvim lua plugins
 " Just uncomment then when you need them
 " Plug 'tjdevries/luvjob.nvim'
 
 if exists("lsp")
-  Plug 'prabirshrestha/async.vim'
-  Plug 'prabirshrestha/asyncomplete.vim'
-  Plug 'prabirshrestha/asyncomplete-lsp.vim'
   Plug 'prabirshrestha/vim-lsp'
   Plug 'mattn/vim-lsp-settings'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
 elseif exists("lsc")
   Plug 'natebosch/vim-lsc'
 elseif exists("vnative") && has("nvim")
+  Plug 'scalameta/nvim-metals'
   Plug 'neovim/nvim-lsp'
   Plug 'haorenW1025/completion-nvim'
   Plug 'haorenW1025/diagnostic-nvim'

@@ -1,19 +1,22 @@
 {
   "metals.serverVersion": "0.9.5-SNAPSHOT",
-  //"metals.serverVersion": "0.9.3+115-08650df6-SNAPSHOT",
+  //"metals.serverVersion": "0.9.4+92-11f4c1a5-SNAPSHOT",
   //"metals.serverVersion": "0.9.4",
+  "metals.bloopVersion": "1.4.4",
   "metals.excludedPackages": [
     "akka.actor.typed.javadsl",
     "com.github.swagger.akka.javadsl"
   ],
-
+  "metals.implicitArgumentAnnotationsEnabled": true,
+  "metals.typeAnnotationsEnabled": true,
+  "metals.statusBarEnabled": true,
+  "metals.superMethodLensesEnabled": true,
   "coc.preferences.formatOnType": true,
+  "coc.preferences.extensionUpdateCheck": "daily",
   "codeLens.enable": true,
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign": "",
-  "metals.statusBarEnabled": true,
   "diagnostic.checkCurrentLine": true,
-  "metals.superMethodLensesEnabled": true,
   "languageserver": {
     "lua": {
       "args": [
@@ -41,8 +44,6 @@
       "describe"
     ]
   },
-  "coc.preferences.extensionUpdateCheck": "daily",
   "tsserver.log": "verbose",
-  "tsserver.trace.server": "verbose",
-
+  "tsserver.trace.server": "verbose"
 }

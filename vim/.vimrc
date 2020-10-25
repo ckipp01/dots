@@ -1,12 +1,6 @@
 " custom leader
 let mapleader = ","
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 " plugins
 if filereadable(expand("~/.flavor/plugs.vim"))
   source ~/.flavor/plugs.vim
@@ -38,14 +32,18 @@ else
   colorscheme onedark
 endif
 
+" Override the annoying bright red and yellow from coc
+highlight CocErrorSign guifg=#E06C75
+highlight CocWarningSign guifg=#E5C07B
+
 " highlight groups used for statusline
-highlight StatusLineStatus ctermfg=238 ctermbg=236 guifg=#4B5263 guibg=#2C323C
-highlight StatusLineError ctermfg=204 ctermbg=236 guifg=#E06C75 guibg=#2C323C
-highlight StatusLineWarning ctermfg=130 ctermbg=236 guifg=#ff922b guibg=#2C323C
+highlight StatusLineStatus guifg=#4B5263 guibg=#2C323C
+highlight StatusLineError guifg=#E06C75 guibg=#2C323C
+highlight StatusLineWarning guifg=#E5C07B guibg=#2C323C
 
 " highlight groups to match statusline
-highlight LspGutterError ctermfg=9 guifg=#ff0000
-highlight LspGutterWarning ctermfg=130 guifg=#ff922b
+highlight LspGutterError guifg=#E06C75
+highlight LspGutterWarning guifg=#E5C07B
 
 set statusline=%n\   " buffer number
 set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview
@@ -53,6 +51,7 @@ if exists("vnative")
   set statusline+=%#StatusLineError#%{metals#errors()}\ "LSP Errors
   set statusline+=%#StatusLineWarning#%{metals#warnings()}%#StatusLine#\ "LSP Warnings
   set statusline+=%#StatusLineStatus#%{metals#status()}%#StatusLine#\ "nvim-metals status 
+elseif exists("lsp") " If using vim-lsp there is no status
 else
   set statusline+=%#StatusLineError#%{CocMinimalErrors()}\ " coc-errors
   set statusline+=%#StatusLineWarning#%{CocMinimalWarnings()}\ " coc-warnings
