@@ -3,15 +3,19 @@ local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
 local g = vim.g -- a table to access global variables
 
 local function opt(scope, key, value)
-    local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
-    scopes[scope][key] = value
-    if scope ~= 'o' then scopes['o'][key] = value end
+  local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
+  scopes[scope][key] = value
+  if scope ~= 'o' then
+    scopes['o'][key] = value
+  end
 end
 
 local function map(mode, lhs, rhs, opts)
-    local options = {noremap = true}
-    if opts then options = vim.tbl_extend('force', options, opts) end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  local options = {noremap = true}
+  if opts then
+    options = vim.tbl_extend('force', options, opts)
+  end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 ----------------------------------
@@ -129,23 +133,17 @@ map('n', '<leader>nf', ':NvimTreeFindFile<CR>')
 map('n', '<silent> gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', '<silent> K', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', '<silent> gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-map('n', '<silent> gr',
-    '<cmd>lua require"telescope.builtin".lsp_references{}<CR>')
-map('n', '<silent> <leader>s',
-    '<cmd>lua require"telescope.builtin".lsp_workspace_symbols{}<CR>')
+map('n', '<silent> gr', '<cmd>lua require"telescope.builtin".lsp_references{}<CR>')
+map('n', '<silent> <leader>s', '<cmd>lua require"telescope.builtin".lsp_workspace_symbols{}<CR>')
 map('n', '<silent> gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 map('n', '<silent> gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
 map('n', '<silent> <leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
 map('n', '<silent> <leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 map('n', '<silent> <leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-map('n', '<silent> <leader>ws',
-    '<cmd>lua require"metals".show_hover_message()<CR>')
-map('n', '<silent> <leader>a',
-    '<cmd>lua require"metals".open_all_diagnostics()<CR>')
-map('n', '<silent> [c',
-    '<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>')
-map('n', '<silent> ]c',
-    '<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>')
+map('n', '<silent> <leader>ws', '<cmd>lua require"metals".show_hover_message()<CR>')
+map('n', '<silent> <leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
+map('n', '<silent> [c', '<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>')
+map('n', '<silent> ]c', '<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>')
 map('n', '<silent> <space>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
 
 -- completion
@@ -167,9 +165,9 @@ cmd [[autocmd!]]
 cmd [[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
 cmd [[autocmd BufRead,BufNewFile *.sbt set filetype=scala]]
 cmd [[autocmd FileType scala lua require("metals").initialize_or_attach(metals_config)]]
-cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
-cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
-cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
+-- cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
+-- cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
+-- cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
 cmd [[augroup end]]
 
 ----------------------------------
@@ -177,26 +175,23 @@ cmd [[augroup end]]
 ----------------------------------
 metals_config = require'metals'.bare_config
 metals_config.settings = {
-    showImplicitArguments = true,
-    excludedPackages = {
-        "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl"
-    }
+  showImplicitArguments = true,
+  excludedPackages = {'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl'}
 }
 
-metals_config.on_attach = function() require'completion'.on_attach(); end
+metals_config.on_attach = function()
+  require'completion'.on_attach();
+end
 
 metals_config.init_options.statusBarProvider = 'on'
 
-metals_config.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
-                 {virtual_text = {prefix = ''}})
+metals_config.handlers['textDocument/publishDiagnostics'] =
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {virtual_text = {prefix = ''}})
 
 ----------------------------------
 -- TREESITTER Setup --------------
 ----------------------------------
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "scala", "html", "javascript", "yaml", "css", "toml", "lua", "json" },
-  highlight = {
-    enable = true
-  },
+  ensure_installed = {'scala', 'html', 'javascript', 'yaml', 'css', 'toml', 'lua', 'json'},
+  highlight = {enable = true}
 }
