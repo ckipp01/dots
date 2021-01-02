@@ -1,6 +1,6 @@
-local cmd = vim.cmd -- to execute Vim commands e.g. cmd('pwd')
-local fn = vim.fn -- to call Vim functions e.g. fn.bufnr()
-local g = vim.g -- a table to access global variables
+local cmd = vim.cmd
+local fn = vim.fn
+local g = vim.g
 
 local function opt(scope, key, value)
   local scopes = {o = vim.o, b = vim.bo, w = vim.wo}
@@ -63,21 +63,11 @@ g['netrw_banner'] = 0
 g['vim_markdown_conceal'] = 0
 g['vim_markdown_conceal_code_blocks'] = 0
 
--- vimspector
-g['vimspector_enable_mappings'] = 'HUMAN'
-
 -- nvim-metals
 g['metals_server_version'] = '0.9.8+43-e729533a-SNAPSHOT'
 
 -- nvim-tree
 g['nvim_tree_auto_open'] = 1
-
-local gl = require('galaxyline')
-local gls = gl.section
-gl.short_line_list = {'LuaTree', 'vista', 'dbui'}
-
---
-cmd 'colorscheme onedark'
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -130,21 +120,21 @@ map('n', '<leader>nn', ':NvimTreeToggle<CR>')
 map('n', '<leader>nf', ':NvimTreeFindFile<CR>')
 
 -- LSP
-map('n', '<silent> gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
-map('n', '<silent> K', '<cmd>lua vim.lsp.buf.hover()<CR>')
-map('n', '<silent> gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-map('n', '<silent> gr', '<cmd>lua require"telescope.builtin".lsp_references{}<CR>')
-map('n', '<silent> <leader>s', '<cmd>lua require"telescope.builtin".lsp_workspace_symbols{}<CR>')
-map('n', '<silent> gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
-map('n', '<silent> gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
-map('n', '<silent> <leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-map('n', '<silent> <leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
-map('n', '<silent> <leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
-map('n', '<silent> <leader>ws', '<cmd>lua require"metals".show_hover_message()<CR>')
-map('n', '<silent> <leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
-map('n', '<silent> [c', '<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>')
-map('n', '<silent> ]c', '<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>')
-map('n', '<silent> <space>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
+map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+map('n', 'gr', '<cmd>lua require"telescope.builtin".lsp_references{}<CR>')
+map('n', '<leader>s', '<cmd>lua require"telescope.builtin".lsp_workspace_symbols{}<CR>')
+map('n', 'gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
+map('n', 'gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
+map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
+map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+map('n', '<leader>ws', '<cmd>lua require"metals".show_hover_message()<CR>')
+map('n', '<leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
+map('n', '[c', '<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>')
+map('n', ']c', '<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>')
+map('n', '<space>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
 
 -- completion
 map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
@@ -170,6 +160,14 @@ cmd [[autocmd FileType scala lua require("metals").initialize_or_attach(metals_c
 -- cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
 cmd [[augroup end]]
 
+-- Needed to esnure float background doesn't get odd highlighting
+-- https://github.com/joshdick/onedark.vim#onedarkset_highlight
+cmd [[augroup colorset]]
+cmd [[autocmd!]]
+cmd [[autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" } })]]
+cmd [[augroup END]]
+
+cmd 'colorscheme onedark'
 ----------------------------------
 -- LSP Setup ---------------------
 ----------------------------------

@@ -124,7 +124,7 @@ gls.left[10] = {
 }
 gls.left[11] = {
     MetalsStatus = {
-        provider = function() return vim.g['metals_status'] end,
+        provider = function() return  '  ' .. (vim.g['metals_status'] or '') end,
         highlight = {colors.line_bg}
     }
 }
