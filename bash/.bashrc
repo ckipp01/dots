@@ -31,14 +31,6 @@ else
   source ~/.autojump/etc/profile.d/autojump.sh
 fi
 
-# wakatime tracking
-if [ -f ~/Software/bash-wakatime/bash-wakatime.sh ]; then
-  source ~/Software/bash-wakatime/bash-wakatime.sh
-else
-  echo "No wakatime tracking found."
-  git clone git@github.com:irondoge/bash-wakatime.git ~/Software/bash-wakatime
-fi
-
 # some env stuff
 if [ -f ~/.env ]; then
   source ~/.env
@@ -102,3 +94,4 @@ export SDKMAN_DIR="/home/ckipp/.sdkman"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH=/Users/ckipp/.local/share/fury/usr/active/bin:/Users/ckipp/.local/share/fury/usr/active/opt:$PATH # Added by Fury

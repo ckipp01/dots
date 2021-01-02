@@ -1,15 +1,40 @@
 " custom leader
 let mapleader = ","
 
-" plugins
-if filereadable(expand("~/.flavor/plugs.vim"))
-  source ~/.flavor/plugs.vim
+call plug#begin('~/.vim/plugged')
+
+Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'wakatime/vim-wakatime'
+Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'sheerun/vim-polyglot'
+Plug 'Yggdroot/indentLine'
+" Plug 'puremourning/vimspector'
+"Plug 'machakann/vim-sandwich'
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
+call plug#end()
+
+" netwr settings
+let g:netrw_liststyle=3
+let g:netrw_banner=0
+
+au BufRead,BufNewFile *.sbt set filetype=scala
+
+if filereadable(expand("~/.flavor/coc.vim"))
+  source ~/.flavor/coc.vim
 endif
 
-" plugin settings
-if filereadable(expand("~/.flavor/plug-settings.vim"))
-  source ~/.flavor/plug-settings.vim
-endif
+" Coming from polyglot's markdown settings
+let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal_code_blocks = 0
+
+" vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
 
 " Theme
 set termguicolors
@@ -45,17 +70,23 @@ highlight StatusLineWarning guifg=#E5C07B guibg=#2C323C
 highlight LspGutterError guifg=#E06C75
 highlight LspGutterWarning guifg=#E5C07B
 
+highlight LspDiagnosticsDefaultError guifg=#E06C75
+highlight LspDiagnosticsDefaultWarning guifg=#E5C07B
+
+sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
+sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
+
 set statusline=%n\   " buffer number
 set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview
-if exists("vnative")
-  set statusline+=%#StatusLineError#%{metals#errors()}\ "LSP Errors
-  set statusline+=%#StatusLineWarning#%{metals#warnings()}%#StatusLine#\ "LSP Warnings
-  set statusline+=%#StatusLineStatus#%{metals#status()}%#StatusLine#\ "nvim-metals status 
-elseif exists("lsp") " If using vim-lsp there is no status
-else
+if exists("coc")
   set statusline+=%#StatusLineError#%{CocMinimalErrors()}\ " coc-errors
   set statusline+=%#StatusLineWarning#%{CocMinimalWarnings()}\ " coc-warnings
   set statusline+=%#StatusLineStatus#%{CocMinimalStatus()}%#StatusLine#\ " coc status 
+elseif exists("lsp") " If using vim-lsp there is no status
+elseif has("nvim")
+  set statusline+=%#StatusLineError#%{metals#errors()}\ "LSP Errors
+  set statusline+=%#StatusLineWarning#%{metals#warnings()}%#StatusLine#\ "LSP Warnings
+  set statusline+=%#StatusLineStatus#%{metals#status()}%#StatusLine#\ "nvim-metals status 
 endif
 set statusline+=%=%Y\  " filetype
 set statusline+=%{&ff}\  " right align line endings
@@ -89,8 +120,6 @@ set hidden
 set showtabline=1
 
 " display options
-set showmode
-set showcmd
 set cursorline
 set number
 set relativenumber
@@ -99,7 +128,6 @@ set conceallevel=0
 " allows your update time to be a bit faster
 set updatetime=300
 
-set matchpairs+=<:>
 set showmatch
 
 " always show signcolumns
@@ -126,9 +154,6 @@ filetype plugin on
 " don't search git, node_modules, or targert with wildmenu
 set wildignore=.git,*/node_modules/*,*/target/*
 
-"encoding
-set encoding=utf-8
-
 "search settings
 set incsearch
 " include matching uppercase words with lowercase search term
@@ -142,7 +167,6 @@ set clipboard=unnamed
 
 " escape
 inoremap jj <ESC>
-
 " toggle highlight search off
 nnoremap<leader>hs :nohlsearch<cr>
 " format json

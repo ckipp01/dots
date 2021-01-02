@@ -3,7 +3,7 @@ coursier bootstrap \
   --java-opt -Xss4m \
   --java-opt -Xms100m \
   --java-opt -Dmetals.client=emacs \
-  org.scalameta:metals_2.12:0.8.5-SNAPSHOT \
+  org.scalameta:metals_2.12:0.9.4+92-11f4c1a5-SNAPSHOT \
   -r bintray:scalacenter/releases \
   -r sonatype:snapshots \
   -o /usr/local/bin/metals-emacs -f
