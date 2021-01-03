@@ -54,7 +54,7 @@ require 'statusline'
 -- VARIABLES ---------------------
 ----------------------------------
 g['mapleader'] = ','
-g['netrw_gx'] = '<cWORD>'
+g['netrw_gx'] = '<cWORD>' -- TODO figure out why this isn't working
 g['netrw_liststyle'] = 3
 g['netrw_banner'] = 0
 
@@ -120,7 +120,7 @@ map('n', '<leader>nn', ':NvimTreeToggle<CR>')
 map('n', '<leader>nf', ':NvimTreeFindFile<CR>')
 
 -- LSP
-map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+map('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
 map('n', 'gr', '<cmd>lua require"telescope.builtin".lsp_references{}<CR>')
@@ -186,6 +186,29 @@ metals_config.init_options.statusBarProvider = 'on'
 metals_config.handlers['textDocument/publishDiagnostics'] =
     vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {virtual_text = {prefix = ''}})
 
+require'lspconfig'.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT', -- since using mainly for neovim
+        -- Setup your lua path
+        path = vim.split(package.path, ';'),
+      },
+      diagnostics = {
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = {
+          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+        },
+      },
+    },
+  },
+}
+
+-- vim.lsp.set_log_level("trace")
 ----------------------------------
 -- TREESITTER Setup --------------
 ----------------------------------
