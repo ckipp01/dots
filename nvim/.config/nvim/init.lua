@@ -54,7 +54,7 @@ require 'statusline'
 -- VARIABLES ---------------------
 ----------------------------------
 g['mapleader'] = ','
-g['netrw_gx'] = '<cWORD>' -- TODO figure out why this isn't working
+g['netrw_gx'] = '<cWORD>'
 g['netrw_liststyle'] = 3
 g['netrw_banner'] = 0
 
@@ -171,6 +171,16 @@ cmd 'colorscheme onedark'
 ----------------------------------
 -- LSP Setup ---------------------
 ----------------------------------
+local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
+                                                {virtual_text = {prefix = ''}})
+local lsp_config = require 'lspconfig'
+
+lsp_config.util.default_config = vim.tbl_extend('force', lsp_config.util.default_config, {
+  handlers = {['textDocument/publishDiagnostics'] = shared_diagnostic_settings},
+  on_attach = require'completion'.on_attach
+})
+
+-- nvim-metals
 metals_config = require'metals'.bare_config
 metals_config.settings = {
   showImplicitArguments = true,
@@ -183,29 +193,30 @@ end
 
 metals_config.init_options.statusBarProvider = 'on'
 
-metals_config.handlers['textDocument/publishDiagnostics'] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {virtual_text = {prefix = ''}})
+metals_config.handlers['textDocument/publishDiagnostics'] = shared_diagnostic_settings
 
+-- sumneko lua
 require'lspconfig'.sumneko_lua.setup {
+  cmd = {
+    '/Users/ckipp/Documents/lua-workspace/lua-language-server/bin/macOS/lua-language-server', '-E',
+    '/Users/ckipp/Documents/lua-workspace/lua-language-server/main.lua'
+  },
   settings = {
     Lua = {
       runtime = {
         version = 'LuaJIT', -- since using mainly for neovim
-        -- Setup your lua path
-        path = vim.split(package.path, ';'),
+        path = vim.split(package.path, ';')
       },
-      diagnostics = {
-        globals = {'vim'},
-      },
+      diagnostics = {globals = {'vim'}},
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
           [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-        },
-      },
-    },
-  },
+          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+        }
+      }
+    }
+  }
 }
 
 -- vim.lsp.set_log_level("trace")
