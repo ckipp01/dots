@@ -36,6 +36,7 @@ paq {'kyazdani42/nvim-tree.lua'}
 paq {'kyazdani42/nvim-web-devicons'}
 paq {'liuchengxu/vista.vim'}
 paq {'neovim/nvim-lspconfig'}
+paq {'norcalli/nvim-colorizer.lua'}
 paq {'nvim-lua/completion-nvim'}
 paq {'nvim-lua/plenary.nvim'}
 paq {'nvim-lua/popup.nvim'}
@@ -48,7 +49,6 @@ paq {'tpope/vim-fugitive'}
 paq {'wakatime/vim-wakatime'}
 paq {'Yggdroot/indentLine'}
 
-require 'statusline'
 
 ----------------------------------
 -- VARIABLES ---------------------
@@ -227,3 +227,5 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = {'scala', 'html', 'javascript', 'yaml', 'css', 'toml', 'lua', 'json'},
   highlight = {enable = true}
 }
+
+require'statusline'
