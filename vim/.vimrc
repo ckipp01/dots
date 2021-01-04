@@ -72,11 +72,9 @@ highlight LspGutterWarning guifg=#E5C07B
 
 set statusline=%n\   " buffer number
 set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview
-if exists("coc")
-  set statusline+=%#StatusLineError#%{CocMinimalErrors()}\ " coc-errors
-  set statusline+=%#StatusLineWarning#%{CocMinimalWarnings()}\ " coc-warnings
-  set statusline+=%#StatusLineStatus#%{CocMinimalStatus()}%#StatusLine#\ " coc status 
-elseif exists("lsp") " If using vim-lsp there is no status
+set statusline+=%#StatusLineError#%{CocMinimalErrors()}\ " coc-errors
+set statusline+=%#StatusLineWarning#%{CocMinimalWarnings()}\ " coc-warnings
+set statusline+=%#StatusLineStatus#%{CocMinimalStatus()}%#StatusLine#\ " coc status 
 set statusline+=%=%Y\  " filetype
 set statusline+=%{&ff}\  " right align line endings
 set statusline+=%l,%v\ " curser position
