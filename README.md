@@ -1,6 +1,4 @@
-# dots
-
-<p align="center"> <img src="images/desktop5.png"/> </p>
+# dots ...
 
 As soon as I started developing I became interested in making sure the machine I
 was working on for at least 8 hours a day felt pleasant to look at and worked
@@ -18,8 +16,8 @@ file repos I've scoured through.
 
 I use a combination of Mac (for work) and Linux (for personal), and I used [GNU
 Stow](https://www.gnu.org/software/stow/) for managing everything. If you've
-never used Stow before, it's a life-saver for managing dots. The general idea is
-that if my structure in each profile mimics the structure of my actual machine,
-I can simply `stow vim` for example, to link all of my vim related files in the
-vim directory to their related places on my machine.
+never used Stow before, it's a life-saver for managing dot files. The general
+idea is that if my structure in each profile mimics the structure of my actual
+machine, I can simply `stow nvim` for example, to link all of my nvim related
+files in the nvim directory to their related places on my machine.
 
