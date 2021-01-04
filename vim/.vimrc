@@ -70,12 +70,6 @@ highlight StatusLineWarning guifg=#E5C07B guibg=#2C323C
 highlight LspGutterError guifg=#E06C75
 highlight LspGutterWarning guifg=#E5C07B
 
-highlight LspDiagnosticsDefaultError guifg=#E06C75
-highlight LspDiagnosticsDefaultWarning guifg=#E5C07B
-
-sign define LspDiagnosticsSignError text=✘ texthl=LspDiagnosticsSignError linehl= numhl=
-sign define LspDiagnosticsSignWarning text= texthl=LspDiagnosticsSignWarning linehl= numhl=
-
 set statusline=%n\   " buffer number
 set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview
 if exists("coc")
@@ -83,11 +77,6 @@ if exists("coc")
   set statusline+=%#StatusLineWarning#%{CocMinimalWarnings()}\ " coc-warnings
   set statusline+=%#StatusLineStatus#%{CocMinimalStatus()}%#StatusLine#\ " coc status 
 elseif exists("lsp") " If using vim-lsp there is no status
-elseif has("nvim")
-  set statusline+=%#StatusLineError#%{metals#errors()}\ "LSP Errors
-  set statusline+=%#StatusLineWarning#%{metals#warnings()}%#StatusLine#\ "LSP Warnings
-  set statusline+=%#StatusLineStatus#%{metals#status()}%#StatusLine#\ "nvim-metals status 
-endif
 set statusline+=%=%Y\  " filetype
 set statusline+=%{&ff}\  " right align line endings
 set statusline+=%l,%v\ " curser position

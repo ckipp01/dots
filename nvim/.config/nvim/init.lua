@@ -49,7 +49,6 @@ paq {'tpope/vim-fugitive'}
 paq {'wakatime/vim-wakatime'}
 paq {'Yggdroot/indentLine'}
 
-
 ----------------------------------
 -- VARIABLES ---------------------
 ----------------------------------
@@ -153,8 +152,8 @@ cmd [[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang
 cmd [[augroup lsp]]
 cmd [[autocmd!]]
 cmd [[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
-cmd [[autocmd BufRead,BufNewFile *.sbt set filetype=scala]]
-cmd [[autocmd FileType scala lua require("metals").initialize_or_attach(metals_config)]]
+-- cmd [[autocmd BufRead,BufNewFile *.sbt set filetype=scala]]
+cmd [[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
 -- cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
 -- cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
 -- cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
@@ -171,6 +170,10 @@ cmd 'colorscheme onedark'
 ----------------------------------
 -- LSP Setup ---------------------
 ----------------------------------
+
+fn.sign_define('LspDiagnosticsSignError', {text = '✘', texthl = 'LspDiagnosticsDefaultError'})
+fn.sign_define('LspDiagnosticsSignWarning', {text = '', texthl = 'LspDiagnosticsDefaultWarning'})
+
 local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                                                 {virtual_text = {prefix = ''}})
 local lsp_config = require 'lspconfig'
@@ -228,4 +231,4 @@ require'nvim-treesitter.configs'.setup {
   highlight = {enable = true}
 }
 
-require'statusline'
+require 'statusline'
