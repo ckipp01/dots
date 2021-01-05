@@ -32,19 +32,17 @@ paq {'hrsh7th/vim-vsnip-integ'} -- needed for completion-nvim
 paq {'iamcco/markdown-preview.nvim', hook = 'cd app & yarn install'}
 paq {'joshdick/onedark.vim'}
 paq {'junegunn/goyo.vim', opt = true}
-paq {'kyazdani42/nvim-tree.lua'}
 paq {'kyazdani42/nvim-web-devicons'}
 paq {'liuchengxu/vista.vim'}
 paq {'neovim/nvim-lspconfig'}
 paq {'norcalli/nvim-colorizer.lua'}
 paq {'nvim-lua/completion-nvim'}
 paq {'nvim-lua/plenary.nvim'}
-paq {'nvim-lua/popup.nvim'}
-paq {'nvim-lua/telescope.nvim'}
 paq {'nvim-treesitter/nvim-treesitter'}
 paq {'savq/paq-nvim', opt = true}
 paq {'scalameta/nvim-metals'}
 paq {'sheerun/vim-polyglot'}
+paq {'tmsvg/pear-tree'}
 paq {'tpope/vim-fugitive'}
 paq {'wakatime/vim-wakatime'}
 paq {'Yggdroot/indentLine'}
@@ -122,8 +120,7 @@ map('n', '<leader>nf', ':NvimTreeFindFile<CR>')
 map('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-map('n', 'gr', '<cmd>lua require"telescope.builtin".lsp_references{}<CR>')
-map('n', '<leader>s', '<cmd>lua require"telescope.builtin".lsp_workspace_symbols{}<CR>')
+map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
 map('n', 'gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 map('n', 'gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
@@ -131,9 +128,9 @@ map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 map('n', '<leader>ws', '<cmd>lua require"metals".worksheet_hover()<CR>')
 map('n', '<leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
+map('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>') -- buffer diagnostics only
 map('n', '[c', '<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>')
 map('n', ']c', '<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>')
-map('n', '<space>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
 
 -- completion
 map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
@@ -199,7 +196,7 @@ metals_config.init_options.statusBarProvider = 'on'
 metals_config.handlers['textDocument/publishDiagnostics'] = shared_diagnostic_settings
 
 -- sumneko lua
-require'lspconfig'.sumneko_lua.setup {
+lsp_config.sumneko_lua.setup {
   cmd = {
     '/Users/ckipp/Documents/lua-workspace/lua-language-server/bin/macOS/lua-language-server', '-E',
     '/Users/ckipp/Documents/lua-workspace/lua-language-server/main.lua'
@@ -221,6 +218,9 @@ require'lspconfig'.sumneko_lua.setup {
     }
   }
 }
+
+-- tsserver typescript
+lsp_config.tsserver.setup {}
 
 -- vim.lsp.set_log_level("trace")
 ----------------------------------
