@@ -231,5 +231,5 @@ require'nvim-treesitter.configs'.setup {
   highlight = {enable = true}
 }
 
-require 'statusline'
+require('statusline').setup()
 require('nvim-autopairs').setup()
