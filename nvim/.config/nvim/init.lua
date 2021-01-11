@@ -42,9 +42,9 @@ paq {'nvim-treesitter/nvim-treesitter'}
 paq {'savq/paq-nvim', opt = true}
 paq {'scalameta/nvim-metals'}
 paq {'sheerun/vim-polyglot'}
-paq {'tmsvg/pear-tree'}
 paq {'tpope/vim-fugitive'}
 paq {'wakatime/vim-wakatime'}
+paq {'windwp/nvim-autopairs'}
 paq {'Yggdroot/indentLine'}
 
 ----------------------------------
@@ -62,9 +62,6 @@ g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
 g['metals_server_version'] = '0.9.8+43-e729533a-SNAPSHOT'
-
--- nvim-tree
-g['nvim_tree_auto_open'] = 1
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -117,7 +114,7 @@ map('n', '<leader>nn', ':NvimTreeToggle<CR>')
 map('n', '<leader>nf', ':NvimTreeFindFile<CR>')
 
 -- LSP
-map('n', '<leader>gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+map('n', '<leader>g', '<cmd>lua vim.lsp.buf.definition()<CR>', {nowait=true})
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
 map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
@@ -149,7 +146,6 @@ cmd [[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang
 cmd [[augroup lsp]]
 cmd [[autocmd!]]
 cmd [[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
--- cmd [[autocmd BufRead,BufNewFile *.sbt set filetype=scala]]
 cmd [[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
 -- cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
 -- cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
@@ -170,6 +166,10 @@ cmd 'colorscheme onedark'
 
 fn.sign_define('LspDiagnosticsSignError', {text = '✘', texthl = 'LspDiagnosticsDefaultError'})
 fn.sign_define('LspDiagnosticsSignWarning', {text = '', texthl = 'LspDiagnosticsDefaultWarning'})
+
+vim.cmd [[hi! link LspReferenceText CursorColumn]]
+vim.cmd [[hi! link LspReferenceRead CursorColumn]]
+vim.cmd [[hi! link LspReferenceWrite CursorColumn]]
 
 local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                                                 {virtual_text = {prefix = ''}})
@@ -207,7 +207,7 @@ lsp_config.sumneko_lua.setup {
         version = 'LuaJIT', -- since using mainly for neovim
         path = vim.split(package.path, ';')
       },
-      diagnostics = {globals = {'vim'}},
+      diagnostics = {globals = {'vim', 'it'}},
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = {
@@ -232,3 +232,4 @@ require'nvim-treesitter.configs'.setup {
 }
 
 require 'statusline'
+require('nvim-autopairs').setup()

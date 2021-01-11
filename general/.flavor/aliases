@@ -19,5 +19,6 @@ alias 'tail-bsp'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/bsp.
 alias gfu='git fetch upstream'
 alias gp='git push'
 alias cleanBloop="rm -rf /Users/ckipp/.ivy2/local/ch.epfl.scala/sbt-bloop/ && rm -rf ./.bloop/"
+alias bat="bat --theme='TwoDark'"
 
 # vim: ft=sh
