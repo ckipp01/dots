@@ -21,31 +21,8 @@ end
 ----------------------------------
 -- PLUGINS -----------------------
 ----------------------------------
-cmd 'packadd paq-nvim'
-local paq = require('paq-nvim').paq
-
-paq {'airblade/vim-gitgutter'}
-paq {'andrejlevkovitch/vim-lua-format'}
-paq {'glepnir/galaxyline.nvim'}
-paq {'hrsh7th/vim-vsnip'} -- needed for completion-nvim
-paq {'hrsh7th/vim-vsnip-integ'} -- needed for completion-nvim
-paq {'iamcco/markdown-preview.nvim', hook = 'cd app && yarn install'}
-paq {'joshdick/onedark.vim'}
-paq {'junegunn/goyo.vim', opt = true}
-paq {'kyazdani42/nvim-web-devicons'}
-paq {'liuchengxu/vista.vim'}
-paq {'neovim/nvim-lspconfig'}
-paq {'norcalli/nvim-colorizer.lua'}
-paq {'nvim-lua/completion-nvim'}
-paq {'nvim-lua/plenary.nvim'}
-paq {'nvim-treesitter/nvim-treesitter'}
-paq {'savq/paq-nvim', opt = true}
-paq {'scalameta/nvim-metals'}
-paq {'sheerun/vim-polyglot'}
-paq {'tpope/vim-fugitive'}
-paq {'wakatime/vim-wakatime'}
-paq {'windwp/nvim-autopairs'}
-paq {'Yggdroot/indentLine'}
+cmd [[packadd packer.nvim]]
+require 'plugins'
 
 ----------------------------------
 -- VARIABLES ---------------------
