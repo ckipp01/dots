@@ -29,7 +29,7 @@ paq {'andrejlevkovitch/vim-lua-format'}
 paq {'glepnir/galaxyline.nvim'}
 paq {'hrsh7th/vim-vsnip'} -- needed for completion-nvim
 paq {'hrsh7th/vim-vsnip-integ'} -- needed for completion-nvim
-paq {'iamcco/markdown-preview.nvim', hook = 'cd app & yarn install'}
+paq {'iamcco/markdown-preview.nvim', hook = 'cd app && yarn install'}
 paq {'joshdick/onedark.vim'}
 paq {'junegunn/goyo.vim', opt = true}
 paq {'kyazdani42/nvim-web-devicons'}
@@ -61,7 +61,7 @@ g['vim_markdown_conceal'] = 0
 g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
-g['metals_server_version'] = '0.9.8+43-e729533a-SNAPSHOT'
+g['metals_server_version'] = '0.9.8+56-b75a7a88-SNAPSHOT'
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -160,12 +160,18 @@ cmd [[autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": { "gui"
 cmd [[augroup END]]
 
 cmd 'colorscheme onedark'
+
 ----------------------------------
 -- LSP Setup ---------------------
 ----------------------------------
-
 fn.sign_define('LspDiagnosticsSignError', {text = '✘', texthl = 'LspDiagnosticsDefaultError'})
 fn.sign_define('LspDiagnosticsSignWarning', {text = '', texthl = 'LspDiagnosticsDefaultWarning'})
+
+
+-- LspDiagnosticsUnderlineError
+-- LspDiagnosticsUnderlineWarning
+-- LspDiagnosticsUnderlineInformation
+-- vim.cmd [[hi! LspDiagnosticsUnderlineWarning guifg=none]] -- wtf doesn't this work TODO figure this out
 
 vim.cmd [[hi! link LspReferenceText CursorColumn]]
 vim.cmd [[hi! link LspReferenceRead CursorColumn]]
