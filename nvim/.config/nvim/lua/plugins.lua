@@ -15,10 +15,7 @@ return require('packer').startup(function(use)
     use {'norcalli/nvim-colorizer.lua'}
     use {
         'nvim-lua/completion-nvim',
-        requires = {
-            {'hrsh7th/vim-vsnip', opt = true},
-            {'hrsh7th/vim-vsnip-integ', opt = true}
-        }
+        requires = {{'hrsh7th/vim-vsnip'}, {'hrsh7th/vim-vsnip-integ'}}
     }
     use {'nvim-lua/plenary.nvim'}
     use {'nvim-treesitter/nvim-treesitter'}
