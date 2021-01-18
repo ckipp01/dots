@@ -39,7 +39,7 @@ g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
 g['metals_server_version'] = '0.9.8'
---g['metals_server_version'] = '0.9.9+9-372f5c01-SNAPSHOT'
+-- g['metals_server_version'] = '0.9.9+9-372f5c01-SNAPSHOT'
 -- g['metals_server_version'] = '0.9.9-SNAPSHOT'
 
 ----------------------------------
@@ -82,9 +82,8 @@ map('i', 'jj', '<ESC>')
 
 -- normal-mode mappings
 map('n', '<leader>hs', ':nohlsearch<cr>')
-map('n', '<leader>js', ':%!jq "."<cr>')
+-- map('n', '<leader>js', ':%!jq "."<cr>') If satisfied with the jsonls, I can just remove this
 map('n', '<leader>xml', ':%!xmllint --format -<cr>')
-map('n', '<leader>l', ':call LuaFormat()<cr>')
 map('n', '<leader>fo', ':copen<cr>')
 map('n', '<leader>fc', ':cclose<cr>')
 map('n', '<leader>fn', ':cnext<cr>')
@@ -157,10 +156,13 @@ vim.cmd [[hi! link LspReferenceWrite CursorColumn]]
 local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                                                 {virtual_text = {prefix = '', truncated = true}})
 local lsp_config = require 'lspconfig'
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 lsp_config.util.default_config = vim.tbl_extend('force', lsp_config.util.default_config, {
   handlers = {['textDocument/publishDiagnostics'] = shared_diagnostic_settings},
-  on_attach = require'completion'.on_attach
+  on_attach = require'completion'.on_attach,
+  capabilities = capabilities
 })
 
 -- nvim-metals
@@ -175,14 +177,21 @@ metals_config.on_attach = function()
 end
 
 metals_config.init_options.statusBarProvider = 'on'
-
 metals_config.handlers['textDocument/publishDiagnostics'] = shared_diagnostic_settings
+metals_config.capabilities = capabilities
 
 -- sumneko lua
 lsp_config.sumneko_lua.setup {
   cmd = {
     '/Users/ckipp/Documents/lua-workspace/lua-language-server/bin/macOS/lua-language-server', '-E',
     '/Users/ckipp/Documents/lua-workspace/lua-language-server/main.lua'
+  },
+  commands = {
+    Format = {
+      function()
+        vim.api.nvim_call_function('LuaFormat', {})
+      end
+    }
   },
   settings = {
     Lua = {
@@ -202,8 +211,19 @@ lsp_config.sumneko_lua.setup {
   }
 }
 
--- tsserver typescript
+lsp_config.dockerls.setup {}
+lsp_config.html.setup {}
+lsp_config.jsonls.setup {
+  commands = {
+    Format = {
+      function()
+        vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line('$'), 0})
+      end
+    }
+  }
+}
 lsp_config.tsserver.setup {}
+lsp_config.yamlls.setup {}
 
 -- Uncomment for trace logs from neovim
 -- vim.lsp.set_log_level("trace")
