@@ -38,7 +38,9 @@ g['vim_markdown_conceal'] = 0
 g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
-g['metals_server_version'] = '0.9.8+56-b75a7a88-SNAPSHOT'
+g['metals_server_version'] = '0.9.8'
+--g['metals_server_version'] = '0.9.9+9-372f5c01-SNAPSHOT'
+-- g['metals_server_version'] = '0.9.9-SNAPSHOT'
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -52,7 +54,7 @@ opt('o', 'showtabline', 1)
 opt('o', 'updatetime', 300)
 opt('o', 'showmatch', true)
 opt('o', 'laststatus', 2)
-opt('o', 'wildignore', '.git,*/node_modules/*,*/target/*')
+opt('o', 'wildignore', '.git,*/node_modules/*,*/target/*,.metals,.bloop')
 opt('o', 'ignorecase', true)
 opt('o', 'smartcase', true)
 opt('o', 'clipboard', 'unnamed')
@@ -91,7 +93,7 @@ map('n', '<leader>nn', ':NvimTreeToggle<CR>')
 map('n', '<leader>nf', ':NvimTreeFindFile<CR>')
 
 -- LSP
-map('n', '<leader>g', '<cmd>lua vim.lsp.buf.definition()<CR>', {nowait=true})
+map('n', '<leader>g', '<cmd>lua vim.lsp.buf.definition()<CR>', {nowait = true})
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
 map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
@@ -144,18 +146,16 @@ cmd 'colorscheme onedark'
 fn.sign_define('LspDiagnosticsSignError', {text = '✘', texthl = 'LspDiagnosticsDefaultError'})
 fn.sign_define('LspDiagnosticsSignWarning', {text = '', texthl = 'LspDiagnosticsDefaultWarning'})
 
-
 -- LspDiagnosticsUnderlineError
 -- LspDiagnosticsUnderlineWarning
 -- LspDiagnosticsUnderlineInformation
--- vim.cmd [[hi! LspDiagnosticsUnderlineWarning guifg=none]] -- wtf doesn't this work TODO figure this out
-
+-- vim.cmd [[hi! LspDiagnosticsUnderlineWarning guifg=none]] -- I don't ge twhy this doesn't work TODO figure this out
 vim.cmd [[hi! link LspReferenceText CursorColumn]]
 vim.cmd [[hi! link LspReferenceRead CursorColumn]]
 vim.cmd [[hi! link LspReferenceWrite CursorColumn]]
 
 local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
-                                                {virtual_text = {prefix = ''}})
+                                                {virtual_text = {prefix = '', truncated = true}})
 local lsp_config = require 'lspconfig'
 
 lsp_config.util.default_config = vim.tbl_extend('force', lsp_config.util.default_config, {
@@ -205,12 +205,13 @@ lsp_config.sumneko_lua.setup {
 -- tsserver typescript
 lsp_config.tsserver.setup {}
 
+-- Uncomment for trace logs from neovim
 -- vim.lsp.set_log_level("trace")
 ----------------------------------
 -- TREESITTER Setup --------------
 ----------------------------------
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {'scala', 'html', 'javascript', 'yaml', 'css', 'toml', 'lua', 'json'},
+  ensure_installed = {'html', 'javascript', 'yaml', 'css', 'toml', 'lua', 'json'},
   highlight = {enable = true}
 }
 
