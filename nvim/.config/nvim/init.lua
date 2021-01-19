@@ -11,7 +11,7 @@ local function opt(scope, key, value)
 end
 
 local function map(mode, lhs, rhs, opts)
-  local options = {noremap = true}
+  local options = {noremap = true, silent = true}
   if opts then
     options = vim.tbl_extend('force', options, opts)
   end
@@ -38,9 +38,9 @@ g['vim_markdown_conceal'] = 0
 g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
-g['metals_server_version'] = '0.9.8'
--- g['metals_server_version'] = '0.9.9+9-372f5c01-SNAPSHOT'
--- g['metals_server_version'] = '0.9.9-SNAPSHOT'
+-- g['metals_server_version'] = '0.9.8'
+--g['metals_server_version'] = '0.9.9+12-d9327197-SNAPSHOT'
+--g['metals_server_version'] = '0.9.10-SNAPSHOT'
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -92,14 +92,14 @@ map('n', '<leader>nn', ':NvimTreeToggle<CR>')
 map('n', '<leader>nf', ':NvimTreeFindFile<CR>')
 
 -- LSP
-map('n', '<leader>g', '<cmd>lua vim.lsp.buf.definition()<CR>', {nowait = true})
+map('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
 map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
 map('n', 'gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 map('n', 'gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', {nowait = true})
 map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 map('n', '<leader>ws', '<cmd>lua require"metals".worksheet_hover()<CR>')
 map('n', '<leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
@@ -224,6 +224,7 @@ lsp_config.jsonls.setup {
 }
 lsp_config.tsserver.setup {}
 lsp_config.yamlls.setup {}
+lsp_config.racket_langserver.setup {}
 
 -- Uncomment for trace logs from neovim
 -- vim.lsp.set_log_level("trace")
