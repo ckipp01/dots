@@ -19,8 +19,9 @@ return require('packer').startup(function(use)
     }
     use {'nvim-lua/plenary.nvim'}
     use {'nvim-treesitter/nvim-treesitter'}
-    use {'savq/paq-nvim', opt = true}
-    use {'/Users/ckipp/Documents/lua-workspace/nvim-metals'}
+    use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}}}
+    use {'scalameta/nvim-metals'}
+    -- use {'/Users/ckipp/Documents/lua-workspace/nvim-metals'}
     use {'sheerun/vim-polyglot'}
     use {'tpope/vim-fugitive'}
     use {'wakatime/vim-wakatime'}

@@ -39,7 +39,7 @@ g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
 -- g['metals_server_version'] = '0.9.8'
---g['metals_server_version'] = '0.9.9+12-d9327197-SNAPSHOT'
+g['metals_server_version'] = '0.9.10+14-94a8c9c3-SNAPSHOT'
 --g['metals_server_version'] = '0.9.10-SNAPSHOT'
 
 ----------------------------------
@@ -99,7 +99,7 @@ map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
 map('n', 'gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
 map('n', 'gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', {nowait = true})
+map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 map('n', '<leader>ws', '<cmd>lua require"metals".worksheet_hover()<CR>')
 map('n', '<leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
