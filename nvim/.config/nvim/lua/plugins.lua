@@ -9,6 +9,7 @@ return require('packer').startup(function(use)
     }
     use {'joshdick/onedark.vim'}
     use {'junegunn/goyo.vim', opt = true}
+    use {'kevinhwang91/nvim-bqf'}
     use {'kyazdani42/nvim-web-devicons'}
     use {'liuchengxu/vista.vim'}
     use {'neovim/nvim-lspconfig'}
@@ -19,7 +20,6 @@ return require('packer').startup(function(use)
     }
     use {'nvim-lua/plenary.nvim'}
     use {'nvim-treesitter/nvim-treesitter'}
-    use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}}}
     use {'scalameta/nvim-metals'}
     -- use {'/Users/ckipp/Documents/lua-workspace/nvim-metals'}
     use {'sheerun/vim-polyglot'}
@@ -27,5 +27,6 @@ return require('packer').startup(function(use)
     use {'wakatime/vim-wakatime'}
     use {'wbthomason/packer.nvim', opt = true}
     use {'windwp/nvim-autopairs'}
+    use {'wlangstroth/vim-racket'}
     use {'Yggdroot/indentLine'}
 end)

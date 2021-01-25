@@ -24,6 +24,14 @@ end
 cmd [[packadd packer.nvim]]
 require 'plugins'
 
+require('statusline').setup()
+require('nvim-autopairs').setup()
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {'html', 'javascript', 'yaml', 'css', 'toml', 'lua', 'json'},
+  highlight = {enable = true}
+}
+
 ----------------------------------
 -- VARIABLES ---------------------
 ----------------------------------
@@ -40,7 +48,7 @@ g['vim_markdown_conceal_code_blocks'] = 0
 -- nvim-metals
 -- g['metals_server_version'] = '0.9.8'
 g['metals_server_version'] = '0.9.10+14-94a8c9c3-SNAPSHOT'
---g['metals_server_version'] = '0.9.10-SNAPSHOT'
+-- g['metals_server_version'] = '0.9.10-SNAPSHOT'
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -88,8 +96,6 @@ map('n', '<leader>fo', ':copen<cr>')
 map('n', '<leader>fc', ':cclose<cr>')
 map('n', '<leader>fn', ':cnext<cr>')
 map('n', '<leader>fp', ':cprevious<cr>')
-map('n', '<leader>nn', ':NvimTreeToggle<CR>')
-map('n', '<leader>nf', ':NvimTreeFindFile<CR>')
 
 -- LSP
 map('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>')
@@ -228,13 +234,3 @@ lsp_config.racket_langserver.setup {}
 
 -- Uncomment for trace logs from neovim
 -- vim.lsp.set_log_level("trace")
-----------------------------------
--- TREESITTER Setup --------------
-----------------------------------
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {'html', 'javascript', 'yaml', 'css', 'toml', 'lua', 'json'},
-  highlight = {enable = true}
-}
-
-require('statusline').setup()
-require('nvim-autopairs').setup()
