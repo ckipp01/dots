@@ -19,12 +19,12 @@ local function map(mode, lhs, rhs, opts)
 end
 
 ----------------------------------
--- PLUGINS -----------------------
+-- SETUP PLUGINS -----------------
 ----------------------------------
 cmd [[packadd packer.nvim]]
 require 'plugins'
 
-require('statusline').setup()
+require('settings.galaxyline').setup()
 require('nvim-autopairs').setup()
 
 require'nvim-treesitter.configs'.setup {
@@ -32,13 +32,16 @@ require'nvim-treesitter.configs'.setup {
   highlight = {enable = true}
 }
 
+require('settings.compe').setup()
+require('settings.telescope').setup()
+
 ----------------------------------
 -- VARIABLES ---------------------
 ----------------------------------
 g['mapleader'] = ','
 g['netrw_gx'] = '<cWORD>'
 g['netrw_liststyle'] = 3
-g['netrw_banner'] = 0
+-- g['netrw_banner'] = 0
 
 -- plugin variables
 -- polyglot's markdown settings
@@ -47,13 +50,15 @@ g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
 -- g['metals_server_version'] = '0.9.8'
-g['metals_server_version'] = '0.9.10+14-94a8c9c3-SNAPSHOT'
--- g['metals_server_version'] = '0.9.10-SNAPSHOT'
+g['metals_server_version'] = '0.9.10+50-eeb4b840-SNAPSHOT'
+-- g['metals_server_version'] = '0.9.11-SNAPSHOT'
 
 ----------------------------------
 -- OPTIONS -----------------------
 ----------------------------------
 local indent = 2
+vim.o.shortmess = string.gsub(vim.o.shortmess, 'F', '') .. 'c'
+vim.o.path = vim.o.path .. '**'
 
 -- global
 opt('o', 'termguicolors', true)
@@ -66,9 +71,7 @@ opt('o', 'wildignore', '.git,*/node_modules/*,*/target/*,.metals,.bloop')
 opt('o', 'ignorecase', true)
 opt('o', 'smartcase', true)
 opt('o', 'clipboard', 'unnamed')
-opt('o', 'completeopt', 'menuone,noinsert,noselect')
-vim.o.shortmess = string.gsub(vim.o.shortmess, 'F', '') .. 'c'
-vim.o.path = vim.o.path .. '**'
+opt('o', 'completeopt', 'menu,menuone,noselect')
 
 -- window-scoped
 opt('w', 'wrap', false)
@@ -90,7 +93,6 @@ map('i', 'jj', '<ESC>')
 
 -- normal-mode mappings
 map('n', '<leader>hs', ':nohlsearch<cr>')
--- map('n', '<leader>js', ':%!jq "."<cr>') If satisfied with the jsonls, I can just remove this
 map('n', '<leader>xml', ':%!xmllint --format -<cr>')
 map('n', '<leader>fo', ':copen<cr>')
 map('n', '<leader>fc', ':cclose<cr>')
@@ -101,11 +103,10 @@ map('n', '<leader>fp', ':cprevious<cr>')
 map('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-map('n', 'gds', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
-map('n', 'gws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
+map('n', 'gr', '<cmd>lua require"telescope.builtin".lsp_references()<CR>')
+map('n', 'gds', '<cmd>lua require"telescope.builtin".lsp_document_symbols()<CR>')
+map('n', 'gws', '<cmd>lua require"settings.telescope".lsp_workspace_symbols()<CR>')
 map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-map('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
 map('n', '<leader>ws', '<cmd>lua require"metals".worksheet_hover()<CR>')
 map('n', '<leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
@@ -116,6 +117,11 @@ map('n', ']c', '<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>')
 -- completion
 map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
 map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
+map('i', '<CR>', 'compe#confirm("\\<CR>")', {expr = true})
+
+-- telescope mappings
+map('n', '<leader>ff', '<cmd>lua require"telescope.builtin".find_files()<CR>')
+map('n', '<leader>lg', '<cmd>lua require"telescope.builtin".live_grep()<CR>')
 
 ----------------------------------
 -- COMMANDS ----------------------
@@ -131,9 +137,6 @@ cmd [[augroup lsp]]
 cmd [[autocmd!]]
 cmd [[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
 cmd [[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
--- cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
--- cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
--- cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
 cmd [[augroup end]]
 
 -- Needed to esnure float background doesn't get odd highlighting
@@ -167,7 +170,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 lsp_config.util.default_config = vim.tbl_extend('force', lsp_config.util.default_config, {
   handlers = {['textDocument/publishDiagnostics'] = shared_diagnostic_settings},
-  on_attach = require'completion'.on_attach,
+  -- on_attach = require'completion'.on_attach,
   capabilities = capabilities
 })
 
@@ -178,9 +181,9 @@ metals_config.settings = {
   excludedPackages = {'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl'}
 }
 
-metals_config.on_attach = function()
-  require'completion'.on_attach();
-end
+-- metals_config.on_attach = function()
+--   require'completion'.on_attach();
+-- end
 
 metals_config.init_options.statusBarProvider = 'on'
 metals_config.handlers['textDocument/publishDiagnostics'] = shared_diagnostic_settings
