@@ -1,3 +1,4 @@
+--https://github.com/glepnir/galaxyline.nvim
 local M = {}
 local gl = require('galaxyline')
 local gls = gl.section

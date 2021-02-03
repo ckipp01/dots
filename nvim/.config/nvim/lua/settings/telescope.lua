@@ -1,8 +1,14 @@
+-- https://github.com/nvim-telescope/telescope.nvim
 local M = {}
 
 M.setup = function()
     require('telescope').setup {
-        defaults = {file_ignore_patterns = {"target"}, prompt_prefix = "❯"}
+        defaults = {
+            file_ignore_patterns = {"target"},
+            prompt_prefix = "❯",
+            set_env = {['COLORTERM'] = 'truecolor'},
+            file_previewer = require'telescope.previewers'.vim_buffer_cat.new
+        }
     }
 
     require('telescope').load_extension('fzy_native')

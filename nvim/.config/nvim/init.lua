@@ -27,13 +27,18 @@ require 'plugins'
 require('settings.galaxyline').setup()
 require('nvim-autopairs').setup()
 
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   ensure_installed = {'html', 'javascript', 'yaml', 'css', 'toml', 'lua', 'json'},
   highlight = {enable = true}
 }
 
 require('settings.compe').setup()
 require('settings.telescope').setup()
+
+require('lspsaga').init_lsp_saga({
+  finder_action_keys = {open = '<CR>', vsplit = 's', split = 'i', quit = 'q'},
+  server_filetype_map = {metals = {'sbt', 'scala'}}
+})
 
 ----------------------------------
 -- VARIABLES ---------------------
@@ -49,8 +54,7 @@ g['vim_markdown_conceal'] = 0
 g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
--- g['metals_server_version'] = '0.9.8'
-g['metals_server_version'] = '0.9.10+50-eeb4b840-SNAPSHOT'
+g['metals_server_version'] = '0.9.10+92-36843ee6-SNAPSHOT'
 -- g['metals_server_version'] = '0.9.11-SNAPSHOT'
 
 ----------------------------------
@@ -99,15 +103,17 @@ map('n', '<leader>fc', ':cclose<cr>')
 map('n', '<leader>fn', ':cnext<cr>')
 map('n', '<leader>fp', ':cprevious<cr>')
 
+--map('n', '<leader>.', '<cmd>lua require"playground.ui".make_float_with_borders()<CR>')
+
 -- LSP
 map('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>')
-map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>')
+map('n', 'K', '<cmd>lua require"lspsaga.hover".render_hover_doc()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-map('n', 'gr', '<cmd>lua require"telescope.builtin".lsp_references()<CR>')
+map('n', 'gr', '<cmd>lua require"lspsaga.provider".lsp_finder()<CR>')
 map('n', 'gds', '<cmd>lua require"telescope.builtin".lsp_document_symbols()<CR>')
 map('n', 'gws', '<cmd>lua require"settings.telescope".lsp_workspace_symbols()<CR>')
-map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-map('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+map('n', '<leader>rn', '<cmd>lua require"lspsaga.rename".rename()<CR>')
+map('n', '<leader>ca', '<cmd>lua require"lspsaga.codeaction".code_action()<CR>')
 map('n', '<leader>ws', '<cmd>lua require"metals".worksheet_hover()<CR>')
 map('n', '<leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
 map('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>') -- buffer diagnostics only
@@ -162,6 +168,8 @@ vim.cmd [[hi! link LspReferenceText CursorColumn]]
 vim.cmd [[hi! link LspReferenceRead CursorColumn]]
 vim.cmd [[hi! link LspReferenceWrite CursorColumn]]
 
+vim.cmd [[hi! link LspSagaFinderSelection CursorColumn]]
+
 local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                                                 {virtual_text = {prefix = '', truncated = true}})
 local lsp_config = require 'lspconfig'
@@ -170,7 +178,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 lsp_config.util.default_config = vim.tbl_extend('force', lsp_config.util.default_config, {
   handlers = {['textDocument/publishDiagnostics'] = shared_diagnostic_settings},
-  -- on_attach = require'completion'.on_attach,
   capabilities = capabilities
 })
 
@@ -180,10 +187,6 @@ metals_config.settings = {
   showImplicitArguments = true,
   excludedPackages = {'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl'}
 }
-
--- metals_config.on_attach = function()
---   require'completion'.on_attach();
--- end
 
 metals_config.init_options.statusBarProvider = 'on'
 metals_config.handlers['textDocument/publishDiagnostics'] = shared_diagnostic_settings
