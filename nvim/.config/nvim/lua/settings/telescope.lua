@@ -7,7 +7,8 @@ M.setup = function()
             file_ignore_patterns = {"target"},
             prompt_prefix = "❯",
             set_env = {['COLORTERM'] = 'truecolor'},
-            file_previewer = require'telescope.previewers'.vim_buffer_cat.new
+            file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
+            grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new
         }
     }
 

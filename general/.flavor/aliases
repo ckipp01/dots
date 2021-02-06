@@ -18,6 +18,7 @@ alias 'tail-lsp'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/lsp.
 alias 'tail-bsp'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/bsp.trace.json'
 alias gfu='git fetch upstream'
 alias gp='git push'
+alias gmum='git merge upstream/main'
 alias cleanBloop="rm -rf /Users/ckipp/.ivy2/local/ch.epfl.scala/sbt-bloop/ && rm -rf ./.bloop/"
 alias bat="bat --theme='TwoDark'"
 

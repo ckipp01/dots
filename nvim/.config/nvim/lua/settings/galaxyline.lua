@@ -114,25 +114,18 @@ M.setup = function()
     }
   }
   gls.left[8] = {
-    Space = {
-      provider = function()
-        return ' '
-      end
-    }
-  }
-  gls.left[9] = {
     DiagnosticWarn = {
       provider = 'DiagnosticWarn',
       icon = '  ',
       highlight = {colors.yellow, colors.bg}
     }
   }
-  gls.left[10] = {
+  gls.left[9] = {
     MetalsStatus = {
       provider = function()
         return '  ' .. (vim.g['metals_status'] or '')
       end,
-      highlight = {colors.line_bg}
+      highlight = {colors.line_bg, colors.bg}
     }
   }
   gls.right[1] = {

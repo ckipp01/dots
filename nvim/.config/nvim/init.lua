@@ -54,7 +54,8 @@ g['vim_markdown_conceal'] = 0
 g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
-g['metals_server_version'] = '0.9.10+92-36843ee6-SNAPSHOT'
+--g['metals_use_global_executable'] = true
+g['metals_server_version'] = '0.9.10+105-d3459c49-SNAPSHOT'
 -- g['metals_server_version'] = '0.9.11-SNAPSHOT'
 
 ----------------------------------
@@ -103,8 +104,7 @@ map('n', '<leader>fc', ':cclose<cr>')
 map('n', '<leader>fn', ':cnext<cr>')
 map('n', '<leader>fp', ':cprevious<cr>')
 
---map('n', '<leader>.', '<cmd>lua require"playground.ui".make_float_with_borders()<CR>')
-
+-- map('n', '<leader>.', '<cmd>lua require"playground.ui".make_float_with_borders()<CR>')
 -- LSP
 map('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', 'K', '<cmd>lua require"lspsaga.hover".render_hover_doc()<CR>')
@@ -185,12 +185,17 @@ lsp_config.util.default_config = vim.tbl_extend('force', lsp_config.util.default
 metals_config = require'metals'.bare_config
 metals_config.settings = {
   showImplicitArguments = true,
-  excludedPackages = {'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl'}
+  excludedPackages = {'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl'},
+  fallbackScalaVersion = '2.13.4'
 }
 
 metals_config.init_options.statusBarProvider = 'on'
 metals_config.handlers['textDocument/publishDiagnostics'] = shared_diagnostic_settings
 metals_config.capabilities = capabilities
+
+-- metals_config.on_attach = function()
+--   require'metals'.setup_dap()
+-- end
 
 -- sumneko lua
 lsp_config.sumneko_lua.setup {

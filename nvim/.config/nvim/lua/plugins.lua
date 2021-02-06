@@ -13,6 +13,7 @@ return require('packer').startup(function(use)
     }
     use {'kyazdani42/nvim-web-devicons'}
     use {'liuchengxu/vista.vim'}
+    use {'mfussenegger/nvim-dap'}
     use {'neovim/nvim-lspconfig'}
     use {'norcalli/nvim-colorizer.lua'}
     use {
@@ -23,7 +24,6 @@ return require('packer').startup(function(use)
         }
     }
     use {'nvim-treesitter/nvim-treesitter'}
-    -- use {'scalameta/nvim-metals'}
     use {'/Users/ckipp/Documents/lua-workspace/nvim-metals'}
     use {'sheerun/vim-polyglot'}
     use {'tpope/vim-fugitive'}
