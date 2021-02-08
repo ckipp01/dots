@@ -109,14 +109,14 @@ M.setup = function()
   gls.left[7] = {
     DiagnosticError = {
       provider = 'DiagnosticError',
-      icon = ' ✘ ',
+      icon = ' ▬ ',
       highlight = {colors.red, colors.bg}
     }
   }
   gls.left[8] = {
     DiagnosticWarn = {
       provider = 'DiagnosticWarn',
-      icon = '  ',
+      icon = ' ▬ ',
       highlight = {colors.yellow, colors.bg}
     }
   }

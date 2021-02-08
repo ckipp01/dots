@@ -54,9 +54,9 @@ g['vim_markdown_conceal'] = 0
 g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
---g['metals_use_global_executable'] = true
-g['metals_server_version'] = '0.9.10+105-d3459c49-SNAPSHOT'
--- g['metals_server_version'] = '0.9.11-SNAPSHOT'
+-- g['metals_use_global_executable'] = true
+-- g['metals_server_version'] = '0.9.10+105-d3459c49-SNAPSHOT'
+g['metals_server_version'] = '0.9.11-SNAPSHOT'
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -104,21 +104,23 @@ map('n', '<leader>fc', ':cclose<cr>')
 map('n', '<leader>fn', ':cnext<cr>')
 map('n', '<leader>fp', ':cprevious<cr>')
 
--- map('n', '<leader>.', '<cmd>lua require"playground.ui".make_float_with_borders()<CR>')
 -- LSP
 map('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>')
 map('n', 'K', '<cmd>lua require"lspsaga.hover".render_hover_doc()<CR>')
 map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-map('n', 'gr', '<cmd>lua require"lspsaga.provider".lsp_finder()<CR>')
+map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>')
 map('n', 'gds', '<cmd>lua require"telescope.builtin".lsp_document_symbols()<CR>')
 map('n', 'gws', '<cmd>lua require"settings.telescope".lsp_workspace_symbols()<CR>')
 map('n', '<leader>rn', '<cmd>lua require"lspsaga.rename".rename()<CR>')
 map('n', '<leader>ca', '<cmd>lua require"lspsaga.codeaction".code_action()<CR>')
+map('v', '<leader>ca', '<cmd>lua require"lspsaga.codeaction".range_code_action()<CR>')
 map('n', '<leader>ws', '<cmd>lua require"metals".worksheet_hover()<CR>')
 map('n', '<leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
 map('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>') -- buffer diagnostics only
-map('n', '[c', '<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>')
-map('n', ']c', '<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>')
+map('n', ']c', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<CR>')
+map('n', '[c', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<CR>')
+-- map('n', '[c', '<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>')
+-- map('n', ']c', '<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>')
 
 -- completion
 map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
@@ -157,13 +159,10 @@ cmd 'colorscheme onedark'
 ----------------------------------
 -- LSP Setup ---------------------
 ----------------------------------
-fn.sign_define('LspDiagnosticsSignError', {text = '✘', texthl = 'LspDiagnosticsDefaultError'})
-fn.sign_define('LspDiagnosticsSignWarning', {text = '', texthl = 'LspDiagnosticsDefaultWarning'})
+fn.sign_define('LspDiagnosticsSignError', {text = '▬'})
+fn.sign_define('LspDiagnosticsSignWarning', {text = '▬'})
+fn.sign_define('LspDiagnosticsSignInformation', {text = '▬'})
 
--- LspDiagnosticsUnderlineError
--- LspDiagnosticsUnderlineWarning
--- LspDiagnosticsUnderlineInformation
--- vim.cmd [[hi! LspDiagnosticsUnderlineWarning guifg=none]] -- I don't ge twhy this doesn't work TODO figure this out
 vim.cmd [[hi! link LspReferenceText CursorColumn]]
 vim.cmd [[hi! link LspReferenceRead CursorColumn]]
 vim.cmd [[hi! link LspReferenceWrite CursorColumn]]
@@ -171,7 +170,7 @@ vim.cmd [[hi! link LspReferenceWrite CursorColumn]]
 vim.cmd [[hi! link LspSagaFinderSelection CursorColumn]]
 
 local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
-                                                {virtual_text = {prefix = '', truncated = true}})
+                                                {virtual_text = false})
 local lsp_config = require 'lspconfig'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -244,4 +243,4 @@ lsp_config.yamlls.setup {}
 lsp_config.racket_langserver.setup {}
 
 -- Uncomment for trace logs from neovim
--- vim.lsp.set_log_level("trace")
+-- vim.lsp.set_log_level('trace')

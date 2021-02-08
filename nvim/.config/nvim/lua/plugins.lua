@@ -11,6 +11,7 @@ return require('packer').startup(function(use)
         run = 'cd app && yarn install',
         cmd = 'MarkdownPreview'
     }
+    use {'kevinhwang91/nvim-bqf'}
     use {'kyazdani42/nvim-web-devicons'}
     use {'liuchengxu/vista.vim'}
     use {'mfussenegger/nvim-dap'}
