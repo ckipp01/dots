@@ -55,7 +55,7 @@ g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
 -- g['metals_use_global_executable'] = true
--- g['metals_server_version'] = '0.9.10+105-d3459c49-SNAPSHOT'
+-- g['metals_server_version'] = '0.9.10+108-895ca516-SNAPSHOT'
 g['metals_server_version'] = '0.9.11-SNAPSHOT'
 
 ----------------------------------
@@ -144,7 +144,7 @@ cmd [[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang
 cmd [[augroup lsp]]
 cmd [[autocmd!]]
 cmd [[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]]
-cmd [[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]]
+cmd [[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(Metals_config)]]
 cmd [[augroup end]]
 
 -- Needed to esnure float background doesn't get odd highlighting
@@ -168,6 +168,7 @@ vim.cmd [[hi! link LspReferenceRead CursorColumn]]
 vim.cmd [[hi! link LspReferenceWrite CursorColumn]]
 
 vim.cmd [[hi! link LspSagaFinderSelection CursorColumn]]
+vim.cmd [[hi! link LspSagaDocTruncateLine LspSagaHoverBorder]]
 
 local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
                                                 {virtual_text = false})
@@ -181,18 +182,18 @@ lsp_config.util.default_config = vim.tbl_extend('force', lsp_config.util.default
 })
 
 -- nvim-metals
-metals_config = require'metals'.bare_config
-metals_config.settings = {
+Metals_config = require'metals'.bare_config
+Metals_config.settings = {
   showImplicitArguments = true,
   excludedPackages = {'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl'},
   fallbackScalaVersion = '2.13.4'
 }
 
-metals_config.init_options.statusBarProvider = 'on'
-metals_config.handlers['textDocument/publishDiagnostics'] = shared_diagnostic_settings
-metals_config.capabilities = capabilities
+Metals_config.init_options.statusBarProvider = 'on'
+Metals_config.handlers['textDocument/publishDiagnostics'] = shared_diagnostic_settings
+Metals_config.capabilities = capabilities
 
--- metals_config.on_attach = function()
+-- Metals_config.on_attach = function()
 --   require'metals'.setup_dap()
 -- end
 
