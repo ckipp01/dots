@@ -12,7 +12,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
-" Plug 'puremourning/vimspector'
+"Plug 'puremourning/vimspector'
 "Plug 'machakann/vim-sandwich'
 "Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}

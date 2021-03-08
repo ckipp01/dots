@@ -131,8 +131,10 @@ augroup end
 
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
+
 xmap <leader>al  <Plug>(coc-codeaction-line)
 nmap <leader>al  <Plug>(coc-codeaction-line)
+nmap <leader>ca  <Plug>(coc-codeaction-cursor)
 
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
@@ -144,7 +146,7 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 
 nnoremap <leader>cl :<C-u>call CocActionAsync('codeLensAction')<CR>
 " Use `:Format` for format current buffer
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Use `:Fold` for fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)

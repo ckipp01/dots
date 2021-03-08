@@ -1,5 +1,4 @@
 return require('packer').startup(function(use)
-    use {'airblade/vim-gitgutter'}
     use {'andrejlevkovitch/vim-lua-format'}
     use {'glepnir/galaxyline.nvim'}
     use {'glepnir/lspsaga.nvim'}
@@ -25,6 +24,7 @@ return require('packer').startup(function(use)
         }
     }
     use {'nvim-treesitter/nvim-treesitter'}
+    use {'nvim-treesitter/playground'}
     use {'/Users/ckipp/Documents/lua-workspace/nvim-metals'}
     use {'sheerun/vim-polyglot'}
     use {'tpope/vim-fugitive'}

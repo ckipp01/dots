@@ -13,9 +13,12 @@ M.setup = function()
         source = {
             path = true,
             buffer = true,
-            vsnip = {filetypes = {'scala', 'html', 'javascript', 'lua', 'java'}},
+            vsnip = {
+                filetypes = {'scala', 'html', 'javascript', 'lua', 'java', 'go'}
+            },
             nvim_lsp = {
-                filetypes = {'scala', 'html', 'javascript', 'lua', 'java'}
+                priority = 1000,
+                filetypes = {'scala', 'html', 'javascript', 'lua', 'java', 'go'}
             }
         }
     }

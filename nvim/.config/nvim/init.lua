@@ -28,7 +28,7 @@ require('settings.galaxyline').setup()
 require('nvim-autopairs').setup()
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = {'html', 'javascript', 'yaml', 'css', 'toml', 'lua', 'json'},
+  ensure_installed = 'maintained',
   highlight = {enable = true}
 }
 
@@ -55,8 +55,9 @@ g['vim_markdown_conceal_code_blocks'] = 0
 
 -- nvim-metals
 -- g['metals_use_global_executable'] = true
--- g['metals_server_version'] = '0.9.10+108-895ca516-SNAPSHOT'
-g['metals_server_version'] = '0.9.11-SNAPSHOT'
+-- g['metals_server_version'] = '0.10.0'
+g['metals_server_version'] = '0.10.0+36-33049b09-SNAPSHOT'
+--g['metals_server_version'] = '0.10.1-SNAPSHOT'
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -103,6 +104,7 @@ map('n', '<leader>fo', ':copen<cr>')
 map('n', '<leader>fc', ':cclose<cr>')
 map('n', '<leader>fn', ':cnext<cr>')
 map('n', '<leader>fp', ':cprevious<cr>')
+map('n', '<leader>tv', ':vnew | :te<cr>')
 
 -- LSP
 map('n', 'gD', '<cmd>lua vim.lsp.buf.definition()<CR>')
@@ -119,17 +121,24 @@ map('n', '<leader>a', '<cmd>lua require"metals".open_all_diagnostics()<CR>')
 map('n', '<leader>d', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>') -- buffer diagnostics only
 map('n', ']c', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<CR>')
 map('n', '[c', '<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<CR>')
--- map('n', '[c', '<cmd>lua vim.lsp.diagnostic.goto_prev { wrap = false }<CR>')
--- map('n', ']c', '<cmd>lua vim.lsp.diagnostic.goto_next { wrap = false }<CR>')
+map('n', '<leader>ln', '<cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>')
 
 -- completion
 map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
 map('i', '<Tab>', 'pumvisible() ? "\\<C-n>" : "\\<Tab>"', {expr = true})
 map('i', '<CR>', 'compe#confirm("\\<CR>")', {expr = true})
 
--- telescope mappings
+-- telescope
 map('n', '<leader>ff', '<cmd>lua require"telescope.builtin".find_files()<CR>')
 map('n', '<leader>lg', '<cmd>lua require"telescope.builtin".live_grep()<CR>')
+
+-- nvim-dap
+map('n', '<leader>dtb', '<cmd>lua require"dap".toggle_breakpoint()<CR>')
+map('n', '<leader>dso', '<cmd>lua require"dap".step_over()<CR>')
+map('n', '<leader>dsi', '<cmd>lua require"dap".step_into()<CR>')
+
+-- other stuff
+map('n', '<leader>pd', '<cmd>lua require"playground.functions".peek()<CR>')
 
 ----------------------------------
 -- COMMANDS ----------------------
@@ -139,7 +148,7 @@ cmd [[autocmd FileType markdown setlocal textwidth=80]]
 cmd [[autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)]]
 cmd [[autocmd BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell]]
 cmd [[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang=en_us]]
-
+cmd [[autocmd TermOpen * startinsert]]
 -- LSP
 cmd [[augroup lsp]]
 cmd [[autocmd!]]
@@ -162,6 +171,7 @@ cmd 'colorscheme onedark'
 fn.sign_define('LspDiagnosticsSignError', {text = '▬'})
 fn.sign_define('LspDiagnosticsSignWarning', {text = '▬'})
 fn.sign_define('LspDiagnosticsSignInformation', {text = '▬'})
+fn.sign_define('LspDiagnosticsSignHint', {text = '▬'})
 
 vim.cmd [[hi! link LspReferenceText CursorColumn]]
 vim.cmd [[hi! link LspReferenceRead CursorColumn]]
@@ -185,7 +195,10 @@ lsp_config.util.default_config = vim.tbl_extend('force', lsp_config.util.default
 Metals_config = require'metals'.bare_config
 Metals_config.settings = {
   showImplicitArguments = true,
-  excludedPackages = {'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl'},
+  showInferredType = true,
+  excludedPackages = {
+    'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl', 'akka.stream.javadsl'
+  },
   fallbackScalaVersion = '2.13.4'
 }
 
@@ -242,6 +255,11 @@ lsp_config.jsonls.setup {
 lsp_config.tsserver.setup {}
 lsp_config.yamlls.setup {}
 lsp_config.racket_langserver.setup {}
+
+lsp_config.gopls.setup {
+  cmd = {'gopls', 'serve'},
+  settings = {gopls = {analyses = {unusedparams = true}, staticcheck = true}}
+}
 
 -- Uncomment for trace logs from neovim
 -- vim.lsp.set_log_level('trace')

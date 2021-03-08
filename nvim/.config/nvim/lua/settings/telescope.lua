@@ -4,9 +4,8 @@ local M = {}
 M.setup = function()
     require('telescope').setup {
         defaults = {
-            file_ignore_patterns = {"target"},
+            file_ignore_patterns = {"target", "node_modules"},
             prompt_prefix = "❯",
-            set_env = {['COLORTERM'] = 'truecolor'},
             file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
             grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new
         }
