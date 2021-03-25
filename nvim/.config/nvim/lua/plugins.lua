@@ -28,6 +28,7 @@ return require('packer').startup(function(use)
     use {'/Users/ckipp/Documents/lua-workspace/nvim-metals'}
     use {'sheerun/vim-polyglot'}
     use {'tpope/vim-fugitive'}
+    use {'tpope/vim-vinegar'}
     use {'wakatime/vim-wakatime'}
     use {'wbthomason/packer.nvim', opt = true}
     use {'windwp/nvim-autopairs'}

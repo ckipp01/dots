@@ -28,16 +28,24 @@ require('settings.galaxyline').setup()
 require('nvim-autopairs').setup()
 
 require('nvim-treesitter.configs').setup {
+  playground = {enable = true},
+  query_linter = {
+    enable = true,
+    use_virtual_text = true,
+    lint_events = {"BufWrite", "CursorHold"}
+  },
   ensure_installed = 'maintained',
   highlight = {enable = true}
 }
 
 require('settings.compe').setup()
 require('settings.telescope').setup()
+require('settings.lsp').setup()
 
 require('lspsaga').init_lsp_saga({
   finder_action_keys = {open = '<CR>', vsplit = 's', split = 'i', quit = 'q'},
-  server_filetype_map = {metals = {'sbt', 'scala'}}
+  server_filetype_map = {metals = {'sbt', 'scala'}},
+  code_action_prompt = {virtual_text = false}
 })
 
 ----------------------------------
@@ -56,8 +64,8 @@ g['vim_markdown_conceal_code_blocks'] = 0
 -- nvim-metals
 -- g['metals_use_global_executable'] = true
 -- g['metals_server_version'] = '0.10.0'
-g['metals_server_version'] = '0.10.0+36-33049b09-SNAPSHOT'
---g['metals_server_version'] = '0.10.1-SNAPSHOT'
+--g['metals_server_version'] = '0.10.0+101-f0ccc00b-SNAPSHOT'
+g['metals_server_version'] = '0.10.1-SNAPSHOT'
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -133,12 +141,17 @@ map('n', '<leader>ff', '<cmd>lua require"telescope.builtin".find_files()<CR>')
 map('n', '<leader>lg', '<cmd>lua require"telescope.builtin".live_grep()<CR>')
 
 -- nvim-dap
+map('n', '<leader>dc', '<cmd>lua require"dap".continue()<CR>')
+map('n', '<leader>dr', '<cmd>lua require"dap".repl.toggle()<CR>')
 map('n', '<leader>dtb', '<cmd>lua require"dap".toggle_breakpoint()<CR>')
 map('n', '<leader>dso', '<cmd>lua require"dap".step_over()<CR>')
 map('n', '<leader>dsi', '<cmd>lua require"dap".step_into()<CR>')
 
 -- other stuff
 map('n', '<leader>pd', '<cmd>lua require"playground.functions".peek()<CR>')
+
+require('playground.globals')
+map('n', '<leader>s', [[<cmd>lua RELOAD("playground.semantic").generate()<CR>]])
 
 ----------------------------------
 -- COMMANDS ----------------------
@@ -166,7 +179,7 @@ cmd [[augroup END]]
 cmd 'colorscheme onedark'
 
 ----------------------------------
--- LSP Setup ---------------------
+-- LSP Settings ------------------
 ----------------------------------
 fn.sign_define('LspDiagnosticsSignError', {text = '▬'})
 fn.sign_define('LspDiagnosticsSignWarning', {text = '▬'})
@@ -179,87 +192,3 @@ vim.cmd [[hi! link LspReferenceWrite CursorColumn]]
 
 vim.cmd [[hi! link LspSagaFinderSelection CursorColumn]]
 vim.cmd [[hi! link LspSagaDocTruncateLine LspSagaHoverBorder]]
-
-local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
-                                                {virtual_text = false})
-local lsp_config = require 'lspconfig'
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-lsp_config.util.default_config = vim.tbl_extend('force', lsp_config.util.default_config, {
-  handlers = {['textDocument/publishDiagnostics'] = shared_diagnostic_settings},
-  capabilities = capabilities
-})
-
--- nvim-metals
-Metals_config = require'metals'.bare_config
-Metals_config.settings = {
-  showImplicitArguments = true,
-  showInferredType = true,
-  excludedPackages = {
-    'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl', 'akka.stream.javadsl'
-  },
-  fallbackScalaVersion = '2.13.4'
-}
-
-Metals_config.init_options.statusBarProvider = 'on'
-Metals_config.handlers['textDocument/publishDiagnostics'] = shared_diagnostic_settings
-Metals_config.capabilities = capabilities
-
--- Metals_config.on_attach = function()
---   require'metals'.setup_dap()
--- end
-
--- sumneko lua
-lsp_config.sumneko_lua.setup {
-  cmd = {
-    '/Users/ckipp/Documents/lua-workspace/lua-language-server/bin/macOS/lua-language-server', '-E',
-    '/Users/ckipp/Documents/lua-workspace/lua-language-server/main.lua'
-  },
-  commands = {
-    Format = {
-      function()
-        vim.api.nvim_call_function('LuaFormat', {})
-      end
-    }
-  },
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT', -- since using mainly for neovim
-        path = vim.split(package.path, ';')
-      },
-      diagnostics = {globals = {'vim', 'it'}},
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = {
-          [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-          [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-        }
-      }
-    }
-  }
-}
-
-lsp_config.dockerls.setup {}
-lsp_config.html.setup {}
-lsp_config.jsonls.setup {
-  commands = {
-    Format = {
-      function()
-        vim.lsp.buf.range_formatting({}, {0, 0}, {vim.fn.line('$'), 0})
-      end
-    }
-  }
-}
-lsp_config.tsserver.setup {}
-lsp_config.yamlls.setup {}
-lsp_config.racket_langserver.setup {}
-
-lsp_config.gopls.setup {
-  cmd = {'gopls', 'serve'},
-  settings = {gopls = {analyses = {unusedparams = true}, staticcheck = true}}
-}
-
--- Uncomment for trace logs from neovim
--- vim.lsp.set_log_level('trace')
