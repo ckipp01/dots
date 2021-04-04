@@ -22,7 +22,7 @@ M.setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    fallbackScalaVersion = "2.13.5",
+    fallbackScalaVersion = "2.13.5"
   }
 
   Metals_config.init_options.statusBarProvider = "on"

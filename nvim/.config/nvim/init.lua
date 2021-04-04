@@ -53,8 +53,6 @@ require("lspsaga").init_lsp_saga({
 ----------------------------------
 g["mapleader"] = ","
 g["netrw_gx"] = "<cWORD>"
-g["netrw_liststyle"] = 3
--- g['netrw_banner'] = 0
 
 -- plugin variables
 -- polyglot's markdown settings
@@ -62,9 +60,8 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
--- g['metals_use_global_executable'] = true
 -- g['metals_server_version'] = '0.10.0'
-g["metals_server_version"] = "0.10.0+110-f4ac2963-SNAPSHOT"
+g["metals_server_version"] = "0.10.0+169-03704c17-SNAPSHOT"
 --g["metals_server_version"] = "0.10.1-SNAPSHOT"
 
 ----------------------------------
@@ -115,43 +112,42 @@ map("n", "<leader>fp", ":cprevious<cr>")
 map("n", "<leader>tv", ":vnew | :te<cr>")
 
 -- LSP
-map("n", "gD", "<cmd>lua vim.lsp.buf.definition()<CR>")
-map("n", "K", "<cmd>lua require\"lspsaga.hover\".render_hover_doc()<CR>")
-map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-map("n", "gds", "<cmd>lua require\"telescope.builtin\".lsp_document_symbols()<CR>")
-map("n", "gws", "<cmd>lua require\"settings.telescope\".lsp_workspace_symbols()<CR>")
-map("n", "<leader>rn", "<cmd>lua require\"lspsaga.rename\".rename()<CR>")
-map("n", "<leader>ca", "<cmd>lua require\"lspsaga.codeaction\".code_action()<CR>")
-map("v", "<leader>ca", "<cmd>lua require\"lspsaga.codeaction\".range_code_action()<CR>")
-map("n", "<leader>ws", "<cmd>lua require\"metals\".worksheet_hover()<CR>")
-map("n", "<leader>a", "<cmd>lua require\"metals\".open_all_diagnostics()<CR>")
-map("n", "<leader>d", "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>") -- buffer diagnostics only
-map("n", "]c", "<cmd>lua require\"lspsaga.diagnostic\".lsp_jump_diagnostic_next()<CR>")
-map("n", "[c", "<cmd>lua require\"lspsaga.diagnostic\".lsp_jump_diagnostic_prev()<CR>")
-map("n", "<leader>ln", "<cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>")
+map("n", "gD", [[<cmd>lua vim.lsp.buf.definition()<CR>]])
+map("n", "K", [[<cmd>lua require"lspsaga.hover".render_hover_doc()<CR>]])
+map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
+map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
+map("n", "gds", [[<cmd>lua require"telescope.builtin".lsp_document_symbols()<CR>]])
+map("n", "gws", [[<cmd>lua require"settings.telescope".lsp_workspace_symbols()<CR>]])
+map("n", "<leader>rn", [[<cmd>lua require"lspsaga.rename".rename()<CR>]])
+map("n", "<leader>ca", [[<cmd>lua require"lspsaga.codeaction".code_action()<CR>]])
+map("v", "<leader>ca", [[<cmd>lua require"lspsaga.codeaction".range_code_action()<CR>]])
+map("n", "<leader>ws", [[<cmd>lua require"metals".worksheet_hover()<CR>]])
+map("n", "<leader>a", [[<cmd>lua require"metals".open_all_diagnostics()<CR>]])
+map("n", "<leader>d", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]]) -- buffer diagnostics only
+map("n", "]c", [[<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<CR>]])
+map("n", "[c", [[<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<CR>]])
+map("n", "<leader>ln", [[<cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>]])
 
 -- completion
-map("i", "<S-Tab>", "pumvisible() ? \"\\<C-p>\" : \"\\<Tab>\"", { expr = true })
-map("i", "<Tab>", "pumvisible() ? \"\\<C-n>\" : \"\\<Tab>\"", { expr = true })
-map("i", "<CR>", "compe#confirm(\"\\<CR>\")", { expr = true })
+map("i", "<S-Tab>", [[pumvisible() ? "\\<C-p>" : "\\<Tab>"]], { expr = true })
+map("i", "<Tab>", [[pumvisible() ? "\\<C-n>" : "\\<Tab>"]], { expr = true })
+map("i", "<CR>", [[compe#confirm("\\<CR>")]], { expr = true })
 
 -- telescope
-map("n", "<leader>ff", "<cmd>lua require\"telescope.builtin\".find_files()<CR>")
-map("n", "<leader>lg", "<cmd>lua require\"telescope.builtin\".live_grep()<CR>")
+map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files()<CR>]])
+map("n", "<leader>lg", [[<cmd>lua require"telescope.builtin".live_grep()<CR>]])
 
 -- nvim-dap
-map("n", "<leader>dc", "<cmd>lua require\"dap\".continue()<CR>")
-map("n", "<leader>dr", "<cmd>lua require\"dap\".repl.toggle()<CR>")
-map("n", "<leader>dtb", "<cmd>lua require\"dap\".toggle_breakpoint()<CR>")
-map("n", "<leader>dso", "<cmd>lua require\"dap\".step_over()<CR>")
-map("n", "<leader>dsi", "<cmd>lua require\"dap\".step_into()<CR>")
+map("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
+map("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+map("n", "<leader>dtb", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
+map("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
+map("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
 
 -- other stuff
-map("n", "<leader>pd", "<cmd>lua require\"playground.functions\".peek()<CR>")
-
 require("playground.globals")
-map("n", "<leader>s", [[<cmd>lua RELOAD("playground.semantic").generate()<CR>]])
+map("n", "<leader><leader>p", [[<cmd>lua require"playground.functions".peek()<CR>]])
+map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.semantic").generate()<CR>]])
 
 ----------------------------------
 -- COMMANDS ----------------------
@@ -162,6 +158,7 @@ cmd([[autocmd BufEnter *.js call matchadd('ColorColumn', '\%81v', 100)]])
 cmd([[autocmd BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell]])
 cmd([[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang=en_us]])
 cmd([[autocmd TermOpen * startinsert]])
+
 -- LSP
 cmd([[augroup lsp]])
 cmd([[autocmd!]])

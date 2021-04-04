@@ -4,7 +4,7 @@ local M = {}
 M.setup = function()
   require("telescope").setup({
     defaults = {
-      file_ignore_patterns = { "target", "node_modules" },
+      file_ignore_patterns = { "target", "node_modules", "parser.c" },
       prompt_prefix = "❯",
       file_previewer = require("telescope.previewers").vim_buffer_cat.new,
       grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
