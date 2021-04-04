@@ -129,9 +129,9 @@ map("n", "[c", [[<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()
 map("n", "<leader>ln", [[<cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>]])
 
 -- completion
-map("i", "<S-Tab>", [[pumvisible() ? "\\<C-p>" : "\\<Tab>"]], { expr = true })
-map("i", "<Tab>", [[pumvisible() ? "\\<C-n>" : "\\<Tab>"]], { expr = true })
-map("i", "<CR>", [[compe#confirm("\\<CR>")]], { expr = true })
+map("i", "<S-Tab>", [[pumvisible() ? "<C-p>" : "<Tab>"]], { expr = true })
+map("i", "<Tab>", [[pumvisible() ? "<C-n>" : "<Tab>"]], { expr = true })
+map("i", "<CR>", [[compe#confirm("<CR>")]], { expr = true })
 
 -- telescope
 map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files()<CR>]])
