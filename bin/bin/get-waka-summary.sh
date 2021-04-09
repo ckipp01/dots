@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-. ${HOME}/.env
 . ${HOME}/bin/colors.sh
 baseurl="https://wakatime.com/api/v1/"
 user="ckipp01"
@@ -45,7 +44,7 @@ read correct
 
 if [ $correct = "y" ]
 then
-  encoded="$(echo $wakatimeAPIKey | base64)"
+  encoded="$(echo $WAKA_API_KEY | base64)"
   case $mode in
     file)
       response=$(curl -v --header "Authorization: Basic ${encoded}" "${baseurl}users/${user}/summaries?start=${startDate}&end=${endDate}" -o ${outputDir}summary-${startDate}.json)

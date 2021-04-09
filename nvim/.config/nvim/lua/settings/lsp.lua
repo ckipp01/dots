@@ -22,7 +22,7 @@ M.setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    fallbackScalaVersion = "2.13.5"
+    --fallbackScalaVersion = "2.13.5"
   }
 
   Metals_config.init_options.statusBarProvider = "on"
@@ -113,6 +113,14 @@ M.setup = function()
       gopls = { analyses = { unusedparams = true }, staticcheck = true },
     },
   })
+
+  --lsp_config.groovyls.setup({
+  --  cmd = {
+  --    "java",
+  --    "-jar",
+  --    "/Users/ckipp/Documents/groovy-workspace/groovy-language-server/build/libs/groovy-language-server-all.jar",
+  --  },
+  --})
 
   -- Uncomment for trace logs from neovim
   --vim.lsp.set_log_level('trace')

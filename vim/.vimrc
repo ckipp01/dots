@@ -3,18 +3,12 @@ let mapleader = ","
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'wakatime/vim-wakatime'
-Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
 "Plug 'puremourning/vimspector'
-"Plug 'machakann/vim-sandwich'
-"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
@@ -39,36 +33,18 @@ let g:vimspector_enable_mappings = 'HUMAN'
 " Theme
 set termguicolors
 
-if exists("sunny")
-  set background=light
-  colorscheme one
-else
-  set background=dark
-  " onedark.vim override: Don't set a background color when running in a terminal;
-  " just use the terminal's background color
-  if (has("autocmd") && !has("gui_running"))
-    augroup colors
-      autocmd!
-      let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16": "7"}
-      autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) "No `bg` setting
-    augroup END
-  endif
-
-  colorscheme onedark
+set background=dark
+" onedark.vim override: Don't set a background color when running in a terminal;
+" just use the terminal's background color
+if (has("autocmd") && !has("gui_running"))
+  augroup colors
+    autocmd!
+    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16": "7"}
+    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) "No `bg` setting
+  augroup END
 endif
 
-" Override the annoying bright red and yellow from coc
-highlight CocErrorSign guifg=#E06C75
-highlight CocWarningSign guifg=#E5C07B
-
-" highlight groups used for statusline
-highlight StatusLineStatus guifg=#4B5263 guibg=#2C323C
-highlight StatusLineError guifg=#E06C75 guibg=#2C323C
-highlight StatusLineWarning guifg=#E5C07B guibg=#2C323C
-
-" highlight groups to match statusline
-highlight LspGutterError guifg=#E06C75
-highlight LspGutterWarning guifg=#E5C07B
+colorscheme onedark
 
 set statusline=%n\   " buffer number
 set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview

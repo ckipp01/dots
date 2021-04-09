@@ -1,28 +1,19 @@
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
-
-local function opt(scope, key, value)
-  local scopes = { o = vim.o, b = vim.bo, w = vim.wo }
-  scopes[scope][key] = value
-  if scope ~= "o" then
-    scopes["o"][key] = value
-  end
-end
-
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+local f = require("settings.functions")
+local map = f.map
+local opt = f.opt
 
 ----------------------------------
 -- SETUP PLUGINS -----------------
 ----------------------------------
 cmd([[packadd packer.nvim]])
 require("plugins")
+require("settings.functions")
+require("settings.compe").setup()
+require("settings.telescope").setup()
+require("settings.lsp").setup()
 
 require("settings.galaxyline").setup()
 require("nvim-autopairs").setup()
@@ -38,12 +29,7 @@ require("nvim-treesitter.configs").setup({
   highlight = { enable = true },
 })
 
-require("settings.compe").setup()
-require("settings.telescope").setup()
-require("settings.lsp").setup()
-
 require("lspsaga").init_lsp_saga({
-  finder_action_keys = { open = "<CR>", vsplit = "s", split = "i", quit = "q" },
   server_filetype_map = { metals = { "sbt", "scala" } },
   code_action_prompt = { virtual_text = false },
 })
@@ -60,9 +46,9 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
--- g['metals_server_version'] = '0.10.0'
-g["metals_server_version"] = "0.10.0+169-03704c17-SNAPSHOT"
---g["metals_server_version"] = "0.10.1-SNAPSHOT"
+--g["metals_server_version"] = "0.10.1"
+--g["metals_server_version"] = "0.10.1+12-b7ca9595-SNAPSHOT"
+g["metals_server_version"] = "0.10.2-SNAPSHOT"
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -87,8 +73,6 @@ opt("o", "completeopt", "menu,menuone,noselect")
 -- window-scoped
 opt("w", "wrap", false)
 opt("w", "cursorline", true)
-opt("w", "number", true)
-opt("w", "relativenumber", true)
 opt("w", "signcolumn", "yes")
 
 -- buffer-scoped
@@ -101,6 +85,8 @@ opt("b", "fileformat", "unix")
 -- MAPPINGS -----------------------
 -- insert-mode mappings
 map("i", "jj", "<ESC>")
+
+map("n", "<leader>n", [[<cmd>lua RELOAD("settings.functions").toggle_nums()<CR>]])
 
 -- normal-mode mappings
 map("n", "<leader>hs", ":nohlsearch<cr>")
@@ -159,6 +145,12 @@ cmd([[autocmd BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebrea
 cmd([[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang=en_us]])
 cmd([[autocmd TermOpen * startinsert]])
 
+cmd("colorscheme onedark")
+-- TODO make sure this works later
+-- TODO I can't get this to work as expected
+cmd([[highlight LspDiagnosticsUnderlineWarning guifg=None]])
+--cmd([[highlight LspDiagnosticsUnderlineWarning guifg=None"]])
+
 -- LSP
 cmd([[augroup lsp]])
 cmd([[autocmd!]])
@@ -173,7 +165,6 @@ cmd([[autocmd!]])
 cmd([[autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" } })]])
 cmd([[augroup END]])
 
-cmd("colorscheme onedark")
 
 ----------------------------------
 -- LSP Settings ------------------
