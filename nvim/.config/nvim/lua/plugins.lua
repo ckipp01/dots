@@ -4,11 +4,6 @@ return require("packer").startup(function(use)
   use({ "joshdick/onedark.vim" })
   use({ "junegunn/goyo.vim", opt = true })
   use({ "hrsh7th/nvim-compe", requires = { { "hrsh7th/vim-vsnip" } } })
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && yarn install",
-    cmd = "MarkdownPreview",
-  })
   use({ "kevinhwang91/nvim-bqf" })
   use({ "kyazdani42/nvim-web-devicons" })
   use({ "liuchengxu/vista.vim" })

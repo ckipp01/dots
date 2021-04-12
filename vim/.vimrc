@@ -6,16 +6,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'tpope/vim-fugitive'
-Plug 'sheerun/vim-polyglot'
 Plug 'Yggdroot/indentLine'
+
+
+
 "Plug 'puremourning/vimspector'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
 call plug#end()
-
-" netwr settings
-let g:netrw_liststyle=3
-let g:netrw_banner=0
 
 au BufRead,BufNewFile *.sbt set filetype=scala
 
@@ -23,12 +21,8 @@ if filereadable(expand("~/.flavor/coc.vim"))
   source ~/.flavor/coc.vim
 endif
 
-" Coming from polyglot's markdown settings
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_conceal_code_blocks = 0
-
 " vimspector
-let g:vimspector_enable_mappings = 'HUMAN'
+" let g:vimspector_enable_mappings = 'HUMAN'
 
 " Theme
 set termguicolors
@@ -45,6 +39,13 @@ if (has("autocmd") && !has("gui_running"))
 endif
 
 colorscheme onedark
+
+" Because no one likes to be blinded by awful colors
+highlight CocErrorSign guifg=#E06C75
+highlight CocWarningSign guifg=#E5C07B
+highlight StatusLineStatus guifg=#4B5263 guibg=#2C323C
+highlight StatusLineError guifg=#E06C75 guibg=#2C323C
+highlight StatusLineWarning guifg=#E5C07B guibg=#2C323C
 
 set statusline=%n\   " buffer number
 set statusline+=%t\ %M%r%h%w\  " file modified, readonly, help, preview

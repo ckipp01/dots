@@ -47,8 +47,10 @@ g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
 --g["metals_server_version"] = "0.10.1"
---g["metals_server_version"] = "0.10.1+12-b7ca9595-SNAPSHOT"
-g["metals_server_version"] = "0.10.2-SNAPSHOT"
+g["metals_server_version"] = "0.10.1+19-da13f348-SNAPSHOT"
+-- TODO I want to be able to do this so badly
+--g["metals_server_version"] = "latest.snapshot"
+--g["metals_server_version"] = "0.10.2-SNAPSHOT"
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -114,6 +116,8 @@ map("n", "]c", [[<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()
 map("n", "[c", [[<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<CR>]])
 map("n", "<leader>ln", [[<cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>]])
 
+map("n", "<leader>q", [[<cmd>lua RELOAD("metals").restart_server()<CR>]])
+
 -- completion
 map("i", "<S-Tab>", [[pumvisible() ? "<C-p>" : "<Tab>"]], { expr = true })
 map("i", "<Tab>", [[pumvisible() ? "<C-n>" : "<Tab>"]], { expr = true })
@@ -129,6 +133,7 @@ map("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
 map("n", "<leader>dtb", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
 map("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
 map("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
+map("n", "<leader>ddd", [[<cmd>lua require"dap".list_breakpoints()<CR>]])
 
 -- other stuff
 require("playground.globals")
@@ -164,7 +169,6 @@ cmd([[augroup colorset]])
 cmd([[autocmd!]])
 cmd([[autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" } })]])
 cmd([[augroup END]])
-
 
 ----------------------------------
 -- LSP Settings ------------------
