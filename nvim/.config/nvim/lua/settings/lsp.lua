@@ -22,7 +22,7 @@ M.setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    --fallbackScalaVersion = "2.13.5"
+    fallbackScalaVersion = "2.13.5",
   }
 
   Metals_config.init_options.statusBarProvider = "on"
@@ -40,19 +40,29 @@ M.setup = function()
       type = "scala",
       request = "launch",
       name = "Run",
-      metalsRunType = "run",
+      metals = {
+        runType = "run",
+        args = { "firstArg", "secondArg", "thirdArg" },
+        jvmOptions = {},
+        env = {},
+        envFile = "",
+      },
     },
     {
       type = "scala",
       request = "launch",
       name = "Test File",
-      metalsRunType = "testFile",
+      metals = {
+        runType = "testFIle",
+      },
     },
     {
       type = "scala",
       request = "launch",
       name = "Test Target",
-      metalsRunType = "testTarget",
+      metals = {
+        runType = "testTarget",
+      },
     },
   }
 
@@ -80,7 +90,7 @@ M.setup = function()
           version = "LuaJIT", -- since using mainly for neovim
           path = vim.split(package.path, ";"),
         },
-        diagnostics = { globals = { "vim", "it" } },
+        diagnostics = { globals = { "vim", "it", "describe" } },
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = {

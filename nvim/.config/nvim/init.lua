@@ -46,12 +46,12 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
---g["metals_server_version"] = "0.10.1"
-g["metals_server_version"] = "0.10.1+19-da13f348-SNAPSHOT"
+--g["metals_server_version"] = "0.10.2"
+g["metals_server_version"] = "0.10.2+46-e7ab8592-SNAPSHOT"
 -- TODO I want to be able to do this so badly
 --g["metals_server_version"] = "latest.snapshot"
---g["metals_server_version"] = "0.10.2-SNAPSHOT"
-
+--g["metals_server_version"] = "0.10.3-SNAPSHOT"
+--g["metals_disabled_mode"] = true
 ----------------------------------
 -- OPTIONS -----------------------
 ----------------------------------
@@ -110,7 +110,8 @@ map("n", "<leader>rn", [[<cmd>lua require"lspsaga.rename".rename()<CR>]])
 map("n", "<leader>ca", [[<cmd>lua require"lspsaga.codeaction".code_action()<CR>]])
 map("v", "<leader>ca", [[<cmd>lua require"lspsaga.codeaction".range_code_action()<CR>]])
 map("n", "<leader>ws", [[<cmd>lua require"metals".worksheet_hover()<CR>]])
-map("n", "<leader>a", [[<cmd>lua require"metals".open_all_diagnostics()<CR>]])
+map("n", "<leader>a", [[<cmd>lua RELOAD("metals").open_all_diagnostics()<CR>]])
+map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
 map("n", "<leader>d", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]]) -- buffer diagnostics only
 map("n", "]c", [[<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<CR>]])
 map("n", "[c", [[<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<CR>]])
@@ -126,19 +127,25 @@ map("i", "<CR>", [[compe#confirm("<CR>")]], { expr = true })
 -- telescope
 map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files()<CR>]])
 map("n", "<leader>lg", [[<cmd>lua require"telescope.builtin".live_grep()<CR>]])
+map("n", "<leader>fb", [[<cmd>lua require"telescope.builtin".file_browser()<CR>]])
 
 -- nvim-dap
 map("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
 map("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+map("n", "<leader>ds", [[<cmd>lua require"dap.ui.variables".scopes()<CR>]])
 map("n", "<leader>dtb", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
 map("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
 map("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
-map("n", "<leader>ddd", [[<cmd>lua require"dap".list_breakpoints()<CR>]])
+
+-- scala-utils
+map("n", "<leader>slc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_line()<CR>]])
+map("n", "<leader>sc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_input()<CR>]])
 
 -- other stuff
 require("playground.globals")
 map("n", "<leader><leader>p", [[<cmd>lua require"playground.functions".peek()<CR>]])
 map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.semantic").generate()<CR>]])
+map("n", "<leader><leader>m", [[<cmd>lua RELOAD("playground.mt").get_dep()<CR>]])
 
 ----------------------------------
 -- COMMANDS ----------------------
@@ -184,3 +191,5 @@ vim.cmd([[hi! link LspReferenceWrite CursorColumn]])
 
 vim.cmd([[hi! link LspSagaFinderSelection CursorColumn]])
 vim.cmd([[hi! link LspSagaDocTruncateLine LspSagaHoverBorder]])
+
+vim.cmd([[command! Format lua vim.lsp.buf.formatting()]])
