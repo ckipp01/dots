@@ -47,10 +47,10 @@ g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
 --g["metals_server_version"] = "0.10.2"
-g["metals_server_version"] = "0.10.2+46-e7ab8592-SNAPSHOT"
+g["metals_server_version"] = "0.10.3+23-3512dbc6-SNAPSHOT"
 -- TODO I want to be able to do this so badly
 --g["metals_server_version"] = "latest.snapshot"
---g["metals_server_version"] = "0.10.3-SNAPSHOT"
+--g["metals_server_version"] = "0.10.4-SNAPSHOT"
 --g["metals_disabled_mode"] = true
 ----------------------------------
 -- OPTIONS -----------------------
@@ -112,6 +112,8 @@ map("v", "<leader>ca", [[<cmd>lua require"lspsaga.codeaction".range_code_action(
 map("n", "<leader>ws", [[<cmd>lua require"metals".worksheet_hover()<CR>]])
 map("n", "<leader>a", [[<cmd>lua RELOAD("metals").open_all_diagnostics()<CR>]])
 map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
+map("n", "<leader>td", [[<cmd>lua require("metals.tvp").debug_tree()<CR>]])
+map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
 map("n", "<leader>d", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]]) -- buffer diagnostics only
 map("n", "]c", [[<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_next()<CR>]])
 map("n", "[c", [[<cmd>lua require"lspsaga.diagnostic".lsp_jump_diagnostic_prev()<CR>]])
@@ -146,6 +148,9 @@ require("playground.globals")
 map("n", "<leader><leader>p", [[<cmd>lua require"playground.functions".peek()<CR>]])
 map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.semantic").generate()<CR>]])
 map("n", "<leader><leader>m", [[<cmd>lua RELOAD("playground.mt").get_dep()<CR>]])
+map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.functions").set_ext()<CR>]])
+map("n", "<leader><leader>g", [[<cmd>lua RELOAD("playground.functions").get_exts()<CR>]])
+map("n", "<leader><leader>e", [[:luafile %<CR>]])
 
 ----------------------------------
 -- COMMANDS ----------------------

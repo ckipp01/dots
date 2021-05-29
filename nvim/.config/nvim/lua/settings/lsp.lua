@@ -14,6 +14,7 @@ M.setup = function()
   })
 
   Metals_config = require("metals").bare_config
+
   Metals_config.settings = {
     showImplicitArguments = true,
     showInferredType = true,
@@ -22,7 +23,7 @@ M.setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    fallbackScalaVersion = "2.13.5",
+    fallbackScalaVersion = "2.13.6",
   }
 
   Metals_config.init_options.statusBarProvider = "on"
@@ -43,9 +44,6 @@ M.setup = function()
       metals = {
         runType = "run",
         args = { "firstArg", "secondArg", "thirdArg" },
-        jvmOptions = {},
-        env = {},
-        envFile = "",
       },
     },
     {
@@ -53,7 +51,7 @@ M.setup = function()
       request = "launch",
       name = "Test File",
       metals = {
-        runType = "testFIle",
+        runType = "testFile",
       },
     },
     {
@@ -98,6 +96,7 @@ M.setup = function()
             [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
           },
         },
+        telemetry = { enable = false },
       },
     },
   })
@@ -121,6 +120,12 @@ M.setup = function()
     cmd = { "gopls", "serve" },
     settings = {
       gopls = { analyses = { unusedparams = true }, staticcheck = true },
+    },
+  })
+
+  require("lspconfig").kotlin_language_server.setup({
+    cmd = {
+      "/Users/ckipp/Documents/kotlin-workspace/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
     },
   })
 
