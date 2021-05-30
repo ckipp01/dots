@@ -3,7 +3,8 @@ local fn = vim.fn
 local g = vim.g
 local f = require("settings.functions")
 local map = f.map
-local opt = f.opt
+local opt = vim.opt
+local global_opt = vim.opt_global
 
 ----------------------------------
 -- SETUP PLUGINS -----------------
@@ -56,33 +57,33 @@ g["metals_server_version"] = "0.10.3+23-3512dbc6-SNAPSHOT"
 -- OPTIONS -----------------------
 ----------------------------------
 local indent = 2
-vim.o.shortmess = string.gsub(vim.o.shortmess, "F", "") .. "c"
-vim.o.path = vim.o.path .. "**"
 
 -- global
-opt("o", "termguicolors", true)
-opt("o", "hidden", true)
-opt("o", "showtabline", 1)
-opt("o", "updatetime", 300)
-opt("o", "showmatch", true)
-opt("o", "laststatus", 2)
-opt("o", "wildignore", ".git,*/node_modules/*,*/target/*,.metals,.bloop")
-opt("o", "ignorecase", true)
-opt("o", "smartcase", true)
-opt("o", "clipboard", "unnamed")
-opt("o", "completeopt", "menu,menuone,noselect")
+global_opt.shortmess:remove("F"):append("c")
+global_opt.path:append("**")
+global_opt.termguicolors = true
+global_opt.hidden = true
+global_opt.showtabline = 1
+global_opt.updatetime = 300
+global_opt.showmatch = true
+global_opt.laststatus = 2
+global_opt.wildignore = { ".git", "*/node_modules/*", "*/target/*", ".metals", ".bloop", ".ammonite" }
+global_opt.ignorecase = true
+global_opt.smartcase = true
+global_opt.clipboard = "unnamed"
+global_opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- window-scoped
-opt("w", "wrap", false)
-opt("w", "cursorline", true)
-opt("w", "signcolumn", "yes")
+opt.wrap = false
+opt.cursorline = true
+opt.signcolumn = "yes"
 
 -- buffer-scoped
-opt("b", "tabstop", indent)
-opt("b", "shiftwidth", indent)
-opt("b", "softtabstop", indent)
-opt("b", "expandtab", true)
-opt("b", "fileformat", "unix")
+opt.tabstop = indent
+opt.shiftwidth = indent
+opt.softtabstop = indent
+opt.expandtab = true
+opt.fileformat = "unix"
 
 -- MAPPINGS -----------------------
 -- insert-mode mappings
