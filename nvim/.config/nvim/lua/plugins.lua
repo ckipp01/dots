@@ -1,6 +1,5 @@
 return require("packer").startup(function(use)
   use({ "glepnir/galaxyline.nvim" })
-  use({ "glepnir/lspsaga.nvim" })
   use({ "joshdick/onedark.vim" })
   use({ "junegunn/goyo.vim", opt = true })
   use({ "hrsh7th/nvim-compe", requires = { { "hrsh7th/vim-vsnip" } } })

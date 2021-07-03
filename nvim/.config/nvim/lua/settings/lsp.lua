@@ -24,6 +24,7 @@ M.setup = function()
       "akka.stream.javadsl",
     },
     fallbackScalaVersion = "2.13.6",
+    superMethodLensesEnabled = true
   }
 
   Metals_config.init_options.statusBarProvider = "on"
@@ -31,10 +32,6 @@ M.setup = function()
   Metals_config.capabilities = capabilities
 
   local dap = require("dap")
-
-  -- For that they usually provide a `console` option in their |dap-configuration|.
-  -- The supported values are usually called `internalConsole`, `integratedTerminal`
-  -- and `externalTerminal`.
 
   dap.configurations.scala = {
     {

@@ -102,7 +102,7 @@ M.setup = function()
         return ""
       end,
       separator = " ",
-      separator_highlight = { colors.line_bg, colors.line_bg },
+      separator_highlight = { colors.line_bg, colors.bg},
       highlight = { colors.bg, colors.line_bg },
     },
   }
