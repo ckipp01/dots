@@ -142,7 +142,6 @@ map("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
 map("n", "<leader>slc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_line()<CR>]])
 map("n", "<leader>sc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_input()<CR>]])
 
-map("n", "<leader>mnf", [[<cmd>lua require("metals").new_scala_file()<CR>]])
 -- other stuff
 require("playground.globals")
 map("n", "<leader><leader>p", [[<cmd>lua require"playground.functions".peek()<CR>]])
@@ -160,7 +159,7 @@ cmd(
   [[autocmd BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell]]
 )
 cmd([[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang=en_us]])
-cmd([[autocmd BufEnter lua do_thing()]])
+cmd([[autocmd TermOpen * startinsert]])
 
 cmd("colorscheme onedark")
 -- TODO make sure this works later
@@ -168,10 +167,10 @@ cmd("colorscheme onedark")
 cmd([[highlight LspDiagnosticsUnderlineWarning guifg=None]])
 --cmd([[highlight LspDiagnosticsUnderlineWarning guifg=None"]])
 
--- Needed to esnure float background doesn't get odd highlighting
--- https://github.com/joshdick/onedark.vim#onedarkset_highlight
 cmd([[augroup colorset]])
 cmd([[autocmd!]])
+-- Needed to esnure float background doesn't get odd highlighting
+-- https://github.com/joshdick/onedark.vim#onedarkset_highlight
 cmd(
   [[autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" } })]]
 )
