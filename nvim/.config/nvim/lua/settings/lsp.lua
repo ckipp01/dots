@@ -23,8 +23,9 @@ M.setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    fallbackScalaVersion = "2.13.6",
-    superMethodLensesEnabled = true
+    fallbackScalaVersion = "3.0.1",
+    --fallbackScalaVersion = "2.13.6",
+    superMethodLensesEnabled = true,
   }
 
   Metals_config.init_options.statusBarProvider = "on"
@@ -62,6 +63,11 @@ M.setup = function()
   }
 
   Metals_config.on_attach = function(client, bufnr)
+
+    vim.cmd([[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]])
+    vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
+    vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]])
+
     require("metals").setup_dap()
   end
 
@@ -125,14 +131,6 @@ M.setup = function()
       "/Users/ckipp/Documents/kotlin-workspace/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
     },
   })
-
-  --lsp_config.groovyls.setup({
-  --  cmd = {
-  --    "java",
-  --    "-jar",
-  --    "/Users/ckipp/Documents/groovy-workspace/groovy-language-server/build/libs/groovy-language-server-all.jar",
-  --  },
-  --})
 
   -- Uncomment for trace logs from neovim
   --vim.lsp.set_log_level('trace')

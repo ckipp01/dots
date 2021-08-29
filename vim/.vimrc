@@ -8,8 +8,6 @@ Plug 'wakatime/vim-wakatime'
 Plug 'tpope/vim-fugitive'
 Plug 'Yggdroot/indentLine'
 
-
-
 "Plug 'puremourning/vimspector'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 "Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
@@ -25,18 +23,18 @@ endif
 " let g:vimspector_enable_mappings = 'HUMAN'
 
 " Theme
-set termguicolors
+"set termguicolors
 
 set background=dark
 " onedark.vim override: Don't set a background color when running in a terminal;
 " just use the terminal's background color
-if (has("autocmd") && !has("gui_running"))
-  augroup colors
-    autocmd!
-    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16": "7"}
-    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) "No `bg` setting
-  augroup END
-endif
+"if (has("autocmd") && !has("gui_running"))
+"  augroup colors
+"    autocmd!
+"    let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16": "7"}
+"    autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white }) "No `bg` setting
+"  augroup END
+"endif
 
 colorscheme onedark
 

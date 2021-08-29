@@ -18,6 +18,7 @@ require("settings.lsp").setup()
 
 require("settings.galaxyline").setup()
 require("nvim-autopairs").setup()
+require("gitsigns").setup()
 
 require("nvim-treesitter.configs").setup({
   playground = { enable = true },
@@ -27,7 +28,10 @@ require("nvim-treesitter.configs").setup({
     lint_events = { "BufWrite", "CursorHold" },
   },
   ensure_installed = "maintained",
-  highlight = { enable = true },
+  highlight = {
+    enable = true,
+    disable = { "scala" },
+  },
 })
 
 ----------------------------------
@@ -42,12 +46,8 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
---g["metals_server_version"] = "0.10.4"
-g["metals_server_version"] = "0.10.4+110-3cdc7a9c-SNAPSHOT"
--- TODO I want to be able to do this so badly
---g["metals_server_version"] = "latest.snapshot"
---g["metals_server_version"] = "0.10.5-SNAPSHOT"
---g["metals_disabled_mode"] = true
+g["metals_server_version"] = "0.10.6-M1+38-9f8ccde2-SNAPSHOT"
+--g["metals_server_version"] = "0.10.6-SNAPSHOT"
 ----------------------------------
 -- OPTIONS -----------------------
 ----------------------------------
@@ -87,7 +87,7 @@ map("n", "<leader><leader>n", [[<cmd>lua RELOAD("settings.functions").toggle_num
 map("n", "<leader><leader>c", [[<cmd>lua RELOAD("settings.functions").toggle_conceal()<CR>]])
 
 -- normal-mode mappings
-map("n", "<leader>hs", ":nohlsearch<cr>")
+map("n", "<leader>nhs", ":nohlsearch<cr>")
 map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 map("n", "<leader>fo", ":copen<cr>")
 map("n", "<leader>fc", ":cclose<cr>")
@@ -98,6 +98,7 @@ map("n", "<leader>tv", ":vnew | :te<cr>")
 -- LSP
 map("n", "gD", [[<cmd>lua vim.lsp.buf.definition()<CR>]])
 map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]])
+map("v", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]])
 map("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
 map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
 map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
@@ -105,17 +106,17 @@ map("n", "gds", [[<cmd>lua require"telescope.builtin".lsp_document_symbols()<CR>
 map("n", "gws", [[<cmd>lua require"settings.telescope".lsp_workspace_symbols()<CR>]])
 map("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]])
 map("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]])
-map("n", "<leader>ws", [[<cmd>lua require"metals".worksheet_hover()<CR>]])
+map("n", "<leader>ws", [[<cmd>lua require"metals".hover_worksheet()<CR>]])
 map("n", "<leader>a", [[<cmd>lua RELOAD("metals").open_all_diagnostics()<CR>]])
 map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
 map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
 map("n", "<leader>d", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]]) -- buffer diagnostics only
-map("n", "]c", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]])
-map("n", "[c", [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]])
-map("n", "<leader>ln", [[<cmd>lua vim.lsp.diagnostic.get_line_diagnostics()<CR>]])
+map("n", "<leader>nd", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]])
+map("n", "<leader>pd", [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]])
+map("n", "<leader>ld", [[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>]])
 
-map("n", "<leader>q", [[<cmd>lua RELOAD("metals").restart_server()<CR>]])
 map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
+map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
 
 -- completion
 map("i", "<S-Tab>", [[pumvisible() ? "<C-p>" : "<Tab>"]], { expr = true })
@@ -161,21 +162,20 @@ cmd(
 cmd([[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang=en_us]])
 cmd([[autocmd TermOpen * startinsert]])
 
-cmd("colorscheme onedark")
--- TODO make sure this works later
--- TODO I can't get this to work as expected
-cmd([[highlight LspDiagnosticsUnderlineWarning guifg=None]])
---cmd([[highlight LspDiagnosticsUnderlineWarning guifg=None"]])
-
 cmd([[augroup colorset]])
 cmd([[autocmd!]])
--- Needed to esnure float background doesn't get odd highlighting
--- https://github.com/joshdick/onedark.vim#onedarkset_highlight
+
+--- For some reason when this is included in the augroup down below it doesn't work
+---- Needed to esnure float background doesn't get odd highlighting
+---- https://github.com/joshdick/onedark.vim#onedarkset_highlight
 cmd(
   [[autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" } })]]
 )
-cmd([[ autocmd ColorScheme * highlight link LspCodeLens Conceal]])
+cmd([[autocmd ColorScheme * highlight link LspCodeLens Conceal]])
+
 cmd([[augroup END]])
+
+cmd("colorscheme onedark")
 -- LSP
 cmd([[augroup lsp]])
 cmd([[autocmd!]])
@@ -186,7 +186,6 @@ cmd([[hi! link LspReferenceText CursorColumn]])
 cmd([[hi! link LspReferenceRead CursorColumn]])
 cmd([[hi! link LspReferenceWrite CursorColumn]])
 
-cmd([[hi! link LspCodeLens CursorColumn]])
 cmd([[augroup END]])
 
 ----------------------------------
