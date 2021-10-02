@@ -18,7 +18,7 @@ M.setup = function()
       },
       nvim_lsp = {
         priority = 1000,
-        filetypes = { "scala", "html", "javascript", "lua", "java", "go" },
+        filetypes = { "scala", "html", "javascript", "lua", "java", "go", "sbt", "typescript" },
       },
     },
   })

@@ -46,8 +46,12 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
-g["metals_server_version"] = "0.10.6-M1+38-9f8ccde2-SNAPSHOT"
---g["metals_server_version"] = "0.10.6-SNAPSHOT"
+g["metals_server_version"] = "0.10.7+74-b68f0c82-SNAPSHOT"
+--g["metals_server_version"] = "0.10.7"
+-- Only for testing scala-cli
+--g["metals_server_org"] = "org.virtuslab"
+--g["metals_server_version"] = "0.10.8-SNAPSHOT"
+
 ----------------------------------
 -- OPTIONS -----------------------
 ----------------------------------
@@ -80,13 +84,11 @@ opt.expandtab = true
 opt.fileformat = "unix"
 
 -- MAPPINGS -----------------------
--- insert-mode mappings
 map("i", "jj", "<ESC>")
 
 map("n", "<leader><leader>n", [[<cmd>lua RELOAD("settings.functions").toggle_nums()<CR>]])
 map("n", "<leader><leader>c", [[<cmd>lua RELOAD("settings.functions").toggle_conceal()<CR>]])
 
--- normal-mode mappings
 map("n", "<leader>nhs", ":nohlsearch<cr>")
 map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 map("n", "<leader>fo", ":copen<cr>")
@@ -114,7 +116,6 @@ map("n", "<leader>d", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]]) -- buff
 map("n", "<leader>nd", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]])
 map("n", "<leader>pd", [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]])
 map("n", "<leader>ld", [[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>]])
-
 map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
 map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
 
@@ -172,28 +173,48 @@ cmd(
   [[autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" } })]]
 )
 cmd([[autocmd ColorScheme * highlight link LspCodeLens Conceal]])
-
 cmd([[augroup END]])
 
 cmd("colorscheme onedark")
+
 -- LSP
 cmd([[augroup lsp]])
 cmd([[autocmd!]])
 cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 cmd([[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(Metals_config)]])
 
+-- used in textDocument/hightlight
 cmd([[hi! link LspReferenceText CursorColumn]])
 cmd([[hi! link LspReferenceRead CursorColumn]])
 cmd([[hi! link LspReferenceWrite CursorColumn]])
 
+-- Diagnostic specific colors
+cmd([[hi! DiagnosticError guifg=#e06c75]]) -- light red
+cmd([[hi! DiagnosticWarn guifg=#e5c07b]]) -- light yellow
+cmd([[hi! DiagnosticInfo guifg=#56b6c2]]) -- cyan
+cmd([[hi! link DiagnosticHint DiagnosticInfo]])
+-- _Maybe_ try underline for a bit
+cmd([[hi! DiagnosticUnderlineError cterm=NONE gui=underline guifg=NONE]])
+cmd([[hi! DiagnosticUnderlineWarn cterm=NONE gui=underline guifg=NONE]])
+cmd([[hi! DiagnosticUnderlineInfo cterm=NONE gui=underline guifg=NONE]])
+cmd([[hi! DiagnosticUnderlineHint cterm=NONE gui=underline guifg=NONE]])
 cmd([[augroup END]])
 
-----------------------------------
--- LSP Settings ------------------
-----------------------------------
-fn.sign_define("LspDiagnosticsSignError", { text = "▬" })
-fn.sign_define("LspDiagnosticsSignWarning", { text = "▬" })
-fn.sign_define("LspDiagnosticsSignInformation", { text = "▬" })
-fn.sign_define("LspDiagnosticsSignHint", { text = "▬" })
-
 vim.cmd([[command! Format lua vim.lsp.buf.formatting()]])
+
+----------------------------------
+-- DIAGNOSTIC SETTINGS -----------
+----------------------------------
+fn.sign_define("DiagnosticSignError", { text = "▬", texthl = "DiagnosticError" })
+fn.sign_define("DiagnosticSignWarn", { text = "▬", texthl = "DiagnosticWarn" })
+fn.sign_define("DiagnosticSignInfo", { text = "▬", texthl = "DiagnosticInfo" })
+fn.sign_define("DiagnosticSignHint", { text = "▬", texthl = "DiagnosticHint" })
+
+-- Since a lot of errors can be super long and multiple lines in Scala, I use
+-- this to split on the first new line and only dispaly the first line as the
+-- virtual text... that is when I actually use virtual text for diagnsostics
+local diagnostic_foramt = function(diagnostic)
+  return string.format("%s: %s", diagnostic.source, f.split_on(diagnostic.message, "\n")[1])
+end
+
+vim.diagnostic.config({ virtual_text = { format = diagnostic_foramt } })

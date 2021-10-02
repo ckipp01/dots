@@ -23,9 +23,10 @@ M.setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    fallbackScalaVersion = "3.0.1",
-    --fallbackScalaVersion = "2.13.6",
-    superMethodLensesEnabled = true,
+    --fallbackScalaVersion = "3.0.1",
+    --serverProperties = {
+    --  "-Dmetals.scala-cli.launcher=/usr/local/bin/scala-cli",
+    --},
   }
 
   Metals_config.init_options.statusBarProvider = "on"
@@ -63,8 +64,7 @@ M.setup = function()
   }
 
   Metals_config.on_attach = function(client, bufnr)
-
-    vim.cmd([[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]])
+    vim.cmd([[autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()]])
     vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
     vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]])
 
