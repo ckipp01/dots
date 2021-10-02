@@ -1,3 +1,4 @@
+local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
@@ -15,8 +16,8 @@ require("settings.functions")
 require("settings.compe").setup()
 require("settings.telescope").setup()
 require("settings.lsp").setup()
+require("settings.statusline")
 
-require("settings.galaxyline").setup()
 require("nvim-autopairs").setup()
 require("gitsigns").setup()
 
@@ -82,6 +83,9 @@ opt.shiftwidth = indent
 opt.softtabstop = indent
 opt.expandtab = true
 opt.fileformat = "unix"
+
+-- statusline
+opt.statusline = "%!luaeval('Super_custom_status_line()')"
 
 -- MAPPINGS -----------------------
 map("i", "jj", "<ESC>")
@@ -193,12 +197,19 @@ cmd([[hi! DiagnosticError guifg=#e06c75]]) -- light red
 cmd([[hi! DiagnosticWarn guifg=#e5c07b]]) -- light yellow
 cmd([[hi! DiagnosticInfo guifg=#56b6c2]]) -- cyan
 cmd([[hi! link DiagnosticHint DiagnosticInfo]])
+
 -- _Maybe_ try underline for a bit
 cmd([[hi! DiagnosticUnderlineError cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! DiagnosticUnderlineWarn cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! DiagnosticUnderlineInfo cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! DiagnosticUnderlineHint cterm=NONE gui=underline guifg=NONE]])
+
+cmd([[hi! StatusLine guifg=#5C6370 guibg=#282c34]])
+cmd([[hi! link StatusError DiagnosticError]])
+cmd([[hi! link StatusWarn DiagnosticWarn]])
+
 cmd([[augroup END]])
+
 
 vim.cmd([[command! Format lua vim.lsp.buf.formatting()]])
 
