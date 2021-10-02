@@ -1,4 +1,3 @@
-local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
@@ -204,6 +203,7 @@ cmd([[hi! DiagnosticUnderlineWarn cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! DiagnosticUnderlineInfo cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! DiagnosticUnderlineHint cterm=NONE gui=underline guifg=NONE]])
 
+-- Statusline specific highlights
 cmd([[hi! StatusLine guifg=#5C6370 guibg=#282c34]])
 cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])

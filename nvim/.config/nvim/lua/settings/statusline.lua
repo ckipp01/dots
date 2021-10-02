@@ -7,10 +7,7 @@ https://twitter.com/ful1e5/status/1439191720722272260 and how I was inspired by
 that statusline. It was as this point I realized my day was gone, lost.
 --]]
 
-
--- #282c34
 local api = vim.api
-local cmd = vim.cmd
 local opt = vim.opt
 
 local function err_count(severity)
@@ -87,9 +84,9 @@ function Super_custom_status_line()
     err_count("Warn"),
     "%#StatusLine#",
     metals_status(),
-    "%=",
-    "%l, ",
-    "%c ",
+    "%=", -- Left and Right divider
+    "%l, ", -- line number
+    "%c ", -- column number
     scrollbar(),
     "%"
   })
