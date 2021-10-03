@@ -10,7 +10,7 @@ M.setup = function()
     handlers = {
       ["textDocument/publishDiagnostics"] = shared_diagnostic_settings,
     },
-    capabilities = capabilities,
+    capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities),
   })
 
   Metals_config = require("metals").bare_config
@@ -31,7 +31,7 @@ M.setup = function()
 
   Metals_config.init_options.statusBarProvider = "on"
   Metals_config.handlers["textDocument/publishDiagnostics"] = shared_diagnostic_settings
-  Metals_config.capabilities = capabilities
+  Metals_config.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
   local dap = require("dap")
 

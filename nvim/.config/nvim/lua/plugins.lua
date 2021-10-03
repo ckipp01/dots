@@ -1,9 +1,15 @@
 return require("packer").startup(function(use)
   use({ "ckipp01/nvim-jvmopts" })
-  --use({ "glepnir/galaxyline.nvim" })
   use({ "joshdick/onedark.vim" })
-  use({ "junegunn/goyo.vim", opt = true })
-  use({ "hrsh7th/nvim-compe", requires = { { "hrsh7th/vim-vsnip" } } })
+  use({
+    "hrsh7th/nvim-cmp",
+    requires = {
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-vsnip" },
+      { "hrsh7th/vim-vsnip" },
+    },
+  })
   use({ "kevinhwang91/nvim-bqf" })
   use({ "kyazdani42/nvim-web-devicons" })
   use({
@@ -37,6 +43,5 @@ return require("packer").startup(function(use)
   use({ "wakatime/vim-wakatime" })
   use({ "wbthomason/packer.nvim", opt = true })
   use({ "windwp/nvim-autopairs" })
-  use({ "wlangstroth/vim-racket" })
   use({ "Yggdroot/indentLine" })
 end)

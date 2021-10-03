@@ -12,7 +12,7 @@ local global_opt = vim.opt_global
 cmd([[packadd packer.nvim]])
 require("plugins")
 require("settings.functions")
-require("settings.compe").setup()
+require("settings.cmp").setup()
 require("settings.telescope").setup()
 require("settings.lsp").setup()
 require("settings.statusline")
@@ -58,7 +58,10 @@ g["metals_server_version"] = "0.10.7+74-b68f0c82-SNAPSHOT"
 local indent = 2
 
 -- global
-global_opt.shortmess:remove("F"):append("c")
+-- If you're copying my dot files and aren't familiar with nvim-metals, then
+-- make sure you remove("F"). Do as I say, not as I do
+--global_opt.shortmess:remove("F"):append("c")
+global_opt.shortmess:append("c")
 global_opt.termguicolors = true
 global_opt.hidden = true
 global_opt.showtabline = 1
@@ -125,7 +128,6 @@ map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicit
 -- completion
 map("i", "<S-Tab>", [[pumvisible() ? "<C-p>" : "<Tab>"]], { expr = true })
 map("i", "<Tab>", [[pumvisible() ? "<C-n>" : "<Tab>"]], { expr = true })
-map("i", "<CR>", [[compe#confirm("<CR>")]], { expr = true })
 
 -- telescope
 map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files()<CR>]])
@@ -209,7 +211,6 @@ cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])
 
 cmd([[augroup END]])
-
 
 vim.cmd([[command! Format lua vim.lsp.buf.formatting()]])
 
