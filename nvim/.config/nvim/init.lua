@@ -46,7 +46,7 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
-g["metals_server_version"] = "1.10.7+74-b68f0c82-SNAPSHOT"
+g["metals_server_version"] = "0.10.7+78-03c450a0-SNAPSHOT"
 --g["metals_server_version"] = "0.10.7"
 -- Only for testing scala-cli
 --g["metals_server_org"] = "org.virtuslab"
