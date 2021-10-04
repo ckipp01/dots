@@ -4,7 +4,6 @@ M.setup = function()
   local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false })
   local lsp_config = require("lspconfig")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   lsp_config.util.default_config = vim.tbl_extend("force", lsp_config.util.default_config, {
     handlers = {
@@ -30,6 +29,7 @@ M.setup = function()
   }
 
   Metals_config.init_options.statusBarProvider = "on"
+  Metals_config.init_options.compilerOptions.isCompletionItemResolve = false
   Metals_config.handlers["textDocument/publishDiagnostics"] = shared_diagnostic_settings
   Metals_config.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
@@ -131,6 +131,8 @@ M.setup = function()
       "/Users/ckipp/Documents/kotlin-workspace/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
     },
   })
+
+  lsp_config.elmls.setup({})
 
   -- Uncomment for trace logs from neovim
   --vim.lsp.set_log_level('trace')

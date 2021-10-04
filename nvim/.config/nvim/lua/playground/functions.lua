@@ -19,8 +19,26 @@ local function get_exts()
   print(vim.inspect(all))
 end
 
+local function visual_selection_range()
+  --local test = vim.lsp.util.make_given_range_params()
+
+  --local test = vim.lsp.util.make_range_params()
+  --local _, start_line_num, start_col_num, _ = unpack(vim.fn.getpos("'<"))
+  local a = vim.api.nvim_buf_get_mark(0, '<')
+  local b = vim.fn.getpos("'<")
+
+  P(a)
+  P(b)
+  --if csrow < cerow or (csrow == cerow and cscol <= cecol) then
+  --  return csrow - 1, cscol - 1, cerow - 1, cecol
+  --else
+  --  return cerow - 1, cecol - 1, csrow - 1, cscol
+  --end
+end
+
 return {
   peek = peek,
   set_ext = set_ext,
   get_exts = get_exts,
+  visual_selection_range = visual_selection_range,
 }

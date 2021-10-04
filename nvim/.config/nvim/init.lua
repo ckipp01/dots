@@ -46,7 +46,7 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
-g["metals_server_version"] = "0.10.7+74-b68f0c82-SNAPSHOT"
+g["metals_server_version"] = "1.10.7+74-b68f0c82-SNAPSHOT"
 --g["metals_server_version"] = "0.10.7"
 -- Only for testing scala-cli
 --g["metals_server_org"] = "org.virtuslab"
@@ -106,7 +106,7 @@ map("n", "<leader>tv", ":vnew | :te<cr>")
 -- LSP
 map("n", "gD", [[<cmd>lua vim.lsp.buf.definition()<CR>]])
 map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]])
-map("v", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]])
+map("v", "K", [[<cmd>lua require("metals").type_of_range()<CR>]])
 map("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
 map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
 map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
@@ -156,6 +156,7 @@ map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.semantic").generate(
 map("n", "<leader><leader>m", [[<cmd>lua RELOAD("playground.mt").get_dep()<CR>]])
 map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.functions").set_ext()<CR>]])
 map("n", "<leader><leader>g", [[<cmd>lua RELOAD("playground.functions").get_exts()<CR>]])
+map("v", "<leader><leader>v", [[<cmd>lua RELOAD("playground.functions").visual_selection_range()<CR>]])
 map("n", "<leader><leader>e", [[:luafile %<CR>]])
 
 ----------------------------------
