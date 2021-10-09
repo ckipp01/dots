@@ -23,9 +23,10 @@ local function visual_selection_range()
   --local test = vim.lsp.util.make_given_range_params()
 
   --local test = vim.lsp.util.make_range_params()
-  --local _, start_line_num, start_col_num, _ = unpack(vim.fn.getpos("'<"))
+  local _, start_line_num, start_col_num, _ = unpack(vim.fn.getpos("'<"))
   local a = vim.api.nvim_buf_get_mark(0, '<')
   local b = vim.fn.getpos("'<")
+  local b = vim.fn.getpos("'>")
 
   P(a)
   P(b)

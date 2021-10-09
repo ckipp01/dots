@@ -46,11 +46,11 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
-g["metals_server_version"] = "0.10.7+78-03c450a0-SNAPSHOT"
+--g["metals_server_version"] = "0.10.7+84-9d4bcf78-SNAPSHOT"
 --g["metals_server_version"] = "0.10.7"
 -- Only for testing scala-cli
 --g["metals_server_org"] = "org.virtuslab"
---g["metals_server_version"] = "0.10.8-SNAPSHOT"
+g["metals_server_version"] = "0.10.8-SNAPSHOT"
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -60,8 +60,8 @@ local indent = 2
 -- global
 -- If you're copying my dot files and aren't familiar with nvim-metals, then
 -- make sure you remove("F"). Do as I say, not as I do
---global_opt.shortmess:remove("F"):append("c")
-global_opt.shortmess:append("c")
+global_opt.shortmess:remove("F"):append("c")
+--global_opt.shortmess:append("c")
 global_opt.termguicolors = true
 global_opt.hidden = true
 global_opt.showtabline = 1
@@ -124,10 +124,6 @@ map("n", "<leader>pd", [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]])
 map("n", "<leader>ld", [[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>]])
 map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
 map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
-
--- completion
-map("i", "<S-Tab>", [[pumvisible() ? "<C-p>" : "<Tab>"]], { expr = true })
-map("i", "<Tab>", [[pumvisible() ? "<C-n>" : "<Tab>"]], { expr = true })
 
 -- telescope
 map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files()<CR>]])

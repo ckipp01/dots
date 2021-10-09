@@ -91,7 +91,7 @@ M.setup = function()
           version = "LuaJIT", -- since using mainly for neovim
           path = vim.split(package.path, ";"),
         },
-        diagnostics = { globals = { "vim", "it", "describe" } },
+        diagnostics = { globals = { "vim", "it", "describe", "before_each"} },
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = {
