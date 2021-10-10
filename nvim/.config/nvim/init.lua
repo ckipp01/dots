@@ -46,7 +46,7 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
---g["metals_server_version"] = "0.10.7+84-9d4bcf78-SNAPSHOT"
+--g["metals_server_version"] = "0.10.7+109-46da025f-SNAPSHOT"
 --g["metals_server_version"] = "0.10.7"
 -- Only for testing scala-cli
 --g["metals_server_org"] = "org.virtuslab"
@@ -106,7 +106,7 @@ map("n", "<leader>tv", ":vnew | :te<cr>")
 -- LSP
 map("n", "gD", [[<cmd>lua vim.lsp.buf.definition()<CR>]])
 map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]])
-map("v", "K", [[<cmd>lua require("metals").type_of_range()<CR>]])
+map("v", "K", [[<Esc><cmd>lua require("metals").type_of_range()<CR>]])
 map("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
 map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
 map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
@@ -184,6 +184,8 @@ cmd([[augroup lsp]])
 cmd([[autocmd!]])
 cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 cmd([[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(Metals_config)]])
+--cmd([[autocmd FileType dap-repl lua require("dap.ext.autocompl").attatch()]])
+
 
 -- used in textDocument/hightlight
 cmd([[hi! link LspReferenceText CursorColumn]])
