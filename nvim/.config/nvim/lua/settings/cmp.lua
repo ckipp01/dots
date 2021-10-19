@@ -4,8 +4,8 @@ M.setup = function()
   local cmp = require("cmp")
   cmp.setup({
     sources = {
+      { name = "nvim_lsp", priority = 10 },
       { name = "buffer" },
-      { name = "nvim_lsp" },
       { name = "vsnip" },
     },
     snippet = {

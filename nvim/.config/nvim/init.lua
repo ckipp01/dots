@@ -30,7 +30,7 @@ require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
   highlight = {
     enable = true,
-    disable = { "scala" },
+    --disable = { "scala" },
   },
 })
 
@@ -46,11 +46,11 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
---g["metals_server_version"] = "0.10.7+109-46da025f-SNAPSHOT"
+g["metals_server_version"] = "0.10.7+124-df3f5d66-SNAPSHOT"
 --g["metals_server_version"] = "0.10.7"
 -- Only for testing scala-cli
 --g["metals_server_org"] = "org.virtuslab"
-g["metals_server_version"] = "0.10.8-SNAPSHOT"
+--g["metals_server_version"] = "0.10.8-SNAPSHOT"
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -115,14 +115,15 @@ map("n", "gws", [[<cmd>lua require"settings.telescope".lsp_workspace_symbols()<C
 map("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]])
 map("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]])
 map("n", "<leader>ws", [[<cmd>lua require"metals".hover_worksheet()<CR>]])
-map("n", "<leader>a", [[<cmd>lua RELOAD("metals").open_all_diagnostics()<CR>]])
+map("n", "<leader>a", [[<cmd>lua require("metals").open_all_diagnostics()<CR>]])
 map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
 map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
-map("n", "<leader>d", [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]]) -- buffer diagnostics only
-map("n", "<leader>nd", [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]])
-map("n", "<leader>pd", [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]])
-map("n", "<leader>ld", [[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>]])
+map("n", "<leader>d", [[<cmd>lua vim.diagnostic.setloclist()<CR>]]) -- buffer diagnostics only
+map("n", "<leader>nd", [[<cmd>lua vim.diagnostic.goto_next()<CR>]])
+map("n", "<leader>pd", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]])
+map("n", "<leader>ld", [[<cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>]])
 map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
+
 map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
 
 -- telescope
@@ -186,7 +187,6 @@ cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 cmd([[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(Metals_config)]])
 --cmd([[autocmd FileType dap-repl lua require("dap.ext.autocompl").attatch()]])
 
-
 -- used in textDocument/hightlight
 cmd([[hi! link LspReferenceText CursorColumn]])
 cmd([[hi! link LspReferenceRead CursorColumn]])
@@ -228,4 +228,4 @@ local diagnostic_foramt = function(diagnostic)
   return string.format("%s: %s", diagnostic.source, f.split_on(diagnostic.message, "\n")[1])
 end
 
-vim.diagnostic.config({ virtual_text = { format = diagnostic_foramt } })
+vim.diagnostic.config({ virtual_text = { format = diagnostic_foramt }, severity_sort = true })

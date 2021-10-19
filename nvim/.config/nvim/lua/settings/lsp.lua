@@ -12,7 +12,7 @@ M.setup = function()
     capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities),
   })
 
-  Metals_config = require("metals").bare_config
+  Metals_config = require("metals").bare_config()
 
   Metals_config.settings = {
     showImplicitArguments = true,
@@ -22,7 +22,7 @@ M.setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    --fallbackScalaVersion = "3.0.1",
+    fallbackScalaVersion = "2.13.6",
     --serverProperties = {
     --  "-Dmetals.scala-cli.launcher=/usr/local/bin/scala-cli",
     --},

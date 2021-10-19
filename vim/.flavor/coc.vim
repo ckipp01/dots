@@ -149,7 +149,7 @@ nnoremap <leader>cl :<C-u>call CocActionAsync('codeLensAction')<CR>
 command! -nargs=0 Format :call CocActionAsync('format')
 
 " Use `:Fold` for fold current buffer
-command! -nargs=? Fold :call CocAction('fold', <f-args>)
+command! -nargs=? Fold :call CocActionAsync('fold', <f-args>)
 
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
