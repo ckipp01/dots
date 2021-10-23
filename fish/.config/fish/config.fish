@@ -10,8 +10,6 @@ set PATH /Users/ckipp/.local/bin /Users/ckipp/bin /Users/ckipp/Library/Applicati
 # Setting to change z to j #
 set -U Z_CMD "j"
 
-set N_PREFIX $HOME/n
-
 # Ensure that nvim is set as the default editor
 set -gx EDITOR nvim
 set -gx VISUAL $EDITOR

@@ -23,13 +23,9 @@ M.setup = function()
       "akka.stream.javadsl",
     },
     fallbackScalaVersion = "2.13.6",
-    --serverProperties = {
-    --  "-Dmetals.scala-cli.launcher=/usr/local/bin/scala-cli",
-    --},
   }
 
   Metals_config.init_options.statusBarProvider = "on"
-  Metals_config.init_options.compilerOptions.isCompletionItemResolve = false
   Metals_config.handlers["textDocument/publishDiagnostics"] = shared_diagnostic_settings
   Metals_config.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
@@ -91,7 +87,7 @@ M.setup = function()
           version = "LuaJIT", -- since using mainly for neovim
           path = vim.split(package.path, ";"),
         },
-        diagnostics = { globals = { "vim", "it", "describe", "before_each"} },
+        diagnostics = { globals = { "vim", "it", "describe", "before_each" } },
         workspace = {
           -- Make the server aware of Neovim runtime files
           library = {

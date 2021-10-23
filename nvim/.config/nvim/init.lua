@@ -46,7 +46,8 @@ g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
-g["metals_server_version"] = "0.10.7+124-df3f5d66-SNAPSHOT"
+--g["metals_disabled_mode"] = true
+g["metals_server_version"] = "0.10.7+162-466de5e4-SNAPSHOT"
 --g["metals_server_version"] = "0.10.7"
 -- Only for testing scala-cli
 --g["metals_server_org"] = "org.virtuslab"
@@ -127,9 +128,9 @@ map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
 map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
 
 -- telescope
-map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files()<CR>]])
-map("n", "<leader>lg", [[<cmd>lua require"telescope.builtin".live_grep()<CR>]])
-map("n", "<leader>fb", [[<cmd>lua require"telescope.builtin".file_browser()<CR>]])
+map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files({layout_strategy="vertical"})<CR>]])
+map("n", "<leader>lg", [[<cmd>lua require"telescope.builtin".live_grep({layout_strategy="vertical"})<CR>]])
+map("n", "<leader>fb", [[<cmd>lua require"telescope.builtin".file_browser({layout_strategy="vertical"})<CR>]])
 map("n", "<leader>mc", [[<cmd>lua require("telescope").extensions.metals.commands()<CR>]])
 
 -- nvim-dap
