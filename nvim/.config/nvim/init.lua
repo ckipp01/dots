@@ -30,7 +30,7 @@ require("nvim-treesitter.configs").setup({
   ensure_installed = "maintained",
   highlight = {
     enable = true,
-    --disable = { "scala" },
+    disable = { "scala" },
   },
 })
 
@@ -47,7 +47,7 @@ g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
 --g["metals_disabled_mode"] = true
-g["metals_server_version"] = "0.10.7+162-466de5e4-SNAPSHOT"
+g["metals_server_version"] = "0.10.8"
 --g["metals_server_version"] = "0.10.7"
 -- Only for testing scala-cli
 --g["metals_server_org"] = "org.virtuslab"
@@ -124,6 +124,7 @@ map("n", "<leader>nd", [[<cmd>lua vim.diagnostic.goto_next()<CR>]])
 map("n", "<leader>pd", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]])
 map("n", "<leader>ld", [[<cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>]])
 map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
+map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.formatting()<CR>]])
 
 map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
 
@@ -187,6 +188,7 @@ cmd([[autocmd!]])
 cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 cmd([[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(Metals_config)]])
 --cmd([[autocmd FileType dap-repl lua require("dap.ext.autocompl").attatch()]])
+cmd([[augroup END]])
 
 -- used in textDocument/hightlight
 cmd([[hi! link LspReferenceText CursorColumn]])
@@ -210,9 +212,9 @@ cmd([[hi! StatusLine guifg=#5C6370 guibg=#282c34]])
 cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])
 
-cmd([[augroup END]])
+cmd([[hi! TelescopeTitle guifg=#e5c07b]])
 
-vim.cmd([[command! Format lua vim.lsp.buf.formatting()]])
+cmd([[autocmd TextYankPost * silent! lua vim.highlight.on_yank {}]])
 
 ----------------------------------
 -- DIAGNOSTIC SETTINGS -----------
