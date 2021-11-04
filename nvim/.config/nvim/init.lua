@@ -10,6 +10,7 @@ local global_opt = vim.opt_global
 -- SETUP PLUGINS -----------------
 ----------------------------------
 cmd([[packadd packer.nvim]])
+
 require("plugins")
 require("settings.functions")
 require("settings.cmp").setup()
@@ -47,11 +48,11 @@ g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
 --g["metals_disabled_mode"] = true
-g["metals_server_version"] = "0.10.8"
---g["metals_server_version"] = "0.10.7"
+--g["metals_server_version"] = "0.10.8+17-0ddc2b2e-SNAPSHOT"
+g["metals_server_version"] = "0.10.9"
 -- Only for testing scala-cli
 --g["metals_server_org"] = "org.virtuslab"
---g["metals_server_version"] = "0.10.8-SNAPSHOT"
+--g["metals_server_version"] = "0.10.9-SNAPSHOT"
 
 ----------------------------------
 -- OPTIONS -----------------------

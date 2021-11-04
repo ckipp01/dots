@@ -6,6 +6,7 @@ return require("packer").startup(function(use)
     requires = {
       { "hrsh7th/cmp-buffer" },
       { "hrsh7th/cmp-nvim-lsp" },
+      {'hrsh7th/cmp-path'},
       { "hrsh7th/cmp-vsnip" },
       { "hrsh7th/vim-vsnip" },
     },
@@ -36,7 +37,6 @@ return require("packer").startup(function(use)
   use({ "/Users/ckipp/Documents/lua-workspace/nvim-metals" })
   use({ "/Users/ckipp/Documents/lua-workspace/stylua-nvim" })
   use({ "/Users/ckipp/Documents/lua-workspace/scala-utils.nvim", requires = { "nvim-lua/plenary.nvim" } })
-  --use({ "tjdevries/sg.nvim" })
   use({ "sheerun/vim-polyglot" })
   use({ "tpope/vim-fugitive" })
   use({ "tpope/vim-vinegar" })

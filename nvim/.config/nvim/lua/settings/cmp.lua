@@ -7,6 +7,7 @@ M.setup = function()
       { name = "nvim_lsp", priority = 10 },
       { name = "buffer" },
       { name = "vsnip" },
+      { name = "path" },
     },
     snippet = {
       expand = function(args)

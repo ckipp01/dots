@@ -22,7 +22,7 @@ M.setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    fallbackScalaVersion = "2.13.6",
+    --fallbackScalaVersion = "2.13.6",
   }
 
   Metals_config.init_options.statusBarProvider = "on"
@@ -122,13 +122,15 @@ M.setup = function()
     },
   })
 
-  require("lspconfig").kotlin_language_server.setup({
+  lsp_config.elmls.setup({})
+
+  lsp_config.groovyls.setup({
     cmd = {
-      "/Users/ckipp/Documents/kotlin-workspace/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
+      "java",
+      "-jar",
+      "/Users/ckipp/Documents/java-workspace/groovy-language-server/build/libs/groovy-language-server-all.jar",
     },
   })
-
-  lsp_config.elmls.setup({})
 
   -- Uncomment for trace logs from neovim
   --vim.lsp.set_log_level('trace')
