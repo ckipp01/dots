@@ -1,14 +1,10 @@
 local M = {}
 
 M.setup = function()
-  local shared_diagnostic_settings = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false })
   local lsp_config = require("lspconfig")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   lsp_config.util.default_config = vim.tbl_extend("force", lsp_config.util.default_config, {
-    handlers = {
-      ["textDocument/publishDiagnostics"] = shared_diagnostic_settings,
-    },
     capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities),
   })
 
@@ -22,11 +18,10 @@ M.setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    --fallbackScalaVersion = "2.13.6",
+    fallbackScalaVersion = "2.13.7",
   }
 
   Metals_config.init_options.statusBarProvider = "on"
-  Metals_config.handlers["textDocument/publishDiagnostics"] = shared_diagnostic_settings
   Metals_config.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
   local dap = require("dap")
@@ -38,7 +33,7 @@ M.setup = function()
       name = "Run",
       metals = {
         runType = "run",
-        args = { "firstArg", "secondArg", "thirdArg" },
+        --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
       },
     },
     {

@@ -48,11 +48,11 @@ g["vim_markdown_conceal_code_blocks"] = 0
 
 -- nvim-metals
 --g["metals_disabled_mode"] = true
---g["metals_server_version"] = "0.10.8+17-0ddc2b2e-SNAPSHOT"
-g["metals_server_version"] = "0.10.9"
+g["metals_server_version"] = "0.10.9+54-3f211b03-SNAPSHOT"
+--g["metals_server_version"] = "0.10.9"
 -- Only for testing scala-cli
 --g["metals_server_org"] = "org.virtuslab"
---g["metals_server_version"] = "0.10.9-SNAPSHOT"
+--g["metals_server_version"] = "0.10.10-SNAPSHOT"
 
 ----------------------------------
 -- OPTIONS -----------------------
@@ -134,6 +134,7 @@ map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files({layout_
 map("n", "<leader>lg", [[<cmd>lua require"telescope.builtin".live_grep({layout_strategy="vertical"})<CR>]])
 map("n", "<leader>fb", [[<cmd>lua require"telescope.builtin".file_browser({layout_strategy="vertical"})<CR>]])
 map("n", "<leader>mc", [[<cmd>lua require("telescope").extensions.metals.commands()<CR>]])
+map("n", "<leader>cc", [[<cmd>lua RELOAD("telescope").extensions.coursier.complete()<CR>]])
 
 -- nvim-dap
 map("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
@@ -232,4 +233,5 @@ local diagnostic_foramt = function(diagnostic)
   return string.format("%s: %s", diagnostic.source, f.split_on(diagnostic.message, "\n")[1])
 end
 
-vim.diagnostic.config({ virtual_text = { format = diagnostic_foramt }, severity_sort = true })
+--vim.diagnostic.config({ virtual_text = { format = diagnostic_foramt }, severity_sort = true })
+vim.diagnostic.config({ virtual_text = false })
