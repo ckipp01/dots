@@ -46,14 +46,6 @@ g["netrw_gx"] = "<cWORD>"
 g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
--- nvim-metals
---g["metals_disabled_mode"] = true
-g["metals_server_version"] = "0.10.9+80-6ff28e97-SNAPSHOT"
---g["metals_server_version"] = "0.10.9"
--- Only for testing scala-cli
---g["metals_server_org"] = "org.virtuslab"
---g["metals_server_version"] = "0.10.10-SNAPSHOT"
-
 ----------------------------------
 -- OPTIONS -----------------------
 ----------------------------------
@@ -190,6 +182,7 @@ cmd([[augroup lsp]])
 cmd([[autocmd!]])
 cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 cmd([[autocmd FileType scala,sbt,java lua require("metals").initialize_or_attach(Metals_config)]])
+--cmd([[autocmd FileType scala,sbt,java lua require("metals").initialize_or_attach({})]])
 --cmd([[autocmd FileType dap-repl lua require("dap.ext.autocompl").attatch()]])
 cmd([[augroup END]])
 
