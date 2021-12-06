@@ -1,4 +1,0 @@
-[language.scala]
-filetypes = ["scala"]
-roots = ["build.sbt"]
-command = "metals-kak"
