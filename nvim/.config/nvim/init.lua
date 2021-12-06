@@ -90,7 +90,6 @@ map("i", "jj", "<ESC>")
 map("n", "<leader><leader>n", [[<cmd>lua RELOAD("settings.functions").toggle_nums()<CR>]])
 map("n", "<leader><leader>c", [[<cmd>lua RELOAD("settings.functions").toggle_conceal()<CR>]])
 
-map("n", "<leader>nhs", ":nohlsearch<cr>")
 map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 map("n", "<leader>fo", ":copen<cr>")
 map("n", "<leader>fc", ":cclose<cr>")

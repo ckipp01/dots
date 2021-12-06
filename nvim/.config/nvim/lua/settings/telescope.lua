@@ -24,12 +24,13 @@ end
 -- the symbols. This will first get the input form the user and then execute
 -- the query.
 M.lsp_workspace_symbols = function()
-  local input = vim.fn.input("Query: ")
-  vim.api.nvim_command("normal :esc<CR>")
-  if not input or #input == 0 then
-    return
-  end
-  require("telescope.builtin").lsp_workspace_symbols({ query = input })
+  vim.ui.input({
+    prompt = "Query: ",
+  }, function(result)
+    if result ~= nil then
+      require("telescope.builtin").lsp_workspace_symbols({ query = result })
+    end
+  end)
 end
 
 return M
