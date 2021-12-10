@@ -1,3 +1,5 @@
+local Job = require("plenary.job")
+
 local function preview_location(_, _, res)
   vim.lsp.util.preview_location(res[1])
 end
@@ -24,7 +26,7 @@ local function visual_selection_range()
 
   --local test = vim.lsp.util.make_range_params()
   local _, start_line_num, start_col_num, _ = unpack(vim.fn.getpos("'<"))
-  local a = vim.api.nvim_buf_get_mark(0, '<')
+  local a = vim.api.nvim_buf_get_mark(0, "<")
   local b = vim.fn.getpos("'<")
   local b = vim.fn.getpos("'>")
 
@@ -37,9 +39,48 @@ local function visual_selection_range()
   --end
 end
 
+-- Super hacky hacky way to grab the latest snapshot version. The
+-- maven-metadata.xml file is always out of sync so on the website we scrape
+-- the overview html page and grab it from there. So this just grabs it from
+-- the site...
+local get_latest_metals = function()
+  local version = {}
+  Job
+    :new({
+      command = "curl",
+      args = {
+        "https://scalameta.org/metals/docs/",
+      },
+
+      on_stdout = function(err, data)
+        if not err then
+          table.insert(version, data)
+        end
+      end,
+      on_exit = vim.schedule_wrap(function(_, status)
+        if not status == 0 then
+          vim.notify("Something went wrong getting version from metals site")
+        else
+          local latest = ""
+          for _, value in ipairs(version) do
+            if string.match(value, "SNAPSHOT") then
+              latest = value
+            end
+          end
+          local l = latest:match("</tr><tr><td>(%d.+SNAPSHOT)</td>")
+
+          vim.fn.setreg("+", l)
+          vim.notify(string.format("copied %s to your register", l))
+        end
+      end),
+    })
+    :start()
+end
+
 return {
   peek = peek,
   set_ext = set_ext,
   get_exts = get_exts,
+  get_latest_metals = get_latest_metals,
   visual_selection_range = visual_selection_range,
 }

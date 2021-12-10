@@ -143,14 +143,14 @@ map("n", "<leader>slc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_
 map("n", "<leader>sc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_input()<CR>]])
 
 -- other stuff
-require("playground.globals")
+require("settings.globals")
 map("n", "<leader><leader>p", [[<cmd>lua require"playground.functions".peek()<CR>]])
 map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.semantic").generate()<CR>]])
 map("n", "<leader><leader>m", [[<cmd>lua RELOAD("playground.mt").get_dep()<CR>]])
 map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.functions").set_ext()<CR>]])
 map("n", "<leader><leader>g", [[<cmd>lua RELOAD("playground.functions").get_exts()<CR>]])
-map("v", "<leader><leader>v", [[<cmd>lua RELOAD("playground.functions").visual_selection_range()<CR>]])
 map("n", "<leader><leader>e", [[:luafile %<CR>]])
+map("n", "<leader><leader>v", [[<cmd>lua RELOAD("playground.functions").get_latest_metals()<CR>]])
 
 ----------------------------------
 -- COMMANDS ----------------------
