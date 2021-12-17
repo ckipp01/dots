@@ -77,7 +77,18 @@ local get_latest_metals = function()
     :start()
 end
 
+-- I could use vim-scriptease for this, but I don't want the full plugin to
+-- only use the zS functionality. We we just take that out and give it some lua
+-- love and instead of just displaying the name we call hi with it.
+local function get_hl_under_cursor()
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local id = vim.fn.synID(row, col + 1, 1)
+  local result = vim.fn.synIDattr(id, "name")
+  vim.cmd(string.format("hi %s", result))
+end
+
 return {
+  get_hl_under_cursor = get_hl_under_cursor,
   peek = peek,
   set_ext = set_ext,
   get_exts = get_exts,

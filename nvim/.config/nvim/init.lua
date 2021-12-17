@@ -5,7 +5,6 @@ local f = require("settings.functions")
 local map = f.map
 local opt = vim.opt
 local global_opt = vim.opt_global
-
 ----------------------------------
 -- SETUP PLUGINS -----------------
 ----------------------------------
@@ -105,11 +104,13 @@ map("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
 map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
 map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
 map("n", "gds", [[<cmd>lua require"telescope.builtin".lsp_document_symbols()<CR>]])
-map("n", "gws", [[<cmd>lua require"settings.telescope".lsp_workspace_symbols()<CR>]])
+map("n", "gws", [[<cmd>lua require"telescope.builtin".lsp_dynamic_workspace_symbols()<CR>]])
 map("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]])
 map("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]])
 map("n", "<leader>ws", [[<cmd>lua require"metals".hover_worksheet()<CR>]])
-map("n", "<leader>a", [[<cmd>lua require("metals").open_all_diagnostics()<CR>]])
+map("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]])
+map("n", "<leader>ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]])
+map("n", "<leader>aw", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]])
 map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
 map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
 map("n", "<leader>d", [[<cmd>lua vim.diagnostic.setloclist()<CR>]]) -- buffer diagnostics only
@@ -125,13 +126,14 @@ map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicit
 map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files({layout_strategy="vertical"})<CR>]])
 map("n", "<leader>lg", [[<cmd>lua require"telescope.builtin".live_grep({layout_strategy="vertical"})<CR>]])
 map("n", "<leader>fb", [[<cmd>lua require"telescope.builtin".file_browser({layout_strategy="vertical"})<CR>]])
+map("n", "<leader>gh", [[<cmd>lua require"telescope.builtin".git_commits({layout_strategy="vertical"})<CR>]])
 map("n", "<leader>mc", [[<cmd>lua require("telescope").extensions.metals.commands()<CR>]])
 map("n", "<leader>cc", [[<cmd>lua RELOAD("telescope").extensions.coursier.complete()<CR>]])
 
 -- nvim-dap
 map("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
 map("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
-map("n", "<leader>ds", [[<cmd>lua require"dap.ui.variables".scopes()<CR>]])
+map("n", "<leader>ds", [[<cmd>lua require("dap.ui.widgets").sidebar(require("dap.ui.widgets").scopes).toggle()<CR>]])
 map("n", "<leader>dK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
 map("n", "<leader>dt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
 map("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
@@ -151,6 +153,8 @@ map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.functions").set_ext(
 map("n", "<leader><leader>g", [[<cmd>lua RELOAD("playground.functions").get_exts()<CR>]])
 map("n", "<leader><leader>e", [[:luafile %<CR>]])
 map("n", "<leader><leader>v", [[<cmd>lua RELOAD("playground.functions").get_latest_metals()<CR>]])
+map("n", "<leader><leader>j", [[<cmd>lua RELOAD("playground.jenkins_linter").validate()<CR>]])
+map("n", "<leader><leader>hl", [[<cmd>lua RELOAD("playground.functions").get_hl_under_cursor()<CR>]])
 
 ----------------------------------
 -- COMMANDS ----------------------
@@ -164,25 +168,16 @@ cmd([[autocmd TermOpen * startinsert]])
 
 cmd([[augroup colorset]])
 cmd([[autocmd!]])
-
---- For some reason when this is included in the augroup down below it doesn't work
----- Needed to esnure float background doesn't get odd highlighting
----- https://github.com/joshdick/onedark.vim#onedarkset_highlight
-cmd(
-  [[autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7" } })]]
-)
 cmd([[autocmd ColorScheme * highlight link LspCodeLens Conceal]])
 cmd([[augroup END]])
 
-cmd("colorscheme onedark")
+cmd("colorscheme kanagawa")
 
 -- LSP
 cmd([[augroup lsp]])
 cmd([[autocmd!]])
 cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 cmd([[autocmd FileType scala,sbt,java lua require("metals").initialize_or_attach(Metals_config)]])
---cmd([[autocmd FileType scala,sbt,java lua require("metals").initialize_or_attach({})]])
---cmd([[autocmd FileType dap-repl lua require("dap.ext.autocompl").attatch()]])
 cmd([[augroup END]])
 
 -- used in textDocument/hightlight
@@ -190,24 +185,19 @@ cmd([[hi! link LspReferenceText CursorColumn]])
 cmd([[hi! link LspReferenceRead CursorColumn]])
 cmd([[hi! link LspReferenceWrite CursorColumn]])
 
--- Diagnostic specific colors
-cmd([[hi! DiagnosticError guifg=#e06c75]]) -- light red
-cmd([[hi! DiagnosticWarn guifg=#e5c07b]]) -- light yellow
-cmd([[hi! DiagnosticInfo guifg=#56b6c2]]) -- cyan
-cmd([[hi! link DiagnosticHint DiagnosticInfo]])
-
--- _Maybe_ try underline for a bit
+-- Maybe try underline for a bit
 cmd([[hi! DiagnosticUnderlineError cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! DiagnosticUnderlineWarn cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! DiagnosticUnderlineInfo cterm=NONE gui=underline guifg=NONE]])
 cmd([[hi! DiagnosticUnderlineHint cterm=NONE gui=underline guifg=NONE]])
 
 -- Statusline specific highlights
-cmd([[hi! StatusLine guifg=#5C6370 guibg=#282c34]])
+-- #727169 # fujiGray
+-- #1F1F28 # sumiInk1
+cmd([[hi! StatusLine guifg=#727169 guibg=#1F1F28]])
+cmd([[hi! link StatusLineNC Comment]])
 cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])
-
-cmd([[hi! TelescopeTitle guifg=#e5c07b]])
 
 cmd([[autocmd TextYankPost * silent! lua vim.highlight.on_yank {}]])
 

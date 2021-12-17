@@ -1,6 +1,6 @@
 return require("packer").startup(function(use)
   use({ "ckipp01/nvim-jvmopts" })
-  use({ "joshdick/onedark.vim" })
+  use({"rebelot/kanagawa.nvim"})
   use({
     "hrsh7th/nvim-cmp",
     requires = {
@@ -21,7 +21,6 @@ return require("packer").startup(function(use)
   })
   use({ "liuchengxu/vista.vim" })
   use({ "machakann/vim-sandwich" })
-  use({ "mfussenegger/nvim-dap" })
   use({ "neovim/nvim-lspconfig" })
   use({ "norcalli/nvim-colorizer.lua" })
   use({
@@ -34,7 +33,10 @@ return require("packer").startup(function(use)
   })
   use({ "nvim-treesitter/nvim-treesitter" })
   use({ "nvim-treesitter/playground" })
-  use({ "/Users/ckipp/Documents/lua-workspace/nvim-metals" })
+  use({
+    "/Users/ckipp/Documents/lua-workspace/nvim-metals",
+    requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
+  })
   use({ "/Users/ckipp/Documents/lua-workspace/stylua-nvim" })
   use({ "/Users/ckipp/Documents/lua-workspace/scala-utils.nvim", requires = { "nvim-lua/plenary.nvim" } })
   use({ "sheerun/vim-polyglot" })

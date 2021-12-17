@@ -19,7 +19,8 @@ M.setup = function()
       "akka.stream.javadsl",
     },
     fallbackScalaVersion = "2.13.7",
-    serverVersion = "0.10.9+132-de70f264-SNAPSHOT"
+    serverVersion = "0.10.9+223-11c7c271-SNAPSHOT",
+    --serverVersion = "0.10.10-SNAPSHOT"
   }
 
   Metals_config.init_options.statusBarProvider = "on"
@@ -31,26 +32,10 @@ M.setup = function()
     {
       type = "scala",
       request = "launch",
-      name = "Run",
-      metals = {
-        runType = "run",
-        --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
-      },
-    },
-    {
-      type = "scala",
-      request = "launch",
       name = "RunOrTest",
       metals = {
-        runType = "runOrTestFile"
-      },
-    },
-    {
-      type = "scala",
-      request = "launch",
-      name = "Test File",
-      metals = {
-        runType = "testFile",
+        runType = "runOrTestFile",
+        --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
       },
     },
     {
@@ -72,9 +57,13 @@ M.setup = function()
   end
 
   -- sumneko lua
+  local runtime_path = vim.split(package.path, ";")
+  table.insert(runtime_path, "lua/?.lua")
+  table.insert(runtime_path, "lua/?/init.lua")
+
   lsp_config.sumneko_lua.setup({
     cmd = {
-      "/Users/ckipp/Documents/lua-workspace/lua-language-server/bin/macOS/lua-language-server",
+      "/Users/ckipp/Documents/lua-workspace/lua-language-server/bin/lua-language-server",
       "-E",
       "/Users/ckipp/Documents/lua-workspace/lua-language-server/main.lua",
     },
@@ -88,16 +77,13 @@ M.setup = function()
     settings = {
       Lua = {
         runtime = {
-          version = "LuaJIT", -- since using mainly for neovim
-          path = vim.split(package.path, ";"),
+          version = "LuaJIT",
+          path = runtime_path,
         },
         diagnostics = { globals = { "vim", "it", "describe", "before_each" } },
         workspace = {
           -- Make the server aware of Neovim runtime files
-          library = {
-            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-          },
+          library = vim.api.nvim_get_runtime_file("", true),
         },
         telemetry = { enable = false },
       },
