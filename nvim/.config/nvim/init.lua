@@ -1,7 +1,7 @@
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
-local f = require("settings.functions")
+local f = require("mesopotamia.settings.functions")
 local map = f.map
 local opt = vim.opt
 local global_opt = vim.opt_global
@@ -10,12 +10,12 @@ local global_opt = vim.opt_global
 ----------------------------------
 cmd([[packadd packer.nvim]])
 
-require("plugins")
-require("settings.functions")
-require("settings.cmp").setup()
-require("settings.telescope").setup()
-require("settings.lsp").setup()
-require("settings.statusline")
+require("mesopotamia.plugins")
+require("mesopotamia.settings.functions")
+require("mesopotamia.settings.cmp").setup()
+require("mesopotamia.settings.telescope").setup()
+require("mesopotamia.settings.lsp").setup()
+require("mesopotamia.settings.statusline")
 
 require("nvim-autopairs").setup()
 require("gitsigns").setup()
@@ -86,15 +86,11 @@ opt.statusline = "%!luaeval('Super_custom_status_line()')"
 -- MAPPINGS -----------------------
 map("i", "jj", "<ESC>")
 
-map("n", "<leader><leader>n", [[<cmd>lua RELOAD("settings.functions").toggle_nums()<CR>]])
-map("n", "<leader><leader>c", [[<cmd>lua RELOAD("settings.functions").toggle_conceal()<CR>]])
-
-map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 map("n", "<leader>fo", ":copen<cr>")
 map("n", "<leader>fc", ":cclose<cr>")
 map("n", "<leader>fn", ":cnext<cr>")
 map("n", "<leader>fp", ":cprevious<cr>")
-map("n", "<leader>tv", ":vnew | :te<cr>")
+map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 
 -- LSP
 map("n", "gD", [[<cmd>lua vim.lsp.buf.definition()<CR>]])
@@ -103,11 +99,11 @@ map("v", "K", [[<Esc><cmd>lua require("metals").type_of_range()<CR>]])
 map("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
 map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
 map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
-map("n", "gds", [[<cmd>lua require"telescope.builtin".lsp_document_symbols()<CR>]])
-map("n", "gws", [[<cmd>lua require"telescope.builtin".lsp_dynamic_workspace_symbols()<CR>]])
+map("n", "gds", [[<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>]])
+map("n", "gws", [[<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>]])
 map("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]])
 map("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]])
-map("n", "<leader>ws", [[<cmd>lua require"metals".hover_worksheet()<CR>]])
+map("n", "<leader>ws", [[<cmd>lua require("metals").hover_worksheet()<CR>]])
 map("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]])
 map("n", "<leader>ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]])
 map("n", "<leader>aw", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]])
@@ -123,38 +119,39 @@ map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.formatting()<CR>]])
 map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
 
 -- telescope
-map("n", "<leader>ff", [[<cmd>lua require"telescope.builtin".find_files({layout_strategy="vertical"})<CR>]])
-map("n", "<leader>lg", [[<cmd>lua require"telescope.builtin".live_grep({layout_strategy="vertical"})<CR>]])
-map("n", "<leader>fb", [[<cmd>lua require"telescope.builtin".file_browser({layout_strategy="vertical"})<CR>]])
-map("n", "<leader>gh", [[<cmd>lua require"telescope.builtin".git_commits({layout_strategy="vertical"})<CR>]])
+map("n", "<leader>ff", [[<cmd>lua require("telescope.builtin").find_files({layout_strategy="vertical"})<CR>]])
+map("n", "<leader>lg", [[<cmd>lua require("telescope.builtin").live_grep({layout_strategy="vertical"})<CR>]])
+map("n", "<leader>fb", [[<cmd>lua require("telescope.builtin").file_browser({layout_strategy="vertical"})<CR>]])
+map("n", "<leader>gh", [[<cmd>lua require("telescope.builtin").git_commits({layout_strategy="vertical"})<CR>]])
 map("n", "<leader>mc", [[<cmd>lua require("telescope").extensions.metals.commands()<CR>]])
 map("n", "<leader>cc", [[<cmd>lua RELOAD("telescope").extensions.coursier.complete()<CR>]])
 
 -- nvim-dap
-map("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
-map("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+map("n", "<leader>dc", [[<cmd>lua require("dap").continue()<CR>]])
+map("n", "<leader>dr", [[<cmd>lua require("dap").repl.toggle()<CR>]])
 map("n", "<leader>ds", [[<cmd>lua require("dap.ui.widgets").sidebar(require("dap.ui.widgets").scopes).toggle()<CR>]])
-map("n", "<leader>dK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
-map("n", "<leader>dt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
-map("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
-map("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
-map("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
+map("n", "<leader>dK", [[<cmd>lua require("dap.ui.widgets").hover()<CR>]])
+map("n", "<leader>dt", [[<cmd>lua require("dap").toggle_breakpoint()<CR>]])
+map("n", "<leader>dso", [[<cmd>lua require("dap").step_over()<CR>]])
+map("n", "<leader>dsi", [[<cmd>lua require("dap").step_into()<CR>]])
+map("n", "<leader>dl", [[<cmd>lua require("dap").run_last()<CR>]])
 
 -- scala-utils
 map("n", "<leader>slc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_line()<CR>]])
 map("n", "<leader>sc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_input()<CR>]])
 
 -- other stuff
-require("settings.globals")
-map("n", "<leader><leader>p", [[<cmd>lua require"playground.functions".peek()<CR>]])
-map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.semantic").generate()<CR>]])
-map("n", "<leader><leader>m", [[<cmd>lua RELOAD("playground.mt").get_dep()<CR>]])
-map("n", "<leader><leader>s", [[<cmd>lua RELOAD("playground.functions").set_ext()<CR>]])
-map("n", "<leader><leader>g", [[<cmd>lua RELOAD("playground.functions").get_exts()<CR>]])
+require("mesopotamia.settings.globals")
+map("n", "<leader><leader>p", [[<cmd>lua require("mesopotamia.playground.functions").peek()<CR>]])
+map("n", "<leader><leader>s", [[<cmd>lua RELOAD("mesopotamia.playground.semantic").generate()<CR>]])
+map("n", "<leader><leader>m", [[<cmd>lua RELOAD("mesopotamia.playground.mt").get_dep()<CR>]])
 map("n", "<leader><leader>e", [[:luafile %<CR>]])
-map("n", "<leader><leader>v", [[<cmd>lua RELOAD("playground.functions").get_latest_metals()<CR>]])
-map("n", "<leader><leader>j", [[<cmd>lua RELOAD("playground.jenkins_linter").validate()<CR>]])
-map("n", "<leader><leader>hl", [[<cmd>lua RELOAD("playground.functions").get_hl_under_cursor()<CR>]])
+map("n", "<leader><leader>v", [[<cmd>lua RELOAD("mesopotamia.playground.functions").get_latest_metals()<CR>]])
+map("n", "<leader><leader>j", [[<cmd>lua RELOAD("mesopotamia.playground.jenkins_linter").validate()<CR>]])
+map("n", "<leader><leader>hl", [[<cmd>lua RELOAD("mesopotamia.playground.functions").get_hl_under_cursor()<CR>]])
+
+map("n", "<leader><leader>n", [[<cmd>lua RELOAD("mesopotamia.settings.functions").toggle_nums()<CR>]])
+map("n", "<leader><leader>c", [[<cmd>lua RELOAD("mesopotamia.settings.functions").toggle_conceal()<CR>]])
 
 ----------------------------------
 -- COMMANDS ----------------------
@@ -164,7 +161,6 @@ cmd(
   [[autocmd BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell]]
 )
 cmd([[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang=en_us]])
-cmd([[autocmd TermOpen * startinsert]])
 
 cmd([[augroup colorset]])
 cmd([[autocmd!]])
