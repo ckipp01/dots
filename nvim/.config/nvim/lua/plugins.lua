@@ -1,6 +1,5 @@
 return require("packer").startup(function(use)
   use({ "ckipp01/nvim-jvmopts" })
-  use({"rebelot/kanagawa.nvim"})
   use({
     "hrsh7th/nvim-cmp",
     requires = {
@@ -39,6 +38,7 @@ return require("packer").startup(function(use)
   })
   use({ "/Users/ckipp/Documents/lua-workspace/stylua-nvim" })
   use({ "/Users/ckipp/Documents/lua-workspace/scala-utils.nvim", requires = { "nvim-lua/plenary.nvim" } })
+  use({ "rebelot/kanagawa.nvim" })
   use({ "sheerun/vim-polyglot" })
   use({ "tpope/vim-fugitive" })
   use({ "tpope/vim-vinegar" })
