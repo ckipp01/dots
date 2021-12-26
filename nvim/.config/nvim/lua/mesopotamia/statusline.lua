@@ -70,6 +70,7 @@ local function readonly()
     return ""
   end
 end
+
 -- TODO is there a way to do this without making it global?
 function Super_custom_status_line()
   return table.concat({
@@ -88,6 +89,6 @@ function Super_custom_status_line()
     "%l, ", -- line number
     "%c ", -- column number
     scrollbar(),
-    "%"
+    "%",
   })
 end

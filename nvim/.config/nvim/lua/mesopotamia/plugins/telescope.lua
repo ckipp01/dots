@@ -1,7 +1,4 @@
--- https://github.com/nvim-telescope/telescope.nvim
-local M = {}
-
-M.setup = function()
+local setup = function()
   local actions = require("telescope.actions")
   require("telescope").setup({
     defaults = {
@@ -20,4 +17,6 @@ M.setup = function()
   require("telescope").load_extension("fzy_native")
 end
 
-return M
+return {
+  setup = setup,
+}

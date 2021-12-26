@@ -1,42 +1,37 @@
+--=================================
+-- Mesopotamia
+--
+-- My Neovim Setup
+-- Chris Kpp
+--
+-- https://www.chris-kipp.io
+--=================================
+
+-- We first make sure we have packer before we do anything
+if require"mesopotamia.pre"() then
+  return
+end
+
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
-local f = require("mesopotamia.settings.functions")
+local f = require("mesopotamia.functions")
 local map = f.map
 local opt = vim.opt
 local global_opt = vim.opt_global
-----------------------------------
--- SETUP PLUGINS -----------------
-----------------------------------
-cmd([[packadd packer.nvim]])
 
+--================================
+-- SETUP PLUGINS, GLOBALS, AND LSP
+--================================
 require("mesopotamia.plugins")
-require("mesopotamia.settings.functions")
-require("mesopotamia.settings.cmp").setup()
-require("mesopotamia.settings.telescope").setup()
-require("mesopotamia.settings.lsp").setup()
-require("mesopotamia.settings.statusline")
+require("mesopotamia.globals")
+require("mesopotamia.statusline")
 
-require("nvim-autopairs").setup()
-require("gitsigns").setup()
+require("mesopotamia.lsp").setup()
 
-require("nvim-treesitter.configs").setup({
-  playground = { enable = true },
-  query_linter = {
-    enable = true,
-    use_virtual_text = true,
-    lint_events = { "BufWrite", "CursorHold" },
-  },
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-    disable = { "scala" },
-  },
-})
-
-----------------------------------
+--================================
 -- VARIABLES ---------------------
-----------------------------------
+--================================
 g["mapleader"] = ","
 g["netrw_gx"] = "<cWORD>"
 
@@ -45,16 +40,13 @@ g["netrw_gx"] = "<cWORD>"
 g["vim_markdown_conceal"] = 0
 g["vim_markdown_conceal_code_blocks"] = 0
 
-----------------------------------
+--================================
 -- OPTIONS -----------------------
-----------------------------------
+--================================
 local indent = 2
 
 -- global
--- If you're copying my dot files and aren't familiar with nvim-metals, then
--- make sure you remove("F"). Do as I say, not as I do
 global_opt.shortmess:remove("F"):append("c")
---global_opt.shortmess:append("c")
 global_opt.termguicolors = true
 global_opt.hidden = true
 global_opt.showtabline = 1
@@ -141,7 +133,6 @@ map("n", "<leader>slc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_
 map("n", "<leader>sc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_input()<CR>]])
 
 -- other stuff
-require("mesopotamia.settings.globals")
 map("n", "<leader><leader>p", [[<cmd>lua require("mesopotamia.playground.functions").peek()<CR>]])
 map("n", "<leader><leader>s", [[<cmd>lua RELOAD("mesopotamia.playground.semantic").generate()<CR>]])
 map("n", "<leader><leader>m", [[<cmd>lua RELOAD("mesopotamia.playground.mt").get_dep()<CR>]])
@@ -150,12 +141,12 @@ map("n", "<leader><leader>v", [[<cmd>lua RELOAD("mesopotamia.playground.function
 map("n", "<leader><leader>j", [[<cmd>lua RELOAD("mesopotamia.playground.jenkins_linter").validate()<CR>]])
 map("n", "<leader><leader>hl", [[<cmd>lua RELOAD("mesopotamia.playground.functions").get_hl_under_cursor()<CR>]])
 
-map("n", "<leader><leader>n", [[<cmd>lua RELOAD("mesopotamia.settings.functions").toggle_nums()<CR>]])
-map("n", "<leader><leader>c", [[<cmd>lua RELOAD("mesopotamia.settings.functions").toggle_conceal()<CR>]])
+map("n", "<leader><leader>n", [[<cmd>lua RELOAD("mesopotamia.functions").toggle_nums()<CR>]])
+map("n", "<leader><leader>c", [[<cmd>lua RELOAD("mesopotamia.functions").toggle_conceal()<CR>]])
 
-----------------------------------
+--================================
 -- COMMANDS ----------------------
-----------------------------------
+--================================
 cmd([[autocmd FileType markdown setlocal textwidth=80]])
 cmd(
   [[autocmd BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell]]
@@ -197,9 +188,9 @@ cmd([[hi! link StatusWarn DiagnosticWarn]])
 
 cmd([[autocmd TextYankPost * silent! lua vim.highlight.on_yank {}]])
 
-----------------------------------
+--================================
 -- DIAGNOSTIC SETTINGS -----------
-----------------------------------
+--================================
 fn.sign_define("DiagnosticSignError", { text = "▬", texthl = "DiagnosticError" })
 fn.sign_define("DiagnosticSignWarn", { text = "▬", texthl = "DiagnosticWarn" })
 fn.sign_define("DiagnosticSignInfo", { text = "▬", texthl = "DiagnosticInfo" })

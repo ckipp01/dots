@@ -1,7 +1,6 @@
-local M = {}
-
-M.setup = function()
+local setup = function()
   local cmp = require("cmp")
+
   cmp.setup({
     sources = {
       { name = "nvim_lsp", priority = 10 },
@@ -39,4 +38,6 @@ M.setup = function()
   })
 end
 
-return M
+return {
+  setup = setup,
+}

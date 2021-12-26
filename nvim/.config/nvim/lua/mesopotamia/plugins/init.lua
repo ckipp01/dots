@@ -9,6 +9,7 @@ return require("packer").startup(function(use)
       { "hrsh7th/cmp-vsnip" },
       { "hrsh7th/vim-vsnip" },
     },
+    config = require("mesopotamia.plugins.cmp").setup(),
   })
   use({ "kevinhwang91/nvim-bqf" })
   use({ "kyazdani42/nvim-web-devicons" })
@@ -17,6 +18,7 @@ return require("packer").startup(function(use)
     requires = {
       "nvim-lua/plenary.nvim",
     },
+    config = require("gitsigns").setup(),
   })
   use({ "liuchengxu/vista.vim" })
   use({ "machakann/vim-sandwich" })
@@ -29,8 +31,9 @@ return require("packer").startup(function(use)
       { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-fzy-native.nvim" },
     },
+    config = require("mesopotamia.plugins.telescope").setup(),
   })
-  use({ "nvim-treesitter/nvim-treesitter" })
+  use({ "nvim-treesitter/nvim-treesitter", config = require("mesopotamia.plugins.telescope").setup() })
   use({ "nvim-treesitter/playground" })
   use({
     "/Users/ckipp/Documents/lua-workspace/nvim-metals",
@@ -42,8 +45,8 @@ return require("packer").startup(function(use)
   use({ "sheerun/vim-polyglot" })
   use({ "tpope/vim-fugitive" })
   use({ "tpope/vim-vinegar" })
-  use({ "wakatime/vim-wakatime" })
-  use({ "wbthomason/packer.nvim", opt = true })
-  use({ "windwp/nvim-autopairs" })
+  --use({ "wakatime/vim-wakatime" })
+  use({ "wbthomason/packer.nvim" })
+  use({ "windwp/nvim-autopairs", config = require("nvim-autopairs").setup() })
   use({ "Yggdroot/indentLine" })
 end)

@@ -37,12 +37,7 @@ M.generate = function()
     if not (created == "") then
       print("Couldn't create semanticdb")
     else
-      local semanticdb_path = path_join(
-        semantic_cache_dir,
-        "META-INF",
-        "semanticdb",
-        root_name .. ".scala.semanticdb"
-      )
+      local semanticdb_path = path_join(semantic_cache_dir, "META-INF", "semanticdb", root_name .. ".scala.semanticdb")
       local cmd = string.format("%s %s", metap, semanticdb_path)
       local output = fn.systemlist(cmd)
 
@@ -61,7 +56,6 @@ M.generate = function()
       api.nvim_buf_set_lines(buf, 0, 0, false, output)
     end
   end
-
 end
 
 return M
