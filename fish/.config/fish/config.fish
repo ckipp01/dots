@@ -1,5 +1,29 @@
 # ALIASES #
-source /Users/ckipp/.flavor/aliases
+alias l='exa -la --icons'
+alias ls='exa'
+alias tree='exa -T'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias weather='curl wttr.in/hague,netherlands'
+alias v="nvim"
+alias vsun="nvim --cmd 'let sunny=1'"
+alias vcoc="nvim --cmd 'let coc=1'"
+alias new-sbt='g8 scala/scala-seed.g8'
+alias mlog='tail -f .metals/metals.log'
+alias tmux='tmux -2'
+alias 'tail-metals'='tail -f .metals/metals.log'
+alias 'tail-lsp'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/lsp.trace.json'
+alias 'tail-bsp'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/bsp.trace.json'
+alias 'tail-dap-client'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/dap-client.trace.json'
+alias 'tail-dap-server'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/dap-server.trace.json'
+alias gfu='git fetch upstream'
+alias gp='git push'
+alias gmum='git merge upstream/main'
+alias cleanBloop="rm -rf /Users/ckipp/.ivy2/local/ch.epfl.scala/sbt-bloop/ && rm -rf ./.bloop/"
+alias bat="bat --theme='TwoDark'"
+alias k="kubectl"
+
 # ENV #
 source /Users/ckipp/.config/fish/env.fish
 # FUNCTIONS #
