@@ -1,11 +1,21 @@
 local cmd = vim.cmd
 local fn = vim.fn
+local f = require("mesopotamia.functions")
+local map = f.map
 
 local setup = function()
   cmd([[hi! DiagnosticUnderlineError cterm=NONE gui=underline guifg=NONE]])
   cmd([[hi! DiagnosticUnderlineWarn cterm=NONE gui=underline guifg=NONE]])
   cmd([[hi! DiagnosticUnderlineInfo cterm=NONE gui=underline guifg=NONE]])
   cmd([[hi! DiagnosticUnderlineHint cterm=NONE gui=underline guifg=NONE]])
+
+  map("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]])
+  map("n", "<leader>ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]])
+  map("n", "<leader>aw", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]])
+  map("n", "<leader>d", [[<cmd>lua vim.diagnostic.setloclist()<CR>]]) -- buffer diagnostics only
+  map("n", "<leader>nd", [[<cmd>lua vim.diagnostic.goto_next()<CR>]])
+  map("n", "<leader>pd", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]])
+  map("n", "<leader>ld", [[<cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>]])
 
   fn.sign_define("DiagnosticSignError", { text = "▬", texthl = "DiagnosticError" })
   fn.sign_define("DiagnosticSignWarn", { text = "▬", texthl = "DiagnosticWarn" })
