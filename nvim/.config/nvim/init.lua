@@ -116,9 +116,8 @@ cmd([[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang
 cmd("colorscheme kanagawa")
 
 -- Statusline specific highlights
--- #727169 # fujiGray
--- #1F1F28 # sumiInk1
-cmd([[hi! StatusLine guifg=#727169 guibg=#1F1F28]])
+local kanagaw_colors = require("kanagawa").colors
+cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagaw_colors.fujiGray, kanagaw_colors.sumiInk1))
 cmd([[hi! link StatusLineNC Comment]])
 cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])
