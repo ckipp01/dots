@@ -98,7 +98,7 @@ map("n", "<leader><leader>s", [[<cmd>lua RELOAD("mesopotamia.playground.semantic
 map("n", "<leader><leader>m", [[<cmd>lua RELOAD("mesopotamia.playground.mt").get_dep()<CR>]])
 map("n", "<leader><leader>e", [[:luafile %<CR>]])
 map("n", "<leader><leader>v", [[<cmd>lua RELOAD("mesopotamia.playground.functions").get_latest_metals()<CR>]])
-map("n", "<leader><leader>j", [[<cmd>lua RELOAD("mesopotamia.playground.jenkins_linter").validate()<CR>]])
+map("n", "<leader><leader>j", [[<cmd>lua RELOAD("jenkinsfile_linter").validate()<CR>]])
 map("n", "<leader><leader>hl", [[<cmd>lua RELOAD("mesopotamia.playground.functions").get_hl_under_cursor()<CR>]])
 
 map("n", "<leader><leader>n", [[<cmd>lua RELOAD("mesopotamia.functions").toggle_nums()<CR>]])
