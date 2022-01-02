@@ -13,13 +13,6 @@ return require("packer").startup(function(use)
   })
   use({ "kevinhwang91/nvim-bqf" })
   use({ "kyazdani42/nvim-web-devicons" })
-  use({
-    "lewis6991/gitsigns.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-    },
-    config = require("gitsigns").setup(),
-  })
   use({ "liuchengxu/vista.vim" })
   use({ "lukas-reineke/indent-blankline.nvim", config = require("mesopotamia.plugins.indent_blankline").setup() })
   use({ "machakann/vim-sandwich" })

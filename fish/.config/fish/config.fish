@@ -23,6 +23,7 @@ alias gmum='git merge upstream/main'
 alias cleanBloop="rm -rf /Users/ckipp/.ivy2/local/ch.epfl.scala/sbt-bloop/ && rm -rf ./.bloop/"
 alias bat="bat --theme='TwoDark'"
 alias k="kubectl"
+alias scli="scala-cli"
 
 # ENV #
 source /Users/ckipp/.config/fish/env.fish

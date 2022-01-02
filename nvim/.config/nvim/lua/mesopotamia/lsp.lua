@@ -25,11 +25,6 @@ local setup = function()
   cmd([[autocmd FileType scala,sbt,java lua require("metals").initialize_or_attach(Metals_config)]])
   cmd([[augroup END]])
 
-  -- used in textDocument/hightlight
-  cmd([[hi! link LspReferenceText CursorColumn]])
-  cmd([[hi! link LspReferenceRead CursorColumn]])
-  cmd([[hi! link LspReferenceWrite CursorColumn]])
-
   local lsp_config = require("lspconfig")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -51,7 +46,7 @@ local setup = function()
       "akka.stream.javadsl",
     },
     fallbackScalaVersion = "2.13.7",
-    serverVersion = "0.10.9+234-ff875b20-SNAPSHOT",
+    serverVersion = "0.10.9+271-a8bb69f6-SNAPSHOT",
     --serverVersion = "0.10.10-SNAPSHOT"
   }
 
