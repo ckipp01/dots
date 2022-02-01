@@ -103,6 +103,7 @@ map("n", "<leader><leader>hl", [[<cmd>lua RELOAD("mesopotamia.playground.functio
 
 map("n", "<leader><leader>n", [[<cmd>lua RELOAD("mesopotamia.functions").toggle_nums()<CR>]])
 map("n", "<leader><leader>c", [[<cmd>lua RELOAD("mesopotamia.functions").toggle_conceal()<CR>]])
+map("n", "<leader><leader>jc", [[<cmd>lua RELOAD("mesopotamia.functions").replace_java_converters()<CR>]])
 
 --================================
 -- COMMANDS ----------------------

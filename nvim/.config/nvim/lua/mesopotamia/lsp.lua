@@ -19,6 +19,10 @@ local setup = function()
   map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.formatting()<CR>]])
   map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
 
+  -- WIP
+  map("n", "<leader>td", [[<cmd>lua require("metals.test").toggle_test_view()<CR>]])
+
+
   cmd([[augroup lsp]])
   cmd([[autocmd!]])
   cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
@@ -45,9 +49,9 @@ local setup = function()
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
-    fallbackScalaVersion = "2.13.7",
-    serverVersion = "0.10.9+271-a8bb69f6-SNAPSHOT",
-    --serverVersion = "0.10.10-SNAPSHOT"
+    --fallbackScalaVersion = "2.13.7",
+    serverVersion = "0.11.1+49-dc1cd461-SNAPSHOT",
+    --serverVersion = "0.11.2-SNAPSHOT"
   }
 
   Metals_config.init_options.statusBarProvider = "on"
@@ -69,6 +73,15 @@ local setup = function()
         name = "RunOrTest",
         metals = {
           runType = "runOrTestFile",
+          --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+        },
+      },
+      {
+        type = "scala",
+        request = "launch",
+        name = "Run",
+        metals = {
+          runType = "run",
           --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
         },
       },

@@ -8,7 +8,6 @@ that statusline. It was as this point I realized my day was gone, lost.
 --]]
 
 local api = vim.api
-local cmd = vim.cmd
 local opt = vim.opt
 
 local function err_count(severity)
