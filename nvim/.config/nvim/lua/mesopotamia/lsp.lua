@@ -50,7 +50,7 @@ local setup = function()
       "akka.stream.javadsl",
     },
     --fallbackScalaVersion = "2.13.7",
-    serverVersion = "0.11.1+49-dc1cd461-SNAPSHOT",
+    serverVersion = "0.11.1+74-558d667d-SNAPSHOT",
     --serverVersion = "0.11.2-SNAPSHOT"
   }
 

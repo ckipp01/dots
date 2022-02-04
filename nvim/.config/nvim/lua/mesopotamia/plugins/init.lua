@@ -27,7 +27,7 @@ return require("packer").startup(function(use)
     },
     config = require("mesopotamia.plugins.telescope").setup(),
   })
-  use({ "nvim-treesitter/nvim-treesitter", config = require("mesopotamia.plugins.telescope").setup() })
+  use({ "nvim-treesitter/nvim-treesitter", config = require("mesopotamia.plugins.treesitter").setup() })
   use({ "nvim-treesitter/playground" })
   use({
     "/Users/ckipp/Documents/lua-workspace/nvim-metals",

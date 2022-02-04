@@ -9,7 +9,7 @@ local setup = function()
     ensure_installed = "maintained",
     highlight = {
       enable = true,
-      disable = { "scala" },
+      --disable = { "scala" },
     },
   })
 end
