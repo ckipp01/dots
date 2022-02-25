@@ -22,7 +22,6 @@ local setup = function()
   -- WIP
   map("n", "<leader>td", [[<cmd>lua require("metals.test").toggle_test_view()<CR>]])
 
-
   cmd([[augroup lsp]])
   cmd([[autocmd!]])
   cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
@@ -43,14 +42,16 @@ local setup = function()
 
   Metals_config.settings = {
     showImplicitArguments = true,
+    showImplicitConversionsAndClasses = true,
     showInferredType = true,
+    --testUserInterface = "test explorer",
     excludedPackages = {
       "akka.actor.typed.javadsl",
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
     },
     --fallbackScalaVersion = "2.13.7",
-    serverVersion = "0.11.1+74-558d667d-SNAPSHOT",
+    serverVersion = "0.11.1+161-ff365f7c-SNAPSHOT",
     --serverVersion = "0.11.2-SNAPSHOT"
   }
 
@@ -104,6 +105,7 @@ local setup = function()
     )
     map("n", "<leader>dK", [[<cmd>lua require("dap.ui.widgets").hover()<CR>]])
     map("n", "<leader>dt", [[<cmd>lua require("dap").toggle_breakpoint()<CR>]])
+    map("n", "<leader>dbc", [[<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]])
     map("n", "<leader>dso", [[<cmd>lua require("dap").step_over()<CR>]])
     map("n", "<leader>dsi", [[<cmd>lua require("dap").step_into()<CR>]])
     map("n", "<leader>dl", [[<cmd>lua require("dap").run_last()<CR>]])

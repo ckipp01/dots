@@ -3,14 +3,9 @@ alias l='exa -la --icons'
 alias ls='exa'
 alias tree='exa -T'
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 alias weather='curl wttr.in/hague,netherlands'
 alias v="nvim"
-alias vsun="nvim --cmd 'let sunny=1'"
-alias vcoc="nvim --cmd 'let coc=1'"
 alias new-sbt='g8 scala/scala-seed.g8'
-alias mlog='tail -f .metals/metals.log'
 alias tmux='tmux -2'
 alias 'tail-metals'='tail -f .metals/metals.log'
 alias 'tail-lsp'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/lsp.trace.json'
@@ -24,6 +19,8 @@ alias cleanBloop="rm -rf /Users/ckipp/.ivy2/local/ch.epfl.scala/sbt-bloop/ && rm
 alias bat="bat --theme='TwoDark'"
 alias k="kubectl"
 alias scli="scala-cli"
+alias 'scala3-nightly-repl'='scli repl --scala 3.nightly'
+alias 'scala2-repl'='cs launch scala:2.13.8'
 
 # ENV #
 source /Users/ckipp/.config/fish/env.fish
