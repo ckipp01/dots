@@ -45,11 +45,16 @@ local function replace_java_converters()
 
   local line = vim.fn.line(".") - 1
 
-  vim.api.nvim_buf_set_text(0, line, 0, line, #line_contents, {new_conents})
+  vim.api.nvim_buf_set_text(0, line, 0, line, #line_contents, { new_conents })
+end
+
+local function markdown_headers()
+  vim.cmd([[vimgrep /^#/ % | copen]])
 end
 
 return {
   map = map,
+  markdown_headers = markdown_headers,
   replace_java_converters = replace_java_converters,
   split_on = split_on,
   toggle_nums = toggle_nums,

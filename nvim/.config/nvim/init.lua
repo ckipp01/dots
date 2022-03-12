@@ -113,6 +113,13 @@ map("n", "<leader><leader>jc", [[<cmd>lua RELOAD("mesopotamia.functions").replac
 local base_group = api.nvim_create_augroup("base", { clear = true })
 
 api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "setlocal textwidth=80", group = base_group })
+api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    map("n", "<leader>mh", [[<cmd>lua RELOAD("mesopotamia.functions").markdown_headers()<CR>]])
+  end,
+  group = base_group,
+})
 api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   pattern = { "*.md", "*.txt", "COMMIT_EDITMSG" },
   command = "set wrap linebreak nolist spell spelllang=en_us complete+=kspell",
