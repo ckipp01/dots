@@ -12,6 +12,7 @@ if require("mesopotamia.pre")() then
   return
 end
 
+local api = vim.api
 local cmd = vim.cmd
 local g = vim.g
 
@@ -75,6 +76,7 @@ opt.shiftwidth = indent
 opt.softtabstop = indent
 opt.expandtab = true
 opt.fileformat = "unix"
+opt.modeline = false
 
 -- statusline
 opt.statusline = "%!luaeval('Super_custom_status_line()')"
@@ -108,19 +110,29 @@ map("n", "<leader><leader>jc", [[<cmd>lua RELOAD("mesopotamia.functions").replac
 --================================
 -- COMMANDS ----------------------
 --================================
-cmd([[autocmd FileType markdown setlocal textwidth=80]])
-cmd(
-  [[autocmd BufReadPost,BufNewFile *.md,*.txt,COMMIT_EDITMSG set wrap linebreak nolist spell spelllang=en_us complete+=kspell]]
-)
-cmd([[autocmd BufReadPost,BufNewFile .html,*.txt,*.md,*.adoc set spell spelllang=en_us]])
+local base_group = api.nvim_create_augroup("base", { clear = true })
+
+api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "setlocal textwidth=80", group = base_group })
+api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  pattern = { "*.md", "*.txt", "COMMIT_EDITMSG" },
+  command = "set wrap linebreak nolist spell spelllang=en_us complete+=kspell",
+  group = base_group,
+})
 
 cmd("colorscheme kanagawa")
 
 -- Statusline specific highlights
-local kanagaw_colors = require("kanagawa.colors").setup()
-cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagaw_colors.fujiGray, kanagaw_colors.sumiInk1))
+local kanagawa_colors = require("kanagawa.colors").setup()
+cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.fujiGray, kanagawa_colors.sumiInk1))
 cmd([[hi! link StatusLineNC Comment]])
 cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])
 
-cmd([[autocmd TextYankPost * silent! lua vim.highlight.on_yank {}]])
+local kanagawa_group = api.nvim_create_augroup("kanagawa", { clear = true })
+api.nvim_create_autocmd("TextYankPost", {
+  pattern = "*",
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = kanagawa_group,
+})

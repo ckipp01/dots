@@ -41,3 +41,6 @@ set N_PREFIX $HOME/n
 # Ensure that nvim is set as the default editor
 set -gx EDITOR nvim
 set -gx VISUAL $EDITOR
+
+# opam configuration
+source /Users/ckipp/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true

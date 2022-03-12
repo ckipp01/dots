@@ -1,4 +1,4 @@
-local cmd = vim.cmd
+local api = vim.api
 local f = require("mesopotamia.functions")
 local map = f.map
 
@@ -19,14 +19,8 @@ local setup = function()
   map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.formatting()<CR>]])
   map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
 
-  -- WIP
+  -- WIP trying some stuff out with this
   map("n", "<leader>td", [[<cmd>lua require("metals.test").toggle_test_view()<CR>]])
-
-  cmd([[augroup lsp]])
-  cmd([[autocmd!]])
-  cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
-  cmd([[autocmd FileType scala,sbt,java lua require("metals").initialize_or_attach(Metals_config)]])
-  cmd([[augroup END]])
 
   local lsp_config = require("lspconfig")
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -38,9 +32,9 @@ local setup = function()
   --================================
   -- Metals specific setup
   --================================
-  Metals_config = require("metals").bare_config()
+  local metals_config = require("metals").bare_config()
 
-  Metals_config.settings = {
+  metals_config.settings = {
     showImplicitArguments = true,
     showImplicitConversionsAndClasses = true,
     showInferredType = true,
@@ -49,16 +43,17 @@ local setup = function()
       "akka.actor.typed.javadsl",
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
+      "akka.http.javadsl",
     },
     --fallbackScalaVersion = "2.13.7",
-    serverVersion = "0.11.1+161-ff365f7c-SNAPSHOT",
-    --serverVersion = "0.11.2-SNAPSHOT"
+    serverVersion = "0.11.2+30-f9261de6-SNAPSHOT",
+    --serverVersion = "0.11.3-SNAPSHOT",
   }
 
-  Metals_config.init_options.statusBarProvider = "on"
-  Metals_config.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+  metals_config.init_options.statusBarProvider = "on"
+  metals_config.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
-  Metals_config.on_attach = function(client, bufnr)
+  metals_config.on_attach = function(client, bufnr)
     vim.cmd([[autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()]])
     vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
     vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]])
@@ -113,6 +108,15 @@ local setup = function()
     require("metals").setup_dap()
   end
 
+  local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
+  api.nvim_create_autocmd("FileType", {
+    pattern = { "scala", "sbt", "java" },
+    callback = function()
+      require("metals").initialize_or_attach(metals_config)
+    end,
+    group = lsp_group,
+  })
+
   -- sumneko lua
   local runtime_path = vim.split(package.path, ";")
   table.insert(runtime_path, "lua/?.lua")
@@ -140,7 +144,7 @@ local setup = function()
         diagnostics = { globals = { "vim", "it", "describe", "before_each" } },
         workspace = {
           -- Make the server aware of Neovim runtime files
-          library = vim.api.nvim_get_runtime_file("", true),
+          library = api.nvim_get_runtime_file("", true),
         },
         telemetry = { enable = false },
       },
