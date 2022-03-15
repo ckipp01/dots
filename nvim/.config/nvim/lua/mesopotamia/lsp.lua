@@ -46,7 +46,7 @@ local setup = function()
       "akka.http.javadsl",
     },
     --fallbackScalaVersion = "2.13.7",
-    serverVersion = "0.11.2+30-f9261de6-SNAPSHOT",
+    serverVersion = "0.11.2+47-bfe79a5d-SNAPSHOT",
     --serverVersion = "0.11.3-SNAPSHOT",
   }
 
@@ -91,6 +91,10 @@ local setup = function()
       },
     }
 
+    --dap.listeners.before["command_initialize"]["nvim-metals"] = function(session, body)
+    --  P("OOOOOOO YEA")
+    --end
+
     map("n", "<leader>dc", [[<cmd>lua require("dap").continue()<CR>]])
     map("n", "<leader>dr", [[<cmd>lua require("dap").repl.toggle()<CR>]])
     map(
@@ -123,11 +127,6 @@ local setup = function()
   table.insert(runtime_path, "lua/?/init.lua")
 
   lsp_config.sumneko_lua.setup({
-    cmd = {
-      "/Users/ckipp/Documents/lua-workspace/lua-language-server/bin/lua-language-server",
-      "-E",
-      "/Users/ckipp/Documents/lua-workspace/lua-language-server/main.lua",
-    },
     commands = {
       Format = {
         function()
@@ -164,22 +163,11 @@ local setup = function()
   })
   lsp_config.tsserver.setup({})
   lsp_config.yamlls.setup({})
-  lsp_config.racket_langserver.setup({})
 
   lsp_config.gopls.setup({
     cmd = { "gopls", "serve" },
     settings = {
       gopls = { analyses = { unusedparams = true }, staticcheck = true },
-    },
-  })
-
-  lsp_config.elmls.setup({})
-
-  lsp_config.groovyls.setup({
-    cmd = {
-      "java",
-      "-jar",
-      "/Users/ckipp/Documents/java-workspace/groovy-language-server/build/libs/groovy-language-server-all.jar",
     },
   })
 
