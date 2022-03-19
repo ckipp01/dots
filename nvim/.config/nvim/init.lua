@@ -64,6 +64,7 @@ global_opt.smartcase = true
 global_opt.clipboard = "unnamed"
 global_opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 global_opt.scrolloff = 5
+global_opt.laststatus = 3
 
 -- window-scoped
 opt.wrap = false
@@ -126,14 +127,22 @@ api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   group = base_group,
 })
 
+api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.scala.html" },
+  command = "set filetype=scala",
+  group = base_group,
+})
+
 cmd("colorscheme kanagawa")
 
 -- Statusline specific highlights
 local kanagawa_colors = require("kanagawa.colors").setup()
 cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.fujiGray, kanagawa_colors.sumiInk1))
+--cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.oldWhile, kanagawa_colors.sumiInk3))
 cmd([[hi! link StatusLineNC Comment]])
 cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])
+cmd([[hi! link WinSeparator Comment]])
 
 local kanagawa_group = api.nvim_create_augroup("kanagawa", { clear = true })
 api.nvim_create_autocmd("TextYankPost", {

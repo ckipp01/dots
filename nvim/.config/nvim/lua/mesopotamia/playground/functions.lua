@@ -9,38 +9,22 @@ local function peek()
   return vim.lsp.buf_request(0, "textDocument/definition", params, preview_location)
 end
 
--- Super hacky hacky way to grab the latest snapshot version. The
--- maven-metadata.xml file is always out of sync so on the website we scrape
--- the overview html page and grab it from there. So this just grabs it from
--- the site...
 local get_latest_metals = function()
-  local version = {}
   Job
     :new({
       command = "curl",
       args = {
-        "https://scalameta.org/metals/docs/",
+        "-s",
+        "https://scalameta.org/metals/latests.json",
       },
-
-      on_stdout = function(err, data)
-        if not err then
-          table.insert(version, data)
-        end
-      end,
-      on_exit = vim.schedule_wrap(function(_, status)
+      on_exit = vim.schedule_wrap(function(self, status)
         if not status == 0 then
           vim.notify("Something went wrong getting version from metals site")
         else
-          local latest = ""
-          for _, value in ipairs(version) do
-            if string.match(value, "SNAPSHOT") then
-              latest = value
-            end
-          end
-          local l = latest:match("</tr><tr><td>(%d.+SNAPSHOT)</td>")
-
-          vim.fn.setreg("+", l)
-          vim.notify(string.format("copied %s to your register", l))
+          local versions = vim.fn.json_decode(table.concat(self._stdout_results, ""))
+          local latest_snapshot = versions.snapshot
+          vim.fn.setreg("+", latest_snapshot)
+          vim.notify(string.format("copied %s to your register", latest_snapshot))
         end
       end),
     })

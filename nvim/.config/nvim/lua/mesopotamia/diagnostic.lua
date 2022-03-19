@@ -12,7 +12,6 @@ local setup = function()
   map("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]])
   map("n", "<leader>ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]])
   map("n", "<leader>aw", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]])
-  map("n", "<leader>d", [[<cmd>lua vim.diagnostic.setloclist()<CR>]]) -- buffer diagnostics only
   map("n", "<leader>nd", [[<cmd>lua vim.diagnostic.goto_next()<CR>]])
   map("n", "<leader>pd", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]])
   map("n", "<leader>ld", [[<cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>]])

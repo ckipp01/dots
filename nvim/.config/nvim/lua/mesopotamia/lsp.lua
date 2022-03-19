@@ -3,31 +3,28 @@ local f = require("mesopotamia.functions")
 local map = f.map
 
 local setup = function()
-  -- LSP specific mappings
-  map("n", "gD", [[<cmd>lua vim.lsp.buf.definition()<CR>]])
-  map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]])
-  map("v", "K", [[<Esc><cmd>lua require("metals").type_of_range()<CR>]])
-  map("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
-  map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
-  map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
-  map("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]])
-  map("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]])
-  map("n", "<leader>ws", [[<cmd>lua require("metals").hover_worksheet()<CR>]])
-  map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
-  map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
-  map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
-  map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.formatting()<CR>]])
-  map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
-
-  -- WIP trying some stuff out with this
-  map("n", "<leader>td", [[<cmd>lua require("metals.test").toggle_test_view()<CR>]])
-
   local lsp_config = require("lspconfig")
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local bare_capabilities = vim.lsp.protocol.make_client_capabilities()
+  local capabilities = require("cmp_nvim_lsp").update_capabilities(bare_capabilities)
 
   lsp_config.util.default_config = vim.tbl_extend("force", lsp_config.util.default_config, {
-    capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities),
+    capabilities = capabilities,
   })
+
+  local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
+
+  local on_attach = function(client, bufnr)
+    -- LSP agnostic mappings
+    map("n", "gD", [[<cmd>lua vim.lsp.buf.definition()<CR>]])
+    map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]])
+    map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
+    map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
+    map("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
+    map("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]])
+    map("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]])
+    map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
+    map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.formatting()<CR>]])
+  end
 
   --================================
   -- Metals specific setup
@@ -46,17 +43,43 @@ local setup = function()
       "akka.http.javadsl",
     },
     --fallbackScalaVersion = "2.13.7",
-    serverVersion = "0.11.2+47-bfe79a5d-SNAPSHOT",
+    serverVersion = "latest.snapshot",
+    --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
     --serverVersion = "0.11.3-SNAPSHOT",
   }
 
   metals_config.init_options.statusBarProvider = "on"
-  metals_config.capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+  metals_config.capabilities = capabilities
 
   metals_config.on_attach = function(client, bufnr)
-    vim.cmd([[autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()]])
-    vim.cmd([[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]])
-    vim.cmd([[autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()]])
+    on_attach(client, bufnr)
+
+    -- Metals specific mappings
+    map("v", "K", [[<Esc><cmd>lua require("metals").type_of_range()<CR>]])
+    map("n", "<leader>ws", [[<cmd>lua require("metals").hover_worksheet()<CR>]])
+    map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
+    map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
+    map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
+    -- WIP trying some stuff out with this
+    map("n", "<leader>td", [[<cmd>lua require("metals.test").toggle_test_view()<CR>]])
+
+    -- A lot of the servers I use won't support document_highlight or codelens,
+    -- so we juse use them in Metals
+    api.nvim_create_autocmd("CursorHold", {
+      callback = vim.lsp.buf.document_highlight,
+      buffer = bufnr,
+      group = lsp_group,
+    })
+    api.nvim_create_autocmd("CursorMoved", {
+      callback = vim.lsp.buf.clear_references,
+      buffer = bufnr,
+      group = lsp_group,
+    })
+    api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+      callback = vim.lsp.codelens.refresh,
+      buffer = bufnr,
+      group = lsp_group,
+    })
 
     -- nvim-dap
     -- I only use nvim-dap with Scala, so we keep it all in here
@@ -112,13 +135,13 @@ local setup = function()
     require("metals").setup_dap()
   end
 
-  local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
+  local nvim_metals_group = api.nvim_create_augroup("nvim-metals", { clear = true })
   api.nvim_create_autocmd("FileType", {
     pattern = { "scala", "sbt", "java" },
     callback = function()
       require("metals").initialize_or_attach(metals_config)
     end,
-    group = lsp_group,
+    group = nvim_metals_group,
   })
 
   -- sumneko lua
@@ -127,6 +150,7 @@ local setup = function()
   table.insert(runtime_path, "lua/?/init.lua")
 
   lsp_config.sumneko_lua.setup({
+    on_attach = on_attach,
     commands = {
       Format = {
         function()
@@ -150,9 +174,8 @@ local setup = function()
     },
   })
 
-  lsp_config.dockerls.setup({})
-  lsp_config.html.setup({})
   lsp_config.jsonls.setup({
+    on_attach = on_attach,
     commands = {
       Format = {
         function()
@@ -161,15 +184,12 @@ local setup = function()
       },
     },
   })
-  lsp_config.tsserver.setup({})
-  lsp_config.yamlls.setup({})
 
-  lsp_config.gopls.setup({
-    cmd = { "gopls", "serve" },
-    settings = {
-      gopls = { analyses = { unusedparams = true }, staticcheck = true },
-    },
-  })
+  -- These server just use the vanilla setup
+  local servers = { "dockerls", "html", "tsserver", "yamlls" }
+  for _, server in pairs(servers) do
+    lsp_config[server].setup({ on_attach = on_attach })
+  end
 
   -- Uncomment for trace logs from neovim
   --vim.lsp.set_log_level('trace')
