@@ -32,6 +32,7 @@ local setup = function()
   local metals_config = require("metals").bare_config()
 
   metals_config.settings = {
+    --bloopJvmProperties = { "-Xss16m" },
     showImplicitArguments = true,
     showImplicitConversionsAndClasses = true,
     showInferredType = true,
@@ -80,6 +81,13 @@ local setup = function()
       buffer = bufnr,
       group = lsp_group,
     })
+    api.nvim_create_autocmd("FileType", {
+      pattern = { "dap-repl" },
+      callback = function()
+        require("dap.ext.autocompl").attach()
+      end,
+      group = lsp_group,
+    })
 
     -- nvim-dap
     -- I only use nvim-dap with Scala, so we keep it all in here
@@ -92,16 +100,6 @@ local setup = function()
         name = "RunOrTest",
         metals = {
           runType = "runOrTestFile",
-          --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
-        },
-      },
-      {
-        type = "scala",
-        request = "launch",
-        name = "Run",
-        metals = {
-          runType = "run",
-          --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
         },
       },
       {
@@ -114,23 +112,17 @@ local setup = function()
       },
     }
 
+    map("n", "<leader>dc", [[<cmd>lua require("dap").continue()<CR>]])
+    map("n", "<leader>dr", [[<cmd>lua require("dap").repl.toggle()<CR>]])
+    map("n", "<leader>dK", [[<cmd>lua require("dap.ui.widgets").hover()<CR>]])
+    map("n", "<leader>dt", [[<cmd>lua require("dap").toggle_breakpoint()<CR>]])
+    map("n", "<leader>dso", [[<cmd>lua require("dap").step_over()<CR>]])
+    map("n", "<leader>dsi", [[<cmd>lua require("dap").step_into()<CR>]])
+    map("n", "<leader>drl", [[<cmd>lua require("dap").run_last()<CR>]])
+
     --dap.listeners.before["command_initialize"]["nvim-metals"] = function(session, body)
     --  P("OOOOOOO YEA")
     --end
-
-    map("n", "<leader>dc", [[<cmd>lua require("dap").continue()<CR>]])
-    map("n", "<leader>dr", [[<cmd>lua require("dap").repl.toggle()<CR>]])
-    map(
-      "n",
-      "<leader>ds",
-      [[<cmd>lua require("dap.ui.widgets").sidebar(require("dap.ui.widgets").scopes).toggle()<CR>]]
-    )
-    map("n", "<leader>dK", [[<cmd>lua require("dap.ui.widgets").hover()<CR>]])
-    map("n", "<leader>dt", [[<cmd>lua require("dap").toggle_breakpoint()<CR>]])
-    map("n", "<leader>dbc", [[<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>]])
-    map("n", "<leader>dso", [[<cmd>lua require("dap").step_over()<CR>]])
-    map("n", "<leader>dsi", [[<cmd>lua require("dap").step_into()<CR>]])
-    map("n", "<leader>dl", [[<cmd>lua require("dap").run_last()<CR>]])
 
     require("metals").setup_dap()
   end
@@ -142,6 +134,11 @@ local setup = function()
       require("metals").initialize_or_attach(metals_config)
     end,
     group = nvim_metals_group,
+  })
+
+  require("rust-tools").setup({
+    tools = { hover_with_actions = false },
+    server = { on_attach = on_attach },
   })
 
   -- sumneko lua
@@ -186,7 +183,7 @@ local setup = function()
   })
 
   -- These server just use the vanilla setup
-  local servers = { "dockerls", "html", "tsserver", "yamlls" }
+  local servers = { "bashls", "dockerls", "html", "tsserver", "yamlls" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end

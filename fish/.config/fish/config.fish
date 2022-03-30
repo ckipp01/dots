@@ -21,6 +21,7 @@ alias k="kubectl"
 alias scli="scala-cli"
 alias 'scala3-nightly-repl'='scli repl --scala 3.nightly'
 alias 'scala2-repl'='cs launch scala:2.13.8'
+alias diff="delta"
 
 # ENV #
 source /Users/ckipp/.config/fish/env.fish

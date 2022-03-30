@@ -1,5 +1,4 @@
 return require("packer").startup(function(use)
-  use({ "ckipp01/nvim-jvmopts" })
   use({
     "hrsh7th/nvim-cmp",
     requires = {
@@ -13,7 +12,6 @@ return require("packer").startup(function(use)
   })
   use({ "kevinhwang91/nvim-bqf" })
   use({ "kyazdani42/nvim-web-devicons" })
-  use({ "liuchengxu/vista.vim" })
   use({ "lukas-reineke/indent-blankline.nvim", config = require("mesopotamia.plugins.indent_blankline").setup() })
   use({ "machakann/vim-sandwich" })
   use({ "neovim/nvim-lspconfig" })
@@ -31,12 +29,16 @@ return require("packer").startup(function(use)
   use({ "nvim-treesitter/playground" })
   use({
     "/Users/ckipp/Documents/lua-workspace/nvim-metals",
-    requires = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "mfussenegger/nvim-dap",
+    },
   })
   use({ "/Users/ckipp/Documents/lua-workspace/nvim-jenkinsfile-linter", requires = { "nvim-lua/plenary.nvim" } })
   use({ "/Users/ckipp/Documents/lua-workspace/stylua-nvim" })
   use({ "/Users/ckipp/Documents/lua-workspace/scala-utils.nvim", requires = { "nvim-lua/plenary.nvim" } })
   use({ "rebelot/kanagawa.nvim" })
+  use({ "simrat39/rust-tools.nvim" })
   use({ "sheerun/vim-polyglot" })
   use({ "tpope/vim-fugitive" })
   use({ "tpope/vim-vinegar" })
