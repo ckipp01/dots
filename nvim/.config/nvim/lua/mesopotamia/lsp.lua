@@ -23,7 +23,7 @@ local setup = function()
     map("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]])
     map("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]])
     map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
-    map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.formatting()<CR>]])
+    map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.format({ async = true })<CR>]])
   end
 
   --================================
@@ -100,6 +100,10 @@ local setup = function()
         name = "RunOrTest",
         metals = {
           runType = "runOrTestFile",
+          args = function()
+            local args_string = vim.fn.input("Arguments: ")
+            return vim.split(args_string, " +")
+          end,
         },
       },
       {

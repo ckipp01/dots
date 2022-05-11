@@ -14,8 +14,7 @@ local setup = function()
         vim.fn["vsnip#anonymous"](args.body)
       end,
     },
-    mapping = {
-      -- None of this made sense to me when first looking into this since there
+    mapping = cmp.mapping.preset.insert({ -- None of this made sense to me when first looking into this since there
       -- is no vim docs, but you can't have select = true here _unless_ you are
       -- also using the snippet stuff. So keep in mind that if you remove
       -- snippets you need to remove this select
@@ -34,7 +33,7 @@ local setup = function()
           fallback()
         end
       end,
-    },
+    }),
   })
 end
 

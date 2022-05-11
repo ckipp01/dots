@@ -32,7 +32,8 @@ set PATH /Users/ckipp/.local/bin \
    /Users/ckipp/bin \
    /Users/ckipp/Library/Application\ Support/Coursier/bin\
    /Users/ckipp/.sdkman/candidates/sbt/current/bin\
-   /Users/ckipp/.cargo/bin $PATH
+   /Users/ckipp/.cargo/bin \
+   /usr/local/opt/gnu-sed/libexec/gnubin $PATH
 
 # Setting to change z to j #
 set -U Z_CMD "j"

@@ -20,7 +20,7 @@ local function err_count(severity)
 end
 
 local function get_branch()
-  local name = vim.api.nvim_call_function("fugitive#head", {})
+  local name = vim.api.nvim_call_function("FugitiveHead", {})
   if name and name ~= "" then
     return "  " .. name .. " "
   else
@@ -85,9 +85,9 @@ function Super_custom_status_line()
     err_count("Warn"),
     "%#StatusLine#",
     metals_status(),
-    "%=", -- Left and Right divider
+    "%=",   -- Left and Right divider
     "%l, ", -- line number
-    "%c ", -- column number
+    "%c ",  -- column number
     scrollbar(),
     "%",
   })
