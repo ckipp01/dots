@@ -24,6 +24,9 @@ local setup = function()
     map("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]])
     map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
     map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.format({ async = true })<CR>]])
+
+
+    api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
   end
 
   --================================
@@ -46,7 +49,7 @@ local setup = function()
     --fallbackScalaVersion = "2.13.7",
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
-    --serverVersion = "0.11.3-SNAPSHOT",
+    --serverVersion = "0.11.6-SNAPSHOT",
   }
 
   metals_config.init_options.statusBarProvider = "on"

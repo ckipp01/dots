@@ -74,7 +74,6 @@ end
 -- TODO is there a way to do this without making it global?
 function Super_custom_status_line()
   return table.concat({
-    --"%#StatusBackground#",
     " %t ", -- filename only
     readonly(),
     get_modified(),
@@ -85,10 +84,19 @@ function Super_custom_status_line()
     err_count("Warn"),
     "%#StatusLine#",
     metals_status(),
-    "%=",   -- Left and Right divider
+    "%=", -- Left and Right divider
     "%l, ", -- line number
-    "%c ",  -- column number
+    "%c ", -- column number
     scrollbar(),
     "%",
+  })
+end
+
+function Super_custom_winbar()
+  return table.concat({
+    "%=", -- divider
+    "%#StatusLine#", -- get the colors right
+    get_modified(),
+    "%t", -- filename only
   })
 end

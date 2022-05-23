@@ -30,7 +30,7 @@ local global_opt = vim.opt_global
 
 require("mesopotamia.plugins")
 require("mesopotamia.globals")
-require("mesopotamia.statusline")
+require("mesopotamia.statusline_winbar")
 
 require("mesopotamia.lsp").setup()
 require("mesopotamia.diagnostic").setup()
@@ -62,7 +62,7 @@ global_opt.wildignore = { ".git", "*/node_modules/*", "*/target/*", ".metals", "
 global_opt.ignorecase = true
 global_opt.smartcase = true
 global_opt.clipboard = "unnamed"
-global_opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
+global_opt.completeopt = { "menuone", "noinsert", "noselect" }
 global_opt.scrolloff = 5
 global_opt.laststatus = 3
 
@@ -81,6 +81,7 @@ opt.modeline = false
 
 -- statusline
 opt.statusline = "%!luaeval('Super_custom_status_line()')"
+opt.winbar = "%!luaeval('Super_custom_winbar()')"
 
 -- MAPPINGS -----------------------
 map("i", "jj", "<ESC>")
@@ -138,7 +139,6 @@ cmd("colorscheme kanagawa")
 -- Statusline specific highlights
 local kanagawa_colors = require("kanagawa.colors").setup()
 cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.fujiGray, kanagawa_colors.sumiInk1))
---cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.oldWhile, kanagawa_colors.sumiInk3))
 cmd([[hi! link StatusLineNC Comment]])
 cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])
