@@ -71,8 +71,7 @@ local function readonly()
   end
 end
 
--- TODO is there a way to do this without making it global?
-function Super_custom_status_line()
+local function super_custom_status_line()
   return table.concat({
     " %t ", -- filename only
     readonly(),
@@ -92,7 +91,7 @@ function Super_custom_status_line()
   })
 end
 
-function Super_custom_winbar()
+local function super_custom_winbar()
   return table.concat({
     "%=", -- divider
     "%#StatusLine#", -- get the colors right
@@ -100,3 +99,8 @@ function Super_custom_winbar()
     "%t", -- filename only
   })
 end
+
+return {
+  super_custom_status_line = super_custom_status_line,
+  super_custom_winbar = super_custom_winbar,
+}

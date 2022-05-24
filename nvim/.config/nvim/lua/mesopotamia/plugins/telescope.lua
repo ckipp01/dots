@@ -8,6 +8,11 @@ local setup = function()
     "<leader>fd",
     [[<cmd>lua require("telescope.builtin").find_files({cwd = "~/dots/nvim/.config/nvim", layout_strategy="vertical"})<CR>]]
   )
+  map(
+    "n",
+    "<leader>ft",
+    [[<cmd>lua require("telescope.builtin").find_files({cwd = "~/Documents/notes", layout_strategy="vertical"})<CR>]]
+  )
   map("n", "<leader>lg", [[<cmd>lua require("telescope.builtin").live_grep({layout_strategy="vertical"})<CR>]])
   map("n", "<leader>gh", [[<cmd>lua require("telescope.builtin").git_commits({layout_strategy="vertical"})<CR>]])
   map("n", "<leader>mc", [[<cmd>lua require("telescope").extensions.metals.commands()<CR>]])

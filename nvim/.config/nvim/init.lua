@@ -30,7 +30,6 @@ local global_opt = vim.opt_global
 
 require("mesopotamia.plugins")
 require("mesopotamia.globals")
-require("mesopotamia.statusline_winbar")
 
 require("mesopotamia.lsp").setup()
 require("mesopotamia.diagnostic").setup()
@@ -80,8 +79,8 @@ opt.fileformat = "unix"
 opt.modeline = false
 
 -- statusline
-opt.statusline = "%!luaeval('Super_custom_status_line()')"
-opt.winbar = "%!luaeval('Super_custom_winbar()')"
+opt.statusline = [[%!luaeval('require("mesopotamia.statusline_winbar").super_custom_status_line()')]]
+opt.winbar = [[%!luaeval('require("mesopotamia.statusline_winbar").super_custom_winbar()')]]
 
 -- MAPPINGS -----------------------
 map("i", "jj", "<ESC>")

@@ -12,7 +12,10 @@ return require("packer").startup(function(use)
   })
   use({ "kevinhwang91/nvim-bqf" })
   use({ "kyazdani42/nvim-web-devicons" })
-  use({ "lukas-reineke/indent-blankline.nvim", config = require("mesopotamia.plugins.indent_blankline").setup() })
+  use({
+    "lukas-reineke/indent-blankline.nvim",
+    config = require("mesopotamia.plugins.indent_blankline").setup(),
+  })
   use({ "machakann/vim-sandwich" })
   use({ "neovim/nvim-lspconfig" })
   use({ "norcalli/nvim-colorizer.lua" })
