@@ -28,15 +28,6 @@ local function get_branch()
   end
 end
 
-local function get_modified()
-  local well_are_are = opt.modified:get()
-  if well_are_are then
-    return "  "
-  else
-    return ""
-  end
-end
-
 -- Yanked right from galaxyline because I like this little thing
 local function scrollbar()
   local current_line = vim.fn.line(".")
@@ -75,7 +66,7 @@ local function super_custom_status_line()
   return table.concat({
     " %t ", -- filename only
     readonly(),
-    get_modified(),
+    " %m ",
     get_branch(),
     "%#StatusError#",
     err_count("Error"),
@@ -95,7 +86,7 @@ local function super_custom_winbar()
   return table.concat({
     "%=", -- divider
     "%#StatusLine#", -- get the colors right
-    get_modified(),
+    " %m ",
     "%t", -- filename only
   })
 end
