@@ -11,6 +11,10 @@ local setup = function()
     capabilities = capabilities,
   })
 
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "single",
+  })
+
   local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
 
   local on_attach = function(client, bufnr)
@@ -25,8 +29,7 @@ local setup = function()
     map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
     map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.format({ async = true })<CR>]])
 
-
-    api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   end
 
   --================================
@@ -103,10 +106,10 @@ local setup = function()
         name = "RunOrTest",
         metals = {
           runType = "runOrTestFile",
-          args = function()
-            local args_string = vim.fn.input("Arguments: ")
-            return vim.split(args_string, " +")
-          end,
+          --args = function()
+          --  local args_string = vim.fn.input("Arguments: ")
+          --  return vim.split(args_string, " +")
+          --end,
         },
       },
       {
@@ -127,9 +130,10 @@ local setup = function()
     map("n", "<leader>dsi", [[<cmd>lua require("dap").step_into()<CR>]])
     map("n", "<leader>drl", [[<cmd>lua require("dap").run_last()<CR>]])
 
-    --dap.listeners.before["command_initialize"]["nvim-metals"] = function(session, body)
-    --  P("OOOOOOO YEA")
-    --end
+    dap.listeners.after["event_terminated"]["nvim-metals"] = function(session, body)
+      vim.notify("Tests have finished!")
+      dap.repl.open()
+    end
 
     require("metals").setup_dap()
   end

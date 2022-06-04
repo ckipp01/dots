@@ -66,7 +66,7 @@ local function super_custom_status_line()
   return table.concat({
     " %t ", -- filename only
     readonly(),
-    " %m ",
+    "%m ",
     get_branch(),
     "%#StatusError#",
     err_count("Error"),
@@ -86,7 +86,7 @@ local function super_custom_winbar()
   return table.concat({
     "%=", -- divider
     "%#StatusLine#", -- get the colors right
-    " %m ",
+    "%m ",
     "%t", -- filename only
   })
 end

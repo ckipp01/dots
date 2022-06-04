@@ -1,4 +1,5 @@
 return require("packer").startup(function(use)
+  use({ "gurpreetatwal/vim-avro" })
   use({
     "hrsh7th/nvim-cmp",
     requires = {

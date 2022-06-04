@@ -23,13 +23,15 @@ local setup = function()
 
   -- Since a lot of errors can be super long and multiple lines in Scala, I use
   -- this to split on the first new line and only dispaly the first line as the
-  -- virtual text... that is when I actually use virtual text for diagnsostics
+  -- virtual text... that is when I actually use virtual text for diagnsostics.
   local diagnostic_foramt = function(diagnostic)
     return string.format("%s: %s", diagnostic.source, f.split_on(diagnostic.message, "\n")[1])
   end
 
-  --vim.diagnostic.config({ virtual_text = { format = diagnostic_foramt }, severity_sort = true })
-  vim.diagnostic.config({ virtual_text = false })
+  vim.diagnostic.config({
+    virtual_text = false,
+    severity_sort = true,
+  })
 end
 
 return {

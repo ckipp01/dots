@@ -151,3 +151,7 @@ api.nvim_create_autocmd("TextYankPost", {
   end,
   group = kanagawa_group,
 })
+
+vim.api.nvim_create_user_command("TestThis", function(args)
+  vim.pretty_print(args)
+end, {})
