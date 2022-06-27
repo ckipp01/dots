@@ -6,4 +6,4 @@ cs update && \
   brew upgrade && \
   brew reinstall nvim && \
   brew cleanup && \
-  npm -g update
+  npm --location=global update

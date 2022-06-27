@@ -11,9 +11,11 @@ local setup = function()
     capabilities = capabilities,
   })
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  local hover_config = {
     border = "single",
-  })
+  }
+
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, hover_config)
 
   local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
 
@@ -52,7 +54,11 @@ local setup = function()
     --fallbackScalaVersion = "2.13.7",
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
-    --serverVersion = "0.11.6-SNAPSHOT",
+    --serverVersion = "0.11.7-SNAPSHOT",
+    --mavenScript = "/Users/ckipp/Documents/scala-workspace/spark/build/mvn"
+    --ui = {
+    --  worksheet_hover = hover_config,
+    --},
   }
 
   metals_config.init_options.statusBarProvider = "on"
@@ -103,13 +109,21 @@ local setup = function()
       {
         type = "scala",
         request = "launch",
-        name = "RunOrTest",
+        name = "Run or test with input",
         metals = {
           runType = "runOrTestFile",
-          --args = function()
-          --  local args_string = vim.fn.input("Arguments: ")
-          --  return vim.split(args_string, " +")
-          --end,
+          args = function()
+            local args_string = vim.fn.input("Arguments: ")
+            return vim.split(args_string, " +")
+          end,
+        },
+      },
+      {
+        type = "scala",
+        request = "launch",
+        name = "Run or Test",
+        metals = {
+          runType = "runOrTestFile",
         },
       },
       {
