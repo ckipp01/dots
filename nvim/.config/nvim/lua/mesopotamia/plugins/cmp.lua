@@ -7,6 +7,7 @@ local setup = function()
       { name = "buffer" },
       { name = "vsnip" },
       { name = "path" },
+      { name = "nvim_lsp_signature_help" },
     },
     snippet = {
       expand = function(args)

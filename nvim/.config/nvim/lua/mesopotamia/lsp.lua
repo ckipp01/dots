@@ -11,11 +11,7 @@ local setup = function()
     capabilities = capabilities,
   })
 
-  local hover_config = {
-    border = "single",
-  }
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, hover_config)
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
   local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
 
@@ -38,27 +34,29 @@ local setup = function()
   -- Metals specific setup
   --================================
   local metals_config = require("metals").bare_config()
+  metals_config.tvp = {
+    icons = {
+      enabled = true
+    }
+  }
 
   metals_config.settings = {
-    --bloopJvmProperties = { "-Xss16m" },
+    --disabledMode = true,
+    -- ONLY USE FOR LOCAL TESTING
+    --bloopVersion = "1.5.3-9-e9afbadc-20220807-1539",
     showImplicitArguments = true,
     showImplicitConversionsAndClasses = true,
     showInferredType = true,
-    --testUserInterface = "test explorer",
     excludedPackages = {
       "akka.actor.typed.javadsl",
       "com.github.swagger.akka.javadsl",
       "akka.stream.javadsl",
       "akka.http.javadsl",
     },
-    --fallbackScalaVersion = "2.13.7",
+    fallbackScalaVersion = "2.13.8",
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
-    --serverVersion = "0.11.7-SNAPSHOT",
-    --mavenScript = "/Users/ckipp/Documents/scala-workspace/spark/build/mvn"
-    --ui = {
-    --  worksheet_hover = hover_config,
-    --},
+    --serverVersion = "0.11.9-SNAPSHOT",
   }
 
   metals_config.init_options.statusBarProvider = "on"
@@ -69,7 +67,7 @@ local setup = function()
 
     -- Metals specific mappings
     map("v", "K", [[<Esc><cmd>lua require("metals").type_of_range()<CR>]])
-    map("n", "<leader>ws", [[<cmd>lua require("metals").hover_worksheet()<CR>]])
+    map("n", "<leader>ws", [[<cmd>lua require("metals").hover_worksheet({ border = "single" })<CR>]])
     map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
     map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
     map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
@@ -145,7 +143,7 @@ local setup = function()
     map("n", "<leader>drl", [[<cmd>lua require("dap").run_last()<CR>]])
 
     dap.listeners.after["event_terminated"]["nvim-metals"] = function(session, body)
-      vim.notify("Tests have finished!")
+      --vim.notify("Tests have finished!")
       dap.repl.open()
     end
 
@@ -208,7 +206,7 @@ local setup = function()
   })
 
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "tsserver", "yamlls" }
+  local servers = { "bashls", "dockerls", "html", "tsserver", "yamlls", "gopls" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end
