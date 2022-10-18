@@ -4,8 +4,7 @@ local map = f.map
 
 local setup = function()
   local lsp_config = require("lspconfig")
-  local bare_capabilities = vim.lsp.protocol.make_client_capabilities()
-  local capabilities = require("cmp_nvim_lsp").update_capabilities(bare_capabilities)
+  local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
   lsp_config.util.default_config = vim.tbl_extend("force", lsp_config.util.default_config, {
     capabilities = capabilities,
@@ -40,10 +39,11 @@ local setup = function()
     }
   }
 
+  --metals_config.cmd = { "cs", "launch", "tech.neader:langoustine-tracer_3:0.0.9", "--", "metals" }
   metals_config.settings = {
     --disabledMode = true,
     -- ONLY USE FOR LOCAL TESTING
-    --bloopVersion = "1.5.3-9-e9afbadc-20220807-1539",
+    --bloopVersion = "1.5.3-15-49c6986e-20220816-2002",
     showImplicitArguments = true,
     showImplicitConversionsAndClasses = true,
     showInferredType = true,
@@ -53,7 +53,7 @@ local setup = function()
       "akka.stream.javadsl",
       "akka.http.javadsl",
     },
-    fallbackScalaVersion = "2.13.8",
+    fallbackScalaVersion = "2.13.10",
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
     --serverVersion = "0.11.9-SNAPSHOT",
@@ -206,7 +206,7 @@ local setup = function()
   })
 
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "tsserver", "yamlls", "gopls" }
+  local servers = { "bashls", "dockerls", "html", "tsserver", "yamlls", "gopls", "marksman" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end

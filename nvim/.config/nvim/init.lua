@@ -50,7 +50,7 @@ g["vim_markdown_conceal_code_blocks"] = 0
 local indent = 2
 
 -- global
-global_opt.shortmess:remove("F"):append("c")
+global_opt.shortmess:append("c")
 global_opt.termguicolors = true
 global_opt.hidden = true
 global_opt.showtabline = 1
