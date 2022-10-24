@@ -57,6 +57,7 @@ local setup = function()
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
     --serverVersion = "0.11.9-SNAPSHOT",
+    testUserInterface = "Test Explorer",
   }
 
   metals_config.init_options.statusBarProvider = "on"

@@ -1,8 +1,4 @@
 return require("packer").startup(function(use)
-  use {
-    'AckslD/nvim-FeMaco.lua',
-    config = 'require("femaco").setup()',
-  }
   use({ "gurpreetatwal/vim-avro" })
   use({
     "hrsh7th/nvim-cmp",
@@ -50,6 +46,7 @@ return require("packer").startup(function(use)
   use({ "rebelot/kanagawa.nvim" })
   use({ "simrat39/rust-tools.nvim" })
   use({ "sheerun/vim-polyglot" })
+  use({ "stevearc/dressing.nvim" })
   use({ "tpope/vim-fugitive" })
   use({ "tpope/vim-vinegar" })
   use({ "wakatime/vim-wakatime" })
