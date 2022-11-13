@@ -17,6 +17,7 @@ local setup = function()
   local on_attach = function(client, bufnr)
     -- LSP agnostic mappings
     map("n", "gD", [[<cmd>lua vim.lsp.buf.definition()<CR>]])
+    map("n", "gtD", [[<cmd>lua vim.lsp.buf.type_definition()<CR>]])
     map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]])
     map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
     map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
@@ -53,11 +54,11 @@ local setup = function()
       "akka.stream.javadsl",
       "akka.http.javadsl",
     },
-    fallbackScalaVersion = "2.13.10",
+    --fallbackScalaVersion = "2.13.10",
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
-    --serverVersion = "0.11.9-SNAPSHOT",
-    testUserInterface = "Test Explorer",
+    --serverVersion = "0.11.10-SNAPSHOT",
+    --testUserInterface = "Test Explorer",
   }
 
   metals_config.init_options.statusBarProvider = "on"
@@ -74,6 +75,7 @@ local setup = function()
     map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
     -- WIP trying some stuff out with this
     map("n", "<leader>td", [[<cmd>lua require("metals.test").toggle_test_view()<CR>]])
+    map("n", "<leader>mmc", [[<cmd>lua require("metals").commands()<CR>]])
 
     -- A lot of the servers I use won't support document_highlight or codelens,
     -- so we juse use them in Metals
