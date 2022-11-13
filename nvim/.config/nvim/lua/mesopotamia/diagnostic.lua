@@ -1,7 +1,7 @@
 local cmd = vim.cmd
 local fn = vim.fn
 local f = require("mesopotamia.functions")
-local map = f.map
+local map = vim.keymap.set
 
 local setup = function()
   cmd([[hi! DiagnosticUnderlineError cterm=NONE gui=underline guifg=NONE]])
@@ -9,12 +9,29 @@ local setup = function()
   cmd([[hi! DiagnosticUnderlineInfo cterm=NONE gui=underline guifg=NONE]])
   cmd([[hi! DiagnosticUnderlineHint cterm=NONE gui=underline guifg=NONE]])
 
-  map("n", "<leader>aa", [[<cmd>lua vim.diagnostic.setqflist()<CR>]])
-  map("n", "<leader>ae", [[<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>]])
-  map("n", "<leader>aw", [[<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>]])
-  map("n", "<leader>nd", [[<cmd>lua vim.diagnostic.goto_next()<CR>]])
-  map("n", "<leader>pd", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]])
-  map("n", "<leader>ld", [[<cmd>lua vim.diagnostic.open_float(0, {scope = "line"})<CR>]])
+  map("n", "<leader>aa", function()
+    vim.diagnostic.setqflist()
+  end)
+
+  map("n", "<leader>ae", function()
+    vim.diagnostic.setqflist({ severity = "E" })
+  end)
+
+  map("n", "<leader>aw", function()
+    vim.diagnostic.setqflist({ severity = "W" })
+  end)
+
+  map("n", "<leader>nd", function()
+    vim.diagnostic.goto_next()
+  end)
+
+  map("n", "<leader>pd", function()
+    vim.diagnostic.goto_prev()
+  end)
+
+  map("n", "<leader>ld", function()
+    vim.diagnostic.open_float(0, { scope = "line" })
+  end)
 
   fn.sign_define("DiagnosticSignError", { text = "▬", texthl = "DiagnosticError" })
   fn.sign_define("DiagnosticSignWarn", { text = "▬", texthl = "DiagnosticWarn" })

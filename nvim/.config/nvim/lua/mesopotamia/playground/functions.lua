@@ -10,25 +10,23 @@ local function peek()
 end
 
 local get_latest_metals = function()
-  Job
-    :new({
-      command = "curl",
-      args = {
-        "-s",
-        "https://scalameta.org/metals/latests.json",
-      },
-      on_exit = vim.schedule_wrap(function(self, status)
-        if not status == 0 then
-          vim.notify("Something went wrong getting version from metals site")
-        else
-          local versions = vim.fn.json_decode(table.concat(self._stdout_results, ""))
-          local latest_snapshot = versions.snapshot
-          vim.fn.setreg("+", latest_snapshot)
-          vim.notify(string.format("copied %s to your register", latest_snapshot))
-        end
-      end),
-    })
-    :start()
+  Job:new({
+    command = "curl",
+    args = {
+      "-s",
+      "https://scalameta.org/metals/latests.json",
+    },
+    on_exit = vim.schedule_wrap(function(self, status)
+      if not status == 0 then
+        vim.notify("Something went wrong getting version from metals site")
+      else
+        local versions = vim.fn.json_decode(table.concat(self._stdout_results, ""))
+        local latest_snapshot = versions.snapshot
+        vim.fn.setreg("+", latest_snapshot)
+        vim.notify(string.format("copied %s to your register", latest_snapshot))
+      end
+    end),
+  }):start()
 end
 
 -- I could use vim-scriptease for this, but I don't want the full plugin to

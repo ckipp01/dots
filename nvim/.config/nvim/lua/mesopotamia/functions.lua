@@ -1,5 +1,3 @@
-local api = vim.api
-
 local function toggle_nums()
   vim.wo.number = not vim.wo.number
 end
@@ -11,14 +9,6 @@ local function toggle_conceal()
   else
     vim.wo.conceallevel = 2
   end
-end
-
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true, silent = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 local function split_on(s, delimiter)
@@ -38,10 +28,8 @@ end
 local function replace_java_converters()
   local line_contents = vim.api.nvim_get_current_line()
 
-  local new_conents = line_contents:gsub(
-    "import scala.collection.JavaConverters._",
-    "import scala.jdk.CollectionConverters._"
-  )
+  local new_conents =
+    line_contents:gsub("import scala.collection.JavaConverters._", "import scala.jdk.CollectionConverters._")
 
   local line = vim.fn.line(".") - 1
 
@@ -53,7 +41,6 @@ local function markdown_headers()
 end
 
 return {
-  map = map,
   markdown_headers = markdown_headers,
   replace_java_converters = replace_java_converters,
   split_on = split_on,

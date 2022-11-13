@@ -1,25 +1,41 @@
-local f = require("mesopotamia.functions")
-local map = f.map
+local map = vim.keymap.set
 
 local setup = function()
-  map("n", "<leader>ff", [[<cmd>lua require("telescope.builtin").find_files({layout_strategy="vertical"})<CR>]])
-  map(
-    "n",
-    "<leader>fd",
-    [[<cmd>lua require("telescope.builtin").find_files({cwd = "~/dots/nvim/.config/nvim", layout_strategy="vertical"})<CR>]]
-  )
-  map(
-    "n",
-    "<leader>ft",
-    [[<cmd>lua require("telescope.builtin").find_files({cwd = "~/Documents/notes", layout_strategy="vertical"})<CR>]]
-  )
-  map("n", "<leader>lg", [[<cmd>lua require("telescope.builtin").live_grep({layout_strategy="vertical"})<CR>]])
-  map("n", "<leader>gh", [[<cmd>lua require("telescope.builtin").git_commits({layout_strategy="vertical"})<CR>]])
-  map("n", "<leader>mc", [[<cmd>lua require("telescope").extensions.metals.commands()<CR>]])
-  map("n", "<leader>cc", [[<cmd>lua RELOAD("telescope").extensions.coursier.complete()<CR>]])
+  map("n", "<leader>ff", function()
+    require("telescope.builtin").find_files({ layout_strategy = "vertical" })
+  end)
 
-  map("n", "gds", [[<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>]])
-  map("n", "gws", [[<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>]])
+  map("n", "<leader>fd", function()
+    require("telescope.builtin").find_files({ cwd = "~/dots/nvim/.config/nvim", layout_strategy = "vertical" })
+  end)
+
+  map("n", "<leader>ft", function()
+    require("telescope.builtin").find_files({ cwd = "~/Documents/notes", layout_strategy = "vertical" })
+  end)
+
+  map("n", "<leader>lg", function()
+    require("telescope.builtin").live_grep({ layout_strategy = "vertical" })
+  end)
+
+  map("n", "<leader>gh", function()
+    require("telescope.builtin").git_commits({ layout_strategy = "vertical" })
+  end)
+
+  map("n", "<leader>mc", function()
+    require("telescope").extensions.metals.commands()
+  end)
+
+  map("n", "<leader>cc", function()
+    RELOAD("telescope").extensions.coursier.complete()
+  end)
+
+  map("n", "gds", function()
+    require("telescope.builtin").lsp_document_symbols()
+  end)
+
+  map("n", "gws", function()
+    require("telescope.builtin").lsp_dynamic_workspace_symbols()
+  end)
 
   local actions = require("telescope.actions")
   require("telescope").setup({

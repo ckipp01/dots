@@ -7,11 +7,6 @@
 -- https://www.chris-kipp.io
 --=================================
 
--- We first make sure we have packer before we do anything
-if require("mesopotamia.pre")() then
-  return
-end
-
 local api = vim.api
 local cmd = vim.cmd
 local g = vim.g
@@ -19,8 +14,7 @@ local g = vim.g
 -- NOTE do this ASAP since some of the stuff in our basic setup uses leader
 g["mapleader"] = ","
 
-local f = require("mesopotamia.functions")
-local map = f.map
+local map = vim.keymap.set
 local opt = vim.opt
 local global_opt = vim.opt_global
 
@@ -92,21 +86,51 @@ map("n", "<leader>fp", ":cprevious<cr>")
 map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 
 -- scala-utils
-map("n", "<leader>slc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_line()<CR>]])
-map("n", "<leader>sc", [[<cmd>lua RELOAD("scala-utils.coursier").complete_from_input()<CR>]])
+map("n", "<leader>slc", function()
+  RELOAD("scala-utils.coursier").complete_from_line()
+end)
+map("n", "<leader>sc", function()
+  RELOAD("scala-utils.coursier").complete_from_input()
+end)
 
 -- other stuff
-map("n", "<leader><leader>p", [[<cmd>lua require("mesopotamia.playground.functions").peek()<CR>]])
-map("n", "<leader><leader>s", [[<cmd>lua RELOAD("mesopotamia.playground.semantic").generate()<CR>]])
-map("n", "<leader><leader>m", [[<cmd>lua RELOAD("mesopotamia.playground.mt").get_dep()<CR>]])
-map("n", "<leader><leader>e", [[:luafile %<CR>]])
-map("n", "<leader><leader>v", [[<cmd>lua RELOAD("mesopotamia.playground.functions").get_latest_metals()<CR>]])
-map("n", "<leader><leader>j", [[<cmd>lua RELOAD("jenkinsfile_linter").validate()<CR>]])
-map("n", "<leader><leader>hl", [[<cmd>lua RELOAD("mesopotamia.playground.functions").get_hl_under_cursor()<CR>]])
+map("n", "<leader><leader>p", function()
+  require("mesopotamia.playground.functions").peek()
+end)
 
-map("n", "<leader><leader>n", [[<cmd>lua RELOAD("mesopotamia.functions").toggle_nums()<CR>]])
-map("n", "<leader><leader>c", [[<cmd>lua RELOAD("mesopotamia.functions").toggle_conceal()<CR>]])
-map("n", "<leader><leader>jc", [[<cmd>lua RELOAD("mesopotamia.functions").replace_java_converters()<CR>]])
+map("n", "<leader><leader>s", function()
+  RELOAD("mesopotamia.playground.semantic").generate()
+end)
+
+map("n", "<leader><leader>m", function()
+  RELOAD("mesopotamia.playground.mt").get_dep()
+end)
+
+map("n", "<leader><leader>e", [[:luafile %<CR>]])
+
+map("n", "<leader><leader>v", function()
+  RELOAD("mesopotamia.playground.functions").get_latest_metals()
+end)
+
+map("n", "<leader><leader>j", function()
+  require("jenkinsfile_linter").validate()
+end)
+
+map("n", "<leader><leader>hl", function()
+  RELOAD("mesopotamia.playground.functions").get_hl_under_cursor()
+end)
+
+map("n", "<leader><leader>n", function()
+  RELOAD("mesopotamia.functions").toggle_nums()
+end)
+
+map("n", "<leader><leader>c", function()
+  RELOAD("mesopotamia.functions").toggle_conceal()
+end)
+
+map("n", "<leader><leader>jc", function()
+  RELOAD("mesopotamia.functions").replace_java_converters()
+end)
 
 --================================
 -- COMMANDS ----------------------
@@ -133,7 +157,7 @@ api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = base_group,
 })
 
-cmd("colorscheme kanagawa")
+cmd.colorscheme("kanagawa")
 
 -- Statusline specific highlights
 local kanagawa_colors = require("kanagawa.colors").setup()

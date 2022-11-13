@@ -1,6 +1,5 @@
 local api = vim.api
-local f = require("mesopotamia.functions")
-local map = f.map
+local map = vim.keymap.set
 
 local setup = function()
   local lsp_config = require("lspconfig")
@@ -16,16 +15,45 @@ local setup = function()
 
   local on_attach = function(client, bufnr)
     -- LSP agnostic mappings
-    map("n", "gD", [[<cmd>lua vim.lsp.buf.definition()<CR>]])
-    map("n", "gtD", [[<cmd>lua vim.lsp.buf.type_definition()<CR>]])
-    map("n", "K", [[<cmd>lua vim.lsp.buf.hover()<CR>]])
-    map("n", "gi", [[<cmd>lua vim.lsp.buf.implementation()<CR>]])
-    map("n", "gr", [[<cmd>lua vim.lsp.buf.references()<CR>]])
-    map("n", "<leader>sh", [[<cmd>lua vim.lsp.buf.signature_help()<CR>]])
-    map("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]])
-    map("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]])
-    map("n", "<leader>cl", [[<cmd>lua vim.lsp.codelens.run()<CR>]])
-    map("n", "<leader>o", [[<cmd>lua vim.lsp.buf.format({ async = true })<CR>]])
+    map("n", "gD", function()
+      vim.lsp.buf.definition()
+    end)
+
+    map("n", "gtD", function()
+      vim.lsp.buf.type_definition()
+    end)
+
+    map("n", "K", function()
+      vim.lsp.buf.hover()
+    end)
+
+    map("n", "gi", function()
+      vim.lsp.buf.implementation()
+    end)
+
+    map("n", "gr", function()
+      vim.lsp.buf.references()
+    end)
+
+    map("n", "<leader>sh", function()
+      vim.lsp.buf.signature_help()
+    end)
+
+    map("n", "<leader>rn", function()
+      vim.lsp.buf.rename()
+    end)
+
+    map("n", "<leader>ca", function()
+      vim.lsp.buf.code_action()
+    end)
+
+    map("n", "<leader>cl", function()
+      vim.lsp.codelens.run()
+    end)
+
+    map("n", "<leader>o", function()
+      vim.lsp.buf.format({ async = true })
+    end)
 
     api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   end
@@ -36,8 +64,8 @@ local setup = function()
   local metals_config = require("metals").bare_config()
   metals_config.tvp = {
     icons = {
-      enabled = true
-    }
+      enabled = true,
+    },
   }
 
   --metals_config.cmd = { "cs", "launch", "tech.neader:langoustine-tracer_3:0.0.9", "--", "metals" }
@@ -67,15 +95,29 @@ local setup = function()
   metals_config.on_attach = function(client, bufnr)
     on_attach(client, bufnr)
 
-    -- Metals specific mappings
-    map("v", "K", [[<Esc><cmd>lua require("metals").type_of_range()<CR>]])
-    map("n", "<leader>ws", [[<cmd>lua require("metals").hover_worksheet({ border = "single" })<CR>]])
-    map("n", "<leader>tt", [[<cmd>lua require("metals.tvp").toggle_tree_view()<CR>]])
-    map("n", "<leader>tr", [[<cmd>lua require("metals.tvp").reveal_in_tree()<CR>]])
-    map("n", "<leader>st", [[<cmd>lua require("metals").toggle_setting("showImplicitArguments")<CR>]])
-    -- WIP trying some stuff out with this
-    map("n", "<leader>td", [[<cmd>lua require("metals.test").toggle_test_view()<CR>]])
-    map("n", "<leader>mmc", [[<cmd>lua require("metals").commands()<CR>]])
+    map("v", "K", function()
+      require("metals").type_of_range()
+    end)
+
+    map("n", "<leader>ws", function()
+      require("metals").hover_worksheet({ border = "single" })
+    end)
+
+    map("n", "<leader>tt", function()
+      require("metals.tvp").toggle_tree_view()
+    end)
+
+    map("n", "<leader>tr", function()
+      require("metals.tvp").reveal_in_tree()
+    end)
+
+    map("n", "<leader>st", function()
+      require("metals").toggle_setting("showImplicitArguments")
+    end)
+
+    map("n", "<leader>mmc", function()
+      require("metals").commands()
+    end)
 
     -- A lot of the servers I use won't support document_highlight or codelens,
     -- so we juse use them in Metals
@@ -137,13 +179,33 @@ local setup = function()
       },
     }
 
-    map("n", "<leader>dc", [[<cmd>lua require("dap").continue()<CR>]])
-    map("n", "<leader>dr", [[<cmd>lua require("dap").repl.toggle()<CR>]])
-    map("n", "<leader>dK", [[<cmd>lua require("dap.ui.widgets").hover()<CR>]])
-    map("n", "<leader>dt", [[<cmd>lua require("dap").toggle_breakpoint()<CR>]])
-    map("n", "<leader>dso", [[<cmd>lua require("dap").step_over()<CR>]])
-    map("n", "<leader>dsi", [[<cmd>lua require("dap").step_into()<CR>]])
-    map("n", "<leader>drl", [[<cmd>lua require("dap").run_last()<CR>]])
+    map("n", "<leader>dc", function()
+      require("dap").continue()
+    end)
+
+    map("n", "<leader>dr", function()
+      require("dap").repl.toggle()
+    end)
+
+    map("n", "<leader>dK", function()
+      require("dap.ui.widgets").hover()
+    end)
+
+    map("n", "<leader>dt", function()
+      require("dap").toggle_breakpoint()
+    end)
+
+    map("n", "<leader>dso", function()
+      require("dap").step_over()
+    end)
+
+    map("n", "<leader>dsi", function()
+      require("dap").step_into()
+    end)
+
+    map("n", "<leader>drl", function()
+      require("dap").run_last()
+    end)
 
     dap.listeners.after["event_terminated"]["nvim-metals"] = function(session, body)
       --vim.notify("Tests have finished!")
