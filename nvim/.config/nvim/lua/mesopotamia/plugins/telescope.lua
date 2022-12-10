@@ -9,7 +9,7 @@ local setup = function()
     require("telescope.builtin").find_files({ cwd = "~/dots/nvim/.config/nvim", layout_strategy = "vertical" })
   end)
 
-  map("n", "<leader>ft", function()
+  map("n", "<leader>ftd", function()
     require("telescope.builtin").find_files({ cwd = "~/Documents/notes", layout_strategy = "vertical" })
   end)
 
@@ -21,21 +21,13 @@ local setup = function()
     require("telescope.builtin").git_commits({ layout_strategy = "vertical" })
   end)
 
-  map("n", "<leader>mc", function()
-    require("telescope").extensions.metals.commands()
-  end)
+  map("n", "<leader>mc", require("telescope").extensions.metals.commands)
 
-  map("n", "<leader>cc", function()
-    RELOAD("telescope").extensions.coursier.complete()
-  end)
+  map("n", "<leader>cc", require("telescope").extensions.coursier.complete)
 
-  map("n", "gds", function()
-    require("telescope.builtin").lsp_document_symbols()
-  end)
+  map("n", "gds", require("telescope.builtin").lsp_document_symbols)
 
-  map("n", "gws", function()
-    require("telescope.builtin").lsp_dynamic_workspace_symbols()
-  end)
+  map("n", "gws", require("telescope.builtin").lsp_dynamic_workspace_symbols)
 
   local actions = require("telescope.actions")
   require("telescope").setup({

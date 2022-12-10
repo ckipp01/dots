@@ -24,25 +24,12 @@ local function split_on(s, delimiter)
   return result
 end
 
--- TODO make this generic so I can reuse this
-local function replace_java_converters()
-  local line_contents = vim.api.nvim_get_current_line()
-
-  local new_conents =
-    line_contents:gsub("import scala.collection.JavaConverters._", "import scala.jdk.CollectionConverters._")
-
-  local line = vim.fn.line(".") - 1
-
-  vim.api.nvim_buf_set_text(0, line, 0, line, #line_contents, { new_conents })
-end
-
 local function markdown_headers()
   vim.cmd([[vimgrep /^#/ % | copen]])
 end
 
 return {
   markdown_headers = markdown_headers,
-  replace_java_converters = replace_java_converters,
   split_on = split_on,
   toggle_nums = toggle_nums,
   toggle_conceal = toggle_conceal,

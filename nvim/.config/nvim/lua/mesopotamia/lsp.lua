@@ -15,41 +15,15 @@ local setup = function()
 
   local on_attach = function(client, bufnr)
     -- LSP agnostic mappings
-    map("n", "gD", function()
-      vim.lsp.buf.definition()
-    end)
-
-    map("n", "gtD", function()
-      vim.lsp.buf.type_definition()
-    end)
-
-    map("n", "K", function()
-      vim.lsp.buf.hover()
-    end)
-
-    map("n", "gi", function()
-      vim.lsp.buf.implementation()
-    end)
-
-    map("n", "gr", function()
-      vim.lsp.buf.references()
-    end)
-
-    map("n", "<leader>sh", function()
-      vim.lsp.buf.signature_help()
-    end)
-
-    map("n", "<leader>rn", function()
-      vim.lsp.buf.rename()
-    end)
-
-    map("n", "<leader>ca", function()
-      vim.lsp.buf.code_action()
-    end)
-
-    map("n", "<leader>cl", function()
-      vim.lsp.codelens.run()
-    end)
+    map("n", "gD", vim.lsp.buf.definition)
+    map("n", "gtD", vim.lsp.buf.type_definition)
+    map("n", "K", vim.lsp.buf.hover)
+    map("n", "gi", vim.lsp.buf.implementation)
+    map("n", "gr", vim.lsp.buf.references)
+    map("n", "<leader>sh", vim.lsp.buf.signature_help)
+    map("n", "<leader>rn", vim.lsp.buf.rename)
+    map("n", "<leader>ca", vim.lsp.buf.code_action)
+    map("n", "<leader>cl", vim.lsp.codelens.run)
 
     map("n", "<leader>o", function()
       vim.lsp.buf.format({ async = true })
@@ -95,29 +69,17 @@ local setup = function()
   metals_config.on_attach = function(client, bufnr)
     on_attach(client, bufnr)
 
-    map("v", "K", function()
-      require("metals").type_of_range()
-    end)
+    map("v", "K", require("metals").type_of_range)
 
     map("n", "<leader>ws", function()
       require("metals").hover_worksheet({ border = "single" })
     end)
 
-    map("n", "<leader>tt", function()
-      require("metals.tvp").toggle_tree_view()
-    end)
+    map("n", "<leader>tt", require("metals.tvp").toggle_tree_view)
 
-    map("n", "<leader>tr", function()
-      require("metals.tvp").reveal_in_tree()
-    end)
+    map("n", "<leader>tr", require("metals.tvp").reveal_in_tree)
 
-    map("n", "<leader>st", function()
-      require("metals").toggle_setting("showImplicitArguments")
-    end)
-
-    map("n", "<leader>mmc", function()
-      require("metals").commands()
-    end)
+    map("n", "<leader>mmc", require("metals").commands)
 
     -- A lot of the servers I use won't support document_highlight or codelens,
     -- so we juse use them in Metals
@@ -179,33 +141,13 @@ local setup = function()
       },
     }
 
-    map("n", "<leader>dc", function()
-      require("dap").continue()
-    end)
-
-    map("n", "<leader>dr", function()
-      require("dap").repl.toggle()
-    end)
-
-    map("n", "<leader>dK", function()
-      require("dap.ui.widgets").hover()
-    end)
-
-    map("n", "<leader>dt", function()
-      require("dap").toggle_breakpoint()
-    end)
-
-    map("n", "<leader>dso", function()
-      require("dap").step_over()
-    end)
-
-    map("n", "<leader>dsi", function()
-      require("dap").step_into()
-    end)
-
-    map("n", "<leader>drl", function()
-      require("dap").run_last()
-    end)
+    map("n", "<leader>dc", require("dap").continue)
+    map("n", "<leader>dr", require("dap").repl.toggle)
+    map("n", "<leader>dK", require("dap.ui.widgets").hover)
+    map("n", "<leader>dt", require("dap").toggle_breakpoint)
+    map("n", "<leader>dso", require("dap").step_over)
+    map("n", "<leader>dsi", require("dap").step_into)
+    map("n", "<leader>drl", require("dap").run_last)
 
     dap.listeners.after["event_terminated"]["nvim-metals"] = function(session, body)
       --vim.notify("Tests have finished!")
@@ -270,8 +212,18 @@ local setup = function()
     },
   })
 
+  lsp_config.yamlls.setup({
+    settings = {
+      yaml = {
+        schemas = {
+          ["https://raw.githubusercontent.com/oyvindberg/bleep/master/schema.json"] = "bleep.yaml"
+        }
+      }
+    }
+  })
+
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "tsserver", "yamlls", "gopls", "marksman" }
+  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "marksman" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end

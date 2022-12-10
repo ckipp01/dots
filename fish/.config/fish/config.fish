@@ -23,8 +23,6 @@ alias 'scala3-nightly-repl'='scli repl --scala 3.nightly'
 alias 'scala2-repl'='cs launch scala:2.13.10'
 alias diff="delta"
 
-# ENV #
-source /Users/ckipp/.config/fish/env.fish
 # FUNCTIONS #
 source /Users/ckipp/.config/fish/functions.fish
 

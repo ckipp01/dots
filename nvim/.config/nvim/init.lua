@@ -12,7 +12,7 @@ local cmd = vim.cmd
 local g = vim.g
 
 -- NOTE do this ASAP since some of the stuff in our basic setup uses leader
-g["mapleader"] = ","
+g.mapleader = ","
 
 local map = vim.keymap.set
 local opt = vim.opt
@@ -31,7 +31,7 @@ require("mesopotamia.diagnostic").setup()
 --================================
 -- VARIABLES ---------------------
 --================================
-g["netrw_gx"] = "<cWORD>"
+g.netrw_gx = "<cWORD>"
 
 -- plugin variables
 -- polyglot's markdown settings
@@ -86,51 +86,23 @@ map("n", "<leader>fp", ":cprevious<cr>")
 map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 
 -- scala-utils
-map("n", "<leader>slc", function()
-  RELOAD("scala-utils.coursier").complete_from_line()
-end)
-map("n", "<leader>sc", function()
-  RELOAD("scala-utils.coursier").complete_from_input()
-end)
+map("n", "<leader>slc", RELOAD("scala-utils.coursier").complete_from_line)
+map("n", "<leader>sc", RELOAD("scala-utils.coursier").complete_from_input)
 
 -- other stuff
-map("n", "<leader><leader>p", function()
-  require("mesopotamia.playground.functions").peek()
-end)
+map("n", "<leader><leader>p", require("mesopotamia.playground.functions").peek)
 
-map("n", "<leader><leader>s", function()
-  RELOAD("mesopotamia.playground.semantic").generate()
-end)
-
-map("n", "<leader><leader>m", function()
-  RELOAD("mesopotamia.playground.mt").get_dep()
-end)
+map("n", "<leader><leader>s", RELOAD("mesopotamia.playground.semantic").generate)
 
 map("n", "<leader><leader>e", [[:luafile %<CR>]])
 
-map("n", "<leader><leader>v", function()
-  RELOAD("mesopotamia.playground.functions").get_latest_metals()
-end)
+map("n", "<leader><leader>v", RELOAD("mesopotamia.playground.functions").get_latest_metals)
 
-map("n", "<leader><leader>j", function()
-  require("jenkinsfile_linter").validate()
-end)
+map("n", "<leader><leader>hl", RELOAD("mesopotamia.playground.functions").get_hl_under_cursor)
 
-map("n", "<leader><leader>hl", function()
-  RELOAD("mesopotamia.playground.functions").get_hl_under_cursor()
-end)
+map("n", "<leader><leader>n", require("mesopotamia.functions").toggle_nums)
 
-map("n", "<leader><leader>n", function()
-  RELOAD("mesopotamia.functions").toggle_nums()
-end)
-
-map("n", "<leader><leader>c", function()
-  RELOAD("mesopotamia.functions").toggle_conceal()
-end)
-
-map("n", "<leader><leader>jc", function()
-  RELOAD("mesopotamia.functions").replace_java_converters()
-end)
+map("n", "<leader><leader>c", require("mesopotamia.functions").toggle_conceal)
 
 --================================
 -- COMMANDS ----------------------
