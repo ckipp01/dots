@@ -85,20 +85,24 @@ map("n", "<leader>fn", ":cnext<cr>")
 map("n", "<leader>fp", ":cprevious<cr>")
 map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 
--- scala-utils
-map("n", "<leader>slc", RELOAD("scala-utils.coursier").complete_from_line)
-map("n", "<leader>sc", RELOAD("scala-utils.coursier").complete_from_input)
+-- scala-utils (these aint working... really should try to work on these)
+--map("n", "<leader>slc", RELOAD("scala-utils.coursier").complete_from_line)
+--map("n", "<leader>sc", RELOAD("scala-utils.coursier").complete_from_input)
 
 -- other stuff
 map("n", "<leader><leader>p", require("mesopotamia.playground.functions").peek)
 
-map("n", "<leader><leader>s", RELOAD("mesopotamia.playground.semantic").generate)
+map("n", "<leader><leader>s", function()
+  RELOAD("mesopotamia.playground.semantic").generate()
+end)
 
 map("n", "<leader><leader>e", [[:luafile %<CR>]])
 
-map("n", "<leader><leader>v", RELOAD("mesopotamia.playground.functions").get_latest_metals)
+map("n", "<leader><leader>v", require("mesopotamia.playground.functions").get_latest_metals)
 
-map("n", "<leader><leader>hl", RELOAD("mesopotamia.playground.functions").get_hl_under_cursor)
+map("n", "<leader><leader>hl", function()
+  RELOAD("mesopotamia.playground.functions").get_hl_under_cursor()
+end)
 
 map("n", "<leader><leader>n", require("mesopotamia.functions").toggle_nums)
 
@@ -113,7 +117,7 @@ api.nvim_create_autocmd("FileType", { pattern = "markdown", command = "setlocal 
 api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
-    map("n", "<leader>mh", [[<cmd>lua RELOAD("mesopotamia.functions").markdown_headers()<CR>]])
+    map("n", "<leader>mh", require("mesopotamia.functions").markdown_headers)
   end,
   group = base_group,
 })
@@ -147,7 +151,3 @@ api.nvim_create_autocmd("TextYankPost", {
   end,
   group = kanagawa_group,
 })
-
-vim.api.nvim_create_user_command("TestThis", function(args)
-  vim.pretty_print(args)
-end, {})

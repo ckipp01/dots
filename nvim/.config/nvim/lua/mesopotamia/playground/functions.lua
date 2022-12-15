@@ -33,13 +33,18 @@ end
 -- only use the zS functionality. We we just take that out and give it some lua
 -- love and instead of just displaying the name we call hi with it.
 local function get_hl_under_cursor()
-  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-  local id = vim.fn.synID(row, col + 1, 1)
-  local result = vim.fn.synIDattr(id, "name")
-  if result ~= "" then
-    vim.cmd(string.format("hi %s", result))
+  local tressiterr_capture = vim.treesitter.get_captures_at_cursor()
+  if tressiterr_capture then
+    vim.pretty_print(tressiterr_capture)
   else
-    vim.notify("No highlight group found", vim.log.levels.WARN)
+    local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local id = vim.fn.synID(row, col + 1, 1)
+    local result = vim.fn.synIDattr(id, "name")
+    if result ~= "" then
+      vim.cmd(string.format("hi %s", result))
+    else
+      vim.notify("No highlight group found", vim.log.levels.WARN)
+    end
   end
 end
 

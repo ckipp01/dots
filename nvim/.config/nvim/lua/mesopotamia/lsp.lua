@@ -42,20 +42,14 @@ local setup = function()
     },
   }
 
-  --metals_config.cmd = { "cs", "launch", "tech.neader:langoustine-tracer_3:0.0.9", "--", "metals" }
+  --metals_config.cmd = { "cs", "launch", "tech.neader:langoustine-tracer_3:0.0.18", "--", "metals" }
   metals_config.settings = {
     --disabledMode = true,
-    -- ONLY USE FOR LOCAL TESTING
     --bloopVersion = "1.5.3-15-49c6986e-20220816-2002",
     showImplicitArguments = true,
     showImplicitConversionsAndClasses = true,
     showInferredType = true,
-    excludedPackages = {
-      "akka.actor.typed.javadsl",
-      "com.github.swagger.akka.javadsl",
-      "akka.stream.javadsl",
-      "akka.http.javadsl",
-    },
+    enableSemanticHighlighting = true,
     --fallbackScalaVersion = "2.13.10",
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
