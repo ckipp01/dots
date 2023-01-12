@@ -58,6 +58,7 @@ global_opt.clipboard = "unnamed"
 global_opt.completeopt = { "menuone", "noinsert", "noselect" }
 global_opt.scrolloff = 5
 global_opt.laststatus = 3
+global_opt.mouse = ""
 
 -- window-scoped
 opt.wrap = false
@@ -100,9 +101,7 @@ map("n", "<leader><leader>e", [[:luafile %<CR>]])
 
 map("n", "<leader><leader>v", require("mesopotamia.playground.functions").get_latest_metals)
 
-map("n", "<leader><leader>hl", function()
-  RELOAD("mesopotamia.playground.functions").get_hl_under_cursor()
-end)
+map("n", "<leader><leader>hl", vim.show_pos)
 
 map("n", "<leader><leader>n", require("mesopotamia.functions").toggle_nums)
 

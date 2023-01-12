@@ -2,6 +2,9 @@ local api = vim.api
 local map = vim.keymap.set
 
 local setup = function()
+  require("neodev").setup({
+    -- add any options here, or leave empty to use the default settings
+  })
   local lsp_config = require("lspconfig")
   local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -49,11 +52,11 @@ local setup = function()
     showImplicitArguments = true,
     showImplicitConversionsAndClasses = true,
     showInferredType = true,
-    enableSemanticHighlighting = true,
+    --enableSemanticHighlighting = true,
     --fallbackScalaVersion = "2.13.10",
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
-    --serverVersion = "0.11.10-SNAPSHOT",
+    --serverVersion = "0.11.11-SNAPSHOT",
     --testUserInterface = "Test Explorer",
   }
 
@@ -75,6 +78,10 @@ local setup = function()
 
     map("n", "<leader>mmc", require("metals").commands)
 
+    map("n", "<leader>mts", function()
+      require("metals").toggle_setting("showImplicitArguments")
+    end)
+
     -- A lot of the servers I use won't support document_highlight or codelens,
     -- so we juse use them in Metals
     api.nvim_create_autocmd("CursorHold", {
@@ -87,7 +94,7 @@ local setup = function()
       buffer = bufnr,
       group = lsp_group,
     })
-    api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+    api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
       callback = vim.lsp.codelens.refresh,
       buffer = bufnr,
       group = lsp_group,
@@ -133,6 +140,15 @@ local setup = function()
           runType = "testTarget",
         },
       },
+      {
+        type = "scala",
+        request = "launch",
+        name = "Run minimal2 main",
+        metals = {
+          mainClass = "minimal2.Main",
+          buildTarget = "minimal",
+        },
+      },
     }
 
     map("n", "<leader>dc", require("dap").continue)
@@ -165,10 +181,28 @@ local setup = function()
     server = { on_attach = on_attach },
   })
 
-  -- sumneko lua
-  local runtime_path = vim.split(package.path, ";")
-  table.insert(runtime_path, "lua/?.lua")
-  table.insert(runtime_path, "lua/?/init.lua")
+  -- For editing tree-sitter grammars
+  vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = { "grammar.js", "corpus/*.txt" },
+    callback = function()
+      vim.cmd("setfiletype tree-sitter-grammar")
+    end,
+  })
+
+  vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+    pattern = { "grammar.js" },
+    command = "set syntax=javascript",
+  })
+
+  local configs = require("lspconfig.configs")
+  local util = require("lspconfig.util")
+  configs.grammarsy = {
+    default_config = {
+      cmd = { "/Users/ckipp/bin/grammar-js-lsp-macos" },
+      filetypes = { "tree-sitter-grammar" },
+      root_dir = util.path.dirname,
+    },
+  }
 
   lsp_config.sumneko_lua.setup({
     on_attach = on_attach,
@@ -181,15 +215,7 @@ local setup = function()
     },
     settings = {
       Lua = {
-        runtime = {
-          version = "LuaJIT",
-          path = runtime_path,
-        },
         diagnostics = { globals = { "vim", "it", "describe", "before_each" } },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          library = api.nvim_get_runtime_file("", true),
-        },
         telemetry = { enable = false },
       },
     },
@@ -207,17 +233,23 @@ local setup = function()
   })
 
   lsp_config.yamlls.setup({
+    on_attach = on_attach,
     settings = {
       yaml = {
         schemas = {
-          ["https://raw.githubusercontent.com/oyvindberg/bleep/master/schema.json"] = "bleep.yaml"
-        }
-      }
-    }
+          ["https://raw.githubusercontent.com/oyvindberg/bleep/master/schema.json"] = "bleep.yaml",
+        },
+      },
+    },
+  })
+
+  lsp_config.smithy_ls.setup({
+    on_attach = on_attach,
+    cmd = { "cs", "launch", "com.disneystreaming.smithy:smithy-language-server:0.0.21", "--", "0" },
   })
 
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "marksman" }
+  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "marksman", "grammarsy" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end

@@ -1,4 +1,5 @@
 return require("packer").startup(function(use)
+  use({ "folke/neodev.nvim" })
   use({
     "hrsh7th/nvim-cmp",
     requires = {
@@ -31,7 +32,11 @@ return require("packer").startup(function(use)
     },
     config = require("mesopotamia.plugins.telescope").setup(),
   })
-  use({ "nvim-treesitter/nvim-treesitter", config = require("mesopotamia.plugins.treesitter").setup() })
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = require("mesopotamia.plugins.treesitter").setup(),
+  })
   use({ "nvim-treesitter/playground" })
   use({
     "/Users/ckipp/Documents/lua-workspace/nvim-metals",
