@@ -204,7 +204,7 @@ local setup = function()
     },
   }
 
-  lsp_config.sumneko_lua.setup({
+  lsp_config.lua_ls.setup({
     on_attach = on_attach,
     commands = {
       Format = {
@@ -249,13 +249,13 @@ local setup = function()
   })
 
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "marksman", "grammarsy" }
+  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "marksman", "grammarsy", "clangd" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end
 
   -- Uncomment for trace logs from neovim
-  --vim.lsp.set_log_level('trace')
+  -- vim.lsp.set_log_level('trace')
 end
 
 return {

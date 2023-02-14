@@ -55,5 +55,7 @@ return require("packer").startup(function(use)
   use({ "tpope/vim-vinegar" })
   use({ "wakatime/vim-wakatime" })
   use({ "wbthomason/packer.nvim" })
-  use({ "windwp/nvim-autopairs", config = require("nvim-autopairs").setup() })
+  use({ "windwp/nvim-autopairs",
+    config = require("nvim-autopairs").setup()
+  })
 end)

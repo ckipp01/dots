@@ -64,6 +64,9 @@ global_opt.mouse = ""
 opt.wrap = false
 opt.cursorline = true
 opt.signcolumn = "yes"
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldenable = false
 
 -- buffer-scoped
 opt.tabstop = indent
