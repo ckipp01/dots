@@ -154,7 +154,9 @@ local setup = function()
     map("n", "<leader>dc", require("dap").continue)
     map("n", "<leader>dr", require("dap").repl.toggle)
     map("n", "<leader>dK", require("dap.ui.widgets").hover)
-    map("n", "<leader>dt", require("dap").toggle_breakpoint)
+    map("n", "<leader>dt", function()
+      require("dap").toggle_breakpoint('x == 6')
+    end)
     map("n", "<leader>dso", require("dap").step_over)
     map("n", "<leader>dsi", require("dap").step_into)
     map("n", "<leader>drl", require("dap").run_last)
@@ -249,7 +251,7 @@ local setup = function()
   })
 
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "marksman", "grammarsy", "clangd" }
+  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "grammarsy", "clangd" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end

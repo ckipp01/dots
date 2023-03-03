@@ -5,6 +5,7 @@ alias tree='exa -T'
 alias grep='grep --color=auto'
 alias weather='curl wttr.in/hague,netherlands'
 alias v="nvim"
+alias vl="nvim --cmd \"let g:light='true'\""
 alias new-sbt='g8 scala/scala-seed.g8'
 alias tmux='tmux -2'
 alias 'tail-metals'='tail -f .metals/metals.log'

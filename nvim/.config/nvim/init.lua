@@ -60,6 +60,10 @@ global_opt.scrolloff = 5
 global_opt.laststatus = 3
 global_opt.mouse = ""
 
+if g.light then
+  global_opt.background = "light"
+end
+
 -- window-scoped
 opt.wrap = false
 opt.cursorline = true
@@ -139,7 +143,13 @@ cmd.colorscheme("kanagawa")
 
 -- Statusline specific highlights
 local kanagawa_colors = require("kanagawa.colors").setup()
-cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.fujiGray, kanagawa_colors.sumiInk1))
+
+if g.light then
+  cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.sumiInk3, kanagawa_colors.autumnGreen))
+else
+  cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.fujiGray, kanagawa_colors.sumiInk1))
+end
+
 cmd([[hi! link StatusLineNC Comment]])
 cmd([[hi! link StatusError DiagnosticError]])
 cmd([[hi! link StatusWarn DiagnosticWarn]])
