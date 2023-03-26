@@ -48,14 +48,28 @@ return require("packer").startup(function(use)
   use({ "/Users/ckipp/Documents/lua-workspace/nvim-jenkinsfile-linter", requires = { "nvim-lua/plenary.nvim" } })
   use({ "/Users/ckipp/Documents/lua-workspace/stylua-nvim" })
   use({ "/Users/ckipp/Documents/lua-workspace/scala-utils.nvim", requires = { "nvim-lua/plenary.nvim" } })
-  use({ "rebelot/kanagawa.nvim" })
+  use({
+    "rebelot/kanagawa.nvim",
+    config = require("kanagawa").setup({
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none"
+            }
+          }
+        }
+      }
+    })
+  })
   use({ "simrat39/rust-tools.nvim" })
   use({ "stevearc/dressing.nvim" })
   use({ "tpope/vim-fugitive" })
   use({ "tpope/vim-vinegar" })
   use({ "wakatime/vim-wakatime" })
   use({ "wbthomason/packer.nvim" })
-  use({ "windwp/nvim-autopairs",
+  use({
+    "windwp/nvim-autopairs",
     config = require("nvim-autopairs").setup()
   })
 end)
