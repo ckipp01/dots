@@ -16,7 +16,7 @@ local setup = function()
 
   local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
 
-  local on_attach = function(client, bufnr)
+  local on_attach = function(_, bufnr)
     -- LSP agnostic mappings
     map("n", "gD", vim.lsp.buf.definition)
     map("n", "gtD", vim.lsp.buf.type_definition)
@@ -56,7 +56,7 @@ local setup = function()
     --fallbackScalaVersion = "2.13.10",
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
-    --serverVersion = "0.11.11-SNAPSHOT",
+    --serverVersion = "0.11.13-SNAPSHOT",
     --testUserInterface = "Test Explorer",
   }
 
@@ -161,7 +161,7 @@ local setup = function()
     map("n", "<leader>dsi", require("dap").step_into)
     map("n", "<leader>drl", require("dap").run_last)
 
-    dap.listeners.after["event_terminated"]["nvim-metals"] = function(session, body)
+    dap.listeners.after["event_terminated"]["nvim-metals"] = function()
       --vim.notify("Tests have finished!")
       dap.repl.open()
     end

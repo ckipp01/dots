@@ -1,5 +1,5 @@
 P = function(thing)
-  vim.pretty_print(thing)
+  vim.print(thing)
   return thing
 end
 

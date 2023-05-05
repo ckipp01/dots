@@ -4,6 +4,8 @@
 cs update && \
   brew update && \
   brew upgrade && \
-  brew reinstall nvim && \
+  brew upgrade neovim --fetch-HEAD && \
+  brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest && \
   brew cleanup && \
-  npm --location=global update
+  npm --location=global update && \
+  echo "finished!"
