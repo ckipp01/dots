@@ -18,7 +18,6 @@ alias gp='git push'
 alias gmum='git merge upstream/main'
 alias cleanBloop="rm -rf /Users/ckipp/.ivy2/local/ch.epfl.scala/sbt-bloop/ && rm -rf ./.bloop/"
 alias bat="bat --theme='TwoDark'"
-alias k="kubectl"
 alias scli="scala-cli"
 alias 'scala3-nightly-repl'='scli repl --scala 3.nightly'
 alias 'scala2-repl'='cs launch scala:2.13.10'

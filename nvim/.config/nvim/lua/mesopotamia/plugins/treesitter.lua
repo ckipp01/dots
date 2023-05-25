@@ -1,5 +1,5 @@
 local setup = function()
-  local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+  --local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
   --parser_config.scala = {
   --  install_info = {
   --    -- url can be Git repo or a local directory:

@@ -8,15 +8,27 @@
 --=================================
 
 local api = vim.api
-local cmd = vim.cmd
+local fn = vim.fn
 local g = vim.g
-
--- NOTE do this ASAP since some of the stuff in our basic setup uses leader
-g.mapleader = ","
-
 local map = vim.keymap.set
 local opt = vim.opt
 local global_opt = vim.opt_global
+
+g.mapleader = ","
+
+local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+opt.rtp:prepend(lazypath)
+
 
 --================================
 -- Basic setup
@@ -114,6 +126,28 @@ map("n", "<leader><leader>n", require("mesopotamia.functions").toggle_nums)
 
 map("n", "<leader><leader>c", require("mesopotamia.functions").toggle_conceal)
 
+-- Telescope mappings
+map("n", "<leader>ff", function()
+  require("telescope.builtin").find_files({ layout_strategy = "vertical" })
+end)
+
+map("n", "<leader>lg", function()
+  require("telescope.builtin").live_grep({ layout_strategy = "vertical" })
+end)
+
+map("n", "<leader>gh", function()
+  require("telescope.builtin").git_commits({ layout_strategy = "vertical" })
+end)
+
+map("n", "<leader>mc", require("telescope").extensions.metals.commands)
+
+map("n", "<leader>cc", require("telescope").extensions.coursier.complete)
+
+map("n", "gds", require("telescope.builtin").lsp_document_symbols)
+
+map("n", "gws", require("telescope.builtin").lsp_dynamic_workspace_symbols)
+
+
 --================================
 -- COMMANDS ----------------------
 --================================
@@ -132,34 +166,8 @@ api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   command = "set wrap linebreak nolist spell spelllang=en_us complete+=kspell",
   group = base_group,
 })
-
 api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = { "*.scala.html" },
   command = "set filetype=scala",
   group = base_group,
-})
-
-cmd.colorscheme("kanagawa")
-
--- Statusline specific highlights
-local kanagawa_colors = require("kanagawa.colors").setup()
-
-if g.light then
-  cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.sumiInk3, kanagawa_colors.autumnGreen))
-else
-  cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.fujiGray, kanagawa_colors.sumiInk1))
-end
-
-cmd([[hi! link StatusLineNC Comment]])
-cmd([[hi! link StatusError DiagnosticError]])
-cmd([[hi! link StatusWarn DiagnosticWarn]])
-cmd([[hi! link WinSeparator Comment]])
-
-local kanagawa_group = api.nvim_create_augroup("kanagawa", { clear = true })
-api.nvim_create_autocmd("TextYankPost", {
-  pattern = "*",
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = kanagawa_group,
 })
