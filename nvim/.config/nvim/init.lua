@@ -105,10 +105,6 @@ map("n", "<leader>fn", ":cnext<cr>")
 map("n", "<leader>fp", ":cprevious<cr>")
 map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 
--- scala-utils (these aint working... really should try to work on these)
---map("n", "<leader>slc", RELOAD("scala-utils.coursier").complete_from_line)
---map("n", "<leader>sc", RELOAD("scala-utils.coursier").complete_from_input)
-
 -- other stuff
 map("n", "<leader><leader>p", require("mesopotamia.playground.functions").peek)
 
@@ -140,8 +136,6 @@ map("n", "<leader>gh", function()
 end)
 
 map("n", "<leader>mc", require("telescope").extensions.metals.commands)
-
-map("n", "<leader>cc", require("telescope").extensions.coursier.complete)
 
 map("n", "gds", require("telescope.builtin").lsp_document_symbols)
 

@@ -78,10 +78,6 @@ return require("lazy").setup({
   },
   { dir = "/Users/ckipp/Documents/lua-workspace/stylua-nvim" },
   {
-    dir = "/Users/ckipp/Documents/lua-workspace/scala-utils.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" }
-  },
-  {
     "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
@@ -103,11 +99,8 @@ return require("lazy").setup({
       -- Statusline specific highlights
       local kanagawa_colors = require("kanagawa.colors").setup()
 
-      if vim.g.light then
-        cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.sumiInk3, kanagawa_colors.autumnGreen))
-      else
-        cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.fujiGray, kanagawa_colors.sumiInk1))
-      end
+      cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.palette.fujiWhite,
+        kanagawa_colors.palette.sumiInk3))
 
       cmd([[hi! link StatusLineNC Comment]])
       cmd([[hi! link StatusError DiagnosticError]])
