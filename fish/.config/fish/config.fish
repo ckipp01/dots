@@ -29,7 +29,6 @@ source /Users/ckipp/.config/fish/functions.fish
 set PATH /Users/ckipp/.local/bin \
    /Users/ckipp/bin \
    /Users/ckipp/Library/Application\ Support/Coursier/bin\
-   /Users/ckipp/.sdkman/candidates/sbt/current/bin\
    /Users/ckipp/.cargo/bin \
    /usr/local/opt/gnu-sed/libexec/gnubin \
    /Users/ckipp/go/bin $PATH
@@ -44,5 +43,7 @@ set -gx EDITOR nvim
 set -gx VISUAL $EDITOR
 
 set -gx XDG_CONFIG_HOME $HOME/.config
-# opam configuration
-source /Users/ckipp/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+
+# >>> JVM installed by coursier >>>
+set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.7%252B7/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.7_7.tar.gz/jdk-17.0.7+7/Contents/Home"
+# <<< JVM installed by coursier <<<

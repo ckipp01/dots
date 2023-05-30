@@ -2,7 +2,8 @@
 
 return {
   -- https://wezfurlong.org/wezterm/colorschemes/k/index.html
-  color_scheme = "kanagawabones",
+  --
+  color_scheme = 'Kanagawa (Gogh)',
   enable_tab_bar = false,
   term = "wezterm",
   -- https://wezfurlong.org/wezterm/config/lua/config/window_decorations.html
