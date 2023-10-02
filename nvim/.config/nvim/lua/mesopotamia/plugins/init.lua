@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local api = vim.api
 local cmd = vim.cmd
 
@@ -27,15 +28,16 @@ return require("lazy").setup({
   },
   { "kevinhwang91/nvim-bqf" }, -- TODO figure out what we could trigger this on.
   {
-    "kyazdani42/nvim-web-devicons",
-    lazy = true
-  },
-  {
     "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     config = function()
-      require("indent_blankline").setup({
-        char = "⋅",
-        filetype_exclude = { "help" },
+      require("ibl").setup({
+        indent = {
+          char = "⋅",
+        },
+        exclude = {
+          filetypes = { "help" }
+        }
       })
     end
   },
@@ -95,12 +97,18 @@ return require("lazy").setup({
       })
 
       vim.cmd.colorscheme("kanagawa")
+      --vim.cmd.colorscheme("kanagawa-lotus")
 
       -- Statusline specific highlights
       local kanagawa_colors = require("kanagawa.colors").setup()
+      --local kanagawa_colors = require("kanagawa.colors").setup({ theme = 'lotus' })
 
       cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.palette.fujiWhite,
         kanagawa_colors.palette.sumiInk3))
+
+      -- For light theme
+      -- cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.palette.lotusInk2,
+      --   kanagawa_colors.palette.lotusWhite3))
 
       cmd([[hi! link StatusLineNC Comment]])
       cmd([[hi! link StatusError DiagnosticError]])

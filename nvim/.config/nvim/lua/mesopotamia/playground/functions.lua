@@ -1,4 +1,5 @@
 local Job = require("plenary.job")
+local Path = require("plenary.path")
 
 local function preview_location(_, _, res)
   vim.lsp.util.preview_location(res[1])
@@ -29,7 +30,27 @@ local get_latest_metals = function()
   }):start()
 end
 
+local starts_with = function(text, prefix)
+  return text:find(prefix, 1, true) == 1
+end
+
+local get_java_version = function()
+  local java_home = os.getenv("JAVA_HOME")
+  local release = Path:new(java_home, "release")
+  local version_line
+  for line in io.lines(release.filename) do
+    if starts_with(line, "JAVA_VERSION") then
+      version_line = line
+      break
+    end
+  end
+
+  local version = vim.version.parse(version_line:sub(14, version_line:len()))
+  return version
+end
+
 return {
   peek = peek,
+  get_java_version = get_java_version,
   get_latest_metals = get_latest_metals,
 }

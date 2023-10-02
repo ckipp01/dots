@@ -80,8 +80,8 @@ end
 opt.wrap = false
 opt.cursorline = true
 opt.signcolumn = "yes"
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+--opt.foldmethod = "expr"
+--opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldenable = false
 
 -- buffer-scoped
@@ -107,6 +107,10 @@ map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 
 -- other stuff
 map("n", "<leader><leader>p", require("mesopotamia.playground.functions").peek)
+
+map("n", "<leader><leader>j", function ()
+  RELOAD("mesopotamia.playground.functions").get_java_version()
+end)
 
 map("n", "<leader><leader>s", function()
   RELOAD("mesopotamia.playground.semantic").generate()

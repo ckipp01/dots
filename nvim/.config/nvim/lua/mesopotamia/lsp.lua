@@ -33,7 +33,7 @@ local setup = function()
       vim.lsp.buf.format({ async = true })
     end)
 
-    api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
   end
 
   --================================
@@ -49,15 +49,15 @@ local setup = function()
   --metals_config.cmd = { "cs", "launch", "tech.neader:langoustine-tracer_3:0.0.18", "--", "metals" }
   metals_config.settings = {
     --disabledMode = true,
-    --bloopVersion = "1.5.3-15-49c6986e-20220816-2002",
+    --bloopVersion = "1.5.6-253-5faffd8d-SNAPSHOT",
     showImplicitArguments = true,
     showImplicitConversionsAndClasses = true,
     showInferredType = true,
-    --enableSemanticHighlighting = true,
+    enableSemanticHighlighting = false,
     --fallbackScalaVersion = "2.13.10",
     serverVersion = "latest.snapshot",
     --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
-    --serverVersion = "0.11.13-SNAPSHOT",
+    --serverVersion = "1.0.2-SNAPSHOT",
     --testUserInterface = "Test Explorer",
   }
 
@@ -91,7 +91,9 @@ local setup = function()
       group = lsp_group,
     })
     api.nvim_create_autocmd("CursorMoved", {
-      callback = vim.lsp.buf.clear_references,
+      callback = function()
+        vim.lsp.buf.clear_references()
+      end,
       buffer = bufnr,
       group = lsp_group,
     })

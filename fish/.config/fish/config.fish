@@ -9,10 +9,6 @@ alias vl="nvim --cmd \"let g:light='true'\""
 alias new-sbt='g8 scala/scala-seed.g8'
 alias tmux='tmux -2'
 alias 'tail-metals'='tail -f .metals/metals.log'
-alias 'tail-lsp'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/lsp.trace.json'
-alias 'tail-bsp'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/bsp.trace.json'
-alias 'tail-dap-client'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/dap-client.trace.json'
-alias 'tail-dap-server'='tail  -f /Users/ckipp/Library/Caches/org.scalameta.metals/dap-server.trace.json'
 alias gfu='git fetch upstream'
 alias gp='git push'
 alias gmum='git merge upstream/main'
@@ -44,6 +40,10 @@ set -gx VISUAL $EDITOR
 
 set -gx XDG_CONFIG_HOME $HOME/.config
 
+
+
+
+
 # >>> JVM installed by coursier >>>
-set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.7%252B7/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.7_7.tar.gz/jdk-17.0.7+7/Contents/Home"
+set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin19-binaries/releases/download/jdk-19%252B36/OpenJDK19U-jdk_aarch64_mac_hotspot_19_36.tar.gz/jdk-19+36/Contents/Home"
 # <<< JVM installed by coursier <<<

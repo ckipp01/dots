@@ -8,10 +8,6 @@ echo "========== starting updates ==========" && \
   brew update && \
   echo "========== brew upgrade ==========" && \
   brew upgrade && \
-  echo "========== neovim ==========" && \
-  brew upgrade neovim --fetch-HEAD && \
-  echo "========== wezterm ==========" && \
-  brew upgrade --cask wezterm-nightly --no-quarantine --greedy-latest && \
   echo "========== brew cleanup ==========" && \
   brew cleanup && \
   echo "========== npm ==========" && \
