@@ -1,7 +1,7 @@
 # ALIASES #
-alias l='exa -la --icons'
-alias ls='exa'
-alias tree='exa -T'
+alias l='eza -la --icons'
+alias ls='eza'
+alias tree='eza -T'
 alias grep='grep --color=auto'
 alias weather='curl wttr.in/hague,netherlands'
 alias v="nvim"
@@ -44,6 +44,8 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 
 
 
+
+
 # >>> JVM installed by coursier >>>
-set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin19-binaries/releases/download/jdk-19%252B36/OpenJDK19U-jdk_aarch64_mac_hotspot_19_36.tar.gz/jdk-19+36/Contents/Home"
+set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17%252B35/OpenJDK17-jdk_aarch64_mac_hotspot_17_35.tar.gz/jdk-17+35/Contents/Home"
 # <<< JVM installed by coursier <<<

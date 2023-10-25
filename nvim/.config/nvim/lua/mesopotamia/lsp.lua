@@ -56,8 +56,8 @@ local setup = function()
     enableSemanticHighlighting = false,
     --fallbackScalaVersion = "2.13.10",
     serverVersion = "latest.snapshot",
-    --serverVersion = "0.11.2+74-7a6a65a7-SNAPSHOT",
-    --serverVersion = "1.0.2-SNAPSHOT",
+    --serverVersion = "1.0.1+89-4bb3aeb3-SNAPSHOT",
+    --serverVersion = "1.1.1-SNAPSHOT",
     --testUserInterface = "Test Explorer",
   }
 
@@ -199,6 +199,7 @@ local setup = function()
 
   local configs = require("lspconfig.configs")
   local util = require("lspconfig.util")
+
   configs.grammarsy = {
     default_config = {
       cmd = { "/Users/ckipp/bin/grammar-js-lsp-macos" },
@@ -252,7 +253,7 @@ local setup = function()
   })
 
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "grammarsy", "clangd" }
+  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "grammarsy", "clangd", "pyright" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end
