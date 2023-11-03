@@ -179,11 +179,6 @@ local setup = function()
     group = nvim_metals_group,
   })
 
-  require("rust-tools").setup({
-    tools = { hover_with_actions = false },
-    server = { on_attach = on_attach },
-  })
-
   -- For editing tree-sitter grammars
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = { "grammar.js", "corpus/*.txt" },

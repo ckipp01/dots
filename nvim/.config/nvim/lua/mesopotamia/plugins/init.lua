@@ -28,6 +28,12 @@ return require("lazy").setup({
   },
   { "kevinhwang91/nvim-bqf" }, -- TODO figure out what we could trigger this on.
   {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require('gitsigns').setup()
+    end
+  },
+  {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = function()
@@ -37,6 +43,9 @@ return require("lazy").setup({
         },
         exclude = {
           filetypes = { "help" }
+        },
+        scope = {
+          enabled = false
         }
       })
     end
@@ -125,8 +134,7 @@ return require("lazy").setup({
       })
     end
   },
-  { "simrat39/rust-tools.nvim" },
-  { "stevearc/dressing.nvim",  event = "VeryLazy" },
+  { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "tpope/vim-fugitive" },
   { "tpope/vim-vinegar" },
   { "wakatime/vim-wakatime" },
