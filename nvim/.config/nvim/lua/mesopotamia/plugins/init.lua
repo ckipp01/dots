@@ -26,6 +26,12 @@ return require("lazy").setup({
     "dstein64/vim-startuptime",
     cmd = "StartupTime"
   },
+  {
+    "j-hui/fidget.nvim",
+    opts = {
+      -- options
+    },
+  },
   { "kevinhwang91/nvim-bqf" }, -- TODO figure out what we could trigger this on.
   {
     "lewis6991/gitsigns.nvim",
@@ -75,10 +81,6 @@ return require("lazy").setup({
     config = function()
       require("mesopotamia.plugins.treesitter").setup()
     end
-  },
-  {
-    "nvim-treesitter/playground",
-    cmd = "TSPlaygroundToggle"
   },
   {
     dir = "/Users/ckipp/Documents/lua-workspace/nvim-metals",

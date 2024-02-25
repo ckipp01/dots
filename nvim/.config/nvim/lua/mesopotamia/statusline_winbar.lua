@@ -54,6 +54,15 @@ local function metals_status()
   return vim.g["metals_status"] or ""
 end
 
+local function bsp_status()
+  local status = vim.g["metals_bsp_status"]
+  if status and status ~= "" then
+    return " BSP: " .. status
+  else
+    return ""
+  end
+end
+
 local function readonly()
   if opt.readonly:get() then
     return "  "
@@ -74,6 +83,7 @@ local function super_custom_status_line()
     err_count("Warn"),
     "%#StatusLine#",
     metals_status(),
+    bsp_status(),
     "%=", -- Left and Right divider
     "%l, ", -- line number
     "%c ", -- column number

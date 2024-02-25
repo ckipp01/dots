@@ -145,7 +145,6 @@ map("n", "gds", require("telescope.builtin").lsp_document_symbols)
 
 map("n", "gws", require("telescope.builtin").lsp_dynamic_workspace_symbols)
 
-
 --================================
 -- COMMANDS ----------------------
 --================================

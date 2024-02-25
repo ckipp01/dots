@@ -16,7 +16,7 @@ local setup = function()
 
   local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
 
-  local on_attach = function(_, bufnr)
+  local on_attach = function(client, bufnr)
     -- LSP agnostic mappings
     map("n", "gD", vim.lsp.buf.definition)
     map("n", "gtD", vim.lsp.buf.type_definition)
@@ -26,14 +26,22 @@ local setup = function()
     map("n", "<leader>sh", vim.lsp.buf.signature_help)
     map("n", "<leader>rn", vim.lsp.buf.rename)
     map("n", "<leader>ca", vim.lsp.buf.code_action)
+    map("v", "<leader>ca", vim.lsp.buf.code_action)
     map("n", "<leader>cl", vim.lsp.codelens.run)
     map("n", "<leader>awf", vim.lsp.buf.add_workspace_folder)
+    map("n", "<leader>h", function()
+      vim.lsp.inlay_hint(bufnr, nil)
+    end)
 
     map("n", "<leader>o", function()
       vim.lsp.buf.format({ async = true })
     end)
 
     api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
+
+    if client.server_capabilities.inlayHintProvider then
+      vim.lsp.inlay_hint(bufnr, true)
+    end
   end
 
   --================================
@@ -48,20 +56,23 @@ local setup = function()
 
   --metals_config.cmd = { "cs", "launch", "tech.neader:langoustine-tracer_3:0.0.18", "--", "metals" }
   metals_config.settings = {
-    --disabledMode = true,
     --bloopVersion = "1.5.6-253-5faffd8d-SNAPSHOT",
+    --disabledMode = true,
+    defaultBspToBuildTool = true,
+    enableSemanticHighlighting = false,
     showImplicitArguments = true,
     showImplicitConversionsAndClasses = true,
     showInferredType = true,
-    enableSemanticHighlighting = false,
-    --fallbackScalaVersion = "2.13.10",
     serverVersion = "latest.snapshot",
-    --serverVersion = "1.0.1+89-4bb3aeb3-SNAPSHOT",
-    --serverVersion = "1.1.1-SNAPSHOT",
-    --testUserInterface = "Test Explorer",
+    --serverVersion = "1.2.3-SNAPSHOT",
+    --testUserInterface = "Test Explorer"
   }
 
-  metals_config.init_options.statusBarProvider = "on"
+  metals_config.init_options = {
+    statusBarProvider = "off",
+    icons = "unicode"
+  }
+
   metals_config.capabilities = capabilities
 
   metals_config.on_attach = function(client, bufnr)
@@ -157,10 +168,14 @@ local setup = function()
     map("n", "<leader>dc", require("dap").continue)
     map("n", "<leader>dr", require("dap").repl.toggle)
     map("n", "<leader>dK", require("dap.ui.widgets").hover)
-    map("n", "<leader>dt", require("dap").toggle_breakpoint)
+    map("n", "<leader>dtb", require("dap").toggle_breakpoint)
     map("n", "<leader>dso", require("dap").step_over)
     map("n", "<leader>dsi", require("dap").step_into)
     map("n", "<leader>drl", require("dap").run_last)
+
+    map("n", "<leader>dtc", function()
+      require("dap").toggle_breakpoint("x == 3")
+    end)
 
     dap.listeners.after["event_terminated"]["nvim-metals"] = function()
       vim.notify("dap finished!")

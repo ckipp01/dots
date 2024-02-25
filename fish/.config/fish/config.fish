@@ -29,11 +29,6 @@ set PATH /Users/ckipp/.local/bin \
    /usr/local/opt/gnu-sed/libexec/gnubin \
    /Users/ckipp/go/bin $PATH
 
-# Setting to change z to j #
-set -U Z_CMD "j"
-
-set N_PREFIX $HOME/n
-
 # Ensure that nvim is set as the default editor
 set -gx EDITOR nvim
 set -gx VISUAL $EDITOR
@@ -43,3 +38,5 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 # >>> JVM installed by coursier >>>
 set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.20%252B8/OpenJDK11U-jdk_aarch64_mac_hotspot_11.0.20_8.tar.gz/jdk-11.0.20+8/Contents/Home"
 # <<< JVM installed by coursier <<<
+
+zoxide init fish --cmd j | source
