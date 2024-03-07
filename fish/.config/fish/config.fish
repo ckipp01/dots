@@ -35,6 +35,10 @@ set -gx VISUAL $EDITOR
 
 set -gx XDG_CONFIG_HOME $HOME/.config
 
+
+
+
+
 # >>> JVM installed by coursier >>>
 set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.20%252B8/OpenJDK11U-jdk_aarch64_mac_hotspot_11.0.20_8.tar.gz/jdk-11.0.20+8/Contents/Home"
 # <<< JVM installed by coursier <<<

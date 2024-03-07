@@ -136,7 +136,7 @@ return require("lazy").setup({
       })
     end
   },
-  { "stevearc/dressing.nvim", event = "VeryLazy" },
+  -- { "stevearc/dressing.nvim", event = "VeryLazy" },
   { "tpope/vim-fugitive" },
   { "tpope/vim-vinegar" },
   { "wakatime/vim-wakatime" },
