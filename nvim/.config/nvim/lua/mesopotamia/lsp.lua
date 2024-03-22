@@ -30,7 +30,11 @@ local setup = function()
     map("n", "<leader>cl", vim.lsp.codelens.run)
     map("n", "<leader>awf", vim.lsp.buf.add_workspace_folder)
     map("n", "<leader>h", function()
-      vim.lsp.inlay_hint(bufnr, nil)
+      if client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint(bufnr, nil)
+      else
+        vim.notify("Server is not an inlayhint provider", vim.log.levels.ERROR)
+      end
     end)
 
     map("n", "<leader>o", function()
@@ -38,10 +42,6 @@ local setup = function()
     end)
 
     api.nvim_set_option_value("omnifunc", "v:lua.vim.lsp.omnifunc", { buf = bufnr })
-
-    if client.server_capabilities.inlayHintProvider then
-      vim.lsp.inlay_hint(bufnr, true)
-    end
   end
 
   --================================
