@@ -31,7 +31,7 @@ local setup = function()
     map("n", "<leader>awf", vim.lsp.buf.add_workspace_folder)
     map("n", "<leader>h", function()
       if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint(bufnr, nil)
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
       else
         vim.notify("Server is not an inlayhint provider", vim.log.levels.ERROR)
       end
@@ -48,6 +48,7 @@ local setup = function()
   -- Metals specific setup
   --================================
   local metals_config = require("metals").bare_config()
+
   metals_config.tvp = {
     icons = {
       enabled = true,

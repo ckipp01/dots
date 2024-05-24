@@ -24,6 +24,7 @@ source /Users/ckipp/.config/fish/functions.fish
 
 set PATH /Users/ckipp/.local/bin \
    /Users/ckipp/bin \
+   /opt/homebrew/bin/ \
    /Users/ckipp/Library/Application\ Support/Coursier/bin\
    /Users/ckipp/.cargo/bin \
    /usr/local/opt/gnu-sed/libexec/gnubin \
@@ -39,8 +40,9 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 
 
 
+
 # >>> JVM installed by coursier >>>
-set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.20%252B8/OpenJDK11U-jdk_aarch64_mac_hotspot_11.0.20_8.tar.gz/jdk-11.0.20+8/Contents/Home"
+set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.10%252B7/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.10_7.tar.gz/jdk-17.0.10+7/Contents/Home"
 # <<< JVM installed by coursier <<<
 
 zoxide init fish --cmd j | source
