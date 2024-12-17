@@ -8,21 +8,6 @@ return require("lazy").setup({
     lazy = true
   },
   {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      { "hrsh7th/cmp-buffer" },
-      { "hrsh7th/cmp-nvim-lsp" },
-      { "hrsh7th/cmp-path" },
-      { "hrsh7th/cmp-vsnip" },
-      { "hrsh7th/vim-vsnip" },
-      { "hrsh7th/cmp-nvim-lsp-signature-help" },
-    },
-    config = function()
-      require("mesopotamia.plugins.cmp").setup()
-    end
-  },
-  {
     "dstein64/vim-startuptime",
     cmd = "StartupTime"
   },
@@ -33,6 +18,7 @@ return require("lazy").setup({
     },
   },
   { "kevinhwang91/nvim-bqf" }, -- TODO figure out what we could trigger this on.
+  { "github/copilot.vim" },
   {
     "lewis6991/gitsigns.nvim",
     config = function()
@@ -89,7 +75,6 @@ return require("lazy").setup({
       "mfussenegger/nvim-dap",
     },
   },
-  { dir = "/Users/ckipp/Documents/lua-workspace/stylua-nvim" },
   {
     "rebelot/kanagawa.nvim",
     lazy = false,
@@ -136,7 +121,30 @@ return require("lazy").setup({
       })
     end
   },
-  -- { "stevearc/dressing.nvim", event = "VeryLazy" },
+  {
+    'saghen/blink.cmp',
+    lazy = false, -- lazy loading handled internally
+    dependencies = 'rafamadriz/friendly-snippets',
+    version = 'v0.*',
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      keymap = { preset = 'enter', ["<Tab>"] = { 'select_next', 'fallback' }, ['<S-Tab'] = { 'select_prev', 'fallback' } },
+      appearance = {
+        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
+        -- Useful for when your theme doesn't support blink.cmp
+        -- will be removed in a future release
+        use_nvim_cmp_as_default = true,
+        nerd_font_variant = 'mono'
+      },
+
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+      signature = { enabled = true }
+    },
+    opts_extend = { "sources.default" }
+  },
   { "tpope/vim-fugitive" },
   { "tpope/vim-vinegar" },
   { "wakatime/vim-wakatime" },

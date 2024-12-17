@@ -6,11 +6,11 @@ local setup = function()
     -- add any options here, or leave empty to use the default settings
   })
   local lsp_config = require("lspconfig")
-  local capabilities = require("cmp_nvim_lsp").default_capabilities()
+  --local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-  lsp_config.util.default_config = vim.tbl_extend("force", lsp_config.util.default_config, {
-    capabilities = capabilities,
-  })
+  --lsp_config.util.default_config = vim.tbl_extend("force", lsp_config.util.default_config, {
+  --  capabilities = capabilities,
+  --})
 
   vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
@@ -65,7 +65,7 @@ local setup = function()
     showImplicitConversionsAndClasses = true,
     showInferredType = true,
     serverVersion = "latest.snapshot",
-    --serverVersion = "1.2.3-SNAPSHOT",
+    --serverVersion = "1.4.2-SNAPSHOT",
     --testUserInterface = "Test Explorer"
   }
 
@@ -264,7 +264,7 @@ local setup = function()
   })
 
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "tsserver", "gopls", "grammarsy", "clangd", "pyright" }
+  local servers = { "bashls", "dockerls", "html", "ts_ls", "gopls", "grammarsy", "clangd", "pyright" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end
