@@ -125,28 +125,47 @@ return require("lazy").setup({
     'saghen/blink.cmp',
     lazy = false, -- lazy loading handled internally
     dependencies = 'rafamadriz/friendly-snippets',
-    version = 'v0.*',
+    --version = '*',
+    build = 'cargo build --release',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      keymap = { preset = 'enter', ["<Tab>"] = { 'select_next', 'fallback' }, ['<S-Tab'] = { 'select_prev', 'fallback' } },
+      keymap = {
+        preset = 'enter',
+        ['<Tab>'] = { 'select_next', 'fallback' },
+        ['<S-Tab>'] = { 'select_prev', 'fallback' }
+      },
       appearance = {
-        -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-        -- Useful for when your theme doesn't support blink.cmp
-        -- will be removed in a future release
         use_nvim_cmp_as_default = true,
-        nerd_font_variant = 'mono'
+        nerd_font_variant = 'mono',
       },
-
+      --cmdline = {
+      --  enabled = true,
+      --  keymap = {
+      --    ['<Tab>'] = { 'select_next', 'fallback' },
+      --    ['<S-Tab>'] = { 'select_prev', 'fallback' }
+      --  }
+      --},
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'path', 'snippets', 'buffer' }
       },
-      signature = { enabled = true }
+      signature = { enabled = true },
     },
     opts_extend = { "sources.default" }
   },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      view_options = {
+        show_hidden = true
+      }
+    },
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+  },
   { "tpope/vim-fugitive" },
-  { "tpope/vim-vinegar" },
+  --{ "tpope/vim-vinegar" },
   { "wakatime/vim-wakatime" },
   {
     "windwp/nvim-autopairs",

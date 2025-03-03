@@ -28,6 +28,7 @@ set PATH /Users/ckipp/.local/bin \
    /Users/ckipp/Library/Application\ Support/Coursier/bin\
    /Users/ckipp/.cargo/bin \
    /usr/local/opt/gnu-sed/libexec/gnubin \
+   /Users/ckipp/.luarocks/bin \
    /Users/ckipp/go/bin $PATH
 
 # Ensure that nvim is set as the default editor
@@ -36,12 +37,9 @@ set -gx VISUAL $EDITOR
 
 set -gx XDG_CONFIG_HOME $HOME/.config
 
-
-
-
-
-
-
+if status is-interactive
+   learn_dates 
+end
 
 # >>> JVM installed by coursier >>>
 set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.10%252B7/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.10_7.tar.gz/jdk-17.0.10+7/Contents/Home"

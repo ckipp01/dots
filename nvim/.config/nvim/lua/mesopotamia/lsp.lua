@@ -29,6 +29,7 @@ local setup = function()
     map("v", "<leader>ca", vim.lsp.buf.code_action)
     map("n", "<leader>cl", vim.lsp.codelens.run)
     map("n", "<leader>awf", vim.lsp.buf.add_workspace_folder)
+    vim.lsp.inlay_hint.enable(true)
     map("n", "<leader>h", function()
       if client.server_capabilities.inlayHintProvider then
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -61,8 +62,8 @@ local setup = function()
     --disabledMode = true,
     defaultBspToBuildTool = true,
     enableSemanticHighlighting = false,
-    showImplicitArguments = true,
-    showImplicitConversionsAndClasses = true,
+    --showImplicitArguments = true,
+    --showImplicitConversionsAndClasses = true,
     showInferredType = true,
     serverVersion = "latest.snapshot",
     --serverVersion = "1.4.2-SNAPSHOT",
