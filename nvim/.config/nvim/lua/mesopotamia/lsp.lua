@@ -2,22 +2,12 @@ local api = vim.api
 local map = vim.keymap.set
 
 local setup = function()
-  require("neodev").setup({
-    -- add any options here, or leave empty to use the default settings
-  })
+  require("neodev").setup({})
   local lsp_config = require("lspconfig")
-  --local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-  --lsp_config.util.default_config = vim.tbl_extend("force", lsp_config.util.default_config, {
-  --  capabilities = capabilities,
-  --})
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
   local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
 
   local on_attach = function(client, bufnr)
-    -- LSP agnostic mappings
     map("n", "gD", vim.lsp.buf.definition)
     map("n", "gtD", vim.lsp.buf.type_definition)
     map("n", "K", vim.lsp.buf.hover)
@@ -29,7 +19,6 @@ local setup = function()
     map("v", "<leader>ca", vim.lsp.buf.code_action)
     map("n", "<leader>cl", vim.lsp.codelens.run)
     map("n", "<leader>awf", vim.lsp.buf.add_workspace_folder)
-    vim.lsp.inlay_hint.enable(true)
     map("n", "<leader>h", function()
       if client.server_capabilities.inlayHintProvider then
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
@@ -62,9 +51,14 @@ local setup = function()
     --disabledMode = true,
     defaultBspToBuildTool = true,
     enableSemanticHighlighting = false,
-    --showImplicitArguments = true,
-    --showImplicitConversionsAndClasses = true,
-    showInferredType = true,
+    inlayHints = {
+      hintsInPatternMatch = { enable = true },
+      implicitArguments = { enable = true },
+      implicitConversions = { enable = true },
+      inferredTypes = { enable = true },
+      typeParameters = { enable = true },
+
+    },
     serverVersion = "latest.snapshot",
     --serverVersion = "1.4.2-SNAPSHOT",
     --testUserInterface = "Test Explorer"
@@ -74,8 +68,6 @@ local setup = function()
     statusBarProvider = "off",
     icons = "unicode"
   }
-
-  metals_config.capabilities = capabilities
 
   metals_config.on_attach = function(client, bufnr)
     on_attach(client, bufnr)
@@ -91,10 +83,6 @@ local setup = function()
     map("n", "<leader>tr", require("metals.tvp").reveal_in_tree)
 
     map("n", "<leader>mmc", require("metals").commands)
-
-    map("n", "<leader>mts", function()
-      require("metals").toggle_setting("showImplicitArguments")
-    end)
 
     -- A lot of the servers I use won't support document_highlight or codelens,
     -- so we juse use them in Metals
@@ -196,6 +184,14 @@ local setup = function()
     group = nvim_metals_group,
   })
 
+  api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+    pattern = { "*.worksheet.sc" },
+    callback = function()
+      vim.lsp.inlay_hint.enable(true)
+    end,
+    group = nvim_metals_group,
+  })
+
   -- For editing tree-sitter grammars
   vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     pattern = { "grammar.js", "corpus/*.txt" },
@@ -208,17 +204,6 @@ local setup = function()
     pattern = { "grammar.js" },
     command = "set syntax=javascript",
   })
-
-  local configs = require("lspconfig.configs")
-  local util = require("lspconfig.util")
-
-  configs.grammarsy = {
-    default_config = {
-      cmd = { "/Users/ckipp/bin/grammar-js-lsp-macos" },
-      filetypes = { "tree-sitter-grammar" },
-      root_dir = util.path.dirname,
-    },
-  }
 
   lsp_config.lua_ls.setup({
     on_attach = on_attach,
@@ -259,13 +244,8 @@ local setup = function()
     },
   })
 
-  lsp_config.smithy_ls.setup({
-    on_attach = on_attach,
-    cmd = { "cs", "launch", "com.disneystreaming.smithy:smithy-language-server:0.0.21", "--", "0" },
-  })
-
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "ts_ls", "gopls", "grammarsy", "clangd", "pyright" }
+  local servers = { "bashls", "dockerls", "html", "ts_ls", "gopls", "pyright" }
   for _, server in pairs(servers) do
     lsp_config[server].setup({ on_attach = on_attach })
   end

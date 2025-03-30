@@ -21,11 +21,11 @@ local setup = function()
   end)
 
   map("n", "<leader>nd", function()
-    vim.diagnostic.goto_next()
+    vim.diagnostic.jump({ count = 1, float = true })
   end)
 
   map("n", "<leader>pd", function()
-    vim.diagnostic.goto_prev()
+    vim.diagnostic.jump({ count = -1, float = true })
   end)
 
   map("n", "<leader>ld", function()

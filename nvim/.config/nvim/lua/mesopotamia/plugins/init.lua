@@ -13,9 +13,7 @@ return require("lazy").setup({
   },
   {
     "j-hui/fidget.nvim",
-    opts = {
-      -- options
-    },
+    opts = {}
   },
   { "kevinhwang91/nvim-bqf" }, -- TODO figure out what we could trigger this on.
   { "github/copilot.vim" },
@@ -73,7 +71,7 @@ return require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",
       "mfussenegger/nvim-dap",
-    },
+    }
   },
   {
     "rebelot/kanagawa.nvim",
@@ -93,18 +91,10 @@ return require("lazy").setup({
       })
 
       vim.cmd.colorscheme("kanagawa")
-      --vim.cmd.colorscheme("kanagawa-lotus")
-
-      -- Statusline specific highlights
       local kanagawa_colors = require("kanagawa.colors").setup()
-      --local kanagawa_colors = require("kanagawa.colors").setup({ theme = 'lotus' })
 
       cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.palette.fujiWhite,
         kanagawa_colors.palette.sumiInk3))
-
-      -- For light theme
-      -- cmd(string.format([[hi! StatusLine guifg=%s guibg=%s]], kanagawa_colors.palette.lotusInk2,
-      --   kanagawa_colors.palette.lotusWhite3))
 
       cmd([[hi! link StatusLineNC Comment]])
       cmd([[hi! link StatusError DiagnosticError]])
@@ -125,8 +115,7 @@ return require("lazy").setup({
     'saghen/blink.cmp',
     lazy = false, -- lazy loading handled internally
     dependencies = 'rafamadriz/friendly-snippets',
-    --version = '*',
-    build = 'cargo build --release',
+    version = '*',
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
@@ -139,13 +128,6 @@ return require("lazy").setup({
         use_nvim_cmp_as_default = true,
         nerd_font_variant = 'mono',
       },
-      --cmdline = {
-      --  enabled = true,
-      --  keymap = {
-      --    ['<Tab>'] = { 'select_next', 'fallback' },
-      --    ['<S-Tab>'] = { 'select_prev', 'fallback' }
-      --  }
-      --},
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' }
       },
@@ -165,7 +147,6 @@ return require("lazy").setup({
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
   },
   { "tpope/vim-fugitive" },
-  --{ "tpope/vim-vinegar" },
   { "wakatime/vim-wakatime" },
   {
     "windwp/nvim-autopairs",

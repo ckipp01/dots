@@ -108,7 +108,7 @@ map("n", "<leader>xml", ":%!xmllint --format -<cr>")
 -- other stuff
 map("n", "<leader><leader>p", require("mesopotamia.playground.functions").peek)
 
-map("n", "<leader><leader>j", function ()
+map("n", "<leader><leader>j", function()
   RELOAD("mesopotamia.playground.functions").get_java_version()
 end)
 
