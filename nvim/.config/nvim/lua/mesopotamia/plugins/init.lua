@@ -2,6 +2,22 @@
 local api = vim.api
 local cmd = vim.cmd
 
+local function nvim_metals()
+  local hostname = vim.loop.os_gethostname()
+  local plugin = {
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "mfussenegger/nvim-dap",
+    }
+  }
+  if hostname == "mesopotamia.local" then
+    plugin.dir = "/Users/ckipp/Documents/lua-workspace/nvim-metals"
+  else
+    plugin[1] = "scalameta/nvim-metals"
+  end
+  return plugin
+end
+
 return require("lazy").setup({
   {
     "folke/neodev.nvim",
@@ -66,13 +82,7 @@ return require("lazy").setup({
       require("mesopotamia.plugins.treesitter").setup()
     end
   },
-  {
-    dir = "/Users/ckipp/Documents/lua-workspace/nvim-metals",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "mfussenegger/nvim-dap",
-    }
-  },
+  nvim_metals(),
   {
     "rebelot/kanagawa.nvim",
     lazy = false,
