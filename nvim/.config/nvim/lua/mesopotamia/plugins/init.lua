@@ -32,7 +32,6 @@ return require("lazy").setup({
     opts = {}
   },
   { "kevinhwang91/nvim-bqf" }, -- TODO figure out what we could trigger this on.
-  { "github/copilot.vim" },
   {
     "lewis6991/gitsigns.nvim",
     config = function()

@@ -52,6 +52,7 @@ local setup = function()
     defaultBspToBuildTool = true,
     enableSemanticHighlighting = false,
     inlayHints = {
+      byNameParameters = { enable = true},
       hintsInPatternMatch = { enable = true },
       implicitArguments = { enable = true },
       implicitConversions = { enable = true },
@@ -60,7 +61,9 @@ local setup = function()
 
     },
     serverVersion = "latest.snapshot",
-    --serverVersion = "1.4.2-SNAPSHOT",
+    startMcpServer = true,
+    mcpClient = "claude",
+    --serverVersion = "1.6.1-SNAPSHOT",
     --testUserInterface = "Test Explorer"
   }
 
