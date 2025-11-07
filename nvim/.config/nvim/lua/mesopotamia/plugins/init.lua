@@ -3,7 +3,7 @@ local api = vim.api
 local cmd = vim.cmd
 
 local function nvim_metals()
-  local hostname = vim.loop.os_gethostname()
+  local hostname = vim.uv.os_gethostname()
   local plugin = {
     dependencies = {
       "nvim-lua/plenary.nvim",
@@ -19,10 +19,6 @@ local function nvim_metals()
 end
 
 return require("lazy").setup({
-  {
-    "folke/neodev.nvim",
-    lazy = true
-  },
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime"
@@ -54,9 +50,6 @@ return require("lazy").setup({
         }
       })
     end
-  },
-  {
-    "neovim/nvim-lspconfig"
   },
   {
     "norcalli/nvim-colorizer.lua",

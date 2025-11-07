@@ -17,7 +17,7 @@ local global_opt = vim.opt_global
 g.mapleader = ","
 
 local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
   fn.system({
     "git",
     "clone",
@@ -58,11 +58,9 @@ local indent = 2
 -- global
 global_opt.shortmess:append("c")
 global_opt.termguicolors = true
-global_opt.hidden = true
 global_opt.showtabline = 1
 global_opt.updatetime = 300
 global_opt.showmatch = true
-global_opt.laststatus = 2
 global_opt.wildignore = { ".git", "*/node_modules/*", "*/target/*", ".metals", ".bloop", ".ammonite" }
 global_opt.ignorecase = true
 global_opt.smartcase = true

@@ -38,8 +38,9 @@ set -gx VISUAL $EDITOR
 set -gx XDG_CONFIG_HOME $HOME/.config
 
 
+
 # >>> JVM installed by coursier >>>
-set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.10%252B7/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.10_7.tar.gz/jdk-17.0.10+7/Contents/Home"
+set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/cdn.azul.com/zulu/bin/zulu21.38.21-ca-jdk21.0.5-macosx_aarch64.tar.gz/zulu21.38.21-ca-jdk21.0.5-macosx_aarch64"
 # <<< JVM installed by coursier <<<
 
 zoxide init fish --cmd j | source

@@ -2,9 +2,6 @@ local api = vim.api
 local map = vim.keymap.set
 
 local setup = function()
-  require("neodev").setup({})
-  local lsp_config = require("lspconfig")
-
   local lsp_group = api.nvim_create_augroup("lsp", { clear = true })
 
   local on_attach = function(client, bufnr)
@@ -208,8 +205,24 @@ local setup = function()
     command = "set syntax=javascript",
   })
 
-  lsp_config.lua_ls.setup({
-    on_attach = on_attach,
+  -- Helper to wrap on_attach with executable check
+  local function on_attach_with_check(cmd_name)
+    return function(client, bufnr)
+      if vim.fn.executable(cmd_name) == 0 then
+        vim.notify(
+          string.format("LSP server '%s' is configured but '%s' is not installed", client.name, cmd_name),
+          vim.log.levels.WARN
+        )
+      end
+      on_attach(client, bufnr)
+    end
+  end
+
+  vim.lsp.config.lua_ls = {
+    cmd = { 'lua-language-server' },
+    filetypes = { 'lua' },
+    root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
+    on_attach = on_attach_with_check('lua-language-server'),
     commands = {
       Format = {
         function()
@@ -223,10 +236,14 @@ local setup = function()
         telemetry = { enable = false },
       },
     },
-  })
+  }
+  vim.lsp.enable('lua_ls')
 
-  lsp_config.jsonls.setup({
-    on_attach = on_attach,
+  vim.lsp.config.jsonls = {
+    cmd = { 'vscode-json-language-server', '--stdio' },
+    filetypes = { 'json', 'jsonc' },
+    root_markers = { 'package.json', '.git' },
+    on_attach = on_attach_with_check('vscode-json-language-server'),
     commands = {
       Format = {
         function()
@@ -234,10 +251,14 @@ local setup = function()
         end,
       },
     },
-  })
+  }
+  vim.lsp.enable('jsonls')
 
-  lsp_config.yamlls.setup({
-    on_attach = on_attach,
+  vim.lsp.config.yamlls = {
+    cmd = { 'yaml-language-server', '--stdio' },
+    filetypes = { 'yaml', 'yml', 'yaml.docker-compose', 'yaml.gitlab' },
+    root_markers = { '.git' },
+    on_attach = on_attach_with_check('yaml-language-server'),
     settings = {
       yaml = {
         schemas = {
@@ -245,12 +266,26 @@ local setup = function()
         },
       },
     },
-  })
+  }
+  vim.lsp.enable('yamlls')
 
   -- These server just use the vanilla setup
-  local servers = { "bashls", "dockerls", "html", "ts_ls", "gopls", "pyright" }
+  local servers = {
+    { name = "bashls", cmd = { "bash-language-server", "start" }, filetypes = { "sh", "bash" }, root_markers = { ".git" } },
+    { name = "dockerls", cmd = { "docker-langserver", "--stdio" }, filetypes = { "dockerfile" }, root_markers = { "Dockerfile", ".git" } },
+    { name = "html", cmd = { "vscode-html-language-server", "--stdio" }, filetypes = { "html" }, root_markers = { "package.json", ".git" } },
+    { name = "ts_ls", cmd = { "typescript-language-server", "--stdio" }, filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }, root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" } },
+    { name = "gopls", cmd = { "gopls" }, filetypes = { "go", "gomod", "gowork", "gotmpl" }, root_markers = { "go.mod", "go.work", ".git" } },
+    { name = "pyright", cmd = { "pyright-langserver", "--stdio" }, filetypes = { "python" }, root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" } },
+  }
   for _, server in pairs(servers) do
-    lsp_config[server].setup({ on_attach = on_attach })
+    vim.lsp.config[server.name] = {
+      cmd = server.cmd,
+      filetypes = server.filetypes,
+      root_markers = server.root_markers,
+      on_attach = on_attach_with_check(server.cmd[1]),
+    }
+    vim.lsp.enable(server.name)
   end
 
   -- Uncomment for trace logs from neovim

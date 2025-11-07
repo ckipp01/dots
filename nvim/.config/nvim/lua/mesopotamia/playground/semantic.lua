@@ -1,5 +1,5 @@
 local fn = vim.fn
-local uv = vim.loop
+local uv = vim.uv
 local api = vim.api
 
 local M = {}
