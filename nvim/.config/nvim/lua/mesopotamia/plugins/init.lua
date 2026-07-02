@@ -10,11 +10,12 @@ local function nvim_metals()
       "mfussenegger/nvim-dap",
     }
   }
-  if hostname == "mesopotamia.local" then
-    plugin.dir = "/Users/ckipp/Documents/lua-workspace/nvim-metals"
-  else
-    plugin[1] = "scalameta/nvim-metals"
-  end
+  plugin.dir = "/Users/ckipp/Documents/lua-workspace/nvim-metals"
+  --if hostname == "mesopotamia.local" then
+  --  plugin.dir = "/Users/ckipp/Documents/lua-workspace/nvim-metals"
+  --else
+  --  plugin[1] = "scalameta/nvim-metals"
+  --end
   return plugin
 end
 
@@ -59,7 +60,6 @@ return require("lazy").setup({
     "nvim-telescope/telescope.nvim",
     lazy = true,
     dependencies = {
-      { "nvim-lua/popup.nvim" },
       { "nvim-lua/plenary.nvim" },
       { "nvim-telescope/telescope-fzy-native.nvim" },
     },
@@ -69,10 +69,8 @@ return require("lazy").setup({
   },
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
-    config = function()
-      require("mesopotamia.plugins.treesitter").setup()
-    end
   },
   nvim_metals(),
   {

@@ -39,8 +39,9 @@ set -gx XDG_CONFIG_HOME $HOME/.config
 
 
 
+
 # >>> JVM installed by coursier >>>
-set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/cdn.azul.com/zulu/bin/zulu21.38.21-ca-jdk21.0.5-macosx_aarch64.tar.gz/zulu21.38.21-ca-jdk21.0.5-macosx_aarch64"
+set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/cdn.azul.com/zulu/bin/zulu21.46.19-ca-jdk21.0.9-macosx_aarch64.tar.gz/zulu21.46.19-ca-jdk21.0.9-macosx_aarch64"
 # <<< JVM installed by coursier <<<
 
 zoxide init fish --cmd j | source

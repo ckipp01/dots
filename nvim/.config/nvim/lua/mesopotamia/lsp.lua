@@ -99,7 +99,9 @@ local setup = function()
       group = lsp_group,
     })
     api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
-      callback = vim.lsp.codelens.refresh,
+      callback = function()
+        vim.lsp.codelens.enable(true, { bufnr = bufnr })
+      end,
       buffer = bufnr,
       group = lsp_group,
     })
@@ -247,7 +249,7 @@ local setup = function()
     commands = {
       Format = {
         function()
-          vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+          vim.lsp.buf.format({ range = { ["start"] = { 0, 0 }, ["end"] = { vim.fn.line("$"), 0 } } })
         end,
       },
     },
@@ -273,6 +275,7 @@ local setup = function()
   local servers = {
     { name = "bashls", cmd = { "bash-language-server", "start" }, filetypes = { "sh", "bash" }, root_markers = { ".git" } },
     { name = "dockerls", cmd = { "docker-langserver", "--stdio" }, filetypes = { "dockerfile" }, root_markers = { "Dockerfile", ".git" } },
+    { name = "expert", cmd = { "expert", "--stdio" }, filetypes = { "elixir", "eelixir", "heex", "surface" } },
     { name = "html", cmd = { "vscode-html-language-server", "--stdio" }, filetypes = { "html" }, root_markers = { "package.json", ".git" } },
     { name = "ts_ls", cmd = { "typescript-language-server", "--stdio" }, filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" }, root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" } },
     { name = "gopls", cmd = { "gopls" }, filetypes = { "go", "gomod", "gowork", "gotmpl" }, root_markers = { "go.mod", "go.work", ".git" } },
