@@ -45,3 +45,5 @@ set -gx JAVA_HOME "/Users/ckipp/Library/Caches/Coursier/arc/https/cdn.azul.com/z
 # <<< JVM installed by coursier <<<
 
 zoxide init fish --cmd j | source
+
+direnv hook fish | source

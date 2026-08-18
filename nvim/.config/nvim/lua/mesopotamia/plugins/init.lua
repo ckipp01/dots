@@ -72,7 +72,7 @@ return require("lazy").setup({
     lazy = false,
     build = ":TSUpdate",
   },
-  nvim_metals(),
+  { "scalameta/nvim-metals"},
   {
     "rebelot/kanagawa.nvim",
     lazy = false,

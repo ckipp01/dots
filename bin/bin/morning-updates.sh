@@ -2,8 +2,6 @@
 
 # Update all the things
 echo "========== starting updates ==========" && \
-  echo "========== coursier ==========" && \
-  cs update && \
   echo "========== brew update ==========" && \
   brew update && \
   echo "========== brew upgrade ==========" && \
